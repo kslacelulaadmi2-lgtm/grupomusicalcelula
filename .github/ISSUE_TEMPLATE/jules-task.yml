@@ -1,0 +1,107 @@
+name: 🤖 Jules – Solicitud de Cambio Automatizado
+description: Solicita cambios al sitio para ser ejecutados automáticamente por el agente IA Jules.
+title: "[JULES] <descripción corta del cambio>"
+labels: ["jules"]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## 🤖 Jules – Ejecución Automatizada
+        Este issue será procesado automáticamente por el agente IA **Jules**.
+        Asegúrate de completar **todos los campos** de forma clara y específica.
+
+  - type: input
+    id: requester
+    attributes:
+      label: Solicitante
+      description: Nombre de la persona que solicita el cambio
+      placeholder: Ej. Juan Pérez
+    validations:
+      required: true
+
+  - type: dropdown
+    id: change_type
+    attributes:
+      label: Tipo de cambio
+      options:
+        - Contenido (textos, imágenes, copy)
+        - Estilos / Diseño (CSS, layout)
+        - Funcionalidad (JS, formularios, interacciones)
+        - SEO / Metadata
+        - Performance / Optimización
+        - Bugfix
+        - Otro
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Contexto del cambio
+      description: ¿Por qué se necesita este cambio? ¿Qué problema resuelve o qué mejora busca?
+      placeholder: |
+        Ej. Se requiere actualizar la sección de eventos porque la información actual ya no es vigente.
+    validations:
+      required: true
+
+  - type: textarea
+    id: requirements
+    attributes:
+      label: Requerimientos específicos
+      description: Describe exactamente qué debe cambiar Jules. Sé concreto.
+      placeholder: |
+        - Cambiar el texto del hero principal a: "Nuevo mensaje"
+        - Actualizar imagen de fondo por /public/img/hero-2026.jpg
+        - Ajustar padding superior a 120px en desktop
+    validations:
+      required: true
+
+  - type: textarea
+    id: files
+    attributes:
+      label: Archivos o secciones involucradas
+      description: Indica rutas, componentes o páginas afectadas (si se conocen)
+      placeholder: |
+        - pages/index.tsx
+        - components/Hero.tsx
+        - styles/global.css
+    validations:
+      required: false
+
+  - type: textarea
+    id: constraints
+    attributes:
+      label: Restricciones técnicas
+      description: Cosas que **no deben romperse o cambiar**
+      placeholder: |
+        - No modificar estructura del header
+        - Mantener compatibilidad móvil
+        - No cambiar textos legales
+    validations:
+      required: false
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Criterios de aceptación
+      description: Condiciones que deben cumplirse para considerar el cambio correcto
+      placeholder: |
+        - El sitio compila sin errores
+        - El preview en Vercel carga correctamente
+        - El cambio es visible en desktop y mobile
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: confirmations
+    attributes:
+      label: Confirmaciones
+      options:
+        - label: Entiendo que Jules creará una rama nueva automáticamente
+          required: true
+        - label: Entiendo que Jules abrirá un PR a la rama default (preview)
+          required: true
+        - label: Entiendo que el merge a producción requiere aprobación del code owner
+          required: true
