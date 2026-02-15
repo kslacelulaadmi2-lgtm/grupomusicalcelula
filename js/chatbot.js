@@ -1,144 +1,169 @@
 /**
  * Chatbot para Grupo Musical Versátil La Célula
- * Proporciona atención personalizada, resuelve dudas sobre eventos y ayuda con cotizaciones
- * Especializado en definir necesidades, identificar áreas de oportunidad y realizar cierres de venta
+ * Flujo automatizado de preguntas con envío a WhatsApp y API de leads
  */
 
 class CelulaChatbotManager {
     constructor() {
-        console.log('🔧 Construyendo CelulaChatbotManager...');
+        console.log('🔧 Iniciando chatbot estructurado...');
 
-        // GA helper for chatbot
-        window.__gaChatTrack = function(eventName, params = {}) {
-            try {
-                if (typeof gtag === 'function') {
-                    gtag('event', eventName, Object.assign({
-                        flow: 'chatbot',
-                        source: 'web',
-                        page_location: location.href,
-                        page_referrer: document.referrer
-                    }, params));
-                } else {
-                    console.debug('[GA chat debug]', eventName, params);
-                }
-            } catch (err) {
-                console.warn('GA emit error:', err);
-            }
+        // Datos del lead
+        this.leadData = {
+            name: '',
+            phone: '',
+            eventType: '',
+            eventDate: '',
+            eventLocation: '',
+            guestCount: ''
         };
 
+        // Estado del flujo
+        this.currentStep = 0;
         this.chatWindow = document.getElementById('chat-window');
         this.userInput = document.getElementById('user-input');
         this.sendBtn = document.getElementById('send-btn');
         this.closeBtn = document.getElementById('chat-close');
-        this.leadForm = document.getElementById('lead-form');
         this.chatWindowContainer = document.getElementById('chat-window-container');
-        this.chatInputArea = document.getElementById('chat-input-area');
-        this.emailSent = false; // Flag para evitar envíos múltiples
-        this.sessionStartTime = new Date().toISOString();
-
-        // Verificar que todos los elementos existen
-        const elements = {
-            chatWindow: this.chatWindow,
-            userInput: this.userInput,
-            sendBtn: this.sendBtn,
-            closeBtn: this.closeBtn,
-            leadForm: this.leadForm,
-            chatWindowContainer: this.chatWindowContainer,
-            chatInputArea: this.chatInputArea
-        };
-
-        const missingElements = Object.entries(elements)
-            .filter(([key, value]) => !value)
-            .map(([key]) => key);
-
-        if (missingElements.length > 0) {
-            console.error('❌ Elementos faltantes del chatbot:', missingElements);
-        } else {
-            console.log('✅ Todos los elementos del chatbot encontrados');
-        }
 
         this.init();
     }
 
-    async init() {
+    init() {
         this.setupEventListeners();
-        this.loadState();
+        this.appendMessage('¡Hola! Soy tu asistente para cotizar tu evento musical. ¿Cómo te llamas?', 'bot');
     }
 
-    saveState() {
-        const state = {
-            chatHistory: this.chatHistory,
-            leadData: this.leadData,
-            emailSent: this.emailSent,
-            isChatActive: this.chatWindowContainer.classList.contains('active'),
-            lastUpdated: new Date().getTime()
-        };
-        // Usar sessionStorage en lugar de localStorage para que solo persista durante la sesión
-        sessionStorage.setItem('celulaChatbotState', JSON.stringify(state));
-    }
-
-    loadState() {
-    // Cargar desde sessionStorage (se borra al cerrar la pestaña/ventana)
-        const savedState = sessionStorage.getItem('celulaChatbotState');
-        if (savedState) {
-            try {
-                const state = JSON.parse(savedState);
-
-                this.chatHistory = state.chatHistory || [];
-                this.leadData = state.leadData || {};
-                this.emailSent = state.emailSent || false;
-
-                // Only pre-fill the form if leadData exists, but don't open anything automatically
-                if (Object.keys(this.leadData).length > 0) {
-                    this.fillLeadForm();
-                }
-
-                // Repoblar el chat si hay historial
-                if (this.chatHistory.length > 0) {
-                    this.repopulateChat();
-                }
-
-                // The chat window should NOT be opened automatically here.
-                // The chatbot-toggle button will handle opening the lead form or chat.
-            } catch (error) {
-                console.error('Error al cargar el estado del chatbot:', error);
-                this.resetState();
+    setupEventListeners() {
+        this.sendBtn.addEventListener('click', () => this.handleUserInput());
+        this.userInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                this.handleUserInput();
             }
-        } else {
-            this.resetState();
+        });
+        this.closeBtn.addEventListener('click', () => {
+            this.chatWindowContainer.classList.remove('active');
+        });
+    }
+
+    handleUserInput() {
+        const message = this.userInput.value.trim();
+        if (!message) return;
+
+        this.appendMessage(message, 'user');
+        this.userInput.value = '';
+
+        // Procesar respuesta según el paso actual
+        switch (this.currentStep) {
+            case 0: // Nombre
+                this.leadData.name = message;
+                this.appendMessage('Perfecto, ¿cuál es tu número de teléfono? (10 dígitos)', 'bot');
+                break;
+            case 1: // Teléfono
+                if (!/^\d{10}$/.test(message)) {
+                    this.appendMessage('Por favor, ingresa un número válido de 10 dígitos.', 'bot');
+                    return;
+                }
+                this.leadData.phone = message;
+                this.showEventTypeOptions();
+                break;
+            case 2: // Tipo de evento
+                if (!['boda', 'corporativo', 'xv años', 'graduación', 'otro'].includes(message.toLowerCase())) {
+                    this.appendMessage('Opción no válida. Elige una de las opciones.', 'bot');
+                    return;
+                }
+                this.leadData.eventType = message;
+                this.appendMessage('¿Cuál es la fecha de tu evento? (DD/MM/AAAA)', 'bot');
+                break;
+            case 3: // Fecha
+                if (!/^\d{2}\/\d{2}\/\d{4}$/.test(message)) {
+                    this.appendMessage('Formato incorrecto. Usa DD/MM/AAAA.', 'bot');
+                    return;
+                }
+                this.leadData.eventDate = message;
+                this.showLocationOptions();
+                break;
+            case 4: // Ubicación
+                if (!['cdmx', 'edomex', 'otro'].includes(message.toLowerCase())) {
+                    this.appendMessage('Opción no válida. Elige una de las opciones.', 'bot');
+                    return;
+                }
+                this.leadData.eventLocation = message;
+                this.appendMessage('¿Cuántos invitados aproximados? (50-500)', 'bot');
+                break;
+            case 5: // Invitados
+                const guests = parseInt(message);
+                if (isNaN(guests) || guests < 50 || guests > 500) {
+                    this.appendMessage('Número no válido. Ingresa un valor entre 50 y 500.', 'bot');
+                    return;
+                }
+                this.leadData.guestCount = guests;
+                this.sendToWhatsApp();
+                break;
+        }
+        this.currentStep++;
+    }
+
+    showEventTypeOptions() {
+        const options = ['Boda', 'Corporativo', 'XV años', 'Graduación', 'Otro'];
+        let message = '¿Qué tipo de evento es?\n\n';
+        options.forEach(opt => {
+            message += `- ${opt}\n`;
+        });
+        this.appendMessage(message, 'bot');
+    }
+
+    showLocationOptions() {
+        const options = ['CDMX', 'EdoMex', 'Otro'];
+        let message = '¿Dónde será el evento?\n\n';
+        options.forEach(opt => {
+            message += `- ${opt}\n`;
+        });
+        this.appendMessage(message, 'bot');
+    }
+
+    sendToWhatsApp() {
+        const whatsappMessage = `
+*Nuevo lead de La Célula*\n\n
+*Nombre:* ${this.leadData.name}\n
+*Teléfono:* ${this.leadData.phone}\n
+*Evento:* ${this.leadData.eventType}\n
+*Fecha:* ${this.leadData.eventDate}\n
+*Ubicación:* ${this.leadData.eventLocation}\n
+*Invitados:* ${this.leadData.guestCount}\n
+---\n*Enviado desde grupomusicalcelula.com*`;
+
+        const whatsappURL = `https://wa.me/5215535412631?text=${encodeURIComponent(whatsappMessage)}`;
+        window.open(whatsappURL, '_blank');
+
+        // Enviar a API de leads (backup)
+        this.sendToLeadsAPI();
+
+        this.appendMessage('¡Listo! Te hemos enviado un mensaje por WhatsApp. Próximamente nos pondremos en contacto contigo.', 'bot');
+    }
+
+    async sendToLeadsAPI() {
+        try {
+            const response = await fetch('https://api.grupomusicalcelula.com/leads', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(this.leadData)
+            });
+            if (!response.ok) throw new Error('API error');
+            console.log('Lead enviado a API');
+        } catch (error) {
+            console.error('Error al enviar a API:', error);
         }
     }
 
-    resetState() {
-        this.chatHistory = [];
-        this.leadData = {};
-        sessionStorage.removeItem('celulaChatbotState');
+    appendMessage(text, role) {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `message ${role}-message`;
+        messageDiv.textContent = text.replace(/\n/g, '<br>');
+        this.chatWindow.appendChild(messageDiv);
+        this.chatWindow.scrollTop = this.chatWindow.scrollHeight;
     }
-
-    fillLeadForm() {
-    // Autorellenar el formulario con datos guardados
-        if (this.leadData.name) {
-            document.getElementById('name-input').value = this.leadData.name;
-        }
-        if (this.leadData.email) {
-            document.getElementById('email-input').value = this.leadData.email;
-        }
-        if (this.leadData.phone) {
-            document.getElementById('phone-input').value = this.leadData.phone;
-        }
-        if (this.leadData.eventType) {
-            document.getElementById('event-type-input').value =
-        this.leadData.eventType;
-        }
-        if (this.leadData.eventLocation) {
-            document.getElementById('event-location-input').value =
-        this.leadData.eventLocation;
-        }
-        if (this.leadData.guestCount) {
-            document.getElementById('guest-count-input').value =
-        this.leadData.guestCount;
-        }
-    }
+}
 
     // Determina si un mensaje es visible para el usuario
     isVisibleMessage(message) {
