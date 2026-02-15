@@ -92,6 +92,14 @@ export default async function handler(req, res) {
                       <td style="padding: 8px 0; color: #6b7280; font-weight: 600;">Tipo de Evento:</td>
                       <td style="padding: 8px 0; color: #111827;">${leadData?.eventType || 'No especificado'}</td>
                     </tr>
+                    <tr>
+                      <td style="padding: 8px 0; color: #6b7280; font-weight: 600;">Ubicación:</td>
+                      <td style="padding: 8px 0; color: #111827;">${leadData?.eventLocation || 'No especificada'}</td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 8px 0; color: #6b7280; font-weight: 600;">Invitados:</td>
+                      <td style="padding: 8px 0; color: #111827;">${leadData?.guestCount || 'No especificado'}</td>
+                    </tr>
                   </table>
                 </div>
 
@@ -151,6 +159,14 @@ export default async function handler(req, res) {
                     <tr>
                       <td style="padding: 8px 0; color: #6b7280; font-weight: 600;">Tipo de Evento:</td>
                       <td style="padding: 8px 0; color: #111827;">${leadData.eventType || 'No especificado'}</td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 8px 0; color: #6b7280; font-weight: 600;">Ubicación:</td>
+                      <td style="padding: 8px 0; color: #111827;">${leadData.eventLocation || 'No especificada'}</td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 8px 0; color: #6b7280; font-weight: 600;">Invitados:</td>
+                      <td style="padding: 8px 0; color: #111827;">${leadData.guestCount || 'No especificado'}</td>
                     </tr>
                     <tr>
                       <td style="padding: 8px 0; color: #6b7280; font-weight: 600;">Fecha:</td>
