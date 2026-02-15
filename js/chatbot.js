@@ -1,7 +1,6 @@
 /**
  * Chatbot para Grupo Musical Versátil La Célula
- * Proporciona atención personalizada, resuelve dudas sobre eventos y ayuda con cotizaciones
- * Especializado en definir necesidades, identificar áreas de oportunidad y realizar cierres de venta
+ * Proporciona atención personalizada por medio de un flujo conversacional
  */
 
 class CelulaChatbotManager {
@@ -30,32 +29,11 @@ class CelulaChatbotManager {
         this.userInput = document.getElementById('user-input');
         this.sendBtn = document.getElementById('send-btn');
         this.closeBtn = document.getElementById('chat-close');
-        this.leadForm = document.getElementById('lead-form');
         this.chatWindowContainer = document.getElementById('chat-window-container');
         this.chatInputArea = document.getElementById('chat-input-area');
-        this.emailSent = false; // Flag para evitar envíos múltiples
+        this.emailSent = false;
         this.sessionStartTime = new Date().toISOString();
-
-        // Verificar que todos los elementos existen
-        const elements = {
-            chatWindow: this.chatWindow,
-            userInput: this.userInput,
-            sendBtn: this.sendBtn,
-            closeBtn: this.closeBtn,
-            leadForm: this.leadForm,
-            chatWindowContainer: this.chatWindowContainer,
-            chatInputArea: this.chatInputArea
-        };
-
-        const missingElements = Object.entries(elements)
-            .filter(([key, value]) => !value)
-            .map(([key]) => key);
-
-        if (missingElements.length > 0) {
-            console.error('❌ Elementos faltantes del chatbot:', missingElements);
-        } else {
-            console.log('✅ Todos los elementos del chatbot encontrados');
-        }
+        this.isLoading = false;
 
         this.init();
     }
@@ -63,6 +41,10 @@ class CelulaChatbotManager {
     async init() {
         this.setupEventListeners();
         this.loadState();
+
+        if (this.chatHistory.length === 0) {
+            this.startConversation();
+        }
     }
 
     saveState() {
@@ -73,33 +55,21 @@ class CelulaChatbotManager {
             isChatActive: this.chatWindowContainer.classList.contains('active'),
             lastUpdated: new Date().getTime()
         };
-        // Usar sessionStorage en lugar de localStorage para que solo persista durante la sesión
         sessionStorage.setItem('celulaChatbotState', JSON.stringify(state));
     }
 
     loadState() {
-    // Cargar desde sessionStorage (se borra al cerrar la pestaña/ventana)
         const savedState = sessionStorage.getItem('celulaChatbotState');
         if (savedState) {
             try {
                 const state = JSON.parse(savedState);
-
                 this.chatHistory = state.chatHistory || [];
-                this.leadData = state.leadData || {};
+                this.leadData = state.leadData || { step: 'name' };
                 this.emailSent = state.emailSent || false;
 
-                // Only pre-fill the form if leadData exists, but don't open anything automatically
-                if (Object.keys(this.leadData).length > 0) {
-                    this.fillLeadForm();
-                }
-
-                // Repoblar el chat si hay historial
                 if (this.chatHistory.length > 0) {
                     this.repopulateChat();
                 }
-
-                // The chat window should NOT be opened automatically here.
-                // The chatbot-toggle button will handle opening the lead form or chat.
             } catch (error) {
                 console.error('Error al cargar el estado del chatbot:', error);
                 this.resetState();
@@ -111,50 +81,13 @@ class CelulaChatbotManager {
 
     resetState() {
         this.chatHistory = [];
-        this.leadData = {};
+        this.leadData = { step: 'name' };
+        this.emailSent = false;
         sessionStorage.removeItem('celulaChatbotState');
     }
 
-    fillLeadForm() {
-    // Autorellenar el formulario con datos guardados
-        if (this.leadData.name) {
-            document.getElementById('name-input').value = this.leadData.name;
-        }
-        if (this.leadData.email) {
-            document.getElementById('email-input').value = this.leadData.email;
-        }
-        if (this.leadData.phone) {
-            document.getElementById('phone-input').value = this.leadData.phone;
-        }
-        if (this.leadData.eventType) {
-            document.getElementById('event-type-input').value =
-        this.leadData.eventType;
-        }
-        if (this.leadData.eventLocation) {
-            document.getElementById('event-location-input').value =
-        this.leadData.eventLocation;
-        }
-        if (this.leadData.guestCount) {
-            document.getElementById('guest-count-input').value =
-        this.leadData.guestCount;
-        }
-    }
-
-    // Determina si un mensaje es visible para el usuario
-    isVisibleMessage(message) {
-        return true; // Todos los mensajes son visibles en el nuevo flujo
-    }
-
-    // Filtra los mensajes que son visibles para el usuario
-    getVisibleMessages() {
-        return this.chatHistory;
-    }
-
     repopulateChat() {
-    // Limpiar la ventana de chat
         this.chatWindow.innerHTML = '';
-
-        // Mostrar todo el historial
         this.chatHistory.forEach((item) => {
             if (item.role === 'user') {
                 this.appendMessage(item.parts[0].text, 'user');
@@ -162,92 +95,53 @@ class CelulaChatbotManager {
                 this.appendMessage(item.parts[0].text, 'bot');
             }
         });
+
+        // Re-handle special inputs if we are in the middle of a step that needs them
+        if (this.chatHistory.length > 0 && this.chatHistory[this.chatHistory.length-1].role === 'model') {
+            this.handleSpecialInputs(this.leadData.step);
+        }
     }
 
     setupEventListeners() {
-        console.log('🎯 Configurando event listeners...');
-
-        // Evento para el botón flotante del chatbot (abrir chatbot)
         const chatbotToggle = document.getElementById('chatbot-toggle');
         if (chatbotToggle) {
-            console.log('✅ Botón chatbot-toggle encontrado, agregando listener');
             chatbotToggle.addEventListener('click', () => {
-                console.log('🖱️ Click en chatbot-toggle detectado');
-                console.log('Estado actual:', {
-                    chatHistoryLength: this.chatHistory?.length || 0,
-                    leadDataKeys: Object.keys(this.leadData || {}).length
-                });
-
-                // event: chatbot_open
                 window.__gaChatTrack('chatbot_open', { step: 'open', open_method: 'click' });
+                this.chatWindowContainer.classList.add('active');
+                if (this.chatInputArea) this.chatInputArea.style.display = 'flex';
+                this.saveState();
 
-                if (this.chatHistory && this.chatHistory.length > 3) {
-                    console.log('📝 Abriendo ventana de chat (historial > 3)');
-                    this.leadForm.classList.remove('active');
-                    this.chatWindowContainer.classList.add('active');
-                    this.chatInputArea.style.display = 'flex';
-                } else if (this.leadData && Object.keys(this.leadData).length > 0) {
-                    console.log('📋 Abriendo formulario con datos pre-llenados');
-                    this.fillLeadForm();
-                    this.leadForm.classList.add('active');
-                } else {
-                    console.log('📋 Abriendo formulario vacío');
-                    this.leadForm.classList.add('active');
+                if (this.chatHistory.length === 0) {
+                    this.startConversation();
                 }
             });
-        } else {
-            console.error('❌ No se encontró el botón chatbot-toggle');
         }
 
-        // Evento para cerrar el formulario de lead
-        document
-            .getElementById('lead-form-close')
-            ?.addEventListener('click', () => {
-                this.leadForm.classList.remove('active');
-                this.saveState();
-            });
-
-        // Evento para cerrar la ventana de chat
         document.getElementById('chat-close')?.addEventListener('click', () => {
             this.chatWindowContainer.classList.remove('active');
             this.saveState();
         });
 
-        // Evento para restablecer completamente el chat (borrar historial)
-        const resetChat = document.createElement('button');
-        resetChat.id = 'reset-chat';
-        resetChat.className = 'reset-chat';
-        resetChat.setAttribute('aria-label', 'Borrar conversación');
-        resetChat.innerHTML = '🗑️';
-        resetChat.title = 'Borrar esta conversación y comenzar de nuevo';
-        resetChat.style.cssText =
-      'position: absolute; right: 40px; top: 15px; background: transparent; border: none; color: white; cursor: pointer; font-size: 16px;';
-
-        // Añadir el botón al encabezado del chat
+        // Reset button
         const chatHeader = document.querySelector('.chat-header');
-        if (chatHeader) {
+        if (chatHeader && !document.getElementById('reset-chat')) {
+            const resetChat = document.createElement('button');
+            resetChat.id = 'reset-chat';
+            resetChat.className = 'reset-chat';
+            resetChat.setAttribute('aria-label', 'Borrar conversación');
+            resetChat.innerHTML = '🗑️';
+            resetChat.title = 'Reiniciar conversación';
+            resetChat.style.cssText = 'position: absolute; right: 40px; top: 15px; background: transparent; border: none; color: white; cursor: pointer; font-size: 16px; transition: transform 0.3s ease; z-index: 10;';
             chatHeader.appendChild(resetChat);
+            resetChat.addEventListener('click', () => {
+                if (confirm('¿Estás seguro de que quieres borrar la conversación y comenzar de nuevo?')) {
+                    this.resetState();
+                    this.chatWindow.innerHTML = '';
+                    this.startConversation();
+                    this.saveState();
+                }
+            });
         }
-
-        // Evento para el botón de restablecer chat
-        resetChat.addEventListener('click', () => {
-            if (
-                confirm(
-                    '¿Estás seguro de borrar toda la conversación y comenzar de nuevo?'
-                )
-            ) {
-                this.resetState();
-                this.chatWindowContainer.classList.remove('active');
-                this.chatWindow.innerHTML = '';
-                document.getElementById('chatbot-lead-form').reset();
-                this.leadForm.classList.add('active');
-            }
-        });
-
-        this.closeBtn?.addEventListener('click', () => {
-            parent.postMessage('close-chatbot', '*');
-            this.saveState();
-        });
 
         this.sendBtn?.addEventListener('click', () => this.handleUserInput());
 
@@ -259,26 +153,6 @@ class CelulaChatbotManager {
         });
 
         this.userInput?.addEventListener('input', this.autoResize.bind(this));
-
-        document
-            .getElementById('chatbot-lead-form')
-            ?.addEventListener('submit', (e) => {
-                e.preventDefault();
-                window.__gaChatTrack('chatbot_request_contact', { step: 'request_contact', requested_fields: 'name,email,phone,eventType' });
-                this.handleFormSubmission();
-            });
-
-        // Agregar detección de eventos de cierre de página para guardar estado
-        window.addEventListener('beforeunload', () => {
-            this.saveState();
-        });
-
-        // Guardar periódicamente el estado mientras se usa el chat
-        setInterval(() => {
-            if (this.chatHistory.length > 0) {
-                this.saveState();
-            }
-        }, 30000); // Guardar cada 30 segundos
     }
 
     autoResize(event) {
@@ -287,147 +161,238 @@ class CelulaChatbotManager {
         element.style.height = element.scrollHeight + 'px';
     }
 
-    async handleFormSubmission() {
-        const nameInput = document.getElementById('name-input');
-        const emailInput = document.getElementById('email-input');
-        const phoneInput = document.getElementById('phone-input');
-        const eventTypeInput = document.getElementById('event-type-input');
-        const eventLocationInput = document.getElementById('event-location-input');
-        const guestCountInput = document.getElementById('guest-count-input');
+    async startConversation() {
+        const greeting = "¡Hola! 👋 Soy tu asistente musical de La Célula. Para darte una cotización exacta para tu evento, necesito unos datos rápidos. ¿Cuál es tu **nombre**?";
+        this.addBotMessage(greeting);
+        this.leadData.step = 'name';
+        this.saveState();
+    }
 
-        this.leadData.name = nameInput.value.trim();
-        this.leadData.email = emailInput.value.trim();
-        this.leadData.phone = phoneInput.value.trim();
-        this.leadData.eventType = eventTypeInput.value.trim();
-        this.leadData.eventLocation = eventLocationInput.value.trim();
-        this.leadData.guestCount = guestCountInput.value.trim();
+    addBotMessage(text) {
+        this.chatHistory.push({ role: 'model', parts: [{ text }] });
+        this.appendMessage(text, 'bot');
+        this.scrollToBottom();
+    }
 
-        if (this.leadData.name && this.leadData.email && this.leadData.phone) {
-            // GA: collected contact
-            window.__gaChatTrack('chatbot_collect_contact', {
-                step: 'collect',
-                collected_fields_count: ['name','email','phone','eventType','eventLocation','guestCount'].filter(k=>this.leadData[k] && this.leadData[k].length).length,
-                contact_method: 'chatbot',
-                lead_type: this.leadData.eventType || undefined
+    async handleUserInput(manualMessage = null) {
+        const message = manualMessage || this.userInput.value.trim();
+        if (!message || this.isLoading) return;
+
+        // Validar según el paso actual
+        const validation = this.validateInput(message, this.leadData.step);
+        if (!validation.valid) {
+            // No agregamos el mensaje del usuario si es inválido, solo mostramos el error del bot
+            this.addBotMessage(`⚠️ ${validation.error}`);
+            this.userInput.value = '';
+            return;
+        }
+
+        this.isLoading = true;
+        if (this.sendBtn) this.sendBtn.disabled = true;
+
+        this.appendMessage(message, 'user');
+        this.chatHistory.push({ role: 'user', parts: [{ text: message }] });
+        this.userInput.value = '';
+
+        this.showTypingIndicator();
+
+        // Guardar el dato
+        this.saveLeadData(message, this.leadData.step);
+
+        // Simular tiempo de respuesta
+        setTimeout(async () => {
+            this.removeTypingIndicator();
+            await this.progressFlow();
+            this.isLoading = false;
+            if (this.sendBtn) this.sendBtn.disabled = false;
+            if (this.userInput) this.userInput.focus();
+            this.saveState();
+
+            window.__gaChatTrack('chatbot_message_sent', {
+                step: this.leadData.step,
+                conversation_length: this.chatHistory.length
             });
+        }, 800);
+    }
 
-            // Enviar lead directamente a la API
-            try {
-                const response = await fetch('/api/send-email', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        type: 'chatbot_lead',
-                        leadData: this.leadData
-                    })
-                });
+    validateInput(value, step) {
+        const alphanumeric = /^[a-zA-Z0-9\sÁÉÍÓÚáéíóúÑñ]+$/;
+        switch (step) {
+            case 'name':
+            case 'location':
+                if (!alphanumeric.test(value)) return { valid: false, error: "Por favor, usa solo letras y números, sin caracteres especiales." };
+                break;
+            case 'email':
+                if (!value.includes('@') || !value.includes('.')) return { valid: false, error: "Por favor, ingresa un correo electrónico válido (debe contener @ y .)." };
+                break;
+            case 'phone':
+                const phoneDigits = value.replace(/\D/g, '');
+                if (phoneDigits.length !== 10) return { valid: false, error: "El teléfono debe tener exactamente 10 dígitos numéricos." };
+                break;
+        }
+        return { valid: true };
+    }
 
-                const result = await response.json();
-                if (result.success) {
-                    console.log('✅ Lead capturado enviado:', result.emailId);
-                    // Conversion
-                    window.__gaChatTrack('generate_lead', {
-                        step: 'success',
-                        lead_type: this.leadData.eventType || undefined,
-                        value: undefined,
-                        currency: 'MXN',
-                        contact_method: 'chatbot',
-                        conversation_length: (this.getVisibleMessages() || []).length,
-                        resolution: 'automated'
-                    });
-                } else {
-                    console.warn('⚠️ No se pudo enviar el lead:', result.error);
-                    window.__gaChatTrack('chatbot_submit_error', { step: 'error', error_type: 'server', error_message: String(result.error || 'unknown') });
-                }
-            } catch (error) {
-                console.error('❌ Error enviando lead:', error);
-                window.__gaChatTrack('chatbot_submit_error', { step: 'error', error_type: 'exception', error_message: String(error?.message || error) });
+    saveLeadData(value, step) {
+        switch (step) {
+            case 'name': this.leadData.name = value; break;
+            case 'email': this.leadData.email = value; break;
+            case 'phone': this.leadData.phone = value.replace(/\D/g, ''); break;
+            case 'eventType': this.leadData.eventType = value; break;
+            case 'location': this.leadData.location = value; break;
+            case 'guestCount': this.leadData.guestCount = value; break;
+            case 'date': this.leadData.date = value; break;
+        }
+    }
+
+    async progressFlow() {
+        switch (this.leadData.step) {
+            case 'name':
+                this.leadData.step = 'email';
+                this.addBotMessage(`¡Mucho gusto, ${this.leadData.name}! ¿A qué **email** te enviamos la propuesta?`);
+                break;
+            case 'email':
+                this.leadData.step = 'phone';
+                this.addBotMessage(`¡Perfecto! ¿Cuál es tu **número de teléfono**? (10 dígitos)`);
+                break;
+            case 'phone':
+                this.leadData.step = 'eventType';
+                this.addBotMessage(`¿Qué **tipo de evento** estás planeando?`);
+                this.handleSpecialInputs('eventType');
+                break;
+            case 'eventType':
+                this.leadData.step = 'location';
+                this.addBotMessage(`¿En qué **ciudad o salón** será el evento?`);
+                break;
+            case 'location':
+                this.leadData.step = 'guestCount';
+                this.addBotMessage(`¿Cuántos **invitados** aproximadamente esperas?`);
+                this.handleSpecialInputs('guestCount');
+                break;
+            case 'guestCount':
+                this.leadData.step = 'date';
+                this.addBotMessage(`¿Para qué **fecha** es tu evento? 📅`);
+                this.handleSpecialInputs('date');
+                break;
+            case 'date':
+                this.leadData.step = 'completed';
+                await this.finishFlow();
+                break;
+        }
+    }
+
+    handleSpecialInputs(step) {
+        if (step === 'eventType') {
+            this.renderButtons(['Boda', 'XV años', 'Evento Corporativo', 'Fiesta privada', 'Graduación', 'Otro']);
+        } else if (step === 'guestCount') {
+            this.renderButtons(['50-100', '200-500', '500-1000', '1000+']);
+        } else if (step === 'date') {
+            this.renderDatePicker();
+        }
+    }
+
+    renderButtons(options) {
+        const container = document.createElement('div');
+        container.className = 'chat-buttons';
+        options.forEach(opt => {
+            const btn = document.createElement('button');
+            btn.className = 'chat-btn';
+            btn.textContent = opt;
+            btn.onclick = () => this.handleUserInput(opt);
+            container.appendChild(btn);
+        });
+        this.chatWindow.appendChild(container);
+        this.scrollToBottom();
+    }
+
+    renderDatePicker() {
+        const container = document.createElement('div');
+        container.className = 'chat-date-container';
+
+        const input = document.createElement('input');
+        input.type = 'date';
+        input.className = 'chat-date-input';
+
+        // No permitir fechas pasadas
+        const today = new Date().toISOString().split('T')[0];
+        input.min = today;
+
+        const confirmBtn = document.createElement('button');
+        confirmBtn.className = 'chat-btn date-confirm-btn';
+        confirmBtn.textContent = 'Confirmar fecha';
+        confirmBtn.onclick = () => {
+            if (input.value) {
+                this.handleUserInput(input.value);
+            } else {
+                alert('Por favor selecciona una fecha');
             }
+        };
 
-            this.leadForm.classList.remove('active');
-            this.chatWindowContainer.classList.add('active');
-            this.chatInputArea.style.display = 'flex';
-
-            await this.startChat();
-            this.saveState();
-        }
+        container.appendChild(input);
+        container.appendChild(confirmBtn);
+        this.chatWindow.appendChild(container);
+        this.scrollToBottom();
     }
 
-    async startChat() {
-        window.__gaChatTrack('chatbot_start', { step: 'start', first_intent: this.leadData?.eventType || undefined });
+    async finishFlow() {
+        const summary = `¡Excelente! He recolectado toda la información necesaria.
 
-        // Verificar si ya existe un saludo del bot
-        const hasGreeting = this.chatHistory.some(
-            (item) =>
-                item.role === 'model' &&
-                item.parts[0].text.includes('¡Hola')
-        );
+**Resumen de tu evento:**
+- 👤 **Nombre:** ${this.leadData.name}
+- 📧 **Email:** ${this.leadData.email}
+- 📞 **Teléfono:** ${this.leadData.phone}
+- 🎉 **Evento:** ${this.leadData.eventType}
+- 📍 **Lugar:** ${this.leadData.location}
+- 👥 **Invitados:** ${this.leadData.guestCount}
+- 📅 **Fecha:** ${this.leadData.date}
 
-        if (!hasGreeting) {
-            const greeting = `¡Hola ${this.leadData.name}! 👋 Gracias por elegir a La Célula para tu ${this.leadData.eventType}.
+Haz clic en el botón de abajo para enviarnos estos datos por WhatsApp y recibir tu cotización inmediata.`;
 
-Me alegra saber que será en **${this.leadData.eventLocation}** para **${this.leadData.guestCount}** invitados. ¡Será un evento espectacular! 🎵
+        this.addBotMessage(summary);
 
-¿Te gustaría recibir una cotización personalizada por WhatsApp ahora mismo?`;
+        const waMessage = `Hola, me interesa una cotización. Mis datos son:
+- Nombre: ${this.leadData.name}
+- Email: ${this.leadData.email}
+- Teléfono: ${this.leadData.phone}
+- Evento: ${this.leadData.eventType}
+- Lugar: ${this.leadData.location}
+- Invitados: ${this.leadData.guestCount}
+- Fecha: ${this.leadData.date}`;
 
-            this.chatHistory.push({
-                role: 'model',
-                parts: [{ text: greeting }]
+        const waLink = `https://wa.me/525535412631?text=${encodeURIComponent(waMessage)}`;
+
+        const waBtnContainer = document.createElement('div');
+        waBtnContainer.className = 'chat-buttons';
+        const waBtn = document.createElement('a');
+        waBtn.href = waLink;
+        waBtn.target = '_blank';
+        waBtn.className = 'chat-btn whatsapp-btn';
+        waBtn.innerHTML = '📱 Hablar por WhatsApp';
+        waBtn.style.backgroundColor = '#25D366';
+        waBtn.style.fontWeight = 'bold';
+        waBtn.onclick = () => {
+            window.__gaChatTrack('generate_lead', {
+                step: 'success',
+                contact_method: 'whatsapp_api',
+                lead_type: this.leadData.eventType
             });
+        };
 
-            this.appendMessage(greeting, 'bot');
-            this.saveState();
-        }
-    }
+        waBtnContainer.appendChild(waBtn);
+        this.chatWindow.appendChild(waBtnContainer);
 
-    async getBotResponse(message) {
-        this.chatHistory.push({
-            role: 'user',
-            parts: [{ text: message }]
-        });
-
-        // Contar cuántos mensajes ha enviado el modelo para determinar el paso del flujo
-        const botMessagesCount = this.chatHistory.filter(m => m.role === 'model').length;
-        let response = '';
-
-        if (botMessagesCount === 1) {
-            response = `¡Excelente! Somos un grupo musical versátil con más de 10 años de experiencia. Tocamos todos los géneros (cumbia, rock, pop, salsa y más) y nos adaptamos a tus necesidades para que la pista nunca esté vacía. 🎸🎉
-
-¿Quieres que te enviemos nuestros paquetes actuales o prefieres hablar directamente con un asesor?`;
-        } else {
-            const waMessage = `Hola, vengo del sitio web. Mi evento es una ${this.leadData.eventType} en ${this.leadData.eventLocation} para ${this.leadData.guestCount} personas. Me gustaría una cotización.`;
-            const waLink = `https://wa.me/525535412631?text=${encodeURIComponent(waMessage)}`;
-
-            response = `¡Entendido! Para darte la mejor atención y el presupuesto exacto, un asesor te atenderá de inmediato por WhatsApp.
-
-Haz clic aquí para iniciar la conversación: [**Hablar por WhatsApp**](${waLink}) 📱
-
-¡Estamos listos para hacer de tu evento algo inolvidable!`;
-        }
-
-        this.chatHistory.push({
-            role: 'model',
-            parts: [{ text: response }]
-        });
-
-        return response;
+        // Enviar resumen por email automáticamente
+        setTimeout(() => this.sendConversationSummary(), 2000);
+        this.scrollToBottom();
     }
 
     appendMessage(message, sender) {
         const messageElement = document.createElement('div');
-        messageElement.classList.add(
-            'message',
-            sender === 'user' ? 'user-message' : 'bot-message'
-        );
+        messageElement.classList.add('message', sender === 'user' ? 'user-message' : 'bot-message');
 
         if (sender === 'bot') {
-            // Procesar markdown básico y emojis para mensajes del bot
-            const processedMessage = this.processMarkdown(message);
-            messageElement.innerHTML = processedMessage;
+            messageElement.innerHTML = this.processMarkdown(message);
         } else {
-            // Para mensajes del usuario, usar texto plano
             messageElement.textContent = message;
         }
 
@@ -436,310 +401,74 @@ Haz clic aquí para iniciar la conversación: [**Hablar por WhatsApp**](${waLink
     }
 
     processMarkdown(text) {
-        // Convertir saltos de línea dobles a párrafos y simples a <br>
+        // Simple markdown processor
         let processed = text.replace(/\n\n/g, '</p><p>');
         processed = '<p>' + processed + '</p>';
         processed = processed.replace(/\n/g, '<br>');
-
-        // Limpiar párrafos vacíos
-        processed = processed.replace(/<p><\/p>/g, '');
-        processed = processed.replace(/<p><br><\/p>/g, '');
-
-        // Negritas: **texto**
         processed = processed.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+        processed = processed.replace(/\[(.*?)\]\((https?:\/\/[^\s<>]+)\)/g, '<a href="$2" target="_blank" style="color: #3D9BE9; text-decoration: underline;">$1</a>');
 
-        // Cursivas: *texto*
-        processed = processed.replace(/\*([^*<>]+?)\*/g, '<em>$1</em>');
-
-        // Procesar enlaces Markdown [texto](url)
-        // Lo hacemos antes que las URLs sueltas y números de teléfono para evitar colisiones
-        processed = processed.replace(
-            /\[(.*?)\]\((https?:\/\/[^\s<>]+)\)/g,
-            '<a href="$2" target="_blank" style="color: #3D9BE9; text-decoration: underline; font-weight: bold;">$1</a>'
-        );
-
-        // Convertir URLs sueltas a enlaces clickeables (que no estén ya dentro de un atributo href)
-        processed = processed.replace(
-            /(?<!href=")(https?:\/\/[^\s<>"]+)/g,
-            '<a href="$1" target="_blank" style="color: #3D9BE9; text-decoration: underline;">$1</a>'
-        );
-
-        // Convertir número de WhatsApp de La Célula a enlace, SOLO si no es parte de una URL de wa.me
-        // Usamos un lookbehind para asegurar que no haya un dígito antes (como el 2 de 52)
-        processed = processed.replace(
-            /(?<![\d\/])(55\s*3541\s*2631|5535412631)(?!\d)/g,
-            '<a href="https://wa.me/525535412631?text=Hola,%20vengo%20del%20sitio%20web" target="_blank" style="color: #25D366; font-weight: bold; text-decoration: none;">📱 $1</a>'
-        );
-
-        // Limpiar HTML mal formado
+        // Clean empty paragraphs
         processed = processed.replace(/<p>\s*<\/p>/g, '');
-        processed = processed.replace(/(<\/p>)\s*(<p>)/g, '$1$2');
-
         return processed;
     }
 
-    // Enviar resumen de conversación por email usando Resend
     async sendConversationSummary() {
+        if (this.emailSent) return;
         try {
-            // Obtener solo los mensajes visibles (sin contexto del sistema)
-            const visibleMessages = this.getVisibleMessages();
-
-            // Crear copia textual completa de la conversación
-            let conversationText = '';
-            visibleMessages.forEach((msg) => {
-                const role = msg.role === 'user' ? 'Cliente' : 'Asistente';
-                const text = msg.parts[0].text;
-                conversationText += `${role}: ${text}\n\n`;
-            });
-
-            // ENVIAR SIEMPRE, sin importar la longitud de la conversación
-            if (visibleMessages.length === 0) {
-                console.log('No hay mensajes para enviar');
-                return false;
-            }
-
-            // Preparar payload directo a la API
             const payload = {
                 type: 'chatbot_summary',
                 leadData: this.leadData,
                 conversationData: {
-                    full_conversation: conversationText,
-                    conversation_length: visibleMessages.length,
+                    full_conversation: this.chatHistory.map(m => `${m.role === 'user' ? 'Cliente' : 'Asistente'}: ${m.parts[0].text}`).join('\n\n'),
                     session_start: this.sessionStartTime
                 }
             };
 
-            console.log('📤 Enviando resumen:', payload);
-
-            // Enviar directamente a la API de send-email
             const response = await fetch('/api/send-email', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)
             });
 
             const result = await response.json();
-
             if (result.success) {
-                console.log('✅ Resumen de conversación enviado');
-                this.showEmailSentNotification();
                 this.emailSent = true;
                 this.saveState();
-                return true;
-            } else {
-                console.error('❌ Error enviando email:', result.error);
-                return false;
             }
         } catch (error) {
-            console.error('❌ Error enviando email:', error);
-            return false;
+            console.error('Error enviando resumen por email:', error);
         }
     }
 
-    // Mostrar notificación de email enviado
-    showEmailSentNotification() {
-        const notification = document.createElement('div');
-        notification.className = 'email-notification';
-        notification.innerHTML = `
-            <div style="background: #d4edda; color: #155724; padding: 10px; border-radius: 5px; margin: 10px 0; text-align: center; font-size: 12px;">
-                ✅ Información enviada a nuestro equipo musical
-            </div>
-        `;
-
-        this.chatWindow.appendChild(notification);
-
-        // Quitar la notificación después de 5 segundos
-        setTimeout(() => {
-            if (notification.parentNode) {
-                notification.parentNode.removeChild(notification);
-            }
-        }, 5000);
-
-        this.scrollToBottom();
-    }
-
-    // Verificar si se debe enviar el resumen automáticamente
-    shouldSendSummary() {
-        const userMessages = this.chatHistory
-            .filter((msg) => msg.role === 'user')
-            .map((msg) => msg.parts[0].text)
-            .filter(
-                (text) =>
-                    text.length > 10 && !text.includes('Eres el Asistente Musical')
-            );
-
-        // Enviar después de 3 mensajes del usuario o si menciona palabras clave
-        const keywordTriggers = [
-            'cotizar',
-            'cotización',
-            'precio',
-            'costo',
-            'contratar',
-            'fecha',
-            'presupuesto',
-            'disponibilidad'
-        ];
-        const hasKeywords = userMessages.some((msg) =>
-            keywordTriggers.some((keyword) => msg.toLowerCase().includes(keyword))
-        );
-
-        return (
-            userMessages.length >= 3 || (userMessages.length >= 2 && hasKeywords)
-        );
-    }
-
     scrollToBottom() {
-        this.chatWindow.scrollTop = this.chatWindow.scrollHeight;
+        if (this.chatWindow) {
+            this.chatWindow.scrollTop = this.chatWindow.scrollHeight;
+        }
     }
 
     showTypingIndicator() {
-        const typingElement = document.createElement('div');
-        typingElement.classList.add('message', 'bot-message', 'typing-indicator');
-        typingElement.innerHTML = '<span>Componiendo respuesta...</span>';
-        typingElement.id = 'typing-indicator';
-        this.chatWindow.appendChild(typingElement);
+        const indicator = document.createElement('div');
+        indicator.className = 'message bot-message typing-indicator';
+        indicator.id = 'typing-indicator';
+        indicator.innerHTML = '<span></span><span></span><span></span>';
+        this.chatWindow.appendChild(indicator);
         this.scrollToBottom();
     }
 
     removeTypingIndicator() {
-        const typingElement = document.getElementById('typing-indicator');
-        if (typingElement) {
-            typingElement.remove();
-        }
-    }
-
-    async handleUserInput() {
-        const message = this.userInput.value.trim();
-        if (!message || this.isLoading) return;
-
-        this.isLoading = true;
-        this.sendBtn.disabled = true;
-
-        this.appendMessage(message, 'user');
-        this.userInput.value = '';
-
-        this.showTypingIndicator();
-        try {
-            const botResponse = await this.getBotResponse(message);
-            this.removeTypingIndicator();
-            this.appendMessage(botResponse, 'bot');
-        } catch (error) {
-            this.removeTypingIndicator();
-            this.appendMessage(
-                'Lo siento, no pude procesar tu mensaje. Para atención inmediata, contáctanos por WhatsApp al 55 3541 2631.',
-                'bot'
-            );
-        }
-
-        this.isLoading = false;
-        this.sendBtn.disabled = false;
-        this.userInput.focus();
-        this.saveState();
-
-        // track message sent to get conversation length dynamics
-        window.__gaChatTrack('chatbot_message_sent', { step: 'message', conversation_length: (this.getVisibleMessages() || []).length });
-
-        // Enviar resumen por email después de cada mensaje (SIN condiciones)
-        console.log('📧 Intentando enviar resumen del chatbot...');
-        console.log('📊 Estado:', {
-            emailSent: this.emailSent,
-            ResendHandlerDisponible: !!window.ResendEmailHandler,
-            mensajesUsuario: this.chatHistory.filter(msg =>
-                msg.role === 'user' &&
-        msg.parts[0].text.length > 10 &&
-        !msg.parts[0].text.includes('Eres el Asistente Musical')
-            ).length
-        });
-
-        // Enviar siempre, sin importar las condiciones
-        setTimeout(() => {
-            console.log('⏰ Iniciando envío de resumen (sin condiciones)...');
-            this.sendConversationSummary();
-        }, 2000);
+        document.getElementById('typing-indicator')?.remove();
     }
 }
 
-// Función de inicialización que se ejecuta cuando el DOM está listo
 function initializeChatbot() {
-    console.log('🎵 Inicializando Chatbot La Célula...');
-
-    try {
-        const chatbotManager = new CelulaChatbotManager();
-
-        // Inicializar estado visual de los componentes del chatbot
-        const chatbotToggle = document.getElementById('chatbot-toggle');
-        const leadForm = document.getElementById('lead-form');
-        const chatWindowContainer = document.getElementById(
-            'chat-window-container'
-        );
-
-        // Añadir estilo para el botón de restablecer chat
-        const style = document.createElement('style');
-        style.textContent = `
-            .reset-chat {
-                position: absolute;
-                right: 40px;
-                top: 15px;
-                background: transparent;
-                border: none;
-                color: white;
-                cursor: pointer;
-                font-size: 16px;
-                transition: transform 0.3s ease;
-                z-index: 10;
-            }
-
-            .reset-chat:hover {
-                transform: scale(1.2);
-            }
-
-            @media (max-width: 600px) {
-                .reset-chat {
-                    right: 35px;
-                    top: 14px;
-                    font-size: 14px;
-                }
-            }
-        `;
-        document.head.appendChild(style);
-
-        if (chatbotToggle && leadForm && chatWindowContainer) {
-            console.log(
-                '✅ Chatbot La Célula inicializado correctamente con persistencia entre páginas'
-            );
-        } else {
-            console.error('❌ No se pudieron encontrar elementos del chatbot:', {
-                chatbotToggle: !!chatbotToggle,
-                leadForm: !!leadForm,
-                chatWindowContainer: !!chatWindowContainer
-            });
-        }
-
-        // Mostrar mensaje de persistencia en el chatbot (sólo en desarrollo)
-        if (
-            location.hostname === 'localhost' ||
-      location.hostname === '127.0.0.1'
-        ) {
-            console.log(
-                'Persistencia del chatbot activada. Los datos se conservarán entre páginas y sesiones'
-            );
-        }
-
-        // Hacer el manager accesible globalmente para debugging
-        window.celulaChatbotManager = chatbotManager;
-    } catch (error) {
-        console.error('❌ Error al inicializar el chatbot:', error);
-    }
+    console.log('🎵 Inicializando Chatbot Conversacional La Célula...');
+    const chatbotManager = new CelulaChatbotManager();
+    window.celulaChatbotManager = chatbotManager;
 }
 
-// Ejecutar cuando el DOM esté listo
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initializeChatbot);
 } else {
-    // El DOM ya está listo, ejecutar inmediatamente
     initializeChatbot();
 }
-
-// Form submission logic will be handled by Cloudflare Worker
