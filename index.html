@@ -791,7 +791,7 @@
                     </div>
                     <div class="form-group">
                         <label for="event-type-input">Tipo de evento</label>
-                        <select id="event-type-input">
+                        <select id="event-type-input" required>
                             <option value="">Selecciona...</option>
                             <option value="Boda">Boda</option>
                             <option value="XV años">XV años</option>
@@ -800,6 +800,14 @@
                             <option value="Graduación">Graduación</option>
                             <option value="Otro">Otro</option>
                         </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="event-location-input">Lugar del evento</label>
+                        <input type="text" id="event-location-input" placeholder="Ciudad o salón" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="guest-count-input">Cantidad de invitados</label>
+                        <input type="number" id="guest-count-input" placeholder="Ej: 100" required>
                     </div>
                     <button type="submit" class="lead-form-submit">Iniciar chat</button>
                 </form>

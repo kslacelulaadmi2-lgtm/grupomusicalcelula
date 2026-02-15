@@ -130,44 +130,32 @@ class CelulaChatbotManager {
             document.getElementById('event-type-input').value =
         this.leadData.eventType;
         }
+        if (this.leadData.eventLocation) {
+            document.getElementById('event-location-input').value =
+        this.leadData.eventLocation;
+        }
+        if (this.leadData.guestCount) {
+            document.getElementById('guest-count-input').value =
+        this.leadData.guestCount;
+        }
     }
 
     // Determina si un mensaje es visible para el usuario
     isVisibleMessage(message) {
-    // No mostrar el contexto inicial de sistema
-        if (
-            message.parts[0].text.includes('Eres el Asistente Musical Virtual') ||
-      message.parts[0].text.includes('MISIÓN PRINCIPAL:') ||
-      message.parts[0].text.includes('MÉTODO SPIN') ||
-      message.parts[0].text.includes('DIRECTRICES CRÍTICAS:')
-        ) {
-            return false;
-        }
-
-        // No mostrar la respuesta de inicialización del sistema
-        if (
-            message.role === 'model' &&
-      message.parts[0].text.includes(
-          '¡Entendido! Soy el Asistente Musical de Grupo Musical Versátil La Célula'
-      )
-        ) {
-            return false;
-        }
-
-        return true;
+        return true; // Todos los mensajes son visibles en el nuevo flujo
     }
 
     // Filtra los mensajes que son visibles para el usuario
     getVisibleMessages() {
-        return this.chatHistory.filter((message) => this.isVisibleMessage(message));
+        return this.chatHistory;
     }
 
     repopulateChat() {
     // Limpiar la ventana de chat
         this.chatWindow.innerHTML = '';
 
-        // Mostrar solo los mensajes visibles para el usuario
-        this.getVisibleMessages().forEach((item) => {
+        // Mostrar todo el historial
+        this.chatHistory.forEach((item) => {
             if (item.role === 'user') {
                 this.appendMessage(item.parts[0].text, 'user');
             } else if (item.role === 'model') {
@@ -304,17 +292,21 @@ class CelulaChatbotManager {
         const emailInput = document.getElementById('email-input');
         const phoneInput = document.getElementById('phone-input');
         const eventTypeInput = document.getElementById('event-type-input');
+        const eventLocationInput = document.getElementById('event-location-input');
+        const guestCountInput = document.getElementById('guest-count-input');
 
         this.leadData.name = nameInput.value.trim();
         this.leadData.email = emailInput.value.trim();
         this.leadData.phone = phoneInput.value.trim();
         this.leadData.eventType = eventTypeInput.value.trim();
+        this.leadData.eventLocation = eventLocationInput.value.trim();
+        this.leadData.guestCount = guestCountInput.value.trim();
 
         if (this.leadData.name && this.leadData.email && this.leadData.phone) {
             // GA: collected contact
             window.__gaChatTrack('chatbot_collect_contact', {
                 step: 'collect',
-                collected_fields_count: ['name','email','phone','eventType'].filter(k=>this.leadData[k] && this.leadData[k].length).length,
+                collected_fields_count: ['name','email','phone','eventType','eventLocation','guestCount'].filter(k=>this.leadData[k] && this.leadData[k].length).length,
                 contact_method: 'chatbot',
                 lead_type: this.leadData.eventType || undefined
             });
@@ -364,190 +356,29 @@ class CelulaChatbotManager {
     }
 
     async startChat() {
-    // loadInitialContext ahora devuelve true si necesita añadir saludo
-        const needsGreeting = await this.loadInitialContext();
         window.__gaChatTrack('chatbot_start', { step: 'start', first_intent: this.leadData?.eventType || undefined });
 
-        // Solo añadir el saludo si es necesario (no existe ya en el historial)
-        if (needsGreeting) {
-            // Mensaje de saludo personalizado para La Célula con enfoque SPIN
-            const greeting = `¡Hola ${this.leadData.name}! 👋 Soy el **Asistente Musical** de Grupo Musical La Célula 🎵
+        // Verificar si ya existe un saludo del bot
+        const hasGreeting = this.chatHistory.some(
+            (item) =>
+                item.role === 'model' &&
+                item.parts[0].text.includes('¡Hola')
+        );
 
-Estoy aquí para ayudarte con tu ${this.leadData.eventType || 'evento'}. Somos un grupo versátil que toca todos los géneros musicales y nos adaptamos a cualquier celebración.
+        if (!hasGreeting) {
+            const greeting = `¡Hola ${this.leadData.name}! 👋 Gracias por elegir a La Célula para tu ${this.leadData.eventType}.
 
-¿Cuándo es tu evento y cuántos invitados esperas? 🎉`;
+Me alegra saber que será en **${this.leadData.eventLocation}** para **${this.leadData.guestCount}** invitados. ¡Será un evento espectacular! 🎵
 
-            // Añadir al historial y mostrar al usuario
+¿Te gustaría recibir una cotización personalizada por WhatsApp ahora mismo?`;
+
             this.chatHistory.push({
                 role: 'model',
                 parts: [{ text: greeting }]
             });
 
             this.appendMessage(greeting, 'bot');
-
-            // Guardar el estado para mantener la coherencia entre páginas
             this.saveState();
-        }
-    }
-
-    async loadInitialContext() {
-        try {
-            // Verificar si ya tenemos el contexto inicial en el historial
-            const hasInitialContext = this.chatHistory.some(
-                (item) =>
-                    item.role === 'user' &&
-          item.parts[0].text.includes('Eres el Asistente Musical Virtual')
-            );
-
-            // Solo añadir el contexto inicial si no existe ya
-            if (!hasInitialContext) {
-                const initialContext = `Eres el Asistente Musical Virtual del Grupo Musical Versátil La Célula, especializado en ventas consultivas y cierre de contratos musicales para todo tipo de eventos.
-
-MISIÓN PRINCIPAL:
-Tu misión es EXTRAER LA MAYOR CANTIDAD DE INFORMACIÓN POSIBLE sobre el evento del cliente, utilizando el método SPIN y técnicas de venta avanzadas para calificar al cliente y guiarlo hacia una cotización personalizada.
-
-DIRECTRICES CRÍTICAS:
-1. SIEMPRE destaca la versatilidad del grupo en cualquier género musical (cumbia, rock, pop, baladas, etc.)
-2. PRIORIZA entender las necesidades específicas del evento usando la técnica SPIN
-3. ORIENTA cada respuesta para descubrir problemas ocultos y avanzar hacia el cierre
-4. MANTÉN un formato consistente con listas numeradas o viñetas según corresponda
-5. Cuando no tengas información específica, DIRIGE al cliente al WhatsApp: 55 3541 2631
-
-MÉTODO SPIN (UTILIZA ESTAS PREGUNTAS ESTRATÉGICAMENTE):
-• **Situación**: "¿Para qué evento necesitas música?", "¿Cuántos invitados asistirán?", "¿Ya tienes fecha y lugar?"
-• **Problema**: "¿Te preocupa que la música no sea adecuada para todos tus invitados?", "¿Has tenido malas experiencias con otros grupos musicales?"
-• **Implicación**: "¿Cómo afectaría a tu evento si la banda no puede adaptarse a los diferentes gustos?", "¿Qué pasaría si tus invitados no disfrutan de la música?"
-• **Necesidad**: "¿Sería valioso contar con músicos que puedan tocar todos los géneros?", "¿Te ayudaría tener un grupo que mantenga la pista llena toda la noche?"
-
-INFORMACIÓN CLAVE SOBRE GRUPO MUSICAL LA CÉLULA:
-
-1. **Identidad**
-• Nombre: Grupo Musical Versátil La Célula
-• Especialización: Música para todo tipo de eventos sociales y corporativos
-• Fortaleza: Versatilidad de géneros y capacidad de adaptación a cualquier evento
-• Experiencia: Más de 10 años en eventos exclusivos y corporativos
-
-2. **Paquetes de Servicio**
-• **Paquete Event Plus**: Ideal para eventos grandes (bodas, graduaciones)
-   - 5 horas de música en vivo ininterrumpida
-   - Equipo de audio para 50 hasta 2,000 invitados
-   - Iluminación robótica y láser profesional
-   - Pantalla gigante / Led para momentos especiales
-   - Animadores / DJ para maximizar la experiencia
-   - Dinámicas y regalos para invitados
-   - Máquina de humo para efectos especiales
-
-• **Paquete Party**: Perfecto para fiestas medianas
-   - 5 horas de música en vivo de alta calidad
-   - Equipo de audio para 30-250 personas con sonido premium
-   - Iluminación robótica y LED para crear ambientes únicos
-   - Iluminación láser con máquina de humo inteligente
-   - Dinámicas, batucada y show 80's con regalos exclusivos
-   - Música grabada en descansos (sin silencios incómodos)
-
-• **Paquete Live**: Para eventos masivos y corporativos
-   - Show 80's o temático personalizado según las necesidades
-   - Equipo profesional para hasta 10,000 personas
-   - Escenario, video, luz robótica y láser de alta gama
-   - Pantallas gigantes para mayor visibilidad
-   - Animadores / DJ para complementar la experiencia
-   - Dinámicas especiales adaptadas al tipo de evento
-
-3. **Características Distintivas**
-• 6 integrantes base con posibilidad de ampliar según necesidades
-• Repertorio extenso que incluye TODOS los géneros musicales (pop, rock, cumbia, salsa, etc.)
-• Músicos multifacéticos que dominan varios instrumentos y estilos vocales
-• Diseño de bloques musicales personalizados para cada momento del evento
-• Ambiente continuo sin descansos prolongados que maten la fiesta
-• Equipo de audio de última generación para sonido cristalino
-• Puntualidad y profesionalismo garantizados
-
-4. **Eventos que cubren**
-• Bodas 💍 (ceremonia, cocktail y recepción con ambientación perfecta)
-• XV Años 🎂 (vals tradicional, show juvenil y fiesta para todas las edades)
-• Graduaciones 🎓 (ceremonias formales y celebraciones dinámicas)
-• Aniversarios 💕 (ambientes románticos y festivos)
-• Eventos corporativos 🏢 (presentaciones, cenas de gala, team buildings)
-• Fiestas privadas 🏠 (cumpleaños, reuniones exclusivas, celebraciones íntimas)
-• Conciertos y eventos masivos 🎤 (shows temáticos, festivales, lanzamientos)
-
-5. **Información de Contacto**
-• WhatsApp: 55 3541 2631 (atención inmediata)
-• Sitio Web: https://grupomusicalcelula.com (información detallada)
-• Redes: Facebook, YouTube, Twitter (@grupocelula)
-
-FORMATO CONSISTENTE PARA RESPUESTAS:
-• Usa siempre **negrita** para destacar conceptos clave y nombres de paquetes
-• Estructura tus respuestas con viñetas (•) para listas generales
-• Usa numeración (1, 2, 3) para pasos secuenciales o rankings
-• Usa guiones (-) para detallar características bajo una categoría
-• Incluye emojis relevantes al contexto (🎵 🎸 🎉 🎊 💍 🎓 🎤 🏢 🎂)
-• Mantén párrafos cortos y directos (máximo 2-3 líneas)
-• **IMPORTANTE: Sé CONCISO y DIRECTO. Respuestas máximo 4-5 líneas cuando sea posible**
-• Evita listas largas innecesarias, ve al punto rápidamente
-• Cierra SIEMPRE con una pregunta para mantener la conversación
-
-TÉCNICAS DE VENTA AVANZADAS:
-1. **Diferenciación**: Destaca siempre qué hace único al grupo (versatilidad, cero tiempos muertos, adaptabilidad)
-2. **Storytelling**: Incluye ejemplos breves de éxito en eventos similares
-3. **Urgencia**: Menciona disponibilidad limitada en temporadas altas (diciembre-enero, mayo-junio)
-4. **Beneficios vs Características**: Enfócate en la experiencia, no solo en equipamiento técnico
-5. **Objeciones**: Anticipa y responde proactivamente a preocupaciones comunes (precio, espacio, energía)
-6. **Prueba social**: Menciona sutilmente la experiencia con otros clientes satisfechos
-
-CICLO DE CADA RESPUESTA:
-1. Reconoce la pregunta/comentario del cliente
-2. Proporciona información valiosa y relevante
-3. Incluye un elemento diferenciador del grupo
-4. Termina con una pregunta SPIN para obtener más información
-5. Guía hacia la cotización o contacto directo cuando tengas suficientes datos
-
-ESTRATEGIA PARA CIERRE:
-Cuando hayas recopilado: tipo de evento, fecha, número de invitados y estilo musical deseado, OFRECE:
-"Para brindarte una **cotización personalizada** 💰 podemos:
-1. Contactarte directamente vía WhatsApp al **55 3541 2631**
-2. Enviarte una propuesta detallada por correo electrónico
-¿Qué opción prefieres para avanzar con tu reserva?"
-
-Los datos del usuario son:
-Nombre: ${this.leadData.name || '[Sin nombre]'}
-Correo electrónico: ${this.leadData.email || '[Sin email]'}
-Número de teléfono: ${this.leadData.phone || '[Sin teléfono]'}
-Tipo de evento: ${this.leadData.eventType || '[Sin especificar]'}`;
-
-                this.chatHistory.push({
-                    role: 'user',
-                    parts: [{ text: initialContext }]
-                });
-                this.chatHistory.push({
-                    role: 'model',
-                    parts: [
-                        {
-                            text: '¡Entendido! Soy el Asistente Musical de Grupo Musical Versátil La Célula. Mi misión es usar el método SPIN y técnicas de venta avanzadas para descubrir todas las necesidades del cliente, extraer la mayor información posible sobre su evento, y presentar nuestros servicios de forma convincente. Mantendré un formato consistente en mis respuestas usando viñetas, numeración y elementos visuales para resaltar los beneficios de nuestros paquetes musicales. Cada interacción estará orientada a guiar al cliente hacia una cotización personalizada, destacando siempre nuestra versatilidad musical y adaptabilidad. 🎵🎉'
-                        }
-                    ]
-                });
-            }
-
-            // Verificar si ya existe un saludo del bot
-            const hasGreeting = this.chatHistory.some(
-                (item) =>
-                    item.role === 'model' &&
-          item.parts[0].text.includes('¡Hola') &&
-          item.parts[0].text.includes('Soy el **Asistente Musical**')
-            );
-
-            // Si no hay saludo, preparamos para añadir uno
-            return !hasGreeting;
-        } catch (error) {
-            console.error(error);
-            this.appendMessage(
-                'Error de configuración: No se pudo inicializar el asistente. Por favor, contacta al administrador del sitio.',
-                'bot'
-            );
-            this.sendBtn.disabled = true;
-            this.userInput.disabled = true;
-            return false;
         }
     }
 
@@ -557,52 +388,31 @@ Tipo de evento: ${this.leadData.eventType || '[Sin especificar]'}`;
             parts: [{ text: message }]
         });
 
-        // Simple heuristic to detect intent
-        const lower = (message || '').toLowerCase();
-        const intents = [
-            { name: 'cotizacion', keys: ['cotiza', 'cotización', 'cotizacion', 'precio', 'costo', 'presupuesto'] },
-            { name: 'disponibilidad', keys: ['fecha', 'disponible', 'agenda'] },
-            { name: 'contacto', keys: ['whatsapp', 'llamar', 'contacto'] }
-        ];
-        const hit = intents.find(it => it.keys.some(k => lower.includes(k)));
-        if (hit) {
-            window.__gaChatTrack('chatbot_intent_detected', { step: 'intent', intent_name: hit.name, confidence: 0.6 });
+        // Contar cuántos mensajes ha enviado el modelo para determinar el paso del flujo
+        const botMessagesCount = this.chatHistory.filter(m => m.role === 'model').length;
+        let response = '';
+
+        if (botMessagesCount === 1) {
+            response = `¡Excelente! Somos un grupo musical versátil con más de 10 años de experiencia. Tocamos todos los géneros (cumbia, rock, pop, salsa y más) y nos adaptamos a tus necesidades para que la pista nunca esté vacía. 🎸🎉
+
+¿Quieres que te enviemos nuestros paquetes actuales o prefieres hablar directamente con un asesor?`;
+        } else {
+            const waMessage = `Hola, vengo del sitio web. Mi evento es una ${this.leadData.eventType} en ${this.leadData.eventLocation} para ${this.leadData.guestCount} personas. Me gustaría una cotización.`;
+            const waLink = `https://wa.me/525535412631?text=${encodeURIComponent(waMessage)}`;
+
+            response = `¡Entendido! Para darte la mejor atención y el presupuesto exacto, un asesor te atenderá de inmediato por WhatsApp.
+
+Haz clic aquí para iniciar la conversación: [**Hablar por WhatsApp**](${waLink}) 📱
+
+¡Estamos listos para hacer de tu evento algo inolvidable!`;
         }
 
-        const payload = {
-            history: this.chatHistory
-        };
+        this.chatHistory.push({
+            role: 'model',
+            parts: [{ text: response }]
+        });
 
-        try {
-            // Usar la función API de Cloudflare Pages (la ruta /api/ es mapeada automáticamente a /functions/api/)
-            const response = await fetch('/api/chatbot', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
-            });
-
-            if (!response.ok) {
-                const errorData = await response.json().catch(() => null);
-                const errorMessage =
-          errorData?.error || `Error: ${response.statusText}`;
-                throw new Error(errorMessage);
-            }
-
-            const result = await response.json();
-            const botMessage =
-        result.candidates?.[0]?.content?.parts?.[0]?.text ||
-        'Lo siento, no pude procesar tu mensaje. ¿Podrías contactarnos directamente por WhatsApp al 55 3541 2631?';
-
-            this.chatHistory.push({
-                role: 'model',
-                parts: [{ text: botMessage }]
-            });
-
-            return botMessage;
-        } catch (error) {
-            console.error('Error:', error.message);
-            return 'Lo siento, ocurrió un error al procesar tu mensaje. Para atención inmediata, contáctanos por WhatsApp al 55 3541 2631.';
-        }
+        return response;
     }
 
     appendMessage(message, sender) {
@@ -626,7 +436,7 @@ Tipo de evento: ${this.leadData.eventType || '[Sin especificar]'}`;
     }
 
     processMarkdown(text) {
-    // Convertir saltos de línea dobles a párrafos y simples a <br>
+        // Convertir saltos de línea dobles a párrafos y simples a <br>
         let processed = text.replace(/\n\n/g, '</p><p>');
         processed = '<p>' + processed + '</p>';
         processed = processed.replace(/\n/g, '<br>');
@@ -635,87 +445,35 @@ Tipo de evento: ${this.leadData.eventType || '[Sin especificar]'}`;
         processed = processed.replace(/<p><\/p>/g, '');
         processed = processed.replace(/<p><br><\/p>/g, '');
 
-        // Negritas
+        // Negritas: **texto**
         processed = processed.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
 
-        // Cursivas (solo si no es parte de negritas)
-        processed = processed.replace(/\*([^*<>]+?)\*/g, function (match, content) {
-            return '<em>' + content + '</em>';
-        });
+        // Cursivas: *texto*
+        processed = processed.replace(/\*([^*<>]+?)\*/g, '<em>$1</em>');
 
-        // Procesar listas
+        // Procesar enlaces Markdown [texto](url)
+        // Lo hacemos antes que las URLs sueltas y números de teléfono para evitar colisiones
         processed = processed.replace(
-            /<p>[-*•]\s+(.+?)(<br>|<\/p>)/g,
-            '<p><li>$1</li>$2'
+            /\[(.*?)\]\((https?:\/\/[^\s<>]+)\)/g,
+            '<a href="$2" target="_blank" style="color: #3D9BE9; text-decoration: underline; font-weight: bold;">$1</a>'
         );
+
+        // Convertir URLs sueltas a enlaces clickeables (que no estén ya dentro de un atributo href)
         processed = processed.replace(
-            /<br>[-*•]\s+(.+?)(<br>|<\/p>)/g,
-            '<br><li>$1</li>$2'
+            /(?<!href=")(https?:\/\/[^\s<>"]+)/g,
+            '<a href="$1" target="_blank" style="color: #3D9BE9; text-decoration: underline;">$1</a>'
         );
+
+        // Convertir número de WhatsApp de La Célula a enlace, SOLO si no es parte de una URL de wa.me
+        // Usamos un lookbehind para asegurar que no haya un dígito antes (como el 2 de 52)
         processed = processed.replace(
-            /(<li>.*?<\/li>)(\s*<br>\s*<li>.*?<\/li>)*/gs,
-            '<ul>$&</ul>'
+            /(?<![\d\/])(55\s*3541\s*2631|5535412631)(?!\d)/g,
+            '<a href="https://wa.me/525535412631?text=Hola,%20vengo%20del%20sitio%20web" target="_blank" style="color: #25D366; font-weight: bold; text-decoration: none;">📱 $1</a>'
         );
 
         // Limpiar HTML mal formado
         processed = processed.replace(/<p>\s*<\/p>/g, '');
         processed = processed.replace(/(<\/p>)\s*(<p>)/g, '$1$2');
-
-        // Convertir URLs a enlaces clickeables
-        processed = processed.replace(
-            /(https?:\/\/[^\s<>]+)/g,
-            '<a href="$1" target="_blank" style="color: #3D9BE9; text-decoration: underline;">$1</a>'
-        );
-
-        // Convertir número de WhatsApp de La Célula a enlace
-        processed = processed.replace(
-            /(55\s*3541\s*2631|5535412631)/g,
-            '<a href="https://wa.me/525535412631?text=Hola,%20me%20interesa%20cotizar%20mi%20evento..." target="_blank" style="color: #25D366; font-weight: bold; text-decoration: none;">📱 $1</a>'
-        );
-
-        // Resaltar tipos de eventos
-        const eventTypes = [
-            'boda',
-            'bodas',
-            'xv años',
-            'quinceañera',
-            'graduación',
-            'graduaciones',
-            'fiesta',
-            'fiestas',
-            'corporativo',
-            'empresarial'
-        ];
-        eventTypes.forEach((event) => {
-            const regex = new RegExp(`\b${event}\b`, 'gi');
-            processed = processed.replace(
-                regex,
-                '<span style="color: #3D9BE9; font-weight: 600;">$&</span>'
-            );
-        });
-
-        // Resaltar paquetes
-        processed = processed.replace(
-            /\b(Paquete Event Plus|Paquete Party|Paquete Live)\b/g,
-            '<span style="color: #000000; font-weight: 700; background-color: #f8f9fa; padding: 0 3px; border-radius: 3px;">$1</span>'
-        );
-
-        // Añadir emojis para palabras clave si no tienen ya
-        if (!processed.includes('🎵')) {
-            processed = processed.replace(/\b(música|musical|músicos)\b/gi, '🎵 $1');
-        }
-        if (!processed.includes('💍')) {
-            processed = processed.replace(/\b(boda|bodas)\b/gi, '💍 $1');
-        }
-        if (!processed.includes('🎓')) {
-            processed = processed.replace(/\b(graduación|graduaciones)\b/gi, '🎓 $1');
-        }
-        if (!processed.includes('🎉')) {
-            processed = processed.replace(
-                /\b(fiesta|fiestas|celebración|evento)\b/gi,
-                '🎉 $1'
-            );
-        }
 
         return processed;
     }
