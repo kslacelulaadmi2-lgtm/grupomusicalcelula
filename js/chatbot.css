@@ -1,10 +1,10 @@
 /*! Chatbot Styles for Grupo Musical Célula */:root{--primary-bg:#111827;--primary-text:#fff;--secondary-text:#e0e0e0;--button-blue:#3d9be9;--button-blue-hover:#2b689c;--card-bg:rgba(17,24,39,.8);--overlay-bg:rgba(17,24,39,.4);--chatbot-width:420px;--chatbot-height:550px}
 
 /* Chatbot Container */
-.chatbot-container {
+.celula-chatbot-container {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
+    bottom: 30px;
+    right: 30px;
     width: var(--chatbot-width);
     max-height: var(--chatbot-height);
     background-color: var(--primary-bg);
@@ -270,8 +270,8 @@
 /* Chatbot Toggle Button */
 .chatbot-toggle {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
+    bottom: 30px;
+    right: 30px;
     width: 60px;
     height: 60px;
     background-color: var(--button-blue);
@@ -290,6 +290,41 @@
 .chatbot-toggle:hover {
     transform: scale(1.1);
     background-color: var(--button-blue-hover);
+}
+
+.chatbot-toggle:hover .chatbot-tooltip {
+    opacity: 1;
+}
+
+.chatbot-icon {
+    width: 30px;
+    height: 30px;
+    filter: brightness(0) invert(1);
+}
+
+.chatbot-tooltip {
+    position: absolute;
+    right: 70px;
+    background: #000;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 15px;
+    font-size: 14px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.chatbot-tooltip:after {
+    content: '';
+    position: absolute;
+    right: -8px;
+    top: 50%;
+    transform: translateY(-50%);
+    border-width: 8px 0 8px 8px;
+    border-style: solid;
+    border-color: transparent transparent transparent #000;
 }
 
 .chatbot-toggle i {
@@ -332,7 +367,7 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    .chatbot-container {
+    .celula-chatbot-container {
         width: calc(100% - 40px);
         max-width: var(--chatbot-width);
         max-height: 60vh;
@@ -345,13 +380,13 @@
 }
 
 /* Chatbot minimized state */
-.chatbot-container.minimized {
+.celula-chatbot-container.minimized {
     height: 60px;
     overflow: hidden;
 }
 
-.chatbot-container.minimized .chat-window,
-.chatbot-container.minimized .chat-input-area {
+.celula-chatbot-container.minimized .chat-window,
+.celula-chatbot-container.minimized .chat-input-area {
     display: none;
 }
 

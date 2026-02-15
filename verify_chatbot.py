@@ -26,6 +26,26 @@ def main():
         browser = p.chromium.launch(headless=True)
         page = browser.new_page()
 
+        # Test cotizador.html (Verify both form and chatbot)
+        print("Testing cotizador.html...")
+        page.goto(f"http://localhost:{PORT}/cotizador.html")
+
+        # Verify page form exists
+        form = page.query_selector(".cotizador-form")
+        if form:
+            print("Page form found on cotizador.html!")
+            page.screenshot(path="cotizador_page_form.png")
+        else:
+            print("Page form NOT found on cotizador.html!")
+
+        # Click chatbot toggle
+        page.click("#chatbot-toggle")
+
+        # Wait for chat to be visible and welcome message
+        page.wait_for_selector("#chat-window", state="visible")
+        time.sleep(2)  # Give time for first message
+        page.screenshot(path="chatbot_on_cotizador.png")
+
         # Test index.html
         print("Testing index.html...")
         page.goto(f"http://localhost:{PORT}/index.html")

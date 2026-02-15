@@ -115,14 +115,74 @@
                 <div class="form-container">
                     <h2 class="section-title">Solicita tu Cotización</h2>
                     <p class="section-description">
-                        Ahora puedes obtener tu cotización de manera inmediata a través de nuestro <strong>Asistente Musical</strong> en el chat.
+                        Completa el formulario y te contactaremos para brindarte un presupuesto personalizado
+                        para tu evento musical.
                     </p>
 
-                    <div class="p-8 rounded-sm shadow-xl text-center">
-                        <p class="mb-20">Nuestro chatbot te guiará paso a paso para recolectar la información de tu evento y enviarte una propuesta personalizada por WhatsApp al instante.</p>
-                        <button onclick="document.getElementById('chatbot-toggle').click()" class="btn btn-primary">
-                            👉 Iniciar Cotización en el Chat
-                        </button>
+                    <div class="p-8 rounded-sm shadow-xl">
+                        <form class="cotizador-form">
+                            <div class="form-group">
+                                <label for="nombre" class="form-label">Nombre *</label>
+                                <input type="text" id="nombre" name="nombre" required class="form-input">
+                            </div>
+                            <div class="form-group">
+                                <label for="telefono" class="form-label">Número telefónico *</label>
+                                <input type="tel" id="telefono" name="telefono" required class="form-input" pattern="[0-9]{10}" maxlength="10">
+                            </div>
+                            <div class="form-group">
+                                <label for="email" class="form-label">Email *</label>
+                                <input type="email" id="email" name="email" required class="form-input">
+                            </div>
+                            <div class="form-grid-2col">
+                                <div>
+                                    <label for="evento" class="form-label">Tipo de Evento *</label>
+                                    <select id="evento" name="evento" required class="form-select">
+                                        <option value="">Selecciona el tipo de evento</option>
+                                        <option value="Boda">Boda</option>
+                                        <option value="XV Años">XV Años</option>
+                                        <option value="Evento Corporativo">Evento Corporativo</option>
+                                        <option value="Graduación">Graduación</option>
+                                        <option value="Fiesta Privada">Fiesta Privada</option>
+                                        <option value="Otro">Otro</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="fecha" class="form-label">Fecha del evento *</label>
+                                    <input type="date" id="fecha" name="fecha" required class="form-input">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="invitados" class="form-label">Número de Invitados *</label>
+                                <select id="invitados" name="invitados" required class="form-select">
+                                    <option value="">Selecciona el número de invitados</option>
+                                    <option value="50-100">50-100 invitados</option>
+                                    <option value="101-200">101-200 invitados</option>
+                                    <option value="201-500">201-500 invitados</option>
+                                    <option value="500+">Más de 500 invitados</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="ubicacion" class="form-label">Ciudad/Área Metropolitana *</label>
+                                <select id="ubicacion" name="ubicacion" required class="form-select">
+                                    <option value="">Selecciona una ciudad</option>
+                                    <option value="Ciudad de México (CDMX)">Ciudad de México (CDMX)</option>
+                                    <option value="Estado de México">Estado de México</option>
+                                    <option value="Morelos">Morelos</option>
+                                    <option value="Puebla">Puebla</option>
+                                    <option value="Hidalgo">Hidalgo</option>
+                                    <option value="Otra">Otra ubicación</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="comentarios" class="form-label">Comentarios adicionales</label>
+                                <textarea id="comentarios" name="comentarios" rows="4"
+                                          placeholder="Cuéntanos más sobre tu evento..."
+                                          class="form-textarea"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary form-submit-full">
+                                Enviar Solicitud
+                            </button>
+                        </form>
                     </div>
 
                     <!-- Información de contacto -->
@@ -187,6 +247,9 @@
             <p>&copy; 2025 Grupo Musical Versátil La Célula. Todos los derechos reservados.</p>
         </div>
     </footer>
+
+    <!-- JavaScript para el formulario -->
+    <script src="js/form-handler.min.js"></script>
 
     <!-- Persistent Video Background -->
     <script src="js/video-background.min.js"></script>
