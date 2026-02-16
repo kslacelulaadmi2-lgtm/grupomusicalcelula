@@ -19,6 +19,17 @@
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+/* Chat Window Container (hidden by default) */
+.chat-window-container {
+    display: none;
+}
+
+.chat-window-container.active {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
 /* Chatbot Header */
 .chatbot-header {
     background: var(--card-bg);
