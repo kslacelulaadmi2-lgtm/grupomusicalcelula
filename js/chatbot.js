@@ -41,7 +41,8 @@ class CelulaChatbotManager {
 
     init() {
         this.setupEventListeners();
-        this.appendMessage('¡Hola! Soy tu asistente para cotizar tu evento musical. ¿Cómo te llamas?', 'bot');
+        this.appendMessage('🎵 ¡Hola! Soy tu asistente musical de La Célula. Empecemos con tu cotización.\n\n¿Cuál es tu nombre?', 'bot');
+        this.currentStep = 'name'; // Nuevo flujo: nombre primero
     }
 
     // Setup event listeners (consolidated, no duplicates)
@@ -59,30 +60,22 @@ class CelulaChatbotManager {
                     window.__gaChatTrack('chatbot_open', { step: 'open', open_method: 'click' });
                 }
 
-                // Check if both lead form and chat window are currently hidden
-                const leadFormVisible = this.leadForm && this.leadForm.classList.contains('active');
+                // Check if chat window is currently visible
                 const chatVisible = this.chatWindowContainer && this.chatWindowContainer.classList.contains('active');
 
-                // If something is open, close everything
-                if (leadFormVisible || chatVisible) {
-                    if (this.leadForm) this.leadForm.classList.remove('active');
-                    if (this.chatWindowContainer) this.chatWindowContainer.classList.remove('active');
+                // If chat is open, close it
+                if (chatVisible) {
+                    this.chatWindowContainer.classList.remove('active');
                     return;
                 }
 
-                // Check if lead data has actual filled values (not just empty strings)
-                const hasFilledData = Object.values(this.leadData || {}).some(v => v && v.toString().trim().length > 0);
+                // Open chat window directly
+                this.chatWindowContainer.classList.add('active');
+                if (this.chatInputArea) this.chatInputArea.style.display = 'flex';
 
-                if (this.chatHistory && this.chatHistory.length > 0 && hasFilledData) {
-                    // User has chat history - go straight to chat window
-                    console.log('📝 Abriendo ventana de chat (tiene historial)');
-                    if (this.leadForm) this.leadForm.classList.remove('active');
-                    this.chatWindowContainer.classList.add('active');
-                    if (this.chatInputArea) this.chatInputArea.style.display = 'flex';
-                } else {
-                    // No chat history - show lead form
-                    console.log('📋 Abriendo formulario');
-                    if (this.leadForm) this.leadForm.classList.add('active');
+                // If no chat history, restart the conversation
+                if (!this.chatHistory || this.chatHistory.length === 0) {
+                    this.restartConversation();
                 }
             });
         } else {
@@ -150,17 +143,8 @@ class CelulaChatbotManager {
             }
         });
 
-        // Lead form submission
-        const leadFormSubmitEl = document.getElementById('chatbot-lead-form');
-        if (leadFormSubmitEl) {
-            leadFormSubmitEl.addEventListener('submit', (e) => {
-                e.preventDefault();
-                if (window.__gaChatTrack) {
-                    window.__gaChatTrack('chatbot_request_contact', { step: 'request_contact', requested_fields: 'name,email,phone,eventType' });
-                }
-                this.handleFormSubmission();
-            });
-        }
+        // Lead form submission - Disabled in new flow
+        // The form submission is replaced by the interactive chat flow
 
         // Save state on page unload
         window.addEventListener('beforeunload', () => {
@@ -175,80 +159,394 @@ class CelulaChatbotManager {
         }, 30000);
     }
 
-    handleUserInput() {
+    async handleUserInputEnhanced() {
         const message = this.userInput.value.trim();
         if (!message) return;
 
+        // Enviar mensaje del usuario al historial y mostrarlo
         this.appendMessage(message, 'user');
         this.userInput.value = '';
+        this.userInput.style.height = 'auto';
 
-        // Procesar respuesta según el paso actual
+        // Validar entrada según el paso actual
+        let isValid = true;
+        let errorMessage = '';
+
         switch (this.currentStep) {
-            case 0: // Nombre
-                this.leadData.name = message;
-                this.appendMessage('Perfecto, ¿cuál es tu número de teléfono? (10 dígitos)', 'bot');
+            case 'name':
+                // Validar nombre: solo letras, espacios, apóstrofes y guiones
+                if (!/^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s'\-]+$/.test(message)) {
+                    isValid = false;
+                    errorMessage = 'Por favor, ingresa un nombre válido (solo letras, espacios y apóstrofes).';
+                } else {
+                    this.leadData.name = message.trim();
+                    this.appendMessage(`¡Perfecto ${this.leadData.name}! Ahora necesito tu número de teléfono.\n\nPor favor, ingresa solo 10 dígitos numéricos:`, 'bot');
+                    this.currentStep = 'phone';
+                }
                 break;
-            case 1: // Teléfono
+
+            case 'phone':
+                // Validar teléfono: exactamente 10 dígitos
                 if (!/^\d{10}$/.test(message)) {
-                    this.appendMessage('Por favor, ingresa un número válido de 10 dígitos.', 'bot');
-                    return;
+                    isValid = false;
+                    errorMessage = 'Por favor, ingresa exactamente 10 dígitos numéricos.';
+                } else {
+                    this.leadData.phone = message;
+                    this.appendMessage('Gracias. Ahora necesito tu correo electrónico.\n\nIngresa tu dirección de correo electrónico:', 'bot');
+                    this.currentStep = 'email';
                 }
-                this.leadData.phone = message;
-                this.showEventTypeOptions();
                 break;
-            case 2: // Tipo de evento
-                if (!['boda', 'corporativo', 'xv años', 'graduación', 'otro'].includes(message.toLowerCase())) {
-                    this.appendMessage('Opción no válida. Elige una de las opciones.', 'bot');
-                    return;
+
+            case 'email':
+                // Validar correo electrónico
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(message)) {
+                    isValid = false;
+                    errorMessage = 'Por favor, ingresa un correo electrónico válido (ejemplo@dominio.com).';
+                } else {
+                    this.leadData.email = message.toLowerCase();
+                    // Mostrar opciones de tipo de evento
+                    this.showEventTypeOptions();
+                    this.currentStep = 'eventType';
                 }
+                break;
+
+            case 'eventType':
+                // Validar tipo de evento
+                const validEventTypes = ['boda', 'xv años', 'evento corporativo', 'fiesta privada', 'graduación', 'otro'];
+                const eventTypeLower = message.toLowerCase();
+                
+                if (!validEventTypes.includes(eventTypeLower)) {
+                    // Verificar si coincide con alguna opción exacta (ignorando capitalización)
+                    const exactMatch = ['Boda', 'XV años', 'Evento Corporativo', 'Fiesta privada', 'Graduación', 'Otro']
+                        .find(option => option.toLowerCase() === eventTypeLower);
+                    
+                    if (exactMatch) {
+                        this.leadData.eventType = exactMatch;
+                        
+                        if (eventTypeLower === 'otro') {
+                            this.appendMessage('Por favor, describe el tipo de evento:', 'bot');
+                            this.currentStep = 'eventTypeOther';
+                        } else {
+                            this.appendMessage('¿Cuántos invitados aproximadamente asistirán?', 'bot');
+                            this.currentStep = 'guestCount';
+                        }
+                    } else {
+                        isValid = false;
+                        errorMessage = 'Opción no válida. Por favor selecciona una de las opciones mostradas.';
+                    }
+                } else {
+                    this.leadData.eventType = message;
+                    
+                    if (eventTypeLower === 'otro') {
+                        this.appendMessage('Por favor, describe el tipo de evento:', 'bot');
+                        this.currentStep = 'eventTypeOther';
+                    } else {
+                        this.appendMessage('¿Cuántos invitados aproximadamente asistirán?', 'bot');
+                        this.currentStep = 'guestCount';
+                    }
+                }
+                break;
+
+            case 'eventTypeOther':
+                // Capturar descripción del tipo de evento "otro"
                 this.leadData.eventType = message;
-                this.appendMessage('¿Cuál es la fecha de tu evento? (DD/MM/AAAA)', 'bot');
+                this.appendMessage('¿Cuántos invitados aproximadamente asistirán?', 'bot');
+                this.currentStep = 'guestCount';
                 break;
-            case 3: // Fecha
-                if (!/^\d{2}\/\d{2}\/\d{4}$/.test(message)) {
-                    this.appendMessage('Formato incorrecto. Usa DD/MM/AAAA.', 'bot');
-                    return;
+
+            case 'guestCount':
+                // Validar cantidad de invitados
+                const guestCount = parseInt(message);
+                if (isNaN(guestCount) || guestCount <= 0) {
+                    isValid = false;
+                    errorMessage = 'Por favor, ingresa un número válido de invitados.';
+                } else {
+                    this.leadData.guestCount = guestCount;
+                    // Mostrar opciones de ubicación
+                    this.showLocationOptions();
+                    this.currentStep = 'location';
                 }
-                this.leadData.eventDate = message;
-                this.showLocationOptions();
                 break;
-            case 4: // Ubicación
-                if (!['cdmx', 'edomex', 'otro'].includes(message.toLowerCase())) {
-                    this.appendMessage('Opción no válida. Elige una de las opciones.', 'bot');
-                    return;
+
+            case 'location':
+                // Validar ubicación
+                const validLocations = ['cdmx', 'edomex', 'otro'];
+                const locationLower = message.toLowerCase();
+                
+                if (!validLocations.includes(locationLower)) {
+                    // Verificar si coincide con alguna opción exacta (ignorando capitalización)
+                    const exactMatch = ['CDMX', 'Edomex', 'Otro']
+                        .find(option => option.toLowerCase() === locationLower);
+                    
+                    if (exactMatch) {
+                        this.leadData.eventLocation = exactMatch;
+                        
+                        if (locationLower === 'cdmx') {
+                            this.showCdmcDelegacionesOptions();
+                            this.currentStep = 'delegation';
+                        } else if (locationLower === 'edomex') {
+                            this.showEdomexMunicipiosOptions();
+                            this.currentStep = 'municipio';
+                        } else {
+                            this.appendMessage('Por favor, describe el lugar del evento:', 'bot');
+                            this.currentStep = 'locationOther';
+                        }
+                    } else {
+                        isValid = false;
+                        errorMessage = 'Opción no válida. Por favor selecciona una de las opciones mostradas.';
+                    }
+                } else {
+                    this.leadData.eventLocation = message;
+                    
+                    if (locationLower === 'cdmx') {
+                        this.showCdmcDelegacionesOptions();
+                        this.currentStep = 'delegation';
+                    } else if (locationLower === 'edomex') {
+                        this.showEdomexMunicipiosOptions();
+                        this.currentStep = 'municipio';
+                    } else {
+                        this.appendMessage('Por favor, describe el lugar del evento:', 'bot');
+                        this.currentStep = 'locationOther';
+                    }
                 }
+                break;
+
+            case 'delegation':
+                // Validar delegación de CDMX
+                const validDelegaciones = [
+                    'benito juárez', 'miguel hidalgo', 'coyoacán', 'tlalpan', 'álvaro obregón', 
+                    'cuauhtémoc', 'iztapalapa', 'gustavo a. madero', 'miguel hidalgo', 'venustiano carranza',
+                    'xochimilco', 'tzajalá', 'izcalli', 'magdalena contreras', 'cuajimalpa', 'milpa alta', 'la magdalena contreras'
+                ];
+                
+                const delegationLower = message.toLowerCase();
+                
+                if (!validDelegaciones.includes(delegationLower)) {
+                    // Verificar si coincide con alguna opción exacta (ignorando capitalización)
+                    const exactMatch = ['Benito Juárez', 'Miguel Hidalgo', 'Coyoacán', 'Tlalpan', 'Álvaro Obregón', 'Cuauhtémoc', 'Otro']
+                        .find(option => option.toLowerCase() === delegationLower);
+                    
+                    if (exactMatch) {
+                        this.leadData.eventDelegation = exactMatch;
+                        
+                        if (delegationLower === 'otro') {
+                            this.appendMessage('Por favor, describe la delegación:', 'bot');
+                            this.currentStep = 'locationOther';
+                        } else {
+                            this.appendMessage('Por favor, selecciona la fecha del evento:', 'bot');
+                            this.showCalendarPrompt();
+                            this.currentStep = 'date';
+                        }
+                    } else {
+                        isValid = false;
+                        errorMessage = 'Opción no válida. Por favor selecciona una de las opciones mostradas.';
+                    }
+                } else {
+                    this.leadData.eventDelegation = message;
+                    this.appendMessage('Por favor, selecciona la fecha del evento:', 'bot');
+                    this.showCalendarPrompt();
+                    this.currentStep = 'date';
+                }
+                break;
+
+            case 'municipio':
+                // Validar municipio del Edomex
+                const validMunicipios = [
+                    'naucalpan', 'ecatepec', 'neza', 'tlalnepantla', 'chimalhuacán', 'tecate',
+                    'coacalco', 'tlapacoya', 'santa lucía', 'teotihuacán', 'tejupilco', 'chiconcuac',
+                    'ixtapan', 'san mateo', 'atlautla', 'valle de chalco', 'hueypoxtla', 'coyotepec'
+                ];
+                
+                const municipioLower = message.toLowerCase();
+                
+                if (!validMunicipios.includes(municipioLower)) {
+                    // Verificar si coincide con alguna opción exacta (ignorando capitalización)
+                    const exactMatch = ['Naucalpan', 'Ecatepec', 'Neza', 'Tlalnepantla', 'Chimalhuacán', 'Tecate', 'Otro']
+                        .find(option => option.toLowerCase() === municipioLower);
+                    
+                    if (exactMatch) {
+                        this.leadData.eventMunicipio = exactMatch;
+                        
+                        if (municipioLower === 'otro') {
+                            this.appendMessage('Por favor, describe el municipio:', 'bot');
+                            this.currentStep = 'locationOther';
+                        } else {
+                            this.appendMessage('Por favor, selecciona la fecha del evento:', 'bot');
+                            this.showCalendarPrompt();
+                            this.currentStep = 'date';
+                        }
+                    } else {
+                        isValid = false;
+                        errorMessage = 'Opción no válida. Por favor selecciona una de las opciones mostradas.';
+                    }
+                } else {
+                    this.leadData.eventMunicipio = message;
+                    this.appendMessage('Por favor, selecciona la fecha del evento:', 'bot');
+                    this.showCalendarPrompt();
+                    this.currentStep = 'date';
+                }
+                break;
+
+            case 'locationOther':
+                // Capturar descripción de ubicación "otro"
                 this.leadData.eventLocation = message;
-                this.appendMessage('¿Cuántos invitados aproximados? (50-500)', 'bot');
+                this.appendMessage('Por favor, selecciona la fecha del evento:', 'bot');
+                this.showCalendarPrompt();
+                this.currentStep = 'date';
                 break;
-            case 5: // Invitados
-                const guests = parseInt(message);
-                if (isNaN(guests) || guests < 50 || guests > 500) {
-                    this.appendMessage('Número no válido. Ingresa un valor entre 50 y 500.', 'bot');
-                    return;
+
+            case 'date':
+                // Validar fecha
+                const dateRegex = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/;
+                if (!dateRegex.test(message)) {
+                    isValid = false;
+                    errorMessage = 'Formato de fecha incorrecto. Por favor usa el formato DD/MM/AAAA.';
+                } else {
+                    // Validar que la fecha sea válida
+                    const [day, month, year] = message.split('/');
+                    const date = new Date(year, month - 1, day);
+                    if (date.getFullYear() != year || date.getMonth() != month - 1 || date.getDate() != day) {
+                        isValid = false;
+                        errorMessage = 'Fecha no válida. Por favor verifica los valores.';
+                    } else {
+                        // Validar que la fecha no sea en el pasado
+                        const today = new Date();
+                        today.setHours(0, 0, 0, 0);
+                        if (date < today) {
+                            isValid = false;
+                            errorMessage = 'La fecha no puede ser en el pasado. Por favor selecciona una fecha futura.';
+                        } else {
+                            this.leadData.eventDate = message;
+                            
+                            // Confirmar registro y redirigir a WhatsApp
+                            this.appendMessage(`✅ ¡Registro completado ${this.leadData.name}!\n\nHe recopilado la siguiente información:\n- Nombre: ${this.leadData.name}\n- Teléfono: ${this.leadData.phone}\n- Email: ${this.leadData.email}\n- Evento: ${this.leadData.eventType}\n- Invitados: ${this.leadData.guestCount}\n- Lugar: ${this.leadData.eventLocation}${this.leadData.eventDelegation ? ', ' + this.leadData.eventDelegation : ''}${this.leadData.eventMunicipio ? ', ' + this.leadData.eventMunicipio : ''}\n- Fecha: ${this.leadData.eventDate}\n\nSerás redirigido para atención inmediata y personal.`, 'bot');
+                            
+                            // Enviar datos a través de Resend como fragmentos
+                            await this.sendPartialData('name', this.leadData.name);
+                            await this.sendPartialData('phone', this.leadData.phone);
+                            await this.sendPartialData('email', this.leadData.email);
+                            await this.sendPartialData('eventType', this.leadData.eventType);
+                            await this.sendPartialData('guestCount', this.leadData.guestCount);
+                            await this.sendPartialData('location', this.leadData.eventLocation);
+                            if (this.leadData.eventDelegation) await this.sendPartialData('delegation', this.leadData.eventDelegation);
+                            if (this.leadData.eventMunicipio) await this.sendPartialData('municipio', this.leadData.eventMunicipio);
+                            await this.sendPartialData('date', this.leadData.eventDate);
+                            
+                            // Enviar lead completo
+                            await this.sendCompleteLead();
+                            
+                            // Redirigir a WhatsApp después de un breve delay
+                            setTimeout(() => {
+                                this.redirectToWhatsApp();
+                            }, 3000);
+                            
+                            this.currentStep = 'completed';
+                        }
+                    }
                 }
-                this.leadData.guestCount = guests;
-                this.sendToWhatsApp();
                 break;
         }
-        this.currentStep++;
+
+        // Mostrar mensaje de error si la entrada no es válida
+        if (!isValid && errorMessage) {
+            this.appendMessage(errorMessage, 'bot');
+        }
     }
 
     showEventTypeOptions() {
-        const options = ['Boda', 'Corporativo', 'XV años', 'Graduación', 'Otro'];
-        let message = '¿Qué tipo de evento es?\n\n';
-        options.forEach(opt => {
-            message += `- ${opt}\n`;
-        });
-        this.appendMessage(message, 'bot');
+        const options = ['Boda', 'XV años', 'Evento Corporativo', 'Fiesta privada', 'Graduación', 'Otro'];
+        const message = 'Selecciona el tipo de evento:';
+        this.appendMessage(message, 'bot', options);
     }
 
     showLocationOptions() {
-        const options = ['CDMX', 'EdoMex', 'Otro'];
-        let message = '¿Dónde será el evento?\n\n';
-        options.forEach(opt => {
-            message += `- ${opt}\n`;
-        });
-        this.appendMessage(message, 'bot');
+        const options = ['CDMX', 'Edomex', 'Otro'];
+        const message = '¿Dónde será el evento?';
+        this.appendMessage(message, 'bot', options);
+    }
+
+    showCdmcDelegacionesOptions() {
+        const delegaciones = ['Benito Juárez', 'Miguel Hidalgo', 'Coyoacán', 'Tlalpan', 'Álvaro Obregón', 'Cuauhtémoc', 'Otro'];
+        const message = 'Selecciona la delegación en CDMX:';
+        this.appendMessage(message, 'bot', delegaciones);
+    }
+
+    showEdomexMunicipiosOptions() {
+        const municipios = ['Naucalpan', 'Ecatepec', 'Neza', 'Tlalnepantla', 'Chimalhuacán', 'Tecate', 'Otro'];
+        const message = 'Selecciona el municipio en Edomex:';
+        this.appendMessage(message, 'bot', municipios);
+    }
+
+    showCalendarPrompt() {
+        this.appendMessage('Por favor, proporciona la fecha del evento en formato DD/MM/AAAA (día/mes/año):', 'bot');
+    }
+
+    // Método para enviar datos parciales a través de Resend
+    async sendPartialData(field, value) {
+        try {
+            const response = await fetch('/api/send-email', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    type: 'chatbot_partial_data',
+                    field: field,
+                    value: value,
+                    leadId: this.generateLeadId()
+                })
+            });
+
+            const result = await response.json();
+            if (result.success) {
+                console.log(`✅ Dato parcial enviado: ${field} = ${value}`);
+            } else {
+                console.error(`❌ Error enviando dato parcial ${field}:`, result.error);
+            }
+        } catch (error) {
+            console.error(`❌ Error en sendPartialData para ${field}:`, error);
+        }
+    }
+
+    // Método para enviar lead completo
+    async sendCompleteLead() {
+        try {
+            const response = await fetch('/api/send-email', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    type: 'chatbot_complete_lead',
+                    leadData: this.leadData,
+                    timestamp: new Date().toISOString(),
+                    leadId: this.generateLeadId()
+                })
+            });
+
+            const result = await response.json();
+            if (result.success) {
+                console.log('✅ Lead completo enviado:', result.emailId);
+            } else {
+                console.error('❌ Error enviando lead completo:', result.error);
+            }
+        } catch (error) {
+            console.error('❌ Error en sendCompleteLead:', error);
+        }
+    }
+
+    // Generar ID único para el lead
+    generateLeadId() {
+        return 'lead_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    }
+
+    // Método para redirigir a WhatsApp con mensaje prellenado
+    redirectToWhatsApp() {
+        const whatsappMessage = `Hola, vengo del sitio web. Mi evento es una ${this.leadData.eventType} para ${this.leadData.guestCount} personas. Será el ${this.leadData.eventDate} en ${this.leadData.eventLocation}${this.leadData.eventDelegation ? ', ' + this.leadData.eventDelegation : ''}${this.leadData.eventMunicipio ? ', ' + this.leadData.eventMunicipio : ''}. Mi nombre es ${this.leadData.name} y mi teléfono es ${this.leadData.phone}.`;
+        
+        const whatsappURL = `https://wa.me/5215535412631?text=${encodeURIComponent(whatsappMessage)}`;
+        window.open(whatsappURL, '_blank');
     }
 
     sendToWhatsApp() {
@@ -387,22 +685,28 @@ class CelulaChatbotManager {
                 if (result.success) {
                     console.log('✅ Lead capturado enviado:', result.emailId);
                     // Conversion
-                    window.__gaChatTrack('generate_lead', {
-                        step: 'success',
-                        lead_type: this.leadData.eventType || undefined,
-                        value: undefined,
-                        currency: 'MXN',
-                        contact_method: 'chatbot',
-                        conversation_length: (this.getVisibleMessages() || []).length,
-                        resolution: 'automated'
-                    });
+                    if (window.__gaChatTrack) {
+                        window.__gaChatTrack('generate_lead', {
+                            step: 'success',
+                            lead_type: this.leadData.eventType || undefined,
+                            value: undefined,
+                            currency: 'MXN',
+                            contact_method: 'chatbot',
+                            conversation_length: (this.getVisibleMessages() || []).length,
+                            resolution: 'automated'
+                        });
+                    }
                 } else {
                     console.warn('⚠️ No se pudo enviar el lead:', result.error);
-                    window.__gaChatTrack('chatbot_submit_error', { step: 'error', error_type: 'server', error_message: String(result.error || 'unknown') });
+                    if (window.__gaChatTrack) {
+                        window.__gaChatTrack('chatbot_submit_error', { step: 'error', error_type: 'server', error_message: String(result.error || 'unknown') });
+                    }
                 }
             } catch (error) {
                 console.error('❌ Error enviando lead:', error);
-                window.__gaChatTrack('chatbot_submit_error', { step: 'error', error_type: 'exception', error_message: String((error && error.message) || error) });
+                if (window.__gaChatTrack) {
+                    window.__gaChatTrack('chatbot_submit_error', { step: 'error', error_type: 'exception', error_message: String((error && error.message) || error) });
+                }
             }
 
             this.leadForm.classList.remove('active');
@@ -414,31 +718,30 @@ class CelulaChatbotManager {
         }
     }
 
-    async startChat() {
-        window.__gaChatTrack('chatbot_start', { step: 'start', first_intent: (this.leadData && this.leadData.eventType) || undefined });
-
-        // Verificar si ya existe un saludo del bot
-        const hasGreeting = this.chatHistory.some(
-            (item) =>
-                item.role === 'model' &&
-                item.parts[0].text.includes('¡Hola')
-        );
-
-        if (!hasGreeting) {
-            const greeting = `¡Hola ${this.leadData.name}! 👋 Gracias por elegir a La Célula para tu ${this.leadData.eventType}.
-
-Me alegra saber que será en **${this.leadData.eventLocation}** para **${this.leadData.guestCount}** invitados. ¡Será un evento espectacular! 🎵
-
-¿Te gustaría recibir una cotización personalizada por WhatsApp ahora mismo?`;
-
-            this.chatHistory.push({
-                role: 'model',
-                parts: [{ text: greeting }]
-            });
-
-            this.appendMessage(greeting, 'bot');
-            this.saveState();
-        }
+    restartConversation() {
+        // Reiniciar el flujo de conversación
+        this.currentStep = 'name';
+        this.leadData = {
+            name: '',
+            phone: '',
+            eventType: '',
+            eventDate: '',
+            eventLocation: '',
+            guestCount: '',
+            email: '',
+            eventDelegation: '',
+            eventMunicipio: ''
+        };
+        
+        // Limpiar la ventana de chat
+        this.chatWindow.innerHTML = '';
+        
+        // Mostrar mensaje de bienvenida
+        this.appendMessage('🎵 ¡Hola! Soy tu asistente musical de La Célula. Empecemos con tu cotización.\n\n¿Cuál es tu nombre?', 'bot');
+        
+        // Reiniciar historial
+        this.chatHistory = [];
+        this.saveState();
     }
 
     async getBotResponse(message) {
@@ -474,7 +777,7 @@ Haz clic aquí para iniciar la conversación: [**Hablar por WhatsApp**](${waLink
         return response;
     }
 
-    appendMessage(message, sender) {
+    appendMessage(message, sender, options = null) {
         const messageElement = document.createElement('div');
         messageElement.classList.add(
             'message',
@@ -485,6 +788,22 @@ Haz clic aquí para iniciar la conversación: [**Hablar por WhatsApp**](${waLink
             // Procesar markdown básico y emojis para mensajes del bot
             const processedMessage = this.processMarkdown(message);
             messageElement.innerHTML = processedMessage;
+            
+            // Si hay opciones disponibles, añadirlas como botones
+            if (options && options.length > 0) {
+                const optionsContainer = document.createElement('div');
+                optionsContainer.classList.add('options-container');
+                
+                options.forEach(option => {
+                    const optionButton = document.createElement('button');
+                    optionButton.classList.add('option-button');
+                    optionButton.textContent = option;
+                    optionButton.onclick = () => this.selectOption(option);
+                    optionsContainer.appendChild(optionButton);
+                });
+                
+                messageElement.appendChild(optionsContainer);
+            }
         } else {
             // Para mensajes del usuario, usar texto plano
             messageElement.textContent = message;
@@ -492,6 +811,14 @@ Haz clic aquí para iniciar la conversación: [**Hablar por WhatsApp**](${waLink
 
         this.chatWindow.appendChild(messageElement);
         this.scrollToBottom();
+    }
+    
+    // Función para manejar la selección de opciones
+    selectOption(option) {
+        // Simular que el usuario escribió la opción seleccionada
+        this.userInput.value = option;
+        // Llamar al manejador de entrada
+        this.handleUserInputEnhanced();
     }
 
     processMarkdown(text) {
@@ -669,55 +996,6 @@ Haz clic aquí para iniciar la conversación: [**Hablar por WhatsApp**](${waLink
         }
     }
 
-    async handleUserInputEnhanced() {
-        const message = this.userInput.value.trim();
-        if (!message || this.isLoading) return;
-
-        this.isLoading = true;
-        this.sendBtn.disabled = true;
-
-        this.appendMessage(message, 'user');
-        this.userInput.value = '';
-
-        this.showTypingIndicator();
-        try {
-            const botResponse = await this.getBotResponse(message);
-            this.removeTypingIndicator();
-            this.appendMessage(botResponse, 'bot');
-        } catch (error) {
-            this.removeTypingIndicator();
-            this.appendMessage(
-                'Lo siento, no pude procesar tu mensaje. Para atención inmediata, contáctanos por WhatsApp al 55 3541 2631.',
-                'bot'
-            );
-        }
-
-        this.isLoading = false;
-        this.sendBtn.disabled = false;
-        this.userInput.focus();
-        this.saveState();
-
-        // track message sent to get conversation length dynamics
-        window.__gaChatTrack('chatbot_message_sent', { step: 'message', conversation_length: (this.getVisibleMessages() || []).length });
-
-        // Enviar resumen por email después de cada mensaje (SIN condiciones)
-        console.log('📧 Intentando enviar resumen del chatbot...');
-        console.log('📊 Estado:', {
-            emailSent: this.emailSent,
-            ResendHandlerDisponible: !!window.ResendEmailHandler,
-            mensajesUsuario: this.chatHistory.filter(msg =>
-                msg.role === 'user' &&
-                msg.parts[0].text.length > 10 &&
-                !msg.parts[0].text.includes('Eres el Asistente Musical')
-            ).length
-        });
-
-        // Enviar siempre, sin importar las condiciones
-        setTimeout(() => {
-            console.log('⏰ Iniciando envío de resumen (sin condiciones)...');
-            this.sendConversationSummary();
-        }, 2000);
-    }
 }
 
 // Función de inicialización que se ejecuta cuando el DOM está listo

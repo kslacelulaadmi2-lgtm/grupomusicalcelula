@@ -424,3 +424,33 @@
     height: 70vh;
   }
 }
+
+/* Opciones de botones en mensajes */
+.options-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.option-button {
+  background-color: var(--chatbot-secondary);
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 16px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.option-button:hover {
+  background-color: #2b689c;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.option-button:active {
+  transform: translateY(0);
+}
