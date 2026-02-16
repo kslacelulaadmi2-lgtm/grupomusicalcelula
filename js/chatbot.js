@@ -14,16 +14,27 @@ class CelulaChatbotManager {
             eventType: '',
             eventDate: '',
             eventLocation: '',
-            guestCount: ''
+            guestCount: '',
+            email: '' // Added for the enhanced version
         };
 
         // Estado del flujo
         this.currentStep = 0;
+        
+        // Properties needed for the enhanced functionality
+        this.chatHistory = [];
+        this.sessionStartTime = new Date();
+        this.emailSent = false;
+        this.isLoading = false;
+        
+        // DOM elements
         this.chatWindow = document.getElementById('chat-window');
         this.userInput = document.getElementById('user-input');
         this.sendBtn = document.getElementById('send-btn');
         this.closeBtn = document.getElementById('chat-close');
         this.chatWindowContainer = document.getElementById('chat-window-container');
+        this.leadForm = document.getElementById('lead-form'); // Added for enhanced version
+        this.chatInputArea = document.getElementById('chat-input-area'); // Added for enhanced version
 
         this.init();
     }
@@ -33,7 +44,9 @@ class CelulaChatbotManager {
         this.appendMessage('¡Hola! Soy tu asistente para cotizar tu evento musical. ¿Cómo te llamas?', 'bot');
     }
 
+    // Merged setupEventListeners method combining both implementations
     setupEventListeners() {
+        // Original event listeners from the first setupEventListeners
         // Botón de toggle para abrir/cerrar chatbot
         const chatbotToggle = document.getElementById('chatbot-toggle');
         if (chatbotToggle) {
@@ -52,6 +65,120 @@ class CelulaChatbotManager {
         this.closeBtn.addEventListener('click', () => {
             this.chatWindowContainer.classList.remove('active');
         });
+
+        // Additional event listeners from the second setupEventListeners
+        // Evento para el botón flotante del chatbot (abrir chatbot)
+        if (chatbotToggle) {
+            console.log('✅ Botón chatbot-toggle encontrado, agregando listener');
+            chatbotToggle.addEventListener('click', () => {
+                console.log('🖱️ Click en chatbot-toggle detectado');
+                console.log('Estado actual:', {
+                    chatHistoryLength: (this.chatHistory && this.chatHistory.length) || 0,
+                    leadDataKeys: Object.keys(this.leadData || {}).length
+                });
+
+                // event: chatbot_open
+                window.__gaChatTrack('chatbot_open', { step: 'open', open_method: 'click' });
+
+                if (this.chatHistory && this.chatHistory.length > 3) {
+                    console.log('📝 Abriendo ventana de chat (historial > 3)');
+                    if (this.leadForm) this.leadForm.classList.remove('active');
+                    this.chatWindowContainer.classList.add('active');
+                    if (this.chatInputArea) this.chatInputArea.style.display = 'flex';
+                } else if (this.leadData && Object.keys(this.leadData).length > 0) {
+                    console.log('📋 Abriendo formulario con datos pre-llenados');
+                    this.fillLeadForm();
+                    if (this.leadForm) this.leadForm.classList.add('active');
+                } else {
+                    console.log('📋 Abriendo formulario vacío');
+                    if (this.leadForm) this.leadForm.classList.add('active');
+                }
+            });
+        } else {
+            console.error('❌ No se encontró el botón chatbot-toggle');
+        }
+
+        // Evento para cerrar el formulario de lead
+        document
+            .getElementById('lead-form-close')
+            .addEventListener('click', () => {
+                if (this.leadForm) this.leadForm.classList.remove('active');
+                this.saveState();
+            });
+
+        // Evento para cerrar la ventana de chat
+        const chatCloseEl = document.getElementById('chat-close');
+        if (chatCloseEl) chatCloseEl.addEventListener('click', () => {
+            this.chatWindowContainer.classList.remove('active');
+            this.saveState();
+        });
+
+        // Evento para restablecer completamente el chat (borrar historial)
+        const resetChat = document.createElement('button');
+        resetChat.id = 'reset-chat';
+        resetChat.className = 'reset-chat';
+        resetChat.setAttribute('aria-label', 'Borrar conversación');
+        resetChat.innerHTML = '🗑️';
+        resetChat.title = 'Borrar esta conversación y comenzar de nuevo';
+        resetChat.style.cssText =
+      'position: absolute; right: 40px; top: 15px; background: transparent; border: none; color: white; cursor: pointer; font-size: 16px;';
+
+        // Añadir el botón al encabezado del chat
+        const chatHeader = document.querySelector('.chat-header');
+        if (chatHeader) {
+            chatHeader.appendChild(resetChat);
+        }
+
+        // Evento para el botón de restablecer chat
+        resetChat.addEventListener('click', () => {
+            if (
+                confirm(
+                    '¿Estás seguro de borrar toda la conversación y comenzar de nuevo?'
+                )
+            ) {
+                this.resetState();
+                this.chatWindowContainer.classList.remove('active');
+                this.chatWindow.innerHTML = '';
+                const leadFormEl = document.getElementById('chatbot-lead-form');
+                if (leadFormEl) leadFormEl.reset();
+                if (this.leadForm) this.leadForm.classList.add('active');
+            }
+        });
+
+        if (this.closeBtn) this.closeBtn.addEventListener('click', () => {
+            parent.postMessage('close-chat', '*');
+            this.saveState();
+        });
+
+        if (this.sendBtn) this.sendBtn.addEventListener('click', () => this.handleUserInput());
+
+        if (this.userInput) this.userInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                this.handleUserInput();
+            }
+        });
+
+        if (this.userInput) this.userInput.addEventListener('input', this.autoResize.bind(this));
+
+        const leadFormSubmitEl = document.getElementById('chatbot-lead-form');
+        if (leadFormSubmitEl) leadFormSubmitEl.addEventListener('submit', (e) => {
+                e.preventDefault();
+                window.__gaChatTrack('chatbot_request_contact', { step: 'request_contact', requested_fields: 'name,email,phone,eventType' });
+                this.handleFormSubmission();
+            });
+
+        // Agregar detección de eventos de cierre de página para guardar estado
+        window.addEventListener('beforeunload', () => {
+            this.saveState();
+        });
+
+        // Guardar periódicamente el estado mientras se usa el chat
+        setInterval(() => {
+            if (this.chatHistory && this.chatHistory.length > 0) {
+                this.saveState();
+            }
+        }, 30000); // Guardar cada 30 segundos
     }
 
     handleUserInput() {
@@ -171,7 +298,6 @@ class CelulaChatbotManager {
         this.chatWindow.appendChild(messageDiv);
         this.chatWindow.scrollTop = this.chatWindow.scrollHeight;
     }
-}
 
     // Determina si un mensaje es visible para el usuario
     isVisibleMessage(message) {
@@ -195,123 +321,6 @@ class CelulaChatbotManager {
                 this.appendMessage(item.parts[0].text, 'bot');
             }
         });
-    }
-
-    setupEventListeners() {
-        console.log('🎯 Configurando event listeners...');
-
-        // Evento para el botón flotante del chatbot (abrir chatbot)
-        const chatbotToggle = document.getElementById('chatbot-toggle');
-        if (chatbotToggle) {
-            console.log('✅ Botón chatbot-toggle encontrado, agregando listener');
-            chatbotToggle.addEventListener('click', () => {
-                console.log('🖱️ Click en chatbot-toggle detectado');
-                console.log('Estado actual:', {
-                    chatHistoryLength: this.chatHistory?.length || 0,
-                    leadDataKeys: Object.keys(this.leadData || {}).length
-                });
-
-                // event: chatbot_open
-                window.__gaChatTrack('chatbot_open', { step: 'open', open_method: 'click' });
-
-                if (this.chatHistory && this.chatHistory.length > 3) {
-                    console.log('📝 Abriendo ventana de chat (historial > 3)');
-                    this.leadForm.classList.remove('active');
-                    this.chatWindowContainer.classList.add('active');
-                    this.chatInputArea.style.display = 'flex';
-                } else if (this.leadData && Object.keys(this.leadData).length > 0) {
-                    console.log('📋 Abriendo formulario con datos pre-llenados');
-                    this.fillLeadForm();
-                    this.leadForm.classList.add('active');
-                } else {
-                    console.log('📋 Abriendo formulario vacío');
-                    this.leadForm.classList.add('active');
-                }
-            });
-        } else {
-            console.error('❌ No se encontró el botón chatbot-toggle');
-        }
-
-        // Evento para cerrar el formulario de lead
-        document
-            .getElementById('lead-form-close')
-            ?.addEventListener('click', () => {
-                this.leadForm.classList.remove('active');
-                this.saveState();
-            });
-
-        // Evento para cerrar la ventana de chat
-        document.getElementById('chat-close')?.addEventListener('click', () => {
-            this.chatWindowContainer.classList.remove('active');
-            this.saveState();
-        });
-
-        // Evento para restablecer completamente el chat (borrar historial)
-        const resetChat = document.createElement('button');
-        resetChat.id = 'reset-chat';
-        resetChat.className = 'reset-chat';
-        resetChat.setAttribute('aria-label', 'Borrar conversación');
-        resetChat.innerHTML = '🗑️';
-        resetChat.title = 'Borrar esta conversación y comenzar de nuevo';
-        resetChat.style.cssText =
-      'position: absolute; right: 40px; top: 15px; background: transparent; border: none; color: white; cursor: pointer; font-size: 16px;';
-
-        // Añadir el botón al encabezado del chat
-        const chatHeader = document.querySelector('.chat-header');
-        if (chatHeader) {
-            chatHeader.appendChild(resetChat);
-        }
-
-        // Evento para el botón de restablecer chat
-        resetChat.addEventListener('click', () => {
-            if (
-                confirm(
-                    '¿Estás seguro de borrar toda la conversación y comenzar de nuevo?'
-                )
-            ) {
-                this.resetState();
-                this.chatWindowContainer.classList.remove('active');
-                this.chatWindow.innerHTML = '';
-                document.getElementById('chatbot-lead-form').reset();
-                this.leadForm.classList.add('active');
-            }
-        });
-
-        this.closeBtn?.addEventListener('click', () => {
-            parent.postMessage('close-chatbot', '*');
-            this.saveState();
-        });
-
-        this.sendBtn?.addEventListener('click', () => this.handleUserInput());
-
-        this.userInput?.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter' && !e.shiftKey) {
-                e.preventDefault();
-                this.handleUserInput();
-            }
-        });
-
-        this.userInput?.addEventListener('input', this.autoResize.bind(this));
-
-        document
-            .getElementById('chatbot-lead-form')
-            ?.addEventListener('submit', (e) => {
-                e.preventDefault();
-                window.__gaChatTrack('chatbot_request_contact', { step: 'request_contact', requested_fields: 'name,email,phone,eventType' });
-                this.handleFormSubmission();
-            });
-
-        // Agregar detección de eventos de cierre de página para guardar estado
-        window.addEventListener('beforeunload', () => {
-            this.saveState();
-        });
-
-        // Guardar periódicamente el estado mientras se usa el chat
-        setInterval(() => {
-            if (this.chatHistory.length > 0) {
-                this.saveState();
-            }
-        }, 30000); // Guardar cada 30 segundos
     }
 
     autoResize(event) {
@@ -376,7 +385,7 @@ class CelulaChatbotManager {
                 }
             } catch (error) {
                 console.error('❌ Error enviando lead:', error);
-                window.__gaChatTrack('chatbot_submit_error', { step: 'error', error_type: 'exception', error_message: String(error?.message || error) });
+                window.__gaChatTrack('chatbot_submit_error', { step: 'error', error_type: 'exception', error_message: String((error && error.message) || error) });
             }
 
             this.leadForm.classList.remove('active');
@@ -389,7 +398,7 @@ class CelulaChatbotManager {
     }
 
     async startChat() {
-        window.__gaChatTrack('chatbot_start', { step: 'start', first_intent: this.leadData?.eventType || undefined });
+        window.__gaChatTrack('chatbot_start', { step: 'start', first_intent: (this.leadData && this.leadData.eventType) || undefined });
 
         // Verificar si ya existe un saludo del bot
         const hasGreeting = this.chatHistory.some(
@@ -643,7 +652,7 @@ Haz clic aquí para iniciar la conversación: [**Hablar por WhatsApp**](${waLink
         }
     }
 
-    async handleUserInput() {
+    async handleUserInputEnhanced() {
         const message = this.userInput.value.trim();
         if (!message || this.isLoading) return;
 

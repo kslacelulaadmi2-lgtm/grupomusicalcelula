@@ -25,6 +25,7 @@
   "devDependencies": {
     "cssnano": "^7.1.2",
     "eslint": "^8.57.1",
+    "http-server": "^14.1.1",
     "postcss": "^8.5.6",
     "postcss-cli": "^11.0.1",
     "terser": "^5.44.1",
@@ -39,5 +40,18 @@
     "website"
   ],
   "author": "Grupo La Célula",
-  "license": "MIT"
+  "license": "MIT",
+  "main": "postcss.config.js",
+  "directories": {
+    "doc": "docs",
+    "test": "tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kslacelulaadmi2-lgtm/grupomusicalcelula.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kslacelulaadmi2-lgtm/grupomusicalcelula/issues"
+  },
+  "homepage": "https://github.com/kslacelulaadmi2-lgtm/grupomusicalcelula#readme"
 }
