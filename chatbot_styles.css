@@ -1,7 +1,7 @@
-/* Estilos del chatbot para Grupo Musical Célula */
+/* Estilos mejorados para el chatbot */
 
 /* Variables CSS para el chatbot */
-:root {
+.celula-chatbot-container {
   --chatbot-primary: #000000;
   --chatbot-secondary: #3D9BE9;
   --chatbot-text: #f8f8f8;
@@ -11,10 +11,7 @@
   --chatbot-border-radius: 15px;
   --chatbot-box-shadow: 0 5px 25px rgba(0, 0, 0, 0.4);
   --chatbot-font: 'Open Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-}
 
-/* Contenedor principal del chatbot */
-.celula-chatbot-container {
   position: fixed;
   bottom: 30px;
   right: 30px;
@@ -370,41 +367,6 @@
   44% { transform: translateY(0px); }
 }
 
-/* Animación para mensajes entrantes */
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.chat-window .message {
-  animation: slideUp 0.3s ease forwards;
-}
-
-/* Estilo de scrollbar */
-.chat-window::-webkit-scrollbar {
-  width: 6px;
-}
-
-.chat-window::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.1);
-}
-
-.chat-window::-webkit-scrollbar-thumb {
-  background-color: rgba(255, 255, 255, 0.2);
-  border-radius: 10px;
-}
-
-.chat-window::-webkit-scrollbar-thumb:hover {
-  background-color: rgba(255, 255, 255, 0.3);
-}
-
-/* Diseño responsivo */
 @media (max-width: 600px) {
   .celula-chatbot-container {
     bottom: 20px;

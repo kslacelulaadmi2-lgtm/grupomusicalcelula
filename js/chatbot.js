@@ -20,13 +20,13 @@ class CelulaChatbotManager {
 
         // Estado del flujo
         this.currentStep = 0;
-        
+
         // Properties needed for the enhanced functionality
         this.chatHistory = [];
         this.sessionStartTime = new Date();
         this.emailSent = false;
         this.isLoading = false;
-        
+
         // DOM elements
         this.chatWindow = document.getElementById('chat-window');
         this.userInput = document.getElementById('user-input');
@@ -44,53 +44,44 @@ class CelulaChatbotManager {
         this.appendMessage('¡Hola! Soy tu asistente para cotizar tu evento musical. ¿Cómo te llamas?', 'bot');
     }
 
-    // Merged setupEventListeners method combining both implementations
+    // Setup event listeners (consolidated, no duplicates)
     setupEventListeners() {
-        // Original event listeners from the first setupEventListeners
-        // Botón de toggle para abrir/cerrar chatbot
         const chatbotToggle = document.getElementById('chatbot-toggle');
-        if (chatbotToggle) {
-            chatbotToggle.addEventListener('click', () => {
-                this.chatWindowContainer.classList.toggle('active');
-            });
-        }
 
-        this.sendBtn.addEventListener('click', () => this.handleUserInput());
-        this.userInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter' && !e.shiftKey) {
-                e.preventDefault();
-                this.handleUserInput();
-            }
-        });
-        this.closeBtn.addEventListener('click', () => {
-            this.chatWindowContainer.classList.remove('active');
-        });
-
-        // Additional event listeners from the second setupEventListeners
-        // Evento para el botón flotante del chatbot (abrir chatbot)
+        // Single click listener for the floating toggle button
         if (chatbotToggle) {
             console.log('✅ Botón chatbot-toggle encontrado, agregando listener');
             chatbotToggle.addEventListener('click', () => {
                 console.log('🖱️ Click en chatbot-toggle detectado');
-                console.log('Estado actual:', {
-                    chatHistoryLength: (this.chatHistory && this.chatHistory.length) || 0,
-                    leadDataKeys: Object.keys(this.leadData || {}).length
-                });
 
-                // event: chatbot_open
-                window.__gaChatTrack('chatbot_open', { step: 'open', open_method: 'click' });
+                // GA tracking
+                if (window.__gaChatTrack) {
+                    window.__gaChatTrack('chatbot_open', { step: 'open', open_method: 'click' });
+                }
 
-                if (this.chatHistory && this.chatHistory.length > 3) {
-                    console.log('📝 Abriendo ventana de chat (historial > 3)');
+                // Check if both lead form and chat window are currently hidden
+                const leadFormVisible = this.leadForm && this.leadForm.classList.contains('active');
+                const chatVisible = this.chatWindowContainer && this.chatWindowContainer.classList.contains('active');
+
+                // If something is open, close everything
+                if (leadFormVisible || chatVisible) {
+                    if (this.leadForm) this.leadForm.classList.remove('active');
+                    if (this.chatWindowContainer) this.chatWindowContainer.classList.remove('active');
+                    return;
+                }
+
+                // Check if lead data has actual filled values (not just empty strings)
+                const hasFilledData = Object.values(this.leadData || {}).some(v => v && v.toString().trim().length > 0);
+
+                if (this.chatHistory && this.chatHistory.length > 0 && hasFilledData) {
+                    // User has chat history - go straight to chat window
+                    console.log('📝 Abriendo ventana de chat (tiene historial)');
                     if (this.leadForm) this.leadForm.classList.remove('active');
                     this.chatWindowContainer.classList.add('active');
                     if (this.chatInputArea) this.chatInputArea.style.display = 'flex';
-                } else if (this.leadData && Object.keys(this.leadData).length > 0) {
-                    console.log('📋 Abriendo formulario con datos pre-llenados');
-                    this.fillLeadForm();
-                    if (this.leadForm) this.leadForm.classList.add('active');
                 } else {
-                    console.log('📋 Abriendo formulario vacío');
+                    // No chat history - show lead form
+                    console.log('📋 Abriendo formulario');
                     if (this.leadForm) this.leadForm.classList.add('active');
                 }
             });
@@ -98,22 +89,39 @@ class CelulaChatbotManager {
             console.error('❌ No se encontró el botón chatbot-toggle');
         }
 
-        // Evento para cerrar el formulario de lead
-        document
-            .getElementById('lead-form-close')
-            .addEventListener('click', () => {
+        // Send button and Enter key
+        if (this.sendBtn) {
+            this.sendBtn.addEventListener('click', () => this.handleUserInputEnhanced());
+        }
+
+        if (this.userInput) {
+            this.userInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    this.handleUserInputEnhanced();
+                }
+            });
+            this.userInput.addEventListener('input', this.autoResize.bind(this));
+        }
+
+        // Close buttons
+        if (this.closeBtn) {
+            this.closeBtn.addEventListener('click', () => {
+                this.chatWindowContainer.classList.remove('active');
+                this.saveState();
+            });
+        }
+
+        // Lead form close button
+        const leadFormCloseEl = document.getElementById('lead-form-close');
+        if (leadFormCloseEl) {
+            leadFormCloseEl.addEventListener('click', () => {
                 if (this.leadForm) this.leadForm.classList.remove('active');
                 this.saveState();
             });
+        }
 
-        // Evento para cerrar la ventana de chat
-        const chatCloseEl = document.getElementById('chat-close');
-        if (chatCloseEl) chatCloseEl.addEventListener('click', () => {
-            this.chatWindowContainer.classList.remove('active');
-            this.saveState();
-        });
-
-        // Evento para restablecer completamente el chat (borrar historial)
+        // Reset chat button
         const resetChat = document.createElement('button');
         resetChat.id = 'reset-chat';
         resetChat.className = 'reset-chat';
@@ -121,64 +129,50 @@ class CelulaChatbotManager {
         resetChat.innerHTML = '🗑️';
         resetChat.title = 'Borrar esta conversación y comenzar de nuevo';
         resetChat.style.cssText =
-      'position: absolute; right: 40px; top: 15px; background: transparent; border: none; color: white; cursor: pointer; font-size: 16px;';
+            'position: absolute; right: 40px; top: 15px; background: transparent; border: none; color: white; cursor: pointer; font-size: 16px;';
 
-        // Añadir el botón al encabezado del chat
         const chatHeader = document.querySelector('.chat-header');
         if (chatHeader) {
             chatHeader.appendChild(resetChat);
         }
 
-        // Evento para el botón de restablecer chat
         resetChat.addEventListener('click', () => {
-            if (
-                confirm(
-                    '¿Estás seguro de borrar toda la conversación y comenzar de nuevo?'
-                )
-            ) {
+            if (confirm('¿Estás seguro de borrar toda la conversación y comenzar de nuevo?')) {
                 this.resetState();
                 this.chatWindowContainer.classList.remove('active');
                 this.chatWindow.innerHTML = '';
+                this.chatHistory = [];
+                this.currentStep = 0;
+                this.leadData = { name: '', phone: '', eventType: '', eventDate: '', eventLocation: '', guestCount: '', email: '' };
                 const leadFormEl = document.getElementById('chatbot-lead-form');
                 if (leadFormEl) leadFormEl.reset();
                 if (this.leadForm) this.leadForm.classList.add('active');
             }
         });
 
-        if (this.closeBtn) this.closeBtn.addEventListener('click', () => {
-            parent.postMessage('close-chat', '*');
-            this.saveState();
-        });
-
-        if (this.sendBtn) this.sendBtn.addEventListener('click', () => this.handleUserInput());
-
-        if (this.userInput) this.userInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter' && !e.shiftKey) {
-                e.preventDefault();
-                this.handleUserInput();
-            }
-        });
-
-        if (this.userInput) this.userInput.addEventListener('input', this.autoResize.bind(this));
-
+        // Lead form submission
         const leadFormSubmitEl = document.getElementById('chatbot-lead-form');
-        if (leadFormSubmitEl) leadFormSubmitEl.addEventListener('submit', (e) => {
+        if (leadFormSubmitEl) {
+            leadFormSubmitEl.addEventListener('submit', (e) => {
                 e.preventDefault();
-                window.__gaChatTrack('chatbot_request_contact', { step: 'request_contact', requested_fields: 'name,email,phone,eventType' });
+                if (window.__gaChatTrack) {
+                    window.__gaChatTrack('chatbot_request_contact', { step: 'request_contact', requested_fields: 'name,email,phone,eventType' });
+                }
                 this.handleFormSubmission();
             });
+        }
 
-        // Agregar detección de eventos de cierre de página para guardar estado
+        // Save state on page unload
         window.addEventListener('beforeunload', () => {
             this.saveState();
         });
 
-        // Guardar periódicamente el estado mientras se usa el chat
+        // Periodic state save
         setInterval(() => {
             if (this.chatHistory && this.chatHistory.length > 0) {
                 this.saveState();
             }
-        }, 30000); // Guardar cada 30 segundos
+        }, 30000);
     }
 
     handleUserInput() {
@@ -310,7 +304,7 @@ class CelulaChatbotManager {
     }
 
     repopulateChat() {
-    // Limpiar la ventana de chat
+        // Limpiar la ventana de chat
         this.chatWindow.innerHTML = '';
 
         // Mostrar todo el historial
@@ -329,29 +323,52 @@ class CelulaChatbotManager {
         element.style.height = element.scrollHeight + 'px';
     }
 
+    // Persist state to localStorage
+    saveState() {
+        try {
+            const state = {
+                leadData: this.leadData,
+                chatHistory: this.chatHistory,
+                currentStep: this.currentStep,
+                emailSent: this.emailSent,
+                sessionStartTime: this.sessionStartTime
+            };
+            localStorage.setItem('celula_chatbot_state', JSON.stringify(state));
+        } catch (e) {
+            console.warn('No se pudo guardar el estado del chatbot:', e);
+        }
+    }
+
+    // Reset persisted state
+    resetState() {
+        try {
+            localStorage.removeItem('celula_chatbot_state');
+        } catch (e) {
+            console.warn('No se pudo eliminar el estado del chatbot:', e);
+        }
+    }
+
     async handleFormSubmission() {
         const nameInput = document.getElementById('name-input');
         const emailInput = document.getElementById('email-input');
         const phoneInput = document.getElementById('phone-input');
         const eventTypeInput = document.getElementById('event-type-input');
-        const eventLocationInput = document.getElementById('event-location-input');
-        const guestCountInput = document.getElementById('guest-count-input');
 
-        this.leadData.name = nameInput.value.trim();
-        this.leadData.email = emailInput.value.trim();
-        this.leadData.phone = phoneInput.value.trim();
-        this.leadData.eventType = eventTypeInput.value.trim();
-        this.leadData.eventLocation = eventLocationInput.value.trim();
-        this.leadData.guestCount = guestCountInput.value.trim();
+        this.leadData.name = nameInput ? nameInput.value.trim() : '';
+        this.leadData.email = emailInput ? emailInput.value.trim() : '';
+        this.leadData.phone = phoneInput ? phoneInput.value.trim() : '';
+        this.leadData.eventType = eventTypeInput ? eventTypeInput.value.trim() : '';
 
         if (this.leadData.name && this.leadData.email && this.leadData.phone) {
             // GA: collected contact
-            window.__gaChatTrack('chatbot_collect_contact', {
-                step: 'collect',
-                collected_fields_count: ['name','email','phone','eventType','eventLocation','guestCount'].filter(k=>this.leadData[k] && this.leadData[k].length).length,
-                contact_method: 'chatbot',
-                lead_type: this.leadData.eventType || undefined
-            });
+            if (window.__gaChatTrack) {
+                window.__gaChatTrack('chatbot_collect_contact', {
+                    step: 'collect',
+                    collected_fields_count: ['name', 'email', 'phone', 'eventType'].filter(k => this.leadData[k] && this.leadData[k].length).length,
+                    contact_method: 'chatbot',
+                    lead_type: this.leadData.eventType || undefined
+                });
+            }
 
             // Enviar lead directamente a la API
             try {
@@ -690,8 +707,8 @@ Haz clic aquí para iniciar la conversación: [**Hablar por WhatsApp**](${waLink
             ResendHandlerDisponible: !!window.ResendEmailHandler,
             mensajesUsuario: this.chatHistory.filter(msg =>
                 msg.role === 'user' &&
-        msg.parts[0].text.length > 10 &&
-        !msg.parts[0].text.includes('Eres el Asistente Musical')
+                msg.parts[0].text.length > 10 &&
+                !msg.parts[0].text.includes('Eres el Asistente Musical')
             ).length
         });
 
@@ -762,7 +779,7 @@ function initializeChatbot() {
         // Mostrar mensaje de persistencia en el chatbot (sólo en desarrollo)
         if (
             location.hostname === 'localhost' ||
-      location.hostname === '127.0.0.1'
+            location.hostname === '127.0.0.1'
         ) {
             console.log(
                 'Persistencia del chatbot activada. Los datos se conservarán entre páginas y sesiones'
