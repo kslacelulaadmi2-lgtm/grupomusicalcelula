@@ -34,6 +34,14 @@ class CelulaChatbotManager {
     }
 
     setupEventListeners() {
+        // Botón de toggle para abrir/cerrar chatbot
+        const chatbotToggle = document.getElementById('chatbot-toggle');
+        if (chatbotToggle) {
+            chatbotToggle.addEventListener('click', () => {
+                this.chatWindowContainer.classList.toggle('active');
+            });
+        }
+
         this.sendBtn.addEventListener('click', () => this.handleUserInput());
         this.userInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter' && !e.shiftKey) {
