@@ -228,8 +228,8 @@ class CelulaChatbotManager {
                             this.appendMessage('Por favor, describe el tipo de evento:', 'bot');
                             this.currentStep = 'eventTypeOther';
                         } else {
-                            this.appendMessage('¿Cuántos invitados aproximadamente asistirán?', 'bot');
-                            this.currentStep = 'guestCount';
+                            // Sugerir número de invitados en lugar de pedirlo
+                            this.suggestGuestCount();
                         }
                     } else {
                         isValid = false;
@@ -242,8 +242,8 @@ class CelulaChatbotManager {
                         this.appendMessage('Por favor, describe el tipo de evento:', 'bot');
                         this.currentStep = 'eventTypeOther';
                     } else {
-                        this.appendMessage('¿Cuántos invitados aproximadamente asistirán?', 'bot');
-                        this.currentStep = 'guestCount';
+                        // Sugerir número de invitados en lugar de pedirlo
+                        this.suggestGuestCount();
                     }
                 }
                 break;
@@ -251,22 +251,16 @@ class CelulaChatbotManager {
             case 'eventTypeOther':
                 // Capturar descripción del tipo de evento "otro"
                 this.leadData.eventType = message;
-                this.appendMessage('¿Cuántos invitados aproximadamente asistirán?', 'bot');
-                this.currentStep = 'guestCount';
+                // Sugerir número de invitados en lugar de pedirlo
+                this.suggestGuestCount();
                 break;
 
             case 'guestCount':
-                // Validar cantidad de invitados
-                const guestCount = parseInt(message);
-                if (isNaN(guestCount) || guestCount <= 0) {
-                    isValid = false;
-                    errorMessage = 'Por favor, ingresa un número válido de invitados.';
-                } else {
-                    this.leadData.guestCount = guestCount;
-                    // Mostrar opciones de ubicación
-                    this.showLocationOptions();
-                    this.currentStep = 'location';
-                }
+                // Guardar la selección de rango de invitados
+                this.leadData.guestCount = message;
+                // Mostrar opciones de ubicación
+                this.showLocationOptions();
+                this.currentStep = 'location';
                 break;
 
             case 'location':
@@ -282,16 +276,10 @@ class CelulaChatbotManager {
                     if (exactMatch) {
                         this.leadData.eventLocation = exactMatch;
                         
-                        if (locationLower === 'cdmx') {
-                            this.showCdmcDelegacionesOptions();
-                            this.currentStep = 'delegation';
-                        } else if (locationLower === 'edomex') {
-                            this.showEdomexMunicipiosOptions();
-                            this.currentStep = 'municipio';
-                        } else {
-                            this.appendMessage('Por favor, describe el lugar del evento:', 'bot');
-                            this.currentStep = 'locationOther';
-                        }
+                        // Eliminar las alcaldías y municipios, ir directamente a la fecha
+                        this.appendMessage('Por favor, selecciona la fecha del evento:', 'bot');
+                        this.showCalendarPrompt();
+                        this.currentStep = 'date';
                     } else {
                         isValid = false;
                         errorMessage = 'Opción no válida. Por favor selecciona una de las opciones mostradas.';
@@ -299,101 +287,11 @@ class CelulaChatbotManager {
                 } else {
                     this.leadData.eventLocation = message;
                     
-                    if (locationLower === 'cdmx') {
-                        this.showCdmcDelegacionesOptions();
-                        this.currentStep = 'delegation';
-                    } else if (locationLower === 'edomex') {
-                        this.showEdomexMunicipiosOptions();
-                        this.currentStep = 'municipio';
-                    } else {
-                        this.appendMessage('Por favor, describe el lugar del evento:', 'bot');
-                        this.currentStep = 'locationOther';
-                    }
-                }
-                break;
-
-            case 'delegation':
-                // Validar delegación de CDMX
-                const validDelegaciones = [
-                    'benito juárez', 'miguel hidalgo', 'coyoacán', 'tlalpan', 'álvaro obregón', 
-                    'cuauhtémoc', 'iztapalapa', 'gustavo a. madero', 'miguel hidalgo', 'venustiano carranza',
-                    'xochimilco', 'tzajalá', 'izcalli', 'magdalena contreras', 'cuajimalpa', 'milpa alta', 'la magdalena contreras'
-                ];
-                
-                const delegationLower = message.toLowerCase();
-                
-                if (!validDelegaciones.includes(delegationLower)) {
-                    // Verificar si coincide con alguna opción exacta (ignorando capitalización)
-                    const exactMatch = ['Benito Juárez', 'Miguel Hidalgo', 'Coyoacán', 'Tlalpan', 'Álvaro Obregón', 'Cuauhtémoc', 'Otro']
-                        .find(option => option.toLowerCase() === delegationLower);
-                    
-                    if (exactMatch) {
-                        this.leadData.eventDelegation = exactMatch;
-                        
-                        if (delegationLower === 'otro') {
-                            this.appendMessage('Por favor, describe la delegación:', 'bot');
-                            this.currentStep = 'locationOther';
-                        } else {
-                            this.appendMessage('Por favor, selecciona la fecha del evento:', 'bot');
-                            this.showCalendarPrompt();
-                            this.currentStep = 'date';
-                        }
-                    } else {
-                        isValid = false;
-                        errorMessage = 'Opción no válida. Por favor selecciona una de las opciones mostradas.';
-                    }
-                } else {
-                    this.leadData.eventDelegation = message;
+                    // Eliminar las alcaldías y municipios, ir directamente a la fecha
                     this.appendMessage('Por favor, selecciona la fecha del evento:', 'bot');
                     this.showCalendarPrompt();
                     this.currentStep = 'date';
                 }
-                break;
-
-            case 'municipio':
-                // Validar municipio del Edomex
-                const validMunicipios = [
-                    'naucalpan', 'ecatepec', 'neza', 'tlalnepantla', 'chimalhuacán', 'tecate',
-                    'coacalco', 'tlapacoya', 'santa lucía', 'teotihuacán', 'tejupilco', 'chiconcuac',
-                    'ixtapan', 'san mateo', 'atlautla', 'valle de chalco', 'hueypoxtla', 'coyotepec'
-                ];
-                
-                const municipioLower = message.toLowerCase();
-                
-                if (!validMunicipios.includes(municipioLower)) {
-                    // Verificar si coincide con alguna opción exacta (ignorando capitalización)
-                    const exactMatch = ['Naucalpan', 'Ecatepec', 'Neza', 'Tlalnepantla', 'Chimalhuacán', 'Tecate', 'Otro']
-                        .find(option => option.toLowerCase() === municipioLower);
-                    
-                    if (exactMatch) {
-                        this.leadData.eventMunicipio = exactMatch;
-                        
-                        if (municipioLower === 'otro') {
-                            this.appendMessage('Por favor, describe el municipio:', 'bot');
-                            this.currentStep = 'locationOther';
-                        } else {
-                            this.appendMessage('Por favor, selecciona la fecha del evento:', 'bot');
-                            this.showCalendarPrompt();
-                            this.currentStep = 'date';
-                        }
-                    } else {
-                        isValid = false;
-                        errorMessage = 'Opción no válida. Por favor selecciona una de las opciones mostradas.';
-                    }
-                } else {
-                    this.leadData.eventMunicipio = message;
-                    this.appendMessage('Por favor, selecciona la fecha del evento:', 'bot');
-                    this.showCalendarPrompt();
-                    this.currentStep = 'date';
-                }
-                break;
-
-            case 'locationOther':
-                // Capturar descripción de ubicación "otro"
-                this.leadData.eventLocation = message;
-                this.appendMessage('Por favor, selecciona la fecha del evento:', 'bot');
-                this.showCalendarPrompt();
-                this.currentStep = 'date';
                 break;
 
             case 'date':
@@ -420,8 +318,8 @@ class CelulaChatbotManager {
                             this.leadData.eventDate = message;
                             
                             // Confirmar registro y redirigir a WhatsApp
-                            this.appendMessage(`✅ ¡Registro completado ${this.leadData.name}!\n\nHe recopilado la siguiente información:\n- Nombre: ${this.leadData.name}\n- Teléfono: ${this.leadData.phone}\n- Email: ${this.leadData.email}\n- Evento: ${this.leadData.eventType}\n- Invitados: ${this.leadData.guestCount}\n- Lugar: ${this.leadData.eventLocation}${this.leadData.eventDelegation ? ', ' + this.leadData.eventDelegation : ''}${this.leadData.eventMunicipio ? ', ' + this.leadData.eventMunicipio : ''}\n- Fecha: ${this.leadData.eventDate}\n\nSerás redirigido para atención inmediata y personal.`, 'bot');
-                            
+                            this.appendMessage(`✅ ¡Registro completado ${this.leadData.name}!\n\nHe recopilado la siguiente información:\n- Nombre: ${this.leadData.name}\n- Teléfono: ${this.leadData.phone}\n- Email: ${this.leadData.email}\n- Evento: ${this.leadData.eventType}\n- Invitados: ${this.leadData.guestCount}\n- Lugar: ${this.leadData.eventLocation}\n- Fecha: ${this.leadData.eventDate}\n\nSerás redirigido para atención inmediata y personal.`, 'bot');
+
                             // Enviar datos a través de Resend como fragmentos
                             await this.sendPartialData('name', this.leadData.name);
                             await this.sendPartialData('phone', this.leadData.phone);
@@ -429,18 +327,16 @@ class CelulaChatbotManager {
                             await this.sendPartialData('eventType', this.leadData.eventType);
                             await this.sendPartialData('guestCount', this.leadData.guestCount);
                             await this.sendPartialData('location', this.leadData.eventLocation);
-                            if (this.leadData.eventDelegation) await this.sendPartialData('delegation', this.leadData.eventDelegation);
-                            if (this.leadData.eventMunicipio) await this.sendPartialData('municipio', this.leadData.eventMunicipio);
                             await this.sendPartialData('date', this.leadData.eventDate);
-                            
+
                             // Enviar lead completo
                             await this.sendCompleteLead();
-                            
+
                             // Redirigir a WhatsApp después de un breve delay
                             setTimeout(() => {
                                 this.redirectToWhatsApp();
                             }, 3000);
-                            
+
                             this.currentStep = 'completed';
                         }
                     }
@@ -466,16 +362,12 @@ class CelulaChatbotManager {
         this.appendMessage(message, 'bot', options);
     }
 
-    showCdmcDelegacionesOptions() {
-        const delegaciones = ['Benito Juárez', 'Miguel Hidalgo', 'Coyoacán', 'Tlalpan', 'Álvaro Obregón', 'Cuauhtémoc', 'Otro'];
-        const message = 'Selecciona la delegación en CDMX:';
-        this.appendMessage(message, 'bot', delegaciones);
-    }
 
-    showEdomexMunicipiosOptions() {
-        const municipios = ['Naucalpan', 'Ecatepec', 'Neza', 'Tlalnepantla', 'Chimalhuacán', 'Tecate', 'Otro'];
-        const message = 'Selecciona el municipio en Edomex:';
-        this.appendMessage(message, 'bot', municipios);
+    suggestGuestCount() {
+        const suggestions = ['50-100 personas', '100-200 personas', '200-300 personas', '300-400 personas', 'Más de 400 personas'];
+        const message = 'Sugiere el número de invitados:';
+        this.appendMessage(message, 'bot', suggestions);
+        this.currentStep = 'guestCount';
     }
 
     showCalendarPrompt() {
@@ -543,7 +435,7 @@ class CelulaChatbotManager {
 
     // Método para redirigir a WhatsApp con mensaje prellenado
     redirectToWhatsApp() {
-        const whatsappMessage = `Hola, vengo del sitio web. Mi evento es una ${this.leadData.eventType} para ${this.leadData.guestCount} personas. Será el ${this.leadData.eventDate} en ${this.leadData.eventLocation}${this.leadData.eventDelegation ? ', ' + this.leadData.eventDelegation : ''}${this.leadData.eventMunicipio ? ', ' + this.leadData.eventMunicipio : ''}. Mi nombre es ${this.leadData.name} y mi teléfono es ${this.leadData.phone}.`;
+        const whatsappMessage = `Hola, vengo del sitio web. Mi evento es una ${this.leadData.eventType} para ${this.leadData.guestCount} personas. Será el ${this.leadData.eventDate} en ${this.leadData.eventLocation}. Mi nombre es ${this.leadData.name} y mi teléfono es ${this.leadData.phone}.`;
         
         const whatsappURL = `https://wa.me/5215535412631?text=${encodeURIComponent(whatsappMessage)}`;
         window.open(whatsappURL, '_blank');
@@ -728,9 +620,7 @@ class CelulaChatbotManager {
             eventDate: '',
             eventLocation: '',
             guestCount: '',
-            email: '',
-            eventDelegation: '',
-            eventMunicipio: ''
+            email: ''
         };
         
         // Limpiar la ventana de chat
