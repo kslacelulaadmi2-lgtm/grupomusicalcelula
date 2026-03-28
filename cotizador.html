@@ -121,31 +121,29 @@
 
                     <div class="p-8 rounded-sm shadow-xl">
                         <form class="cotizador-form">
-                            <!-- Campos principales (siempre visibles) -->
                             <div class="form-group">
-                                <label for="nombre" class="form-label">Nombre *</label>
-                                <input type="text" id="nombre" name="nombre" required class="form-input" placeholder="Escribe tu nombre completo">
+                                <label for="nombre" class="form-label">Nombre completo *</label>
+                                <input type="text" id="nombre" name="nombre" required class="form-input" placeholder="Tu nombre">
                             </div>
                             <div class="form-group">
-                                <label for="telefono" class="form-label">WhatsApp / Teléfono *</label>
-                                <input type="tel" id="telefono" name="telefono" required class="form-input" pattern="[0-9]{10}" maxlength="10" placeholder="Tu número a 10 dígitos (ej. 5512345678)">
+                                <label for="telefono" class="form-label">Teléfono / WhatsApp *</label>
+                                <input type="tel" id="telefono" name="telefono" required class="form-input" pattern="[0-9]{10}" maxlength="10" placeholder="Tu número a 10 dígitos">
                             </div>
                             <div class="form-group">
                                 <label for="evento" class="form-label">Tipo de Evento *</label>
                                 <select id="evento" name="evento" required class="form-select">
-                                    <option value="">¿Qué celebras? (Boda, XV, Graduación...)</option>
-                                    <option value="Boda">💍 Boda</option>
-                                    <option value="XV Años">✨ XV Años</option>
-                                    <option value="Evento Corporativo">👔 Evento Corporativo</option>
-                                    <option value="Graduación">🎓 Graduación</option>
-                                    <option value="Fiesta Privada">🥳 Fiesta Privada</option>
+                                    <option value="">Selecciona tu evento</option>
+                                    <option value="Boda">Boda</option>
+                                    <option value="XV Años">XV Años</option>
+                                    <option value="Evento Corporativo">Evento Corporativo</option>
+                                    <option value="Graduación">Graduación</option>
+                                    <option value="Fiesta Privada">Fiesta Privada</option>
                                     <option value="Otro">Otro</option>
                                 </select>
                             </div>
 
-
-                            <button type="submit" class="btn btn-primary form-submit-full">
-                                ¡OBTENER MI COTIZACIÓN!
+                            <button type="submit" class="btn btn-primary form-submit-full" style="background: #25D366; font-size: 18px; font-weight: 700; padding: 18px;">
+                                ¡Quiero mi presupuesto en 15 minutos!
                             </button>
                         </form>
                     </div>
@@ -289,6 +287,11 @@
     <link rel="stylesheet" href="js/chatbot.css">
     <!-- Script de inicialización del chatbot -->
     <script src="js/chatbot.js" defer></script>
+
+    <!-- Botón Flotante WhatsApp -->
+    <a href="https://wa.me/+525535412631?text=Hola,%20quiero%20preguntar%20por%20disponibilidad..." class="whatsapp-float" target="_blank" rel="noopener noreferrer" style="position: fixed; bottom: 20px; right: 20px; background: #25D366; color: #fff; padding: 16px 24px; border-radius: 50px; font-weight: 600; text-decoration: none; z-index: 9999; box-shadow: 0 4px 15px rgba(37,211,102,0.4); display: flex; align-items: center; gap: 10px;">
+        <img src="assets/icons/whatsapp-icon.webp" alt="WhatsApp" style="width: 28px; height: 28px; filter: brightness(0) invert(1);"> Preguntar Disponibilidad
+    </a>
 
   </body>
   </html>
