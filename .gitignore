@@ -5,18 +5,15 @@ package-lock.json
 # Environment variables
 .env
 .env.local
+.env.test
 .env.example
 .dev.vars
-
-# Cloudflare
-.wrangler/
-wrangler.toml.backup
+.env*.local
 
 # Build artifacts
 dist/
 build/
 *.tar.gz
-celula-site.tar.gz
 
 # Archived files
 .archived/
@@ -28,10 +25,21 @@ archived/
 # IDE
 .vscode/
 .idea/
-.yoyo/
+
+# AI Agents & Tools
+.claude/
+CLAUDE.md
+AGENTS.md
+.blackbox/
+.omc/
+.qodo/
+.gitnexus/
+.cursor/
+.windsurf/
+llms.txt
 opencode.json
 opencodetemp/
-AGENTS.md
+.yoyo/
 
 # Logs
 logs/
@@ -43,125 +51,20 @@ npm-debug.log*
 Thumbs.db
 
 # Videos (large files)
-*/*.mov
 *.mov
+*/*.mov
 *.mp4.backup
 
-# Temporary files
+# Temporary / editor history
 contact-form-worker
 temp/
 tmp/
-.history/index_20251120033920.html
-.history/index_20251120033925.html
-.history/index-optimized_20251120041716.html
-.history/index-optimized_20251120041719.html
-.history/index-optimized_20251120041724.html
-.history/index-optimized_20251120041726.html
-.history/docs/CRITICAL-CSS-IMPLEMENTATION_20251120032404.md
-.history/docs/CRITICAL-CSS-IMPLEMENTATION_20251120032408.md
-.history/docs/CRITICAL-CSS-IMPLEMENTATION_20251120032411.md
-.history/docs/CRITICAL-CSS-IMPLEMENTATION_20251120032416.md
-.history/docs/CRITICAL-CSS-IMPLEMENTATION_20251120032420.md
-.history/docs/CRITICAL-CSS-IMPLEMENTATION_20251120032433.md
-.history/docs/CRITICAL-CSS-IMPLEMENTATION_20251120032435.md
-.history/docs/CRITICAL-CSS-IMPLEMENTATION_20251120032437.md
-.history/docs/LIGHTHOUSE-AUDIT-RESULTADOS_20251120033040.md
-.history/docs/LIGHTHOUSE-AUDIT-RESULTADOS_20251120033043.md
-.history/docs/LIGHTHOUSE-AUDIT-RESULTADOS_20251120033046.md
-.history/docs/LIGHTHOUSE-AUDIT-RESULTADOS_20251120033049.md
-.history/docs/LIGHTHOUSE-AUDIT-RESULTADOS_20251120033054.md
-.history/docs/LIGHTHOUSE-AUDIT-RESULTADOS_20251120033100.md
-.history/docs/LIGHTHOUSE-AUDIT-RESULTADOS_20251120033103.md
-.history/docs/LIGHTHOUSE-AUDIT-RESULTADOS_20251120033108.md
-.history/docs/LIGHTHOUSE-AUDIT-RESULTADOS_20251120033114.md
-.history/docs/LIGHTHOUSE-AUDIT-RESULTADOS_20251120033117.md
-.history/docs/LIGHTHOUSE-AUDIT-RESULTADOS_20251120033119.md
-.history/docs/LIGHTHOUSE-AUDIT-RESULTADOS_20251120033123.md
-.history/docs/LIGHTHOUSE-AUDIT-RESULTADOS_20251120033125.md
-.history/docs/MIGRACION-RESEND-API_20251120034347.md
-.history/docs/MIGRACION-RESEND-API_20251120034351.md
-.history/docs/MIGRACION-RESEND-API_20251120034353.md
-.history/docs/MIGRACION-RESEND-API_20251120034355.md
-.history/docs/MIGRACION-RESEND-API_20251120034357.md
-.history/docs/MIGRACION-RESEND-API_20251120034400.md
-.history/docs/MIGRACION-RESEND-API_20251120034408.md
-.history/docs/MIGRACION-RESEND-API_20251120034410.md
-.history/docs/MIGRACION-RESEND-API_20251120034412.md
-.history/docs/MIGRACION-RESEND-API_20251120034416.md
-.history/docs/MIGRACION-RESEND-API_20251120034420.md
-.history/docs/MIGRACION-RESEND-API_20251120034422.md
-.history/docs/MIGRACION-RESEND-API_20251120034423.md
-.history/docs/MIGRACION-RESEND-API_20251120034431.md
-.history/docs/MIGRACION-RESEND-API_20251120034435.md
-.history/docs/MIGRACION-RESEND-API_20251120035843.md
-.history/docs/MIGRACION-RESEND-API_20251120035845.md
-.history/docs/MIGRACION-RESEND-API_20251120035848.md
-.history/docs/SELF-HOST-FONTS-GUIDE_20251120032512.md
-.history/docs/SELF-HOST-FONTS-GUIDE_20251120032517.md
-.history/docs/SELF-HOST-FONTS-GUIDE_20251120032521.md
-.history/docs/SELF-HOST-FONTS-GUIDE_20251120032525.md
-.history/docs/SELF-HOST-FONTS-GUIDE_20251120032527.md
-.history/docs/SELF-HOST-FONTS-GUIDE_20251120032528.md
-.history/docs/SELF-HOST-FONTS-GUIDE_20251120032533.md
-.history/docs/SELF-HOST-FONTS-GUIDE_20251120032536.md
-.history/docs/SELF-HOST-FONTS-GUIDE_20251120032539.md
-.history/docs/SELF-HOST-FONTS-GUIDE_20251120032541.md
-.history/docs/SELF-HOST-FONTS-GUIDE_20251120032543.md
-.history/docs/SELF-HOST-FONTS-GUIDE_20251120032546.md
-.history/docs/SELF-HOST-FONTS-GUIDE_20251120032547.md
-.history/docs/SELF-HOST-FONTS-GUIDE_20251120032549.md
-.history/docs/SELF-HOST-FONTS-GUIDE_20251120032550.md
-.history/docs/SELF-HOST-FONTS-GUIDE_20251120032607.md
-.history/docs/SVG-INLINE-ICONS_20251120032244.html
-.history/docs/SVG-INLINE-ICONS_20251120032247.html
-.history/docs/SVG-INLINE-ICONS_20251120032256.html
-.history/docs/SVG-INLINE-ICONS_20251120032258.html
-.history/docs/SVG-INLINE-ICONS_20251120032305.html
-.history/docs/SVG-INLINE-ICONS_20251120032307.html
-.history/docs/SVG-INLINE-ICONS_20251120032309.html
-.history/docs/SVG-INLINE-ICONS_20251120032312.html
-.history/docs/SVG-INLINE-ICONS_20251120032317.html
-.history/functions/api/send-email_20251119133011.js
-.history/functions/api/send-email_20251120033543.js
-.history/functions/api/send-email_20251120033547.js
-.history/functions/api/send-email_20251120033550.js
-.history/functions/api/send-email_20251120033552.js
-.history/functions/api/send-email_20251120033555.js
-.history/functions/api/send-email_20251120033600.js
-.history/functions/api/send-email_20251120033605.js
-.history/functions/api/send-email_20251120033606.js
-.history/functions/api/send-email_20251120033607.js
-.history/functions/api/send-email_20251120033610.js
-.history/functions/api/send-email_20251120033611.js
-.history/functions/api/send-email_20251120033614.js
-.history/functions/api/send-email_20251120033617.js
-.history/functions/api/send-email_20251120033619.js
-.history/functions/api/send-email_20251120033623.js
-.history/functions/api/send-email_20251120033625.js
-.history/functions/api/send-email_20251120033626.js
-.history/functions/api/send-email_20251120033701.js
-.history/functions/api/send-email_20251120033709.js
-.history/functions/api/send-email_20251120033711.js
-.history/functions/api/send-email_20251120033713.js
-.history/functions/api/send-email_20251120033716.js
-.history/functions/api/send-email_20251120033718.js
-.history/functions/api/send-email_20251120033720.js
-.history/functions/api/send-email_20251120033724.js
-.history/functions/api/send-email_20251120033727.js
-.history/functions/api/send-email_20251120033729.js
-.history/functions/api/send-email_20251120033733.js
-.history/functions/api/send-email_20251120033736.js
-.history/functions/api/send-email_20251120033738.js
-.history/functions/api/send-email_20251120040652.js
-.history/js/chatbot_20251120034154.js
-.history/js/chatbot_20251120034227.js
-.history/js/chatbot_20251120034230.js
-.history/js/chatbot_20251120034231.js
-.history/js/chatbot_20251120034235.js
-.history/public/forms/resend-handler_20251120033824.js
-.history/public/forms/resend-handler_20251120033827.js
-.history/public/forms/resend-handler_20251120033830.js
-.history/public/forms/resend-handler_20251120033834.js
-.history/public/forms/resend-handler_20251120033836.js
+.history/
+
+# Vercel
 .vercel
-.env*.local
+.vercelignore
+
+# Cloudflare
+.wrangler/
+wrangler.toml.backup
