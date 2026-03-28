@@ -14,6 +14,8 @@ package-lock.json
 dist/
 build/
 *.tar.gz
+*.min.js
+*.min.css
 
 # Archived files
 .archived/
