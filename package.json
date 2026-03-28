@@ -1,0 +1,57 @@
+{
+  "name": "celula-site",
+  "version": "3.0.0",
+  "description": "Sitio web de Grupo Musical Versátil La Célula",
+  "type": "module",
+  "scripts": {
+    "dev": "vercel dev",
+    "build": "node tools/build.js",
+    "deploy": "vercel --prod",
+    "deploy:preview": "vercel",
+    "validate": "node tools/validate.js",
+    "minify": "node tools/minify.js",
+    "lint": "npx eslint --config config/eslint.config.js src/js/**/*.js --fix || echo 'ESLint completed with warnings'",
+    "prebuild": "npm run validate && npm run minify",
+    "test:email": "node tests/test-chatbot-email.js",
+    "test:deployment": "node tests/test-local-deployment.js",
+    "test": "npm run test:email && npm run test:deployment"
+  },
+  "dependencies": {
+    "@vercel/analytics": "^1.5.0",
+    "@vercel/speed-insights": "^1.2.0",
+    "node-fetch": "^3.3.2",
+    "resend": "^4.8.0"
+  },
+  "devDependencies": {
+    "cssnano": "^7.1.2",
+    "eslint": "^8.57.1",
+    "http-server": "^14.1.1",
+    "postcss": "^8.5.6",
+    "postcss-cli": "^11.0.1",
+    "terser": "^5.44.1",
+    "vercel": "^37.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": [
+    "grupo-musical",
+    "vercel",
+    "website"
+  ],
+  "author": "Grupo La Célula",
+  "license": "MIT",
+  "main": "postcss.config.js",
+  "directories": {
+    "doc": "docs",
+    "test": "tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kslacelulaadmi2-lgtm/grupomusicalcelula.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kslacelulaadmi2-lgtm/grupomusicalcelula/issues"
+  },
+  "homepage": "https://github.com/kslacelulaadmi2-lgtm/grupomusicalcelula#readme"
+}

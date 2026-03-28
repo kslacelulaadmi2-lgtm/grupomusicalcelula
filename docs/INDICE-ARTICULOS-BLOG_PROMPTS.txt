@@ -1,0 +1,44 @@
+Post-0: Create a welcoming, colorful illustration of a versatile musical group performing on stage, representing the essence of La Célula, with diverse instruments and a festive atmosphere.
+Post-4: Design a collage showing five musical genres (cumbia, rock, salsa, pop, bachata) being played at a wedding, with dancing guests and joyful ambience.
+Post-5: Illustrate a lively wedding party with a live band energizing the crowd, vibrant lights, and dancing couples celebrating.
+Post-9: Show a romantic wedding reception with soft lighting, a band playing melodic tunes, and guests enjoying the perfect atmosphere.
+Post-11: Depict a professional musician curating a wedding playlist, surrounded by musical notes, wedding icons, and a calm studio setting.
+Post-16: Vibrant modern XV birthday party with a live band mixing classic and contemporary hits, colorful decorations and dancing teens.
+Post-19: Romantic scene of a couple's first dance under magical lighting, with floating musical notes representing 15 iconic songs.
+Post-24: Map of a metropolitan area with icons for wedding vendors, highlighted live music services, and a route to the ceremony venue.
+Post-28: Elegant anniversary celebration with a live band playing timeless classics for silver and gold wedding milestones, featuring elegant décor.
+Post-20: Festive Christmas posada with live musicians playing traditional instruments, illuminated lanterns, and joyful crowd.
+Post-2: Corporate conference hall with a live band setting a professional yet lively tone, attendees networking and smiling.
+Post-13: Product launch stage with a live band amplifying excitement, spotlight on the product, and enthusiastic audience.
+Post-17: Luxury hotel ballroom with a versatile band performing, elegant guests enjoying refined ambience.
+Post-21: Corporate team‑building event with live music breaking the ice, interactive performance, and engaged participants.
+Post-25: Formal gala dinner with a jazz band, sophisticated ambience, candlelight, and well‑dressed attendees.
+Post-3: Split‑screen comparison of a DJ booth versus a live band, highlighting the advantages of live music with vibrant visuals.
+Post-22: Party scene showing a live band on one side and a digital jukebox on the other, with guests reacting differently.
+Post-14: Checklist illustration of common music‑hiring mistakes with crossed‑out items and correct choices highlighted.
+Post-1: Timeline collage of musical styles from the 80s to present, with the band performing iconic songs from each era.
+Post-8: Five key moments (ceremony, cocktail, dinner, dance, finale) highlighted with live music impact icons.
+Post-10: Illustration of a brain with musical notes, showing emotional and stress‑reducing effects of live music.
+Post-15: Testimonials collage with speech bubbles, photos of happy events, and a live band on stage.
+Post-26: Energetic dance floor with a cumbia band, diverse crowd dancing, vibrant colors conveying joy.
+Post-6: Step‑by‑step flowchart of the hiring process, with icons for contact, contract, and performance.
+Post-12: Detailed sound equipment layout: speakers, mixers, microphones, stage setup, with technical labels.
+Post-18: Band members in stylish outfits, highlighting the visual aspect of performance alongside instruments.
+Post-27: Checklist of ten essential questions with icons, band silhouette, and a thoughtful client.
+Post-29: Behind‑the‑scenes setup of stage, equipment, soundcheck, with crew members arranging gear.
+Post-23: Vision board for 2026 events, featuring live music highlights, futuristic design elements, and inspirational quotes.
+Post-30: Contract document with a pen, shield icon representing security, and a subtle background of a music stage.
+
+
+curl -X POST https://api.blackbox.ai/chat/completions \
+-H "Content-Type: application/json" \
+-H "Authorization: Bearer $BLACKBOX_API_KEY" \
+-d '{
+    "model": "blackboxai/black-forest-labs/flux-1.1-pro-ultra",
+    "messages": [
+        {
+            "role": "user",
+            "content": "Create a welcoming, colorful illustration of a versatile musical group performing on stage, representing the essence of La Célula, with diverse instruments and a festive atmosphere."
+        }
+    ]
+}'

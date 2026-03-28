@@ -1,0 +1,12 @@
+[
+  {
+    "tarea_tomada": "Archivos con problemas",
+    "segmento": "D",
+    "url_afectada": "assets/icons/",
+    "accion_realizada": "Optimizar íconos de redes sociales",
+    "nuevo_valor": "Íconos optimizados en formato WebP con menor tamaño de archivo",
+    "justificacion": "Los íconos de redes sociales fueron optimizados para reducir el tamaño de archivo y mejorar el rendimiento del sitio.",
+    "colision": false,
+    "estado": "COMPLETADO"
+  }
+]

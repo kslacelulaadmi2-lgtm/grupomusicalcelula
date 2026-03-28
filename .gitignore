@@ -1,0 +1,74 @@
+# Dependencies
+node_modules/
+package-lock.json
+
+# Environment variables
+.env
+.env.local
+.env.test
+.env.example
+.dev.vars
+.env*.local
+
+# Build artifacts
+dist/
+build/
+*.tar.gz
+*.min.js
+*.min.css
+
+# Archived files
+.archived/
+archived/
+*.bak
+*.backup
+*~
+
+# IDE
+.vscode/
+.idea/
+
+# AI Agents & Tools
+.claude/
+CLAUDE.md
+AGENTS.md
+.blackbox/
+.omc/
+.qodo/
+.gitnexus/
+.cursor/
+.windsurf/
+llms.txt
+opencode.json
+opencodetemp/
+.yoyo/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Videos (large files)
+*.mov
+*/*.mov
+*.mp4.backup
+
+# Temporary / editor history
+contact-form-worker
+temp/
+tmp/
+.history/
+
+# Vercel
+.vercel
+.vercelignore
+
+# Cloudflare
+.wrangler/
+wrangler.toml.backup
+
+assets/video/'Grupo musical versatil la celula [Li_vcFRHxYM].mp4.backup'

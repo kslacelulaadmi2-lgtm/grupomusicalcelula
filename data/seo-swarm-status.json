@@ -1,0 +1,92 @@
+{
+  "timestamp": "2025-11-20T16:20:00Z",
+  "estado_enjambre": "ACTIVO",
+  "progreso_global": {
+    "tareas_completadas": 39,
+    "tareas_totales_estimadas": 113,
+    "porcentaje_completado": "34.5%"
+  },
+  "actividad_por_segmento": {
+    "A_criticos_estructurales": {
+      "estado": "CASI_COMPLETO",
+      "progreso": "28/30 (93.3%)",
+      "ultimo_agente_activo": "16:09",
+      "tareas_pendientes": [
+        "Redirecciones en bucle (14)",
+        "Redirecciones internas (10)",
+        "Páginas HTML duplicadas (7)",
+        "Canibalización de keywords (2)"
+      ]
+    },
+    "B_seo_onpage": {
+      "estado": "EN_PROGRESO",
+      "progreso": "5/16 (31.3%)",
+      "ultimo_agente_activo": "16:09",
+      "tareas_pendientes": [
+        "Títulos duplicados (6)",
+        "Meta descriptions duplicadas (5)"
+      ]
+    },
+    "C_contenido": {
+      "estado": "INICIADO",
+      "progreso": "4/19 (21.1%)",
+      "ultimo_agente_activo": "12:00",
+      "tareas_pendientes": [
+        "Pocos párrafos (7)",
+        "Poco texto (7)",
+        "Texto o imágenes de relleno (1)"
+      ]
+    },
+    "D_performance": {
+      "estado": "INICIADO",
+      "progreso": "2/43 (4.7%)",
+      "ultimo_agente_activo": "11:00",
+      "tareas_pendientes": [
+        "Archivos con problemas (41)"
+      ]
+    },
+    "E_navegacion": {
+      "estado": "NO_INICIADO",
+      "progreso": "0/5 (0%)",
+      "ultimo_agente_activo": "N/A",
+      "tareas_pendientes": [
+        "Páginas muy distantes de homepage (5)"
+      ]
+    },
+    "M_monitoreo": {
+      "estado": "ACTIVO",
+      "ultima_verificacion": "16:20",
+      "reportes_generados": 3,
+      "errores_detectados": 0
+    }
+  },
+  "metricas_impacto": {
+    "indexacion": {
+      "canonicals_corregidos": 28,
+      "impacto": "Alto - Mejora significativa en señales de indexación"
+    },
+    "relevancia": {
+      "h1_optimizados": 2,
+      "titulos_mejorados": 1,
+      "meta_tags_corregidos": 2,
+      "impacto": "Medio - Mejora en relevancia de keywords"
+    },
+    "contenido": {
+      "paginas_enriquecidas": 4,
+      "parrafos_agregados": 38,
+      "impacto": "Medio - Mejora en profundidad de contenido"
+    },
+    "performance": {
+      "archivos_optimizados": 4,
+      "reduccion_peso": "2.3KB (37.5%)",
+      "impacto": "Bajo - Optimización inicial de assets"
+    }
+  },
+  "recomendaciones_enjambre": [
+    "Asignar más agentes al Segmento D (Performance) - Solo 4.7% completado",
+    "Iniciar agentes en Segmento E (Navegación) - 0% completado",
+    "Investigar problemas no detectados en Segmento A (redirecciones)",
+    "Mantener ritmo en Segmentos B y C para balance de progreso"
+  ],
+  "siguiente_verificacion": "2025-11-20T16:30:00Z"
+}
