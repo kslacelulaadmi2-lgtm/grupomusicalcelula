@@ -524,48 +524,56 @@
 
     <!-- Hero Section -->
     <section class="hero-section" id="hero">
+        <!-- Partículas decorativas -->
+        <div class="hero-particles">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+        </div>
+        
         <div class="hero-content fade-in">
             <picture>
                 <source srcset="assets/images/logo-blanco.webp" type="image/webp">
                 <img src="assets/images/logo-blanco.webp" alt="Logo Grupo Musical Versátil La Célula" class="hero-logo" width="390" height="220">
             </picture>
 
-            <h1 class="hero-title" style="font-size: 48px; font-weight: 700; margin-bottom: 20px; line-height: 1.2;">
-                La música que tu evento merece: Pista llena de principio a fin.
+            <h1 class="hero-title" style="font-size: 38px; font-weight: 500; margin-bottom: 20px; line-height: 1.2;">
+                La música que tu evento merece:
+                Pista llena de principio a fin.
             </h1>
-            <div class="hero-pill" style="display: inline-block; background: #FFD700; color: #000; padding: 12px 24px; border-radius: 50px; font-weight: 600; font-size: 18px; margin-bottom: 30px;">
-                Garantía de Fiesta: Sin caídas de ritmo
+            <div class="hero-pill" style="display: inline-block; background: linear-gradient(135deg, #FFD7008A 0%, #FFA500C4 100%); color: #000; padding: 14px 28px; border-radius: 50px; font-weight: 700; font-size: 18px; margin-bottom: 30px; box-shadow: 0 4px 20px rgba(255, 215, 0, 0.4);">
+                ✨ Garantía de Fiesta: Sin caídas de ritmo
             </div>
-            <div class="btn cta-btn" style="margin-top: 20px;">
-                <a href="/cotizador.html" style="background: #25D366; color: #fff; padding: 18px 40px; border-radius: 8px; font-size: 20px; font-weight: 700; text-decoration: none; display: inline-block; transition: transform 0.3s ease, box-shadow 0.3s ease; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);">COTIZAR MI EVENTO AHORA</a>
+            <div style="margin-top: 20px; display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                <a href="https://wa.me/+525535412631?text=Hola,%20quiero%20preguntar%20por%20disponibilidad..." class="cta-button" style="background: linear-gradient(135deg, #25D3668F 0%, #1DB95491 100%); color: #fff; padding: 18px 40px; border-radius: 50px; font-size: 18px; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 10px; transition: all 0.3s ease; box-shadow: 0 4px 20px rgba(37, 211, 102, 0.5);"> 
+                    <img src="assets/icons/whatsapp-icon.webp" alt="WhatsApp" style="width: 24px; height: 24px; filter: brightness(0) invert(1);"/>
+                    Cotiza tu evento ahora
+                </a>
             </div>
         </div>
-    </section>
+    </section>        
 
     <!-- Manifiesto: Nuestra Filosofía de Entretenimiento -->
-    <section class="manifesto-section" style="background: rgba(20,20,20,0.95); padding: 80px 20px; text-align: center;">
-        <div class="manifesto-content" style="max-width: 800px; margin: 0 auto;">
-            <h2 style="color: #FFD700; font-size: 36px; font-weight: 700; margin-bottom: 30px; font-family: 'Lobster', cursive;">Nuestra Filosofía de Entretenimiento</h2>
-            <p style="font-size: 24px; color: #fff; font-style: italic; line-height: 1.6; margin-bottom: 20px;">
-                "En La Célula no solo tocamos música; diseñamos la atmósfera de tu evento para que nadie se siente. Somos el único grupo en la ciudad que garantiza flujo continuo sin descansos, asegurando que el clímax de tu fiesta dure de principio a fin."
-            </p>
-            <p style="color: #FFD700; font-size: 18px; font-weight: 600; margin-top: 30px;">— Dirección General, La Célula.</p>
-        </div>
-    </section>
-
-    <!-- Video Promocional -->
-   <!--  <section>
-    <div class="video-promo-section" id="video-promo">
+    <section class="video-promo-section" id="video-promo">
         <div class="video-promo-container">
             <video autoplay loop playsinline controls>
-                <source src="assets/video/Grupo musical versatil la celula [Li_vcFRHxYM].mp4" type="video/mp4">
+                <source src="assets/video/video_salida1.webm" type="video/webm">
                 Tu navegador no soporta videos.
             </video>
         </div>
-    </div>
-
+    </section>
+    <section class="manifesto-section" style="background: transparent !important; position: relative; z-index: 100;">
+        <div class="manifesto-content">
+            <h2 style="color: #FFFF00 !important; font-weight: 900 !important; -webkit-text-fill-color: #FFFF00 !important;">Nuestra Filosofía de Entretenimiento</h2>
+            <p style="color: #FFFFFF !important; font-weight: 600 !important; -webkit-text-fill-color: #FFFFFF !important; opacity: 1 !important; filter: none !important;">
+                "En La Célula no solo tocamos música; diseñamos la atmósfera de tu evento para que nadie se quede sentado. Somos el único grupo en la CDMX que garantiza flujo continuo sin descansos, asegurando que el clímax de tu fiesta dure de principio a fin."
+            </p>
+        </div>
+    </section>
     <!-- Prueba Social -->
-    <div class="social-proof-section" id="testimonios">
+    <section class="social-proof-section" id="testimonios">
         <div class="testimonial-carousel">
             <button class="carousel-nav carousel-prev" aria-label="Anterior">❮</button>
             <div class="testimonial-track" id="testimonialTrack">
@@ -662,106 +670,146 @@
              
                 </div>
                 <div class="services-grid">
-                    <!-- Paquete Event Plus -->
+                    <!-- Bodas -->
                     <div class="service-card fade-in">
-                        <div class="card-inner">
-                            <!-- Frente de la tarjeta -->
-                            <div class="card-front">
-                                <img src="assets/images/servicio-corporativo.webp"
-                                    alt="Grupo musical versátil para evento" class="service-image" loading="lazy">
-                                <div class="service-content">
-                                    <h3 class="service-title">Bodas de Autor</h3>
-                                    <p>El soundtrack perfecto para una pista que nunca se detiene. Diseñamos atmósferas exclusivas con un ritmo impecable.</p>
-                                    <a href="/cotizador" class="btn btn-primary">Ver Propuesta de Autor</a>
-                                </div>
-                            </div>
+                        <img src="assets/images/servicio-corporativo.webp"
+                            alt="Grupo musical versátil para evento" class="service-image" loading="lazy">
+                        <div class="service-content-overlay">
+                            <h3 class="service-title">Bodas</h3>
+                            <p>El soundtrack perfecto para una pista que nunca se detiene. Diseñamos atmósferas exclusivas con un ritmo impecable.</p>
+                        </div>
+                        <div class="service-back-overlay">
+                            <ul class="detailed-features">
+                                <li>5 horas de música en vivo</li>
+                                <li>Equipo para 50 hasta 2,000 invitados</li>
+                                <li>Iluminación robótica y láser</li>
+                                <li>Pantalla gigante / Led</li>
+                                <li>Animadores / DJ</li>
+                                <li>Dinámicas y regalos</li>
+                                <li>Máquina de humo</li>
+                            </ul>
+                            <a href="/cotizador" class="btn btn-secondary">Cotiza tu paquete</a>
+                        </div>
+                    </div>
 
-                            <!-- Reverso de la tarjeta -->
-                            <div class="card-back">
+                    <!-- XV Años -->
+                    <div class="service-card fade-in">
+                        <img src="assets/images/servicio-fiesta.webp" alt="Grupo musical versátil para fiesta"
+                            class="service-image" loading="lazy">
+                        <div class="service-content-overlay">
+                            <h3 class="service-title">XV Años</h3>
+                            <p>Un show visual e interactivo que conecta generaciones con los mejores hits.</p>
+                        </div>
+                        <div class="service-back-overlay">
+                            <ul class="detailed-features">
+                                <li>5 horas de música en vivo</li>
+                                <li>Equipo para 30 hasta 250 personas</li>
+                                <li>Iluminación robótica y led</li>
+                                <li>Láser con máquina de humo</li>
+                                <li>Paquetes de regalos</li>
+                                <li>Música en descansos</li>
+                            </ul>
+                            <a href="/cotizador" class="btn btn-secondary">Cotiza tu paquete</a>
+                        </div>
+                    </div>
+
+                    <!-- Eventos Corporativos -->
+                    <div class="service-card fade-in">
+                        <img src="assets/images/servicio-boda.webp" alt="Grupo musical versátil para boda"
+                            class="service-image" loading="lazy">
+                        <div class="service-content-overlay">
+                            <h3 class="service-title">Eventos Corporativos</h3>
+                            <p>Distinción y profesionalismo para tu marca. Logística impecable.</p>
+                        </div>
+                        <div class="service-back-overlay">
+                            <ul class="detailed-features">
+                                <li>Show 80's o temático</li>
+                                <li>Equipo hasta 10,000 personas</li>
+                                <li>Escenario y video</li>
+                                <li>Luz robótica y láser</li>
+                                <li>Pantallas gigantes</li>
+                                <li>Animadores / DJ</li>
+                                <li>Dinámicas</li>
+                            </ul>
+                            <a href="/cotizador" class="btn btn-secondary">Cotiza tu paquete</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Services Carousel for Mobile -->
+                <div class="services-carousel">
+                    <button class="services-carousel-nav services-carousel-prev" aria-label="Anterior">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+                            <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
+                        </svg>
+                    </button>
+                    <div class="services-carousel-track" id="servicesCarouselTrack">
+                        <div class="service-card fade-in">
+                            <img src="assets/images/servicio-corporativo.webp"
+                                alt="Grupo musical versátil para evento" class="service-image" loading="lazy">
+                            <div class="service-content-overlay">
+                                <h3 class="service-title">Bodas</h3>
+                                <p>El soundtrack perfecto para una pista que nunca se detiene. Diseñamos atmósferas exclusivas con un ritmo impeccable.</p>
+                            </div>
+                            <div class="service-back-overlay">
                                 <ul class="detailed-features">
                                     <li>5 horas de música en vivo</li>
-                                    <li>Equipo de audio para 50 hasta 2,000 invitados</li>
+                                    <li>Equipo para 50 hasta 2,000 invitados</li>
                                     <li>Iluminación robótica y láser</li>
                                     <li>Pantalla gigante / Led</li>
                                     <li>Animadores / DJ</li>
-                                    <li>Dinámicas</li>
-                                    <li>Regalos</li>
+                                    <li>Dinámicas y regalos</li>
                                     <li>Máquina de humo</li>
                                 </ul>
-
-
                                 <a href="/cotizador" class="btn btn-secondary">Cotiza tu paquete</a>
                             </div>
                         </div>
-                    </div>
-
-                    <!-- Paquete Party -->
-                    <div class="service-card fade-in">
-                        <div class="card-inner">
-                            <!-- Frente de la tarjeta -->
-                            <div class="card-front">
-                                <img src="assets/images/servicio-fiesta.webp" alt="Grupo musical versátil para fiesta"
-                                    class="service-image" loading="lazy">
-                                <div class="service-content">
-                                    <h3 class="service-title">XV Años de Vanguardia</h3>
-                                     <p>Un show visual e interactivo que conecta generaciones con los mejores hits.</p>
-                                    <a href="/cotizador" class="btn btn-primary">Vivir el Show</a>
-                                </div>
+                        <div class="service-card fade-in">
+                            <img src="assets/images/servicio-fiesta.webp" alt="Grupo musical versátil para fiesta"
+                                class="service-image" loading="lazy">
+                            <div class="service-content-overlay">
+                                <h3 class="service-title">XV Años</h3>
+                                <p>Un show visual e interactivo que conecta generaciones con los mejores hits.</p>
                             </div>
-
-                            <!-- Reverso de la tarjeta -->
-                            <div class="card-back">
+                            <div class="service-back-overlay">
                                 <ul class="detailed-features">
                                     <li>5 horas de música en vivo</li>
-                                    <li>Equipo de audio para 30 hasta 250 personas</li>
+                                    <li>Equipo para 30 hasta 250 personas</li>
                                     <li>Iluminación robótica y led</li>
-                                    <li>Iluminación láser led con máquina de humo inteligente</li>
-                                    <li>Paquete de regalos para show 80's</li>
-                                    <li>Paquete de regalos para la batucada</li>
-                                    <li>Música grabada en descansos</li>
+                                    <li>Láser con máquina de humo</li>
+                                    <li>Paquetes de regalos</li>
+                                    <li>Música en descansos</li>
                                 </ul>
-
-
-
                                 <a href="/cotizador" class="btn btn-secondary">Cotiza tu paquete</a>
                             </div>
                         </div>
-                    </div>
-
-                    <!-- Paquete Live -->
-                    <div class="service-card fade-in">
-                        <div class="card-inner">
-                            <!-- Frente de la tarjeta -->
-                            <div class="card-front">
-                                <img src="assets/images/servicio-boda.webp" alt="Grupo musical versátil para boda"
-                                    class="service-image" loading="lazy">
-                                <div class="service-content">
-                                    <h3 class="service-title">Eventos Corporativos de Élite</h3>
-                                    <p>Distinción y profesionalismo para tu marca. Logística impecable.</p>
-                                    <a href="/cotizador" class="btn btn-primary">Ver Soluciones de Élite</a>
-
-                                </div>
+                        <div class="service-card fade-in">
+                            <img src="assets/images/servicio-boda.webp" alt="Grupo musical versátil para boda"
+                                class="service-image" loading="lazy">
+                            <div class="service-content-overlay">
+                                <h3 class="service-title">Eventos Corporativos</h3>
+                                <p>Distinción y profesionalismo para tu marca. Logística impecable.</p>
                             </div>
-
-                            <!-- Reverso de la tarjeta -->
-                            <div class="card-back">
+                            <div class="service-back-overlay">
                                 <ul class="detailed-features">
-                                    <li>Show 80's o temático a tu elección</li>
-                                    <li>Equipo profesional hasta para 10,000 personas</li>
-                                    <li>Escenario</li>
-                                    <li>Video</li>
+                                    <li>Show 80's o temático</li>
+                                    <li>Equipo hasta 10,000 personas</li>
+                                    <li>Escenario y video</li>
                                     <li>Luz robótica y láser</li>
                                     <li>Pantallas gigantes</li>
                                     <li>Animadores / DJ</li>
                                     <li>Dinámicas</li>
                                 </ul>
-
-
-
                                 <a href="/cotizador" class="btn btn-secondary">Cotiza tu paquete</a>
                             </div>
                         </div>
                     </div>
+                    <div class="services-carousel-dots"></div>
+                    <button class="services-carousel-nav services-carousel-next" aria-label="Siguiente">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+                            <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
+                        </svg>
+                    </button>
                 </div>
             </div>
         </section>
@@ -792,13 +840,9 @@
                 </div>
             </div>
         </section>
-
-        <!-- Sección La Banda -->
-                <div class="text-center mt-2">
-                    <a href="/cotizador" class="btn btn-primary">Cotiza tu evento</a>
-                </div>
-            </div>
-        </section>
+        <div class="text-center" style="margin-bottom: 5rem;">
+            <a href="/cotizador" class="btn cta-btn" style="background: #0000ff4f; color: white; font-size: 1.5rem;">Cotiza tu evento</a>
+        </div>
     </main>
 
     <!-- Footer -->
@@ -971,9 +1015,7 @@
     <script src="js/chatbot.js" defer></script>
 
     <!-- Botón Flotante WhatsApp -->
-    <a href="https://wa.me/+525535412631?text=Hola,%20quiero%20preguntar%20por%20disponibilidad..." class="whatsapp-float" target="_blank" rel="noopener noreferrer" style="position: fixed; bottom: 20px; right: 20px; background: #25D366; color: #fff; padding: 16px 24px; border-radius: 50px; font-weight: 600; text-decoration: none; z-index: 9999; box-shadow: 0 4px 15px rgba(37,211,102,0.4); display: flex; align-items: center; gap: 10px;">
-        <img src="assets/icons/whatsapp-icon.webp" alt="WhatsApp" style="width: 28px; height: 28px; filter: brightness(0) invert(1);"> Preguntar Disponibilidad
-    </a>
+
 
     <!-- Testimonial Carousel -->
     <script>

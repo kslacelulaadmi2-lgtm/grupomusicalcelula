@@ -68,7 +68,7 @@
     <script defer src="/_vercel/speed-insights/script.js"></script>
 
 </head>
-<body>
+<body style="background: transparent;">
     <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5783XFN4"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -99,18 +99,102 @@
     </header>
 
     <!-- Contenido Principal -->
-    <main class="site-container">
-        <!-- Hero del Cotizador -->
-        <section class="hero-section hero-cotizador">
-            <div class="hero-content fade-in">
-                <h1 class="section-title hero-title-large">Cotizador</h1>
-                <p class="hero-title">Obtén un presupuesto personalizado para tu evento</p>
-                <p>Solicita tu cotización sin compromiso para bodas, XV años, graduaciones, eventos corporativos o cualquier celebración especial. En Grupo Musical Versátil La Célula adaptamos nuestro servicio a tu presupuesto y necesidades específicas. Nuestro equipo te responderá en menos de 24 horas con una propuesta personalizada que incluye repertorio musical, duración del evento, y opciones de equipamiento profesional.</p>
+    <main class="content-section">
+
+        <!-- Bloque 2: Confianza -->
+        <section class="trust-section" style="padding: 50px 20px; text-align: center; margin-top: 20px;">
+            <div style="max-width: 800px; margin: 0 auto;">
+                <h2 style="color: #FFD700; font-size: 28px; margin-bottom: 30px; font-weight: 700;">¿Por qué elegirnos?</h2>
+                <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 30px;">
+                    <div style="flex: 1; min-width: 150px; max-width: 200px;">
+                        <div style="font-size: 40px; margin-bottom: 10px;">🎤</div>
+                        <p style="color: #fff; font-size: 16px;">Respaldados por <strong>cientos</strong> de eventos en los recintos mas destacados de la CDMX</p>
+                    </div>
+                    <div style="flex: 1; min-width: 150px; max-width: 200px;">
+                        <div style="font-size: 40px; margin-bottom: 10px;">🎉</div>
+                        <p style="color: #fff; font-size: 16px;">Especialistas en bodas, XV años, eventos corporativos y privados</p>
+                    </div>
+                    <div style="flex: 1; min-width: 150px; max-width: 200px;">
+                        <div style="font-size: 40px; margin-bottom: 10px;">💃</div>
+                        <p style="color: #fff; font-size: 16px;">Energía que conecta con tus invitados</p>
+                    </div>
+                    <div style="flex: 1; min-width: 150px; max-width: 200px;">
+                        <div style="font-size: 40px; margin-bottom: 10px;">🛡️ </div>
+                        <p style="color: #fff; font-size: 16px;">Garantía de fiesta<strong> sin descansos</strong> cada hora</p>
+                    </div>
+                </div>
             </div>
-        </section>
+
+        <!-- Carrusel de Lugares -->
+        <div class="venues-carousel-section" style="padding: 40px 0; overflow: hidden;">
+            <h3 style="color: #FFD700; text-align: center; font-size: 20px; margin-bottom: 30px;">Lugares donde nos hemos presentado</h3>
+            <div class="venues-track">
+                <div class="venues-slide">
+                    <img src="assets/atriosantafe.png.png" alt="Atrio Santa Fe" style="height: 50px; object-fit: contain;">
+                </div>
+                <div class="venues-slide">
+                    <img src="assets/exposantafe.png.png" alt="ExponTA Santa Fe" style="height: 50px; object-fit: contain;">
+                </div>
+                <div class="venues-slide">
+                    <img src="assets/sitatyr.png.png" alt="SitaYR" style="height: 50px; object-fit: contain;">
+                </div>
+                <div class="venues-slide">
+                    <img src="assets/auditoriobb.png.png" alt="Auditorio BB" style="height: 50px; object-fit: contain;">
+                </div>
+                <div class="venues-slide">
+                    <img src="assets/239476.svg" alt="La Ternura" style="height: 50px; object-fit: contain;">
+                </div>
+                <div class="venues-slide">
+                    <img src="assets/atriosantafe.png.png" alt="Atrio Santa Fe" style="height: 50px; object-fit: contain;">
+                </div>
+                <div class="venues-slide">
+                    <img src="assets/exposantafe.png.png" alt="ExponTA Santa Fe" style="height: 50px; object-fit: contain;">
+                </div>
+                <div class="venues-slide">
+                    <img src="assets/sitatyr.png.png" alt="SitaYR" style="height: 50px; object-fit: contain;">
+                </div>
+                <div class="venues-slide">
+                    <img src="assets/auditoriobb.png.png" alt="Auditorio BB" style="height: 50px; object-fit: contain;">
+                </div>
+                <div class="venues-slide">
+                    <img src="assets/239476.svg" alt="La Ternura" style="height: 50px; object-fit: contain;">
+                </div>
+            </div>
+        </div>
+
+        <style>
+            .venues-carousel-section {
+                background: transparent;
+            }
+            .venues-track {
+                display: flex;
+                gap: 60px;
+                animation: scroll-venues 25s linear infinite;
+                width: max-content;
+            }
+            .venues-slide {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                min-width: 120px;
+                color: #fff;
+                text-align: center;
+            }
+            .venues-slide p {
+                margin-top: 10px;
+                font-size: 14px;
+                opacity: 0.8;
+            }
+            @keyframes scroll-venues {
+                0% { transform: translateX(0); }
+                100% { transform: translateX(-50%); }
+            }
+            .venues-track:hover {
+                animation-play-state: paused;
+            }
+        </style>
 
         <!-- Formulario de Cotización -->
-        <section class="content-section">
             <div class="main-content">
                 <div class="form-container">
                     <h2 class="section-title">Solicita tu Cotización</h2>
@@ -143,7 +227,7 @@
                             </div>
 
                             <button type="submit" class="btn btn-primary form-submit-full" style="background: #25D366; font-size: 18px; font-weight: 700; padding: 18px;">
-                                ¡Quiero mi presupuesto en 15 minutos!
+                                ¡Quiero mi presupuesto!
                             </button>
                         </form>
                     </div>
@@ -287,11 +371,6 @@
     <link rel="stylesheet" href="js/chatbot.css">
     <!-- Script de inicialización del chatbot -->
     <script src="js/chatbot.js" defer></script>
-
-    <!-- Botón Flotante WhatsApp -->
-    <a href="https://wa.me/+525535412631?text=Hola,%20quiero%20preguntar%20por%20disponibilidad..." class="whatsapp-float" target="_blank" rel="noopener noreferrer" style="position: fixed; bottom: 20px; right: 20px; background: #25D366; color: #fff; padding: 16px 24px; border-radius: 50px; font-weight: 600; text-decoration: none; z-index: 9999; box-shadow: 0 4px 15px rgba(37,211,102,0.4); display: flex; align-items: center; gap: 10px;">
-        <img src="assets/icons/whatsapp-icon.webp" alt="WhatsApp" style="width: 28px; height: 28px; filter: brightness(0) invert(1);"> Preguntar Disponibilidad
-    </a>
 
   </body>
   </html>
