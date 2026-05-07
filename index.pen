@@ -1,0 +1,366 @@
+{
+  "version": "2.10",
+  "themes": {
+    "mode": ["light", "dark"],
+    "spacing": ["regular", "condensed"]
+  },
+  "variables": {
+    "color.background": {
+      "type": "color",
+      "value": [
+        { "value": "#000000", "theme": { "mode": "dark" } },
+        { "value": "#000000", "theme": { "mode": "light" } }
+      ]
+    },
+    "color.primary": { "type": "color", "value": "#FFD700" },
+    "color.text": { "type": "color", "value": "#FFFFFF" },
+    "color.text.secondary": { "type": "color", "value": "#D1D5DB" },
+    "color.accent.green": { "type": "color", "value": "#25D366" },
+    "color.header.bg": { "type": "color", "value": "rgba(0, 0, 0, 0.4)" },
+    "size.radius": { "type": "number", "value": 5 },
+    "size.radius.pill": { "type": "number", "value": 50 },
+    "font.family.primary": { "type": "string", "value": "Open Sans" },
+    "font.family.display": { "type": "string", "value": "Lobster" }
+  },
+  "children": [
+    {
+      "id": "header",
+      "type": "frame",
+      "reusable": true,
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 55,
+      "layout": "horizontal",
+      "justifyContent": "center",
+      "alignItems": "center",
+      "fill": "$color.header.bg",
+      "effect": [
+        { "type": "background_blur", "radius": 10 }
+      ],
+      "children": [
+        {
+          "id": "nav-container",
+          "type": "frame",
+          "width": 980,
+          "height": 55,
+          "layout": "horizontal",
+          "justifyContent": "center",
+          "alignItems": "center",
+          "gap": 40,
+          "children": [
+            {
+              "id": "nav-link-inicio",
+              "type": "text",
+              "textGrowth": "auto",
+              "content": "INICIO",
+              "fontSize": 15,
+              "fontWeight": "bold",
+              "fill": "$color.text",
+              "fontFamily": "$font.family.primary"
+            },
+            {
+              "id": "nav-link-cotizador",
+              "type": "text",
+              "textGrowth": "auto",
+              "content": "COTIZADOR",
+              "fontSize": 15,
+              "fontWeight": "bold",
+              "fill": "$color.text",
+              "fontFamily": "$font.family.primary"
+            },
+            {
+              "id": "nav-link-blog",
+              "type": "text",
+              "textGrowth": "auto",
+              "content": "BLOG",
+              "fontSize": 15,
+              "fontWeight": "bold",
+              "fill": "$color.text",
+              "fontFamily": "$font.family.primary"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hero-section",
+      "type": "frame",
+      "x": 0,
+      "y": 55,
+      "width": 1440,
+      "height": 800,
+      "layout": "vertical",
+      "justifyContent": "center",
+      "alignItems": "center",
+      "fill": "#111111",
+      "children": [
+        {
+          "id": "hero-content",
+          "type": "frame",
+          "layout": "vertical",
+          "justifyContent": "center",
+          "alignItems": "center",
+          "gap": 20,
+          "children": [
+            {
+              "id": "hero-logo",
+              "type": "rectangle",
+              "width": 390,
+              "height": 220,
+              "fill": "assets/images/logo-blanco.webp"
+            },
+            {
+              "id": "hero-title",
+              "type": "text",
+              "textGrowth": "fixed-width",
+              "width": 800,
+              "content": "La música que tu evento merece:\nPista llena de principio a fin.",
+              "fontSize": 38,
+              "fontWeight": 500,
+              "fill": "$color.text",
+              "fontFamily": "$font.family.display",
+              "textAlign": "center"
+            },
+            {
+              "id": "hero-pill",
+              "type": "frame",
+              "layout": "horizontal",
+              "justifyContent": "center",
+              "alignItems": "center",
+              "padding": [14, 28, 14, 28],
+              "fill": "#FFD700",
+              "cornerRadius": 50,
+              "effect": [
+                { "type": "shadow", "shadowType": "outer", "offset": { "x": 0, "y": 4 }, "blur": 20, "color": "rgba(255, 215, 0, 0.4)" }
+              ],
+              "children": [
+                {
+                  "id": "pill-text",
+                  "type": "text",
+                  "textGrowth": "auto",
+                  "content": "✨ Garantía de Fiesta: Sin caídas de ritmo",
+                  "fontSize": 18,
+                  "fontWeight": "bold",
+                  "fill": "#000000"
+                }
+              ]
+            },
+            {
+              "id": "cta-button",
+              "type": "frame",
+              "layout": "horizontal",
+              "justifyContent": "center",
+              "alignItems": "center",
+              "gap": 10,
+              "padding": [18, 40, 18, 40],
+              "fill": "#25D366",
+              "cornerRadius": 50,
+              "effect": [
+                { "type": "shadow", "shadowType": "outer", "offset": { "x": 0, "y": 4 }, "blur": 20, "color": "rgba(37, 211, 102, 0.5)" }
+              ],
+              "children": [
+                {
+                  "id": "cta-text",
+                  "type": "text",
+                  "textGrowth": "auto",
+                  "content": "💬 Cotiza tu evento ahora",
+                  "fontSize": 18,
+                  "fontWeight": "bold",
+                  "fill": "#FFFFFF"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "video-promo-section",
+      "type": "frame",
+      "x": 0,
+      "y": 855,
+      "width": 1440,
+      "height": 600,
+      "layout": "vertical",
+      "justifyContent": "center",
+      "alignItems": "center",
+      "children": [
+        {
+          "id": "promo-video",
+          "type": "rectangle",
+          "width": 1200,
+          "height": 600,
+          "fill": "#111111",
+          "cornerRadius": 10,
+          "stroke": { "align": "inside", "thickness": 1, "fill": "#333333" }
+        }
+      ]
+    },
+    {
+      "id": "manifesto-section",
+      "type": "frame",
+      "x": 0,
+      "y": 1455,
+      "width": 1440,
+      "padding": [60, 100, 60, 100],
+      "layout": "vertical",
+      "justifyContent": "center",
+      "alignItems": "center",
+      "gap": 20,
+      "children": [
+        {
+          "id": "manifesto-title",
+          "type": "text",
+          "textGrowth": "fixed-width",
+          "width": 1200,
+          "content": "Nuestra Filosofía de Entretenimiento",
+          "fontSize": 32,
+          "fontWeight": "bold",
+          "fill": "#FFFF00",
+          "textAlign": "center"
+        },
+        {
+          "id": "manifesto-quote",
+          "type": "text",
+          "textGrowth": "fixed-width",
+          "width": 1000,
+          "content": "\"En La Célula no solo tocamos música; diseñamos la atmósfera de tu evento para que nadie se quede sentado. Somos el único grupo en la CDMX que garantiza flujo continuo sin descansos, asegurando que el clímax de tu fiesta dure de principio a fin.\"",
+          "fontSize": 18,
+          "fontWeight": 600,
+          "fill": "#FFFFFF",
+          "textAlign": "center",
+          "lineHeight": 1.6
+        }
+      ]
+    },
+    {
+      "id": "testimonials-section",
+      "type": "frame",
+      "x": 0,
+      "y": 1700,
+      "width": 1440,
+      "padding": [60, 100, 60, 100],
+      "layout": "vertical",
+      "justifyContent": "center",
+      "alignItems": "center",
+      "gap": 30,
+      "children": [
+        {
+          "id": "testimonials-title",
+          "type": "text",
+          "textGrowth": "auto",
+          "content": "Lo que dicen nuestros clientes",
+          "fontSize": 28,
+          "fontWeight": "bold",
+          "fill": "$color.text",
+          "textAlign": "center"
+        },
+        {
+          "id": "testimonial-carousel",
+          "type": "frame",
+          "layout": "horizontal",
+          "gap": 20,
+          "justifyContent": "center",
+          "children": [
+            {
+              "id": "testimonial-card-1",
+              "type": "frame",
+              "width": 320,
+              "padding": [20, 20, 20, 20],
+              "layout": "vertical",
+              "gap": 12,
+              "fill": "#111827",
+              "cornerRadius": 8,
+              "stroke": { "align": "inside", "thickness": 1, "fill": "#374151" },
+              "children": [
+                { "id": "t1-avatar", "type": "ellipse", "width": 48, "height": 48, "fill": "#4B5563" },
+                { "id": "t1-name", "type": "text", "textGrowth": "auto", "content": "Pedro Martin Lozano Morales", "fontSize": 14, "fontWeight": "bold", "fill": "$color.text" },
+                { "id": "t1-stars", "type": "text", "textGrowth": "auto", "content": "★★★★★", "fontSize": 16, "fill": "#FACC15" },
+                { "id": "t1-quote", "type": "text", "textGrowth": "fixed-width", "width": 280, "content": "\"Excelente grupo tocan música versátil para todos los gustos 100% recomendable\"", "fontSize": 13, "fill": "$color.text.secondary", "fontStyle": "italic" }
+              ]
+            },
+            {
+              "id": "testimonial-card-2",
+              "type": "frame",
+              "width": 320,
+              "padding": [20, 20, 20, 20],
+              "layout": "vertical",
+              "gap": 12,
+              "fill": "#111827",
+              "cornerRadius": 8,
+              "stroke": { "align": "inside", "thickness": 1, "fill": "#374151" },
+              "children": [
+                { "id": "t2-avatar", "type": "ellipse", "width": 48, "height": 48, "fill": "#4B5563" },
+                { "id": "t2-name", "type": "text", "textGrowth": "auto", "content": "Rubicel Trujillo", "fontSize": 14, "fontWeight": "bold", "fill": "$color.text" },
+                { "id": "t2-stars", "type": "text", "textGrowth": "auto", "content": "★★★★★", "fontSize": 16, "fill": "#FACC15" },
+                { "id": "t2-quote", "type": "text", "textGrowth": "fixed-width", "width": 280, "content": "\"Excelente grupo musical. Muy versátil, excelente repertorio musical.\"", "fontSize": 13, "fill": "$color.text.secondary", "fontStyle": "italic" }
+              ]
+            },
+            {
+              "id": "testimonial-card-3",
+              "type": "frame",
+              "width": 320,
+              "padding": [20, 20, 20, 20],
+              "layout": "vertical",
+              "gap": 12,
+              "fill": "#111827",
+              "cornerRadius": 8,
+              "stroke": { "align": "inside", "thickness": 1, "fill": "#374151" },
+              "children": [
+                { "id": "t3-avatar", "type": "ellipse", "width": 48, "height": 48, "fill": "#4B5563" },
+                { "id": "t3-name", "type": "text", "textGrowth": "auto", "content": "Aura Mora", "fontSize": 14, "fontWeight": "bold", "fill": "$color.text" },
+                { "id": "t3-stars", "type": "text", "textGrowth": "auto", "content": "★★★★★", "fontSize": 16, "fill": "#FACC15" },
+                { "id": "t3-quote", "type": "text", "textGrowth": "fixed-width", "width": 280, "content": "\"Súper profesionales, excelente atención desde el primer momento\"", "fontSize": 13, "fill": "$color.text.secondary", "fontStyle": "italic" }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "footer",
+      "type": "frame",
+      "x": 0,
+      "y": 2200,
+      "width": 1440,
+      "padding": [40, 100, 40, 100],
+      "layout": "vertical",
+      "justifyContent": "center",
+      "alignItems": "center",
+      "gap": 20,
+      "fill": "#0A0A0A",
+      "children": [
+        {
+          "id": "footer-logo",
+          "type": "rectangle",
+          "width": 150,
+          "height": 80,
+          "fill": "assets/images/logo-blanco.webp"
+        },
+        {
+          "id": "footer-social",
+          "type": "frame",
+          "layout": "horizontal",
+          "gap": 15,
+          "justifyContent": "center",
+          "children": [
+            { "id": "social-facebook", "type": "ellipse", "width": 39, "height": 39, "fill": "#1877F2" },
+            { "id": "social-youtube", "type": "ellipse", "width": 39, "height": 39, "fill": "#FF0000" },
+            { "id": "social-instagram", "type": "ellipse", "width": 39, "height": 39, "fill": "#E4405F" },
+            { "id": "social-tiktok", "type": "ellipse", "width": 39, "height": 39, "fill": "#000000", "stroke": { "align": "inside", "thickness": 1, "fill": "#FFFFFF" } }
+          ]
+        },
+        {
+          "id": "footer-copyright",
+          "type": "text",
+          "textGrowth": "auto",
+          "content": "© 2026 Grupo Musical La Célula. Todos los derechos reservados.",
+          "fontSize": 12,
+          "fill": "#6B7280",
+          "textAlign": "center"
+        }
+      ]
+    }
+  ]
+}

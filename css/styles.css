@@ -15,6 +15,25 @@ body {
     scroll-behavior: smooth;
 }
 
+main.content-text,
+.content-text {
+    font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+    text-align: center;
+}
+
+main.content-text h1,
+main.content-text h2,
+main.content-text h3,
+main.content-text p,
+.content-text h1,
+.content-text h2,
+.content-text h3,
+.content-text p {
+    font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+    text-align: center;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.9), 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
 /* ===== SECCIONES PRINCIPALES ===== */
 
 .hero-section {
@@ -66,11 +85,10 @@ body {
     --font-nav: normal normal bold 15px/1.4em 'Open Sans', Arial, sans-serif;
     --font-body: normal normal normal 20px/1.4em 'Open Sans', Arial, sans-serif;
     --font-title: normal normal normal 25px/1.4em 'Lobster', cursive;
-    --font-large: normal normal normal 35px/1.4em 'Open Sans', Arial, sans-serif;
+    --font-large: normal normal normal 35px/1.4em 'Open Sans', Arial, cursive;
     --font-medium: normal normal normal 27px/1.4em 'Open Sans', Arial, sans-serif;
 
     /* Espaciado */
-    --section-padding: 80px 20px;
     --card-margin: 15px;
     --border-radius: 5px;
     --button-radius: 20px;
@@ -103,6 +121,8 @@ body {
     top: 0;
     left: 0;
     right: 0;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
     height: var(--header-height);
     background: var(--overlay-bg);
     backdrop-filter: blur(10px);
@@ -326,7 +346,7 @@ body {
 
 .hero-content {
     position: absolute;
-    top: 50%;
+    top: 45%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 10;
@@ -348,7 +368,16 @@ body {
     font-size: 30px;
     margin-bottom: 30px;
     color: var(--primary-text);
-    text-shadow: 2px 2px 20px rgba(0,0,0,0.8);
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9), 0 0 20px rgba(0, 0, 0, 0.5);
+}
+.hero-subtitle {
+    font: var(--font-title);
+    font-size: 30px;
+    margin-bottom: 30px;
+    color: var(--primary-text);
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9), 0 0 20px rgba(0, 0, 0, 0.5);
 }
 
 /* Partículas decorativas */
@@ -451,7 +480,6 @@ body {
 
 /* ===== SECCIONES DE CONTENIDO ===== */
 .content-section {
-    padding: var(--section-padding);
     background: transparent;
     color: var(--content-text);
     position: relative;
@@ -468,29 +496,27 @@ body {
 }
 
 .section-title {
+    color: #ffffff !important;
+    font-size: 36px;
+    font-weight: 400;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9), 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.section-subtitle {
     font: var(--font-large);
     text-align: center;
     margin-bottom: 20px;
     color: #ffffff;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
-}
-
-.section-subtitle {
-    font: var(--font-title);
-    text-align: center;
-    margin-bottom: 40px;
-    color: var(--content-text);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9), 0 0 15px rgba(0, 0, 0, 0.5);  
 }
 
 .section-description {
-    font: var(--font-body);
-    text-align: center;
-    margin-bottom: 60px;
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
+    font-size: 24px;
+    color: #FFFFFF !important;
     line-height: 1.6;
-    color: #f0f0f0;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9), 0 0 15px rgba(0, 0, 0, 0.5);
 }
 
 /* ===== TARJETAS DE SERVICIOS - DISEÑO OVERLAY ===== */
@@ -526,9 +552,12 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center;
     position: absolute;
     top: 0;
     left: 0;
+    right: 0;
+    bottom: 0;
 }
 
 .service-content-overlay {
@@ -604,17 +633,27 @@ body {
         display: block;
         position: relative;
         overflow: hidden;
-        padding: 0 40px;
+        padding: 0 25px;
+        gap: 20px;
     }
 
     .services-carousel-track {
         display: flex;
         transition: transform 0.4s ease;
+        gap: 15px;
     }
 
     .services-carousel-track .service-card {
-        min-width: 100%;
-        height: 400px;
+        min-width: calc(100% - 30px);
+        height: 350px;
+        flex: 0 0 auto;
+    }
+
+    .services-carousel-track .service-card .service-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
     }
 
     .services-carousel-track .service-card .service-content-overlay {
@@ -671,11 +710,15 @@ body {
     }
 
     .services-carousel-prev {
-        left: 0;
+        left: 5px;
     }
 
     .services-carousel-next {
-        right: 0;
+        right: 5px;
+    }
+
+    .services-carousel-dots {
+        margin-bottom: 30px;
     }
 }
 
@@ -686,7 +729,7 @@ body {
     letter-spacing: 0.05em;
     margin-bottom: 10px;
     line-height: 1.2;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.9), 0 0 15px rgba(0,0,0,0.5);
 }
 
 .service-content-overlay p {
@@ -694,7 +737,7 @@ body {
     color: #ffffff;
     line-height: 1.5;
     margin: 0;
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.9), 0 0 10px rgba(0,0,0,0.5);
 }
 
 .service-description {
@@ -703,6 +746,7 @@ body {
     margin-bottom: 25px;
     line-height: 1.6;
     flex-grow: 1;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.9), 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 .service-features {
@@ -734,7 +778,6 @@ body {
     color: #cccccc;
     margin-bottom: 25px;
     text-align: center;
-    font-style: italic;
 }
 
 .detailed-features {
@@ -775,7 +818,6 @@ body {
     color: #ffffff;
     line-height: 1.6;
     margin-bottom: 25px;
-    font-style: italic;
     text-align: center;
     padding: 15px;
     background: rgba(61, 155, 233, 0.2);
@@ -1670,6 +1712,7 @@ img[loading="lazy"].loaded {
     color: #ffffff;
     font-size: 1.1rem;
     margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9), 0 0 15px rgba(0, 0, 0, 0.5);
 }
 
 /* ===== BLOG Y ARTÍCULOS ===== */
@@ -1808,6 +1851,7 @@ img[loading="lazy"].loaded {
     font: var(--font-title);
     color: #ffffff;
     margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9), 0 0 15px rgba(0, 0, 0, 0.5);
 }
 
 .contact-buttons {
@@ -2113,7 +2157,6 @@ img[loading="lazy"].loaded {
 
 /* ===== SECCIÓN DE VIDEOS ===== */
 .videos-section {
-    padding: var(--section-padding);
     background: var(--primary-bg);
     color: var(--primary-text);
 }
@@ -2441,6 +2484,7 @@ img[loading="lazy"].loaded {
     margin-bottom: 15px;
     line-height: 1.3;
     font-family: 'Open Sans', Arial, sans-serif;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9), 0 0 15px rgba(0, 0, 0, 0.5);
 }
 
 .post-author {
@@ -2645,7 +2689,6 @@ img[loading="lazy"].loaded {
 .video-promo-container {
     margin-top: 0;
     max-width: 400px;
-    height: 50%;
     margin: 0 auto;
     position: relative;
     border-radius: 12px;
@@ -2898,18 +2941,16 @@ img[loading="lazy"].loaded {
 }
 
 .manifesto-section h2 {
-    color: #FFEA00 !important;
+    color: #ffffff !important;
     font-size: 36px;
-    font-weight: 700;
+    font-weight: 400;
     margin-bottom: 30px;
-    font-family: 'Lobster', cursive;
-    text-shadow: 0 0 10px rgba(255, 234, 0, 0.8);
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
 }
 
 .manifesto-section p {
     font-size: 24px;
     color: #FFFFFF !important;
-    font-style: italic;
     line-height: 1.6;
     margin-bottom: 10px;
 }
@@ -2947,8 +2988,62 @@ img[loading="lazy"].loaded {
         font-size: 1.5rem;
     }
 
+    .video-promo-section {
+        padding: 20px 15px;
+    }
+
+    .video-promo-container {
+        max-width: 100%;
+        width: 100%;
+        margin: 0 auto 20px;
+        border-radius: 10px;
+    }
+
+    .manifesto-section {
+        padding: 30px 15px;
+    }
+
+    .manifesto-section h2 {
+        font-size: 28px;
+        line-height: 1.3;
+        margin-bottom: 18px;
+    }
+
+    .manifesto-section p {
+        font-size: 18px;
+        line-height: 1.5;
+    }
+
     .social-proof-title {
         font-size: 1.5rem;
+    }
+
+    .social-proof-section {
+        padding: 40px 15px;
+    }
+
+    .testimonial-carousel {
+        max-width: 100%;
+        width: 100%;
+        margin: 20px auto 0;
+    }
+
+    .testimonial-slide {
+        padding: 0 8px;
+    }
+
+    .testimonial-card {
+        padding: 20px 16px;
+    }
+
+    .testimonial-name {
+        font-size: 15px;
+        line-height: 1.3;
+    }
+
+    .testimonial-quote {
+        font-size: 14px;
+        line-height: 1.5;
     }
 
     .carousel-nav {

@@ -81,7 +81,8 @@
             font-family: 'Open Sans', Arial, sans-serif;
             background: #000;
             color: #fff;
-            overflow-x: hidden
+            overflow-x: hidden;
+            scrollbar-width: none
         }
 
         .site-header {
@@ -396,7 +397,6 @@
             border-left: 4px solid #4b5563;
             padding-left: 1rem;
             color: #d1d5db;
-            font-style: italic;
             font-size: 1rem;
             line-height: 1.6;
         }
@@ -521,153 +521,55 @@
             </button>
         </nav>
     </header>
+    <main class="content-section" style="background-color: rgba(0, 0, 0, 0.651) !important">
 
-    <!-- Hero Section -->
-    <section class="hero-section" id="hero">
-        <!-- Partículas decorativas -->
-        <div class="hero-particles">
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-        </div>
-        
+    <section class="hero-section" id="hero">        
         <div class="hero-content fade-in">
             <picture>
                 <source srcset="assets/images/logo-blanco.webp" type="image/webp">
                 <img src="assets/images/logo-blanco.webp" alt="Logo Grupo Musical Versátil La Célula" class="hero-logo" width="390" height="220">
             </picture>
 
-            <h1 class="hero-title" style="font-size: 38px; font-weight: 500; margin-bottom: 20px; line-height: 1.2;">
+            <h1 class="hero-title" style="font-size: 46px; font-weight: 100; letter-spacing: 1.3px; margin-bottom: 20px; line-height: 1.2;">
                 La música que tu evento merece:
-                Pista llena de principio a fin.
             </h1>
-            <div class="hero-pill" style="display: inline-block; background: linear-gradient(135deg, #FFD7008A 0%, #FFA500C4 100%); color: #000; padding: 14px 28px; border-radius: 50px; font-weight: 700; font-size: 18px; margin-bottom: 30px; box-shadow: 0 4px 20px rgba(255, 215, 0, 0.4);">
-                ✨ Garantía de Fiesta: Sin caídas de ritmo
-            </div>
-            <div style="margin-top: 20px; display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
-                <a href="https://wa.me/+525535412631?text=Hola,%20quiero%20preguntar%20por%20disponibilidad..." class="cta-button" style="background: linear-gradient(135deg, #25D3668F 0%, #1DB95491 100%); color: #fff; padding: 18px 40px; border-radius: 50px; font-size: 18px; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 10px; transition: all 0.3s ease; box-shadow: 0 4px 20px rgba(37, 211, 102, 0.5);"> 
-                    <img src="assets/icons/whatsapp-icon.webp" alt="WhatsApp" style="width: 24px; height: 24px; filter: brightness(0) invert(1);"/>
-                    Cotiza tu evento ahora
-                </a>
+            <p style="word-wrap: break-word; color: #FFFFFF !important; font-weight: 600; font-size: 26px; -webkit-text-fill-color: #FFFFFF !important; opacity: 1 !important; filter: none !important; padding-bottom: 20px;">"Expertos en leer la pista con gran versatilidad de música<b></b>para bodas, XV años y eventos privados en la Ciudad de México."</p>
+            <div class="hero-pill" style="display: inline-block; background: linear-gradient(135deg, #0000008a 0%, #FFA500C4 100%); color: #ffffff; padding: 14px 28px; border-radius: 50px; font-weight: 700; font-size: 22px; margin-bottom: 30px; box-shadow: 0 4px 20px rgba(255, 215, 0, 0.4);">
+                ✨ Garantía Non Stop: Show continúo sin interrupciones. ✨ 
             </div>
         </div>
-    </section>        
-
-    <!-- Manifiesto: Nuestra Filosofía de Entretenimiento -->
+    </section>
     <section class="video-promo-section" id="video-promo">
         <div class="video-promo-container">
             <video autoplay loop playsinline controls>
-                <source src="assets/video/video_salida1.webm" type="video/webm">
+                <source src="assets/video/video_salida.webm" type="video/webm">
                 Tu navegador no soporta videos.
             </video>
+        </div>    
+        <div style="margin-top: 20px; display: flex; flex-direction: row; padding-top: 10px; position: relative; justify-content: center; flex-wrap: wrap;">
+            <a  href="https://wa.me/+525535412631?text=Hola,%20quiero%20cotizar%20a%20La%20Célula%20para%20mi%20evento.%20Vengo%20de%20su%20sitio%20web" class="cta-button" style="background: linear-gradient(135deg, #25D3668F 0%, #1DB95491 100%); color: #fff; padding: 18px 40px; border-radius: 50px; font-size: 18px; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 10px; transition: all 0.3s ease; box-shadow: 0 4px 20px rgba(37, 211, 102, 0.5);">
+            <img src="assets/icons/whatsapp-icon.webp" alt="WhatsApp" style="width: 24px; height: 24px; filter: brightness(0) invert(1);"/>
+            Cotiza tu evento ahora
+            </a>
         </div>
-    </section>
-    <section class="manifesto-section" style="background: transparent !important; position: relative; z-index: 100;">
+        <div class="manifesto-section" style="background: transparent !important; position: relative; z-index: 100;">
         <div class="manifesto-content">
-            <h2 style="color: #FFFF00 !important; font-weight: 900 !important; -webkit-text-fill-color: #FFFF00 !important;">Nuestra Filosofía de Entretenimiento</h2>
-            <p style="color: #FFFFFF !important; font-weight: 600 !important; -webkit-text-fill-color: #FFFFFF !important; opacity: 1 !important; filter: none !important;">
-                "En La Célula no solo tocamos música; diseñamos la atmósfera de tu evento para que nadie se quede sentado. Somos el único grupo en la CDMX que garantiza flujo continuo sin descansos, asegurando que el clímax de tu fiesta dure de principio a fin."
-            </p>
+            <h2 class="manifesto-title" style="font-size: 36px; font-weight: bold; letter-spacing: 1.3px; margin-bottom: 20px; line-height: 1.2;"> 
+                Nuestra Filosofía de Entretenimiento
+            </h2>
+            <p style="word-wrap: break-word; color: #FFFFFF !important; font-weight: 600; font-size: 26px; -webkit-text-fill-color: #FFFFFF !important; opacity: 1 !important; filter: none !important; padding-bottom: 20px;">Descubre como logramos que nadie se quede sentado en tu evento.</p>
+
         </div>
     </section>
-    <!-- Prueba Social -->
-    <section class="social-proof-section" id="testimonios">
-        <div class="testimonial-carousel">
-            <button class="carousel-nav carousel-prev" aria-label="Anterior">❮</button>
-            <div class="testimonial-track" id="testimonialTrack">
-                <!-- Testimonio 1 -->
-                <div class="testimonial-slide">
-                    <div class="testimonial-card">
-                        <img src="https://ui-avatars.com/api/?name=Pedro+Martin&background=random&color=fff" alt="Avatar" class="testimonial-avatar">
-                        <h4 class="testimonial-name">Pedro Martin Lozano Morales</h4>
-                        <div class="testimonial-stars">★★★★★</div>
-                        <p class="testimonial-quote">"Excelente grupo tocan música versátil para todos los gustos 100% recomendable para cualquier tipo de evento"</p>
-                    </div>
-                </div>
-                <!-- Testimonio 2 -->
-                <div class="testimonial-slide">
-                    <div class="testimonial-card">
-                        <img src="https://ui-avatars.com/api/?name=Rubicel+Trujillo&background=random&color=fff" alt="Avatar" class="testimonial-avatar">
-                        <h4 class="testimonial-name">Rubicel Trujillo</h4>
-                        <div class="testimonial-stars">★★★★★</div>
-                        <p class="testimonial-quote">"Excelente grupo musical. Muy versátil, excelente repertorio musical. A todos nuestros invitados les encantó todo."</p>
-                    </div>
-                </div>
-                <!-- Testimonio 3 -->
-                <div class="testimonial-slide">
-                    <div class="testimonial-card">
-                        <img src="https://ui-avatars.com/api/?name=Aura+Mora&background=random&color=fff" alt="Avatar" class="testimonial-avatar">
-                        <h4 class="testimonial-name">Aura Mora</h4>
-                        <div class="testimonial-stars">★★★★★</div>
-                        <p class="testimonial-quote">"Súper profesionales, me encantó que desde el primer momento me brindaron una excelente atención y siempre estuvieron súper atentos al mood de los invitados."</p>
-                    </div>
-                </div>
-                <!-- Testimonio 4 -->
-                <div class="testimonial-slide">
-                    <div class="testimonial-card">
-                        <img src="https://ui-avatars.com/api/?name=Erandi+MM&background=random&color=fff" alt="Avatar" class="testimonial-avatar">
-                        <h4 class="testimonial-name">Erandi MM</h4>
-                        <div class="testimonial-stars">★★★★★</div>
-                        <p class="testimonial-quote">"Excelente trabajo, todos nuestros invitados estuvieron encantados, muchas gracias por amenizar tan bien nuestra boda 🥰"</p>
-                    </div>
-                </div>
-                <!-- Testimonio 5 -->
-                <div class="testimonial-slide">
-                    <div class="testimonial-card">
-                        <img src="https://ui-avatars.com/api/?name=Kimberly+Rocha&background=random&color=fff" alt="Avatar" class="testimonial-avatar">
-                        <h4 class="testimonial-name">Kimberly Rocha</h4>
-                        <div class="testimonial-stars">★★★★★</div>
-                        <p class="testimonial-quote">"Lo que más me encantó es que son super versátiles al tope de las últimas tendencias musicales, un sonido que suena increíble y súper ambiente."</p>
-                    </div>
-                </div>
-                <!-- Testimonio 6 -->
-                <div class="testimonial-slide">
-                    <div class="testimonial-card">
-                        <img src="https://ui-avatars.com/api/?name=Sherem+Garcia&background=random&color=fff" alt="Avatar" class="testimonial-avatar">
-                        <h4 class="testimonial-name">Sherem Garcia</h4>
-                        <div class="testimonial-stars">★★★★★</div>
-                        <p class="testimonial-quote">"De los mejores que he escuchado y disfrutado y con la mejor actitud de servicio y fiesta CON TODO CELULA"</p>
-                    </div>
-                </div>
-                <!-- Testimonio 7 -->
-                <div class="testimonial-slide">
-                    <div class="testimonial-card">
-                        <img src="https://ui-avatars.com/api/?name=Sebastian+Vernis&background=random&color=fff" alt="Avatar" class="testimonial-avatar">
-                        <h4 class="testimonial-name">Sebastián Vernis Mora</h4>
-                        <div class="testimonial-stars">★★★★★</div>
-                        <p class="testimonial-quote">"Los amé. Música desde los 80's y 90's hasta actual, estuvimos bailando sin parar."</p>
-                    </div>
-                </div>
-                <!-- Testimonio 8 -->
-                <div class="testimonial-slide">
-                    <div class="testimonial-card">
-                        <img src="https://ui-avatars.com/api/?name=Jazmin+Robles&background=random&color=fff" alt="Avatar" class="testimonial-avatar">
-                        <h4 class="testimonial-name">Jazmin Robles Yerena</h4>
-                        <div class="testimonial-stars">★★★★★</div>
-                        <p class="testimonial-quote">"Es muy buen grupo me gusta mucho el ambiente que pone cuando empieza a tocar"</p>
-                    </div>
-                </div>
-            </div>
-            <button class="carousel-nav carousel-next" aria-label="Siguiente">❯</button>
-        </div>
-        <div class="carousel-dots" id="carouselDots"></div>
-    </div>
-    </section>
 
-
-    <main>
+    <section class="content-text content-section">
         <!-- Sección de Servicios -->
-        <section class="content-section" id="servicios">
+        <div id="servicios">
             <div class="main-content">
-                <h2 class="section-title"><strong>El efecto Célula</strong></h2>
-                <h3 class="section-subtitle"><strong>¿Por qué elegirnos para tu gran día?</strong></h3>
+
+                <h2 class="section-subtitle"><strong>¿Por qué elegirnos para tu gran día?</strong></h2>
                 <div class="section-description">
                 <p>Fiesta Sin Interrupciones: Olvídate de los descansos  con La Célula no detenemos el ambiente.</p> 
-               
-
-             
                 </div>
                 <div class="services-grid">
                     <!-- Bodas -->
@@ -675,7 +577,7 @@
                         <img src="assets/images/servicio-corporativo.webp"
                             alt="Grupo musical versátil para evento" class="service-image" loading="lazy">
                         <div class="service-content-overlay">
-                            <h3 class="service-title">Bodas</h3>
+                            <h3 class="service-subtitle">Bodas</h3>
                             <p>El soundtrack perfecto para una pista que nunca se detiene. Diseñamos atmósferas exclusivas con un ritmo impecable.</p>
                         </div>
                         <div class="service-back-overlay">
@@ -697,7 +599,7 @@
                         <img src="assets/images/servicio-fiesta.webp" alt="Grupo musical versátil para fiesta"
                             class="service-image" loading="lazy">
                         <div class="service-content-overlay">
-                            <h3 class="service-title">XV Años</h3>
+                            <h3 class="service-subtitle">XV Años</h3>
                             <p>Un show visual e interactivo que conecta generaciones con los mejores hits.</p>
                         </div>
                         <div class="service-back-overlay">
@@ -718,7 +620,7 @@
                         <img src="assets/images/servicio-boda.webp" alt="Grupo musical versátil para boda"
                             class="service-image" loading="lazy">
                         <div class="service-content-overlay">
-                            <h3 class="service-title">Eventos Corporativos</h3>
+                            <h3 class="service-subtitle">Eventos Corporativos</h3>
                             <p>Distinción y profesionalismo para tu marca. Logística impecable.</p>
                         </div>
                         <div class="service-back-overlay">
@@ -748,7 +650,7 @@
                             <img src="assets/images/servicio-corporativo.webp"
                                 alt="Grupo musical versátil para evento" class="service-image" loading="lazy">
                             <div class="service-content-overlay">
-                                <h3 class="service-title">Bodas</h3>
+                                <h3 class="service-subtitle">Bodas</h3>
                                 <p>El soundtrack perfecto para una pista que nunca se detiene. Diseñamos atmósferas exclusivas con un ritmo impeccable.</p>
                             </div>
                             <div class="service-back-overlay">
@@ -768,7 +670,7 @@
                             <img src="assets/images/servicio-fiesta.webp" alt="Grupo musical versátil para fiesta"
                                 class="service-image" loading="lazy">
                             <div class="service-content-overlay">
-                                <h3 class="service-title">XV Años</h3>
+                                <h3 class="service-subtitle">XV Años</h3>
                                 <p>Un show visual e interactivo que conecta generaciones con los mejores hits.</p>
                             </div>
                             <div class="service-back-overlay">
@@ -787,7 +689,7 @@
                             <img src="assets/images/servicio-boda.webp" alt="Grupo musical versátil para boda"
                                 class="service-image" loading="lazy">
                             <div class="service-content-overlay">
-                                <h3 class="service-title">Eventos Corporativos</h3>
+                                <h3 class="service-subtitle">Eventos Corporativos</h3>
                                 <p>Distinción y profesionalismo para tu marca. Logística impecable.</p>
                             </div>
                             <div class="service-back-overlay">
@@ -812,43 +714,43 @@
                     </button>
                 </div>
             </div>
-        </section>
-
-        <!-- Sección Galería de Videos -->
-        <section class="content-section videos-section" id="videos">
-            <div class="main-content">
-                <h2 class="section-title">GALERÍA DE VIDEOS</h2>
-                <p class="section-description">
-                    Disfruta de algunos de nuestros momentos musicales en vivo y presentaciones destacadas
-                </p>
-
-                <!-- Carrusel dinámico de videos de YouTube -->
-                <div class="youtube-carousel-container" id="youtubeCarouselContainer">
-                    <!-- Los videos se cargarán dinámicamente desde el JSON -->
-
-                    <!-- Controles del carrusel -->
-                    <button class="carousel-btn carousel-btn-prev" aria-label="Anterior">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
-                        </svg>
-                    </button>
-                    <button class="carousel-btn carousel-btn-next" aria-label="Siguiente">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
-                        </svg>
-                    </button>
-                </div>
-            </div>
-        </section>
-        <div class="text-center" style="margin-bottom: 5rem;">
-            <a href="/cotizador" class="btn cta-btn" style="background: #0000ff4f; color: white; font-size: 1.5rem;">Cotiza tu evento</a>
         </div>
+    </section>
+        <!-- Sección Galería de Videos -->
+    <section class="content-section videos-section" id="videos">
+        <div class="main-content">
+            <h2 class="section-subtitle"><strong>Galería de videos</strong></h2>
+            <p class="section-description">
+                Disfruta de algunos de nuestros momentos musicales en vivo y presentaciones destacadas
+            </p>
+
+            <!-- Carrusel dinámico de videos de YouTube -->
+            <div class="youtube-carousel-container" id="youtubeCarouselContainer">
+                <!-- Los videos se cargarán dinámicamente desde el JSON -->
+
+                <!-- Controles del carrusel -->
+                <button class="carousel-btn carousel-btn-prev" aria-label="Anterior">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
+                    </svg>
+                </button>
+                <button class="carousel-btn carousel-btn-next" aria-label="Siguiente">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </section>
+    <div class="text-center" style="margin-bottom: 5rem;">
+        <a href="/cotizador" class="btn cta-btn" style="background: #0000ff4f; color: white; font-size: 1.5rem;">Cotiza tu evento</a>
+    </div>
     </main>
 
     <!-- Footer -->
     <footer class="site-footer" id="SITE_FOOTER">
         <div class="footer-social">
-        <a href="https://wa.me/+525535412631?text=Hola,%20me%20interesa%20cotizar%20mi%20evento..."
+        <a href="https://wa.me/+525535412631?text=Hola,%20quiero%20cotizar%20a%20La%20Célula%20para%20mi%20evento.%20Vengo%20de%20su%20sitio%20web"
                     target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
                     <img src="assets/icons/whatsapp-icon.webp" alt="WhatsApp" class="social-icon">
                 </a>
@@ -889,12 +791,13 @@
         </div>
 
         <div class="footer-text">
-            <p>&copy; 2024 Grupo Musical Versátil La Célula. Todos los derechos reservados.</p>
+            <p>Cobertura total en CDMX, Satélite, Santa Fe e Interlomas.</p>
+            <p>&copy; 2026 Grupo Musical Versátil La Célula. Todos los derechos reservados.</p>
         </div>
     </footer>
 
     <!-- Persistent Video Background -->
-    <script src="js/video-background.min.js"></script>
+    <script src="js/video-background.js"></script>
 
     <!-- Fallback for users with JavaScript disabled -->
     <noscript>
@@ -931,12 +834,12 @@
     </noscript>
 
     <!-- JavaScript para navegación y galería -->
-    <script src="js/site-functionality.min.js?v=2.6" defer></script>
+    <script src="js/site-functionality.js?v=2.6" defer></script>
     <script src="js/accessibility-fixes.js?v=1.0" defer></script>
-    <script src="js/navigation.min.js?v=2.6" defer></script>
-    <script src="js/youtube-carousel.min.js?v=2.6" defer></script>
-    <script src="js/gallery-dynamic.min.js?v=2.6" defer></script>
-    <script src="js/optimizations.min.js?v=2.6" defer></script>
+    <script src="js/navigation.js?v=2.6" defer></script>
+    <script src="js/youtube-carousel.js?v=2.6" defer></script>
+    <script src="js/gallery-dynamic.js?v=2.6" defer></script>
+    <script src="js/optimizations.js?v=2.6" defer></script>
 
     <!-- Chatbot La Célula -->
     <div id="celula-chatbot-container" class="celula-chatbot-container">
@@ -1015,57 +918,6 @@
     <script src="js/chatbot.js" defer></script>
 
     <!-- Botón Flotante WhatsApp -->
-
-
-    <!-- Testimonial Carousel -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const track = document.getElementById('testimonialTrack');
-            const dotsContainer = document.getElementById('carouselDots');
-            const slides = track.querySelectorAll('.testimonial-slide');
-            const prevBtn = document.querySelector('.carousel-prev');
-            const nextBtn = document.querySelector('.carousel-next');
-            let currentSlide = 0;
-            const totalSlides = slides.length;
-
-            // Create dots
-            for (let i = 0; i < totalSlides; i++) {
-                const dot = document.createElement('div');
-                dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
-                dot.addEventListener('click', () => goToSlide(i));
-                dotsContainer.appendChild(dot);
-            }
-
-            function updateDots() {
-                const dots = dotsContainer.querySelectorAll('.carousel-dot');
-                dots.forEach((dot, index) => {
-                    dot.classList.toggle('active', index === currentSlide);
-                });
-            }
-
-            function goToSlide(index) {
-                currentSlide = index;
-                track.style.transform = 'translateX(-' + (currentSlide * 100) + '%)';
-                updateDots();
-            }
-
-            function nextSlide() {
-                currentSlide = (currentSlide + 1) % totalSlides;
-                goToSlide(currentSlide);
-            }
-
-            function prevSlide() {
-                currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-                goToSlide(currentSlide);
-            }
-
-            nextBtn.addEventListener('click', nextSlide);
-            prevBtn.addEventListener('click', prevSlide);
-
-            // Auto-advance every 5 seconds
-            setInterval(nextSlide, 5000);
-        });
-    </script>
 
 </body>
 

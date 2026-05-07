@@ -1,0 +1,249 @@
+{
+  "version": "2.10",
+  "themes": {
+    "mode": ["light", "dark"],
+    "spacing": ["regular", "condensed"]
+  },
+  "variables": {
+    "color.background": { "type": "color", "value": "#000000" },
+    "color.primary": { "type": "color", "value": "#FFD700" },
+    "color.text": { "type": "color", "value": "#FFFFFF" },
+    "color.text.secondary": { "type": "color", "value": "#D1D5DB" },
+    "color.accent.green": { "type": "color", "value": "#25D366" },
+    "color.header.bg": { "type": "color", "value": "rgba(0, 0, 0, 0.4)" },
+    "color.card.bg": { "type": "color", "value": "#111827" },
+    "color.card.border": { "type": "color", "value": "#374151" },
+    "size.radius": { "type": "number", "value": 8 },
+    "size.radius.pill": { "type": "number", "value": 50 },
+    "font.family.primary": { "type": "string", "value": "Open Sans" },
+    "font.family.display": { "type": "string", "value": "Lobster" }
+  },
+  "children": [
+    {
+      "id": "header",
+      "type": "frame",
+      "reusable": true,
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 55,
+      "layout": "horizontal",
+      "justifyContent": "center",
+      "alignItems": "center",
+      "fill": "$color.header.bg",
+      "effect": [{ "type": "background_blur", "radius": 10 }],
+      "children": [
+        {
+          "id": "nav-container",
+          "type": "frame",
+          "width": 980,
+          "layout": "horizontal",
+          "justifyContent": "center",
+          "gap": 40,
+          "children": [
+            { "id": "nav-inicio", "type": "text", "textGrowth": "auto", "content": "INICIO", "fontSize": 15, "fontWeight": "bold", "fill": "$color.text" },
+            { "id": "nav-cotizador", "type": "text", "textGrowth": "auto", "content": "COTIZADOR", "fontSize": 15, "fontWeight": "bold", "fill": "$color.text" },
+            { "id": "nav-blog", "type": "text", "textGrowth": "auto", "content": "BLOG", "fontSize": 15, "fontWeight": "bold", "fill": "$color.primary" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "blog-hero",
+      "type": "frame",
+      "x": 0,
+      "y": 55,
+      "width": 1440,
+      "padding": [80, 100, 80, 100],
+      "layout": "vertical",
+      "justifyContent": "center",
+      "alignItems": "center",
+      "gap": 20,
+      "children": [
+        { "id": "blog-hero-title", "type": "text", "textGrowth": "auto", "content": "Blog Musical", "fontSize": 48, "fontWeight": "bold", "fill": "$color.text", "textAlign": "center" },
+        { "id": "blog-hero-subtitle", "type": "text", "textGrowth": "auto", "content": "Noticias, eventos y novedades de La Célula", "fontSize": 24, "fill": "$color.text.secondary", "textAlign": "center" },
+        { "id": "blog-hero-description", "type": "text", "textGrowth": "fixed-width", "width": 800, "content": "Descubre consejos profesionales para planear eventos musicales exitosos, tendencias en bodas y fiestas, guías completas para contratar el grupo musical perfecto.", "fontSize": 16, "fill": "$color.text.secondary", "textAlign": "center", "lineHeight": 1.6 }
+      ]
+    },
+    {
+      "id": "featured-post",
+      "type": "frame",
+      "x": 0,
+      "y": 350,
+      "width": 1440,
+      "padding": [40, 100, 40, 100],
+      "layout": "vertical",
+      "justifyContent": "center",
+      "alignItems": "center",
+      "children": [
+        {
+          "id": "featured-post-card",
+          "type": "frame",
+          "width": 1200,
+          "layout": "horizontal",
+          "fill": "$color.card.bg",
+          "cornerRadius": 8,
+          "stroke": { "align": "inside", "thickness": 1, "fill": "$color.card.border" },
+          "children": [
+            { "id": "featured-post-image", "type": "rectangle", "width": 500, "height": 400, "fill": "assets/gallery/banda-1.webp" },
+            {
+              "id": "featured-post-content",
+              "type": "frame",
+              "padding": [32, 32, 32, 32],
+              "layout": "vertical",
+              "gap": 16,
+              "children": [
+                { "id": "featured-post-meta", "type": "frame", "layout": "horizontal", "gap": 12, "alignItems": "center", "children": [
+                  { "id": "featured-category", "type": "frame", "padding": [4, 12, 4, 12], "fill": "$color.primary", "cornerRadius": 50, "children": [{ "id": "category-text", "type": "text", "textGrowth": "auto", "content": "Música", "fontSize": 12, "fontWeight": 600, "fill": "#000000" }] },
+                  { "id": "featured-date", "type": "text", "textGrowth": "auto", "content": "30 jul 2024", "fontSize": 12, "fill": "$color.text.secondary" }
+                ]},
+                { "id": "featured-post-title", "type": "text", "textGrowth": "fixed-width", "width": 600, "content": "🎶 Bienvenidos al Mundo Musical de Grupo Musical Versátil La Célula", "fontSize": 24, "fontWeight": "bold", "fill": "$color.text", "lineHeight": 1.4 },
+                { "id": "featured-post-author", "type": "frame", "layout": "horizontal", "gap": 12, "alignItems": "center", "children": [
+                  { "id": "author-avatar", "type": "ellipse", "width": 40, "height": 40, "fill": "#3D9BE9" },
+                  { "id": "author-info", "type": "frame", "layout": "vertical", "gap": 2, "children": [
+                    { "id": "author-name", "type": "text", "textGrowth": "auto", "content": "Giovanni Rocha Urzua", "fontSize": 14, "fontWeight": 600, "fill": "$color.text" },
+                    { "id": "author-stats", "type": "text", "textGrowth": "auto", "content": "1 Min. de lectura", "fontSize": 12, "fill": "$color.text.secondary" }
+                  ]}
+                ]},
+                { "id": "featured-post-excerpt", "type": "text", "textGrowth": "fixed-width", "width": 600, "content": "En Grupo Musical Versátil La Célula creemos que la música no solo se escucha, se vive. Nuestro objetivo es crear atmósferas memorables para cada evento especial...", "fontSize": 14, "fill": "$color.text.secondary", "lineHeight": 1.6 },
+                { "id": "featured-post-cta", "type": "frame", "layout": "horizontal", "justifyContent": "center", "alignItems": "center", "padding": [12, 24, 12, 24], "fill": "$color.primary", "cornerRadius": 50, "children": [
+                  { "id": "cta-text", "type": "text", "textGrowth": "auto", "content": "Leer más", "fontSize": 16, "fontWeight": 600, "fill": "#000000" }
+                ]}
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "posts-grid",
+      "type": "frame",
+      "x": 0,
+      "y": 800,
+      "width": 1440,
+      "padding": [40, 100, 40, 100],
+      "layout": "vertical",
+      "justifyContent": "center",
+      "alignItems": "center",
+      "gap": 30,
+      "children": [
+        {
+          "id": "posts-grid-row-1",
+          "type": "frame",
+          "layout": "horizontal",
+          "gap": 24,
+          "justifyContent": "center",
+          "children": [
+            {
+              "id": "post-card-1",
+              "type": "frame",
+              "width": 380,
+              "layout": "vertical",
+              "fill": "$color.card.bg",
+              "cornerRadius": 8,
+              "stroke": { "align": "inside", "thickness": 1, "fill": "$color.card.border" },
+              "children": [
+                { "id": "post-1-image", "type": "rectangle", "width": 380, "height": 200, "fill": "#374151" },
+                { "id": "post-1-content", "type": "frame", "padding": [20, 20, 20, 20], "layout": "vertical", "gap": 12, "children": [
+                  { "id": "post-1-meta", "type": "frame", "layout": "horizontal", "gap": 8, "children": [
+                    { "id": "post-1-category", "type": "text", "textGrowth": "auto", "content": "Consejos", "fontSize": 12, "fontWeight": 600, "fill": "$color.primary" },
+                    { "id": "post-1-date", "type": "text", "textGrowth": "auto", "content": "15 jun 2024", "fontSize": 12, "fill": "$color.text.secondary" }
+                  ]},
+                  { "id": "post-1-title", "type": "text", "textGrowth": "fixed-width", "width": 340, "content": "Cómo elegir la música perfecta para tu boda", "fontSize": 18, "fontWeight": "bold", "fill": "$color.text" },
+                  { "id": "post-1-excerpt", "type": "text", "textGrowth": "fixed-width", "width": 340, "content": "Descubre los mejores consejos para seleccionar el repertorio musical ideal...", "fontSize": 14, "fill": "$color.text.secondary" }
+                ]}
+              ]
+            },
+            {
+              "id": "post-card-2",
+              "type": "frame",
+              "width": 380,
+              "layout": "vertical",
+              "fill": "$color.card.bg",
+              "cornerRadius": 8,
+              "stroke": { "align": "inside", "thickness": 1, "fill": "$color.card.border" },
+              "children": [
+                { "id": "post-2-image", "type": "rectangle", "width": 380, "height": 200, "fill": "#374151" },
+                { "id": "post-2-content", "type": "frame", "padding": [20, 20, 20, 20], "layout": "vertical", "gap": 12, "children": [
+                  { "id": "post-2-meta", "type": "frame", "layout": "horizontal", "gap": 8, "children": [
+                    { "id": "post-2-category", "type": "text", "textGrowth": "auto", "content": "Eventos", "fontSize": 12, "fontWeight": 600, "fill": "$color.primary" },
+                    { "id": "post-2-date", "type": "text", "textGrowth": "auto", "content": "28 may 2024", "fontSize": 12, "fill": "$color.text.secondary" }
+                  ]},
+                  { "id": "post-2-title", "type": "text", "textGrowth": "fixed-width", "width": 340, "content": "Tendencias musicales para XV años en 2024", "fontSize": 18, "fontWeight": "bold", "fill": "$color.text" },
+                  { "id": "post-2-excerpt", "type": "text", "textGrowth": "fixed-width", "width": 340, "content": "Las mejores ideas para hacer de tus XV años una celebración inolvidable...", "fontSize": 14, "fill": "$color.text.secondary" }
+                ]}
+              ]
+            },
+            {
+              "id": "post-card-3",
+              "type": "frame",
+              "width": 380,
+              "layout": "vertical",
+              "fill": "$color.card.bg",
+              "cornerRadius": 8,
+              "stroke": { "align": "inside", "thickness": 1, "fill": "$color.card.border" },
+              "children": [
+                { "id": "post-3-image", "type": "rectangle", "width": 380, "height": 200, "fill": "#374151" },
+                { "id": "post-3-content", "type": "frame", "padding": [20, 20, 20, 20], "layout": "vertical", "gap": 12, "children": [
+                  { "id": "post-3-meta", "type": "frame", "layout": "horizontal", "gap": 8, "children": [
+                    { "id": "post-3-category", "type": "text", "textGrowth": "auto", "content": "Corporativos", "fontSize": 12, "fontWeight": 600, "fill": "$color.primary" },
+                    { "id": "post-3-date", "type": "text", "textGrowth": "auto", "content": "10 abr 2024", "fontSize": 12, "fill": "$color.text.secondary" }
+                  ]},
+                  { "id": "post-3-title", "type": "text", "textGrowth": "fixed-width", "width": 340, "content": "Música en vivo para eventos empresariales exitosos", "fontSize": 18, "fontWeight": "bold", "fill": "$color.text" },
+                  { "id": "post-3-excerpt", "type": "text", "textGrowth": "fixed-width", "width": 340, "content": "Cómo la música en vivo puede transformar tu evento corporativo...", "fontSize": 14, "fill": "$color.text.secondary" }
+                ]}
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pagination",
+      "type": "frame",
+      "x": 0,
+      "y": 1300,
+      "width": 1440,
+      "padding": [40, 0, 40, 0],
+      "layout": "horizontal",
+      "justifyContent": "center",
+      "alignItems": "center",
+      "gap": 12,
+      "children": [
+        { "id": "page-1", "type": "frame", "width": 40, "height": 40, "layout": "vertical", "justifyContent": "center", "alignItems": "center", "fill": "$color.primary", "cornerRadius": 8, "children": [{ "id": "page-1-text", "type": "text", "textGrowth": "auto", "content": "1", "fontSize": 14, "fontWeight": 600, "fill": "#000000" }] },
+        { "id": "page-2", "type": "frame", "width": 40, "height": 40, "layout": "vertical", "justifyContent": "center", "alignItems": "center", "fill": "$color.card.bg", "cornerRadius": 8, "stroke": { "align": "inside", "thickness": 1, "fill": "$color.card.border" }, "children": [{ "id": "page-2-text", "type": "text", "textGrowth": "auto", "content": "2", "fontSize": 14, "fill": "$color.text" }] },
+        { "id": "page-3", "type": "frame", "width": 40, "height": 40, "layout": "vertical", "justifyContent": "center", "alignItems": "center", "fill": "$color.card.bg", "cornerRadius": 8, "stroke": { "align": "inside", "thickness": 1, "fill": "$color.card.border" }, "children": [{ "id": "page-3-text", "type": "text", "textGrowth": "auto", "content": "3", "fontSize": 14, "fill": "$color.text" }] },
+        { "id": "page-next", "type": "frame", "padding": [8, 16, 8, 16], "fill": "$color.primary", "cornerRadius": 8, "children": [{ "id": "page-next-text", "type": "text", "textGrowth": "auto", "content": "Siguiente →", "fontSize": 14, "fontWeight": 600, "fill": "#000000" }] }
+      ]
+    },
+    {
+      "id": "footer",
+      "type": "frame",
+      "x": 0,
+      "y": 1400,
+      "width": 1440,
+      "padding": [40, 100, 40, 100],
+      "layout": "vertical",
+      "justifyContent": "center",
+      "alignItems": "center",
+      "gap": 20,
+      "fill": "#0A0A0A",
+      "children": [
+        {
+          "id": "footer-social",
+          "type": "frame",
+          "layout": "horizontal",
+          "gap": 15,
+          "justifyContent": "center",
+          "children": [
+            { "id": "social-whatsapp", "type": "ellipse", "width": 39, "height": 39, "fill": "$color.accent.green" },
+            { "id": "social-facebook", "type": "ellipse", "width": 39, "height": 39, "fill": "#1877F2" },
+            { "id": "social-youtube", "type": "ellipse", "width": 39, "height": 39, "fill": "#FF0000" },
+            { "id": "social-twitter", "type": "ellipse", "width": 39, "height": 39, "fill": "#1DA1F2" }
+          ]
+        },
+        { "id": "footer-copyright", "type": "text", "textGrowth": "auto", "content": "© 2025 Grupo Musical Versátil La Célula. Todos los derechos reservados.", "fontSize": 12, "fill": "#6B7280", "textAlign": "center" }
+      ]
+    }
+  ]
+}

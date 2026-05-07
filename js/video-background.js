@@ -5,7 +5,7 @@
     volume: options.volume || 0,
     loop: options.loop !== false,
     muted: options.muted !== false,
-    overlayColor: options.overlayColor || 'rgba(0, 0, 0, 0.5)',
+    overlayColor: options.overlayColor || '#00000046',
     ...options
 };
 
@@ -338,7 +338,7 @@ addStyles() {
                 left: 0;
                 width: 100%;
                 height: 100%;
-                background: ${this.options.overlayColor || 'rgba(0, 0, 0, 0.5)'};
+                background: ${this.options.overlayColor || '#00000046'};
                 z-index: 3;
                 pointer-events: none;
             }
@@ -512,7 +512,7 @@ document.addEventListener('DOMContentLoaded', function() {
         fallbackImage: 'assets/images/hero-background.webp',
         mobileBreakpoint: 768,
         tabletBreakpoint: 1024,
-        overlayColor: 'rgba(0, 0, 0, 0.5)',
+        overlayColor: '#00000046',
         muted: true,
         loop: true
     };

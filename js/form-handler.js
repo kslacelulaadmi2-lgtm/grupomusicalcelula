@@ -54,23 +54,9 @@ let isSubmitting=false;form.addEventListener('submit',async function(e){e.preven
             });
         }
 
-        // Solo nombre, teléfono y tipo de evento son obligatorios
-        if (!data.nombre || !data.telefono || !data.evento) {
+        if (!data.fecha || !data.evento || !data.invitados || !data.ubicacion) {
             window.__gaLeadTrack('cotizador_submit_error', { step: 'error', error_type: 'validation', error_message: 'Campos requeridos faltantes' });
-            throw new Error('Por favor completa tu nombre, teléfono y tipo de evento');
-        }
-
-        // Email solo se valida si fue proporcionado
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (data.email && !emailRegex.test(data.email)) {
-            window.__gaLeadTrack('cotizador_submit_error', { step: 'error', error_type: 'validation', error_message: 'Email inválido' });
-            throw new Error('Por favor ingresa un email válido');
-        }
-
-        const phoneDigits = data.telefono.replace(/\D/g, '');
-        if (phoneDigits.length !== 10) {
-            window.__gaLeadTrack('cotizador_submit_error', { step: 'error', error_type: 'validation', error_message: 'Teléfono inválido' });
-            throw new Error('El teléfono debe tener 10 dígitos');
+            throw new Error('Por favor completa tu nombre, teléfono, tipo de evento y lugar para continuar');
         }
 
         // Fecha solo se valida si fue proporcionada
@@ -90,15 +76,11 @@ let isSubmitting=false;form.addEventListener('submit',async function(e){e.preven
         const emailData = {
             type: 'form_cotizador',
             formData: {
-                nombre: data.nombre.trim(),
-                email: data.email ? data.email.trim() : '',
-                telefono: phoneDigits,
+                telefono: data.telefono.trim(),
                 tipoEvento: data.evento.trim(),
                 fechaEvento: data.fecha || '',
                 lugar: data.ubicacion ? data.ubicacion.trim() : '',
                 numeroInvitados: numeroInvitados,
-                paquete: 'Por definir',
-                mensaje: data.comentarios ? data.comentarios.trim() : ''
             }
         };
 
@@ -156,7 +138,7 @@ let isSubmitting=false;form.addEventListener('submit',async function(e){e.preven
         }
 
         const fechaFormateada = data.fecha ? new Date(data.fecha).toLocaleDateString('es-MX', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) : 'Por definir';
-        const mensaje = `Hola, me interesa cotizar mi evento:\n\n🎵 *Cotización de Evento Musical*\n👤 *Nombre:* ${data.nombre}\n📞 *Teléfono:* ${data.telefono}${data.email ? '\n📧 *Email:* ' + data.email : ''}\n🎉 *Tipo de evento:* ${data.evento}\n📅 *Fecha:* ${fechaFormateada}${data.ubicacion ? '\n📍 *Ubicación:* ' + data.ubicacion : ''}${data.invitados ? '\n👥 *Invitados:* ' + data.invitados + ' personas' : ''}\n💬 *Comentarios:* ${data.comentarios || 'Ninguno'}\n\n¡Espero su respuesta!`;
+        const mensaje = `Hola, vengo de su sitio web.\n\nMe interesa cotizar mi evento:\n\n🎵 *Cotización de Evento Musical*\n📞 *Teléfono:* ${data.telefono}\n🎉 *Tipo de evento:* ${data.evento}\n📅 *Fecha:* ${fechaFormateada}${data.ubicacion ? '\n📍 *Ubicación:* ' + data.ubicacion : ''}${data.invitados ? '\n👥 *Invitados:* ' + data.invitados + ' personas' : ''}\n\n¡Espero su respuesta!`;
 
         await new Promise(resolve => setTimeout(resolve, 1500));
 
@@ -181,29 +163,6 @@ let isSubmitting=false;form.addEventListener('submit',async function(e){e.preven
     }
 });
 
-// Validaciones en tiempo real
-const emailInput = form.querySelector('input[name="email"]');
-if (emailInput) {
-    emailInput.addEventListener('blur', function() {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (this.value && !emailRegex.test(this.value)) {
-            this.setCustomValidity('Por favor ingresa un email válido');
-            this.reportValidity();
-        } else {
-            this.setCustomValidity('');
-        }
-    });
-}
-
-const phoneInput = form.querySelector('input[name="telefono"]');
-if (phoneInput) {
-    phoneInput.addEventListener('input', function() {
-        this.value = this.value.replace(/[^\d]/g, '');
-        if (this.value.length > 10) {
-            this.value = this.value.slice(0, 10);
-        }
-    });
-}
 }
 
 // Track field interactions for updates
@@ -213,7 +172,7 @@ try {
         attendees: (form.querySelector('#invitados')||{}).value || undefined,
         date_selected: (form.querySelector('#fecha')||{}).value || undefined
     });
-    ['#evento','#fecha','#invitados','#ubicacion','#comentarios'].forEach(sel=>{
+    ['#evento','#fecha','#invitados','#ubicacion'].forEach(sel=>{
         const el = form.querySelector(sel);
         if (el) el.addEventListener('change', trackUpdate);
     });

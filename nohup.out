@@ -1,0 +1,91 @@
+2026-04-08T01:52:39.637Z [INFO] --- OpenPencil started ---
+2026-04-08T01:52:39.972Z [INFO] [nitro] ➜ Listening on: http://127.0.0.1:19023/
+2026-04-08T01:52:39.972Z [INFO] Nitro server started on port 19023
+
+(pencil:3234928): dbind-WARNING **: 19:52:39.976: Couldn't connect to accessibility bus: Failed to connect to socket /root/.cache/at-spi/bus_0: Permiso denegado
+2026-04-08T01:52:40.136Z [INFO] [nitro] 🌐 i18next is made possible by our own product, Locize — consider powering your project with managed localization (AI, CDN, integrations): https://locize.com 💙
+[3234928:0407/195242.370069:ERROR:network_service_instance_impl.cc(612)] Network service crashed, restarting service.
+[3234928:0407/195242.383701:ERROR:zygote_communication_linux.cc(296)] Failed to send GetTerminationStatus message to zygote
+[3234928:0407/195242.384960:ERROR:zygote_communication_linux.cc(296)] Failed to send GetTerminationStatus message to zygote
+[3234928:0407/195242.387834:ERROR:gpu_process_host.cc(947)] GPU process launch failed: error_code=1002
+[3234928:0407/195242.388751:ERROR:gpu_process_host.cc(947)] GPU process launch failed: error_code=1002
+[3234928:0407/195242.389395:ERROR:gpu_process_host.cc(947)] GPU process launch failed: error_code=1002
+[3234928:0407/195242.389841:ERROR:gpu_process_host.cc(947)] GPU process launch failed: error_code=1002
+[3234928:0407/195242.390432:ERROR:gpu_process_host.cc(947)] GPU process launch failed: error_code=1002
+[3234928:0407/195242.391279:ERROR:gpu_process_host.cc(947)] GPU process launch failed: error_code=1002
+[3234928:0407/195242.391982:ERROR:gpu_process_host.cc(947)] GPU process launch failed: error_code=1002
+[3234928:0407/195242.392627:ERROR:gpu_process_host.cc(947)] GPU process launch failed: error_code=1002
+[3234928:0407/195242.393842:ERROR:gpu_process_host.cc(947)] GPU process launch failed: error_code=1002
+[3234928:0407/195242.393867:FATAL:gpu_data_manager_impl_private.cc(420)] GPU process isn't usable. Goodbye.
+2026-04-08T02:00:17.777Z [INFO] --- OpenPencil started ---
+2026-04-08T02:00:18.100Z [INFO] [nitro] ➜ Listening on: http://127.0.0.1:20575/
+2026-04-08T02:00:18.100Z [INFO] Nitro server started on port 20575
+
+(pencil:3248642): dbind-WARNING **: 20:00:18.102: Couldn't connect to accessibility bus: Failed to connect to socket /root/.cache/at-spi/bus_0: Permiso denegado
+2026-04-08T02:00:18.230Z [INFO] [nitro] 🌐 i18next is made possible by our own product, Locize — consider powering your project with managed localization (AI, CDN, integrations): https://locize.com 💙
+APPIMAGE env is not defined, current application is not an AppImage
+2026-04-08T02:02:19.476Z [INFO] [nitro] 2026-04-08T02:02:19.476Z [INFO] [connect-agent] connecting to Claude Code...
+2026-04-08T02:02:19.478Z [INFO] [nitro] 2026-04-08T02:02:19.477Z [INFO] [resolve-claude-cli] platform=linux, isWindows=false
+2026-04-08T02:02:19.478Z [INFO] [nitro] 2026-04-08T02:02:19.477Z [INFO] [resolve-claude-cli] PATH lookup: which claude 2>/dev/null
+2026-04-08T02:02:19.485Z [INFO] [nitro] 2026-04-08T02:02:19.485Z [INFO] [resolve-claude-cli] PATH lookup result: "/home/sebastianvernis/.local/bin/claude" (exists=true)
+2026-04-08T02:02:19.486Z [INFO] [nitro] 2026-04-08T02:02:19.485Z [INFO] [connect-agent] resolved claude path: /home/sebastianvernis/.local/bin/claude
+2026-04-08T02:02:19.617Z [INFO] [nitro] 2026-04-08T02:02:19.616Z [INFO] [connect-agent] claude env keys: GEMINI_API_KEY, BLACKBOX_API_KEY, XAUTHORITY, GDMSESSION, HOMEBREW_CELLAR, GHOSTTY_SHELL_FEATURES, INFOPATH, MOONSHOTAI_API_KEY, XMODIFIERS, NVM_DIR, COLORTERM, GROQ_API_KEY, ZILLIZ_CLOUD_KEY, USERNAME, _tide_location_color, _tide_color_separator_same_color, HF_TOKEN, QT_IM_MODULE, _tide_pad, LANG, GPG_AGENT_INFO, CLUTTER_IM_MODULE, MOONSHOT_API_KEY, OLLAMA_MODELS, DESKTOP_SESSION, GTK_IM_MODULE, ASG_PASSWORD, OLLAMA_KEEP_ALIVE, DBUS_SESSION_BUS_ADDRESS, OPENCLAW_CONFIG, TERMINFO, AGENT_CONFIG, CHUTES_API_KEY, XDG_SESSION_ID, XDG_SEAT, MICRO_LSP, PWD, XDG_SESSION_DESKTOP, OPENCODE_SERVER_KEY, OLLAMA_NUM_PARALLEL, TERM_PROGRAM, LS_COLORS, VSCODE_DISABLE_CRASH_REPORTER, HOMEBREW_PREFIX, XDG_VTNR, XDG_CURRENT_DESKTOP, AGENT_ENV, CRUSH_DISABLE_PROVIDER_AUTO_UPDATE, DISPLAY, DONT_PROMPT_WSL_INSTALL, QT_ACCESSIBILITY, ANDROID_HOME, OLLAMA_API_KEY, SHLVL, ASG_USERNAME, XDG_RUNTIME_DIR, OPENAI_API_KEY, OLLAMA_MAX_LOADED_MODELS, TERM_PROGRAM_VERSION, GHOSTTY_BIN_DIR, USER, TERM, I3SOCK, WINDOWID, VERCEL_SDK_API_KEY, CLAUDE_CODE_OAUTH_TOKEN, GHOSTTY_RESOURCES_DIR, SHELL, OMF_CONFIG, OPENROUTER_API_KEY, GDM_LANG, HOME, OLLAMA_HOST, WINDOWPATH, HOMEBREW_REPOSITORY, OMF_PATH, XDG_SESSION_CLASS, PATH, XDG_SESSION_TYPE, XDG_DATA_DIRS, LOGNAME, SSH_AUTH_SOCK, CHROME_DESKTOP, ORIGINAL_XDG_CURRENT_DESKTOP, GDK_BACKEND, NO_AT_BRIDGE, HOST, PORT, NITRO_HOST, NITRO_PORT, DEBUG_CLAUDE_AGENT_SDK
+2026-04-08T02:02:19.617Z [INFO] [nitro] 2026-04-08T02:02:19.617Z [INFO] [connect-agent] claude debugFile: /tmp/openpencil-claude-debug/claude-agent.log
+2026-04-08T02:02:19.628Z [INFO] [nitro] 2026-04-08T02:02:19.628Z [INFO] [connect-agent] querying supportedModels...
+2026-04-08T02:02:20.940Z [INFO] [nitro] 2026-04-08T02:02:20.940Z [INFO] [connect-agent] claude account: email=n/a, type=n/a, source=n/a
+2026-04-08T02:02:20.942Z [INFO] [nitro] 2026-04-08T02:02:20.942Z [INFO] [connect-agent] claude connected, 3 models found
+2026-04-08T02:02:22.328Z [INFO] [nitro] 2026-04-08T02:02:22.328Z [INFO] [connect-agent] connecting to Codex CLI...
+2026-04-08T02:02:22.329Z [INFO] [nitro] 2026-04-08T02:02:22.329Z [INFO] [connect-agent] codex PATH lookup: which codex 2>/dev/null || echo ""
+2026-04-08T02:02:22.335Z [INFO] [nitro] 2026-04-08T02:02:22.335Z [INFO] [connect-agent] codex PATH result: "/usr/local/lib/node_modules/node/bin/codex" resolved="/usr/local/lib/node_modules/node/bin/codex" (exists=true)
+2026-04-08T02:02:22.335Z [INFO] [nitro] 2026-04-08T02:02:22.335Z [INFO] [connect-agent] codex resolved: "/usr/local/lib/node_modules/node/bin/codex"
+2026-04-08T02:02:22.477Z [INFO] [nitro] 2026-04-08T02:02:22.477Z [INFO] [connect-agent] codex version: codex-cli 0.104.0
+2026-04-08T02:02:22.480Z [INFO] [nitro] 2026-04-08T02:02:22.480Z [INFO] [connect-agent] codex connected, 7 models found
+2026-04-08T02:02:23.748Z [INFO] [nitro] 2026-04-08T02:02:23.748Z [INFO] [connect-agent] connecting to OpenCode...
+2026-04-08T02:02:23.749Z [INFO] [nitro] 2026-04-08T02:02:23.749Z [INFO] [resolve-opencode] platform=linux, isWindows=false
+2026-04-08T02:02:23.749Z [INFO] [resolve-opencode] PATH lookup: which opencode 2>/dev/null
+2026-04-08T02:02:23.755Z [INFO] [nitro] 2026-04-08T02:02:23.755Z [INFO] [resolve-opencode] PATH result: "/home/sebastianvernis/.opencode/bin/opencode" (exists=true)
+2026-04-08T02:02:23.755Z [INFO] [nitro] 2026-04-08T02:02:23.755Z [INFO] [connect-agent] resolved opencode path: /home/sebastianvernis/.opencode/bin/opencode
+2026-04-08T02:02:23.756Z [INFO] [nitro] 2026-04-08T02:02:23.756Z [INFO] [connect-agent] creating opencode client...
+2026-04-08T02:02:26.161Z [INFO] [nitro] 2026-04-08T02:02:26.159Z [INFO] [connect-agent] fetching opencode providers...
+2026-04-08T02:02:34.635Z [INFO] [nitro] 2026-04-08T02:02:34.635Z [INFO] [connect-agent] connecting to Copilot...
+2026-04-08T02:02:34.644Z [INFO] [nitro] 2026-04-08T02:02:34.641Z [INFO] [resolve-copilot] platform=linux, isWindows=false
+2026-04-08T02:02:34.641Z [INFO] [resolve-copilot] PATH lookup: which copilot 2>/dev/null
+2026-04-08T02:02:34.654Z [INFO] [nitro] 2026-04-08T02:02:34.654Z [INFO] [resolve-copilot] PATH lookup failed: Command failed: which copilot 2>/dev/null
+2026-04-08T02:02:34.656Z [INFO] [nitro] 2026-04-08T02:02:34.655Z [WARN] [resolve-copilot] no copilot binary found
+2026-04-08T02:02:34.656Z [INFO] [nitro] 2026-04-08T02:02:34.656Z [INFO] [connect-agent] resolved copilot path: NOT FOUND
+2026-04-08T02:02:37.857Z [INFO] [nitro] 2026-04-08T02:02:37.857Z [INFO] [connect-agent] connecting to Copilot...
+2026-04-08T02:02:37.859Z [INFO] [nitro] 2026-04-08T02:02:37.859Z [INFO] [resolve-copilot] platform=linux, isWindows=false
+2026-04-08T02:02:37.860Z [INFO] [nitro] 2026-04-08T02:02:37.859Z [INFO] [resolve-copilot] PATH lookup: which copilot 2>/dev/null
+2026-04-08T02:02:37.877Z [INFO] [nitro] 2026-04-08T02:02:37.877Z [INFO] [resolve-copilot] PATH lookup failed: Command failed: which copilot 2>/dev/null
+2026-04-08T02:02:37.877Z [WARN] [resolve-copilot] no copilot binary found
+2026-04-08T02:02:37.878Z [INFO] [nitro] 2026-04-08T02:02:37.877Z [INFO] [connect-agent] resolved copilot path: NOT FOUND
+2026-04-08T02:02:42.210Z [INFO] [nitro] 2026-04-08T02:02:42.210Z [INFO] [connect-agent] opencode connected, 519 models found
+2026-04-08T02:02:47.023Z [INFO] [nitro] 2026-04-08T02:02:47.023Z [INFO] [connect-agent] connecting to Copilot...
+2026-04-08T02:02:47.023Z [INFO] [nitro] 2026-04-08T02:02:47.023Z [INFO] [resolve-copilot] platform=linux, isWindows=false
+2026-04-08T02:02:47.023Z [INFO] [resolve-copilot] PATH lookup: which copilot 2>/dev/null
+2026-04-08T02:02:47.029Z [INFO] [nitro] 2026-04-08T02:02:47.029Z [INFO] [resolve-copilot] PATH lookup failed: Command failed: which copilot 2>/dev/null
+2026-04-08T02:02:47.029Z [INFO] [nitro] 2026-04-08T02:02:47.029Z [WARN] [resolve-copilot] no copilot binary found
+2026-04-08T02:02:47.029Z [INFO] [connect-agent] resolved copilot path: NOT FOUND
+2026-04-08T02:02:47.828Z [INFO] [nitro] 2026-04-08T02:02:47.827Z [INFO] [connect-agent] connecting to Gemini CLI...
+2026-04-08T02:02:47.830Z [INFO] [nitro] 2026-04-08T02:02:47.829Z [INFO] [resolve-gemini] platform=linux, isWindows=false
+2026-04-08T02:02:47.830Z [INFO] [nitro] 2026-04-08T02:02:47.829Z [INFO] [resolve-gemini] PATH lookup: which gemini 2>/dev/null
+2026-04-08T02:02:47.836Z [INFO] [nitro] 2026-04-08T02:02:47.836Z [INFO] [resolve-gemini] PATH result: "/usr/local/lib/node_modules/node/bin/gemini" (exists=true)
+2026-04-08T02:02:47.836Z [INFO] [nitro] 2026-04-08T02:02:47.836Z [INFO] [connect-agent] resolved gemini path: /usr/local/lib/node_modules/node/bin/gemini
+2026-04-08T02:02:53.098Z [INFO] [nitro] 2026-04-08T02:02:53.098Z [INFO] [connect-agent] gemini version: 0.31.0
+2026-04-08T02:02:53.421Z [INFO] [nitro] 2026-04-08T02:02:53.420Z [INFO] [connect-agent] gemini: fetched 34 models from API
+2026-04-08T02:02:53.421Z [INFO] [nitro] 2026-04-08T02:02:53.421Z [INFO] [connect-agent] gemini connected, 34 models
+2026-04-08T02:04:34.793Z [INFO] [nitro] 2026-04-08T02:04:34.793Z [INFO] [connect-agent] connecting to Copilot...
+2026-04-08T02:04:34.794Z [INFO] [nitro] 2026-04-08T02:04:34.793Z [INFO] [resolve-copilot] platform=linux, isWindows=false
+2026-04-08T02:04:34.793Z [INFO] [resolve-copilot] PATH lookup: which copilot 2>/dev/null
+2026-04-08T02:04:34.800Z [INFO] [nitro] 2026-04-08T02:04:34.800Z [INFO] [resolve-copilot] PATH result: "/home/sebastianvernis/.local/bin/copilot" (exists=true)
+2026-04-08T02:04:34.800Z [INFO] [nitro] 2026-04-08T02:04:34.800Z [INFO] [connect-agent] resolved copilot path: /home/sebastianvernis/.local/bin/copilot
+2026-04-08T02:04:34.814Z [INFO] [nitro] 2026-04-08T02:04:34.814Z [INFO] [connect-agent] starting copilot client...
+2026-04-08T02:04:37.049Z [INFO] [nitro] 2026-04-08T02:04:37.049Z [INFO] [connect-agent] listing copilot models...
+2026-04-08T02:04:38.013Z [INFO] [nitro] 2026-04-08T02:04:38.013Z [INFO] [connect-agent] copilot auth: {"isAuthenticated":true,"authType":"gh-cli","host":"https://github.com","statusMessage":"SebastianVernis (via gh)","login":"SebastianVernis"}
+2026-04-08T02:04:38.013Z [INFO] [nitro] 2026-04-08T02:04:38.013Z [INFO] [connect-agent] copilot connected, 14 models found
+2026-04-08T02:06:03.371Z [INFO] [nitro] [AI] OpenCode generate: model=ollama-cloud/glm-4.7, parsed={"providerID":"ollama-cloud","modelID":"glm-4.7"}
+[3248642:0407/200643.220517:ERROR:nss_util.cc(345)] After loading Root Certs, loaded==false: NSS error code: -8018
+[3248642:0407/200741.478898:ERROR:browser_main_loop.cc(276)] GLib-GObject: ../../../gobject/gsignal.c:2699: instance '0x1a1401493040' has no handler with id '2405'
+[3248642:0407/200742.735291:ERROR:request.cc(169)] Request ended (non-user cancelled).
+[3248642:0407/200748.210235:ERROR:browser_main_loop.cc(276)] GLib-GObject: ../../../gobject/gsignal.c:2699: instance '0x1a1401493040' has no handler with id '2579'
+[3248642:0407/200825.004330:ERROR:request.cc(165)] Request cancelled by user.

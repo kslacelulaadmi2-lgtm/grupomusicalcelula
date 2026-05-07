@@ -1,0 +1,5 @@
+- [x] Revisar archivos relevantes del fondo de video en cotizador
+- [x] Ajustar overlay del video a tono `#00000046` para cubrir ligeramente solo el video
+- [x] Cambiar referencias de scripts `.min.js` a `.js` en todos los HTML fuente
+- [x] Agregar en build un paso para convertir referencias `.js` a `.min.js` dentro de `dist`
+- [ ] Validar visualmente en `cotizador.html` que el overlay ahora sí se percibe

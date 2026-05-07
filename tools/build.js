@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { readFileSync, writeFileSync, mkdirSync, cpSync, existsSync, rmSync } from 'fs';
+import { readFileSync, writeFileSync, mkdirSync, cpSync, existsSync, rmSync, readdirSync, statSync } from 'fs';
 import { join, resolve } from 'path';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
@@ -98,6 +98,40 @@ if (existsSync(functionsSrc)) {
     cpSync(functionsSrc, functionsDest, { recursive: true });
     console.log('  ✓ functions/');
 }
+
+console.log('\n🔁 Rewriting JS references in dist HTML files (.js -> .min.js)...');
+
+function getHtmlFilesRecursively(dir) {
+    const entries = readdirSync(dir);
+    let htmlFiles = [];
+
+    for (const entry of entries) {
+        const fullPath = join(dir, entry);
+        const stats = statSync(fullPath);
+
+        if (stats.isDirectory()) {
+            htmlFiles = htmlFiles.concat(getHtmlFilesRecursively(fullPath));
+        } else if (entry.endsWith('.html')) {
+            htmlFiles.push(fullPath);
+        }
+    }
+
+    return htmlFiles;
+}
+
+const distHtmlFiles = getHtmlFilesRecursively(DIST_DIR);
+let rewrittenCount = 0;
+
+distHtmlFiles.forEach(filePath => {
+    const content = readFileSync(filePath, 'utf8');
+    const rewritten = content.replace(/\.js(\?v=[^"']+)?(?=["'])/g, '.min.js$1');
+    if (rewritten !== content) {
+        writeFileSync(filePath, rewritten, 'utf8');
+        rewrittenCount++;
+    }
+});
+
+console.log(`   - HTML files rewritten: ${rewrittenCount}`);
 
 console.log('\n✅ Build complete! Output in dist/\n');
 console.log('📊 Build summary:');

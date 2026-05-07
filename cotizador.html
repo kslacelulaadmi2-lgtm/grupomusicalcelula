@@ -66,6 +66,57 @@
       window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
     </script>
     <script defer src="/_vercel/speed-insights/script.js"></script>
+    <style>
+    .venues-carousel-section {
+        background: transparent;
+        padding: 40px;
+    }
+    .venues-track {
+        display: flex;
+        gap: 60px;
+        animation: scroll-venues 25s linear infinite;
+        width: max-content;
+    }
+    .venues-slide {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-width: 120px;
+        color: #fff;
+        text-align: center;
+    }
+    .venues-slide p {
+        margin-top: 10px;
+        font-size: 14px;
+        opacity: 0.8;
+    }
+    @keyframes scroll-venues {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
+    }
+    .venues-track:hover {
+        animation-play-state: paused;
+    }
+    @media (max-width: 768px) {
+        .trust-section > div {
+            gap: 20px !important;
+        }
+
+        .trust-section > div > div:nth-of-type(2) {
+            grid-template-columns: 1fr !important;
+            gap: 22px !important;
+        }
+
+        .trust-section > div > div:nth-of-type(3) {
+            max-width: 100% !important;
+        }
+
+        .trust-section > div > div:nth-of-type(2) > div,
+        .trust-section > div > div:nth-of-type(3) > div {
+            padding: 0 !important;
+        }
+    }
+    </style>
 
 </head>
 <body style="background: transparent;">
@@ -99,35 +150,116 @@
     </header>
 
     <!-- Contenido Principal -->
-    <main class="content-section">
+    <main class="content-section" style="background-color: rgba(0, 0, 0, 0.651) !important;">
 
         <!-- Bloque 2: Confianza -->
-        <section class="trust-section" style="padding: 50px 20px; text-align: center; margin-top: 20px;">
-            <div style="max-width: 800px; margin: 0 auto;">
+        <section class="trust-section" style="padding: 20px 20px; text-align: center; margin-top: 20px;">
+            <div style="max-width: 1100px; margin: 0 auto; display: flex; flex-direction: column; gap: 28px; align-items: center;">
                 <h2 style="color: #FFD700; font-size: 28px; margin-bottom: 30px; font-weight: 700;">¿Por qué elegirnos?</h2>
-                <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 30px;">
-                    <div style="flex: 1; min-width: 150px; max-width: 200px;">
-                        <div style="font-size: 40px; margin-bottom: 10px;">🎤</div>
-                        <p style="color: #fff; font-size: 16px;">Respaldados por <strong>cientos</strong> de eventos en los recintos mas destacados de la CDMX</p>
+                <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 30px; width: 100%; align-items: start;">
+                    <div style="padding: 0 10px;">
+                        <div style="font-size: 40px; font-weight: 600; margin-bottom: 10px;">🛡️</div>
+                        <p style="color: #fff; font-size: 16px; line-height: 1.5; font-weight: 600; text-shadow: 0 1px 4px rgba(0, 0, 0, 0.55);">¡Fiesta sin interrupciones! Olvídate de los baches de energía; la música no para.</p>
                     </div>
-                    <div style="flex: 1; min-width: 150px; max-width: 200px;">
-                        <div style="font-size: 40px; margin-bottom: 10px;">🎉</div>
-                        <p style="color: #fff; font-size: 16px;">Especialistas en bodas, XV años, eventos corporativos y privados</p>
+                    <div style="padding: 0 10px;">
+                        <div style="font-size: 40px; font-weight: 600; margin-bottom: 10px;">🎉</div>
+                        <p style="color: #fff; font-size: 16px; font-weight: 600; line-height: 1.5; text-shadow: 0 1px 4px rgba(0, 0, 0, 0.55);">Expertos en crear momentos inolvidables: Bodas, XV Años y Eventos Corporativos.</p>
                     </div>
-                    <div style="flex: 1; min-width: 150px; max-width: 200px;">
-                        <div style="font-size: 40px; margin-bottom: 10px;">💃</div>
-                        <p style="color: #fff; font-size: 16px;">Energía que conecta con tus invitados</p>
-                    </div>
-                    <div style="flex: 1; min-width: 150px; max-width: 200px;">
-                        <div style="font-size: 40px; margin-bottom: 10px;">🛡️ </div>
-                        <p style="color: #fff; font-size: 16px;">Garantía de fiesta<strong> sin descansos</strong> cada hora</p>
+                    <div style="padding: 0 10px;">
+                        <div style="font-size: 40px; font-weight: 600; margin-bottom: 10px;">💃</div>
+                        <p style="color: #fff; font-size: 16px; line-height: 1.5; font-weight: 600; text-shadow: 0 1px 4px rgba(0, 0, 0, 0.55); word-break: break-word;">El mejor show visual de la CDMX,  con gran repertorio multigeneracional.</p>
                     </div>
                 </div>
             </div>
+        </section>
+
+        <!-- Prueba Social -->
+        <section class="social-proof-section" id="testimonios">
+            <div class="testimonial-carousel">
+                <button class="carousel-nav carousel-prev" aria-label="Anterior">❮</button>
+                <div class="testimonial-track" id="testimonialTrack">
+                    <!-- Testimonio 1 -->
+                    <div class="testimonial-slide">
+                        <div class="testimonial-card">
+                            <img src="https://ui-avatars.com/api/?name=Pedro+Martin&background=random&color=fff" alt="Avatar" class="testimonial-avatar">
+                            <h4 class="testimonial-name">Pedro Martin Lozano Morales</h4>
+                            <div class="testimonial-stars">★★★★★</div>
+                            <p class="testimonial-quote">"Excelente grupo tocan música versátil para todos los gustos 100% recomendable para cualquier tipo de evento"</p>
+                        </div>
+                    </div>
+                    <!-- Testimonio 2 -->
+                    <div class="testimonial-slide">
+                        <div class="testimonial-card">
+                            <img src="https://ui-avatars.com/api/?name=Rubicel+Trujillo&background=random&color=fff" alt="Avatar" class="testimonial-avatar">
+                            <h4 class="testimonial-name">Rubicel Trujillo</h4>
+                            <div class="testimonial-stars">★★★★★</div>
+                            <p class="testimonial-quote">"Excelente grupo musical. Muy versátil, excelente repertorio musical. A todos nuestros invitados les encantó todo."</p>
+                        </div>
+                    </div>
+                    <!-- Testimonio 3 -->
+                    <div class="testimonial-slide">
+                        <div class="testimonial-card">
+                            <img src="https://ui-avatars.com/api/?name=Aura+Mora&background=random&color=fff" alt="Avatar" class="testimonial-avatar">
+                            <h4 class="testimonial-name">Aura Mora</h4>
+                            <div class="testimonial-stars">★★★★★</div>
+                            <p class="testimonial-quote">"Súper profesionales, me encantó que desde el primer momento me brindaron una excelente atención y siempre estuvieron súper atentos al mood de los invitados."</p>
+                        </div>
+                    </div>
+                    <!-- Testimonio 4 -->
+                    <div class="testimonial-slide">
+                        <div class="testimonial-card">
+                            <img src="https://ui-avatars.com/api/?name=Erandi+MM&background=random&color=fff" alt="Avatar" class="testimonial-avatar">
+                            <h4 class="testimonial-name">Erandi MM</h4>
+                            <div class="testimonial-stars">★★★★★</div>
+                            <p class="testimonial-quote">"Excelente trabajo, todos nuestros invitados estuvieron encantados, muchas gracias por amenizar tan bien nuestra boda 🥰"</p>
+                        </div>
+                    </div>
+                    <!-- Testimonio 5 -->
+                    <div class="testimonial-slide">
+                        <div class="testimonial-card">
+                            <img src="https://ui-avatars.com/api/?name=Kimberly+Rocha&background=random&color=fff" alt="Avatar" class="testimonial-avatar">
+                            <h4 class="testimonial-name">Kimberly Rocha</h4>
+                            <div class="testimonial-stars">★★★★★</div>
+                            <p class="testimonial-quote">"Lo que más me encantó es que son super versátiles al tope de las últimas tendencias musicales, un sonido que suena increíble y súper ambiente."</p>
+                        </div>
+                    </div>
+                    <!-- Testimonio 6 -->
+                    <div class="testimonial-slide">
+                        <div class="testimonial-card">
+                            <img src="https://ui-avatars.com/api/?name=Sherem+Garcia&background=random&color=fff" alt="Avatar" class="testimonial-avatar">
+                            <h4 class="testimonial-name">Sherem Garcia</h4>
+                            <div class="testimonial-stars">★★★★★</div>
+                            <p class="testimonial-quote">"De los mejores que he escuchado y disfrutado y con la mejor actitud de servicio y fiesta CON TODO CELULA"</p>
+                        </div>
+                    </div>
+                    <!-- Testimonio 7 -->
+                    <div class="testimonial-slide">
+                        <div class="testimonial-card">
+                            <img src="https://ui-avatars.com/api/?name=Sebastian+Vernis&background=random&color=fff" alt="Avatar" class="testimonial-avatar">
+                            <h4 class="testimonial-name">Sebastián Vernis Mora</h4>
+                            <div class="testimonial-stars">★★★★★</div>
+                            <p class="testimonial-quote">"Los amé. Música desde los 80's y 90's hasta actual, estuvimos bailando sin parar."</p>
+                        </div>
+                    </div>
+                    <!-- Testimonio 8 -->
+                    <div class="testimonial-slide">
+                        <div class="testimonial-card">
+                            <img src="https://ui-avatars.com/api/?name=Jazmin+Robles&background=random&color=fff" alt="Avatar" class="testimonial-avatar">
+                            <h4 class="testimonial-name">Jazmin Robles Yerena</h4>
+                            <div class="testimonial-stars">★★★★★</div>
+                            <p class="testimonial-quote">"Es muy buen grupo me gusta mucho el ambiente que pone cuando empieza a tocar"</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-nav carousel-next" aria-label="Siguiente">❯</button>
+            </div>
+            <div class="carousel-dots" id="carouselDots"></div>
+        </section>
 
         <!-- Carrusel de Lugares -->
-        <div class="venues-carousel-section" style="padding: 40px 0; overflow: hidden;">
-            <h3 style="color: #FFD700; text-align: center; font-size: 20px; margin-bottom: 30px;">Lugares donde nos hemos presentado</h3>
+        <section class="venues-carousel-section">
+        <div style="padding: 40px 0; overflow: hidden;">
+        <h2 style="text-align: center; color: #FFD700; font-size: 28px; margin-bottom: 30px; font-weight: 700;">Trayectoria comprobada en los recintos más exclusivos de la CDMX</h2>
             <div class="venues-track">
                 <div class="venues-slide">
                     <img src="assets/atriosantafe.png.png" alt="Atrio Santa Fe" style="height: 50px; object-fit: contain;">
@@ -160,89 +292,85 @@
                     <img src="assets/239476.svg" alt="La Ternura" style="height: 50px; object-fit: contain;">
                 </div>
             </div>
-        </div>
-
-        <style>
-            .venues-carousel-section {
-                background: transparent;
-            }
-            .venues-track {
-                display: flex;
-                gap: 60px;
-                animation: scroll-venues 25s linear infinite;
-                width: max-content;
-            }
-            .venues-slide {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                min-width: 120px;
-                color: #fff;
-                text-align: center;
-            }
-            .venues-slide p {
-                margin-top: 10px;
-                font-size: 14px;
-                opacity: 0.8;
-            }
-            @keyframes scroll-venues {
-                0% { transform: translateX(0); }
-                100% { transform: translateX(-50%); }
-            }
-            .venues-track:hover {
-                animation-play-state: paused;
-            }
-        </style>
+        </div>       
+        </section>
 
         <!-- Formulario de Cotización -->
-            <div class="main-content">
-                <div class="form-container">
-                    <h2 class="section-title">Solicita tu Cotización</h2>
-                    <p class="section-description">
-                        Completa el formulario y te contactaremos para brindarte un presupuesto personalizado
-                        para tu evento musical.
-                    </p>
+        <section class="main-content" style="padding-top: 30px;">
+            <div class="form-container">
+                <h2 style="text-align: center; color: #FFD700; font-size: 28px; margin-bottom: 30px; font-weight: 700;">
+                    Reserva tu fecha y lleva el mejor show de la CDMX a tu evento.
+                </h2>
 
-                    <div class="p-8 rounded-sm shadow-xl">
-                        <form class="cotizador-form">
-                            <div class="form-group">
-                                <label for="nombre" class="form-label">Nombre completo *</label>
-                                <input type="text" id="nombre" name="nombre" required class="form-input" placeholder="Tu nombre">
-                            </div>
-                            <div class="form-group">
-                                <label for="telefono" class="form-label">Teléfono / WhatsApp *</label>
-                                <input type="tel" id="telefono" name="telefono" required class="form-input" pattern="[0-9]{10}" maxlength="10" placeholder="Tu número a 10 dígitos">
-                            </div>
-                            <div class="form-group">
-                                <label for="evento" class="form-label">Tipo de Evento *</label>
-                                <select id="evento" name="evento" required class="form-select">
-                                    <option value="">Selecciona tu evento</option>
-                                    <option value="Boda">Boda</option>
-                                    <option value="XV Años">XV Años</option>
-                                    <option value="Evento Corporativo">Evento Corporativo</option>
-                                    <option value="Graduación">Graduación</option>
-                                    <option value="Fiesta Privada">Fiesta Privada</option>
-                                    <option value="Otro">Otro</option>
-                                </select>
-                            </div>
+                <div class="p-8 rounded-sm shadow-xl">
+                    <form class="cotizador-form">
+                        <div class="form-group">
+                            <label for="evento" class="form-label">¿Qué celebras? *</label>
+                            <select id="evento" name="evento" required class="form-select">
+                                <option value="">Selecciona tu evento</option>
+                                <option value="Boda">Boda</option>
+                                <option value="XV Años">XV Años</option>
+                                <option value="Evento Corporativo">Evento Corporativo</option>
+                                <option value="Graduación">Graduación</option>
+                                <option value="Fiesta Privada">Fiesta Privada</option>
+                                <option value="Otro">Otro</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="fecha" class="form-label">Fecha del evento *</label>
+                            <input type="date" id="fecha" name="fecha" required class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <label for="ubicacion" class="form-label">Lugar del Evento *</label>
+                            <select id="ubicacion" name="ubicacion" required class="form-select">
+                                <option value="">Selecciona el lugar</option>
+                                <option value="Iztapalapa">Iztapalapa</option>
+                                <option value="Iztacalco">Iztacalco</option>
+                                <option value="Venustiano Carranza">Venustiano Carranza</option>
+                                <option value="Cuauhtémoc">Cuauhtémoc</option>
+                                <option value="Álvaro Obregón">Álvaro Obregón</option>
+                                <option value="Azcapotzalco">Azcapotzalco</option>
+                                <option value="Benito Juárez">Benito Juárez</option>
+                                <option value="Coyoacán">Coyoacán</option>
+                                <option value="Cuajimalpa">Cuajimalpa</option>
+                                <option value="Gustavo A. Madero">Gustavo A. Madero</option>
+                                <option value="Miguel Hidalgo">Miguel Hidalgo</option>
+                                <option value="Milpa Alta">Milpa Alta</option>
+                                <option value="Tláhuac">Tláhuac</option>
+                                <option value="Tlalpan">Tlalpan</option>
+                                <option value="Xochimilco">Xochimilco</option>
+                                <option value="Otro">Otro</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="invitados" class="form-label">Número estimado de invitados</label>
+                            <select id="invitados" name="invitados" class="form-select">
+                                <option value="">Selecciona el rango</option>
+                                <option value="Menos de 50">Menos de 50</option>
+                                <option value="50-100">50-100</option>
+                                <option value="100-200">100-200</option>
+                                <option value="200-300">200-300</option>
+                                <option value="Más de 300">Más de 300</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="telefono" class="form-label">Teléfono</label>
+                            <input type="tel" id="telefono" name="telefono" class="form-input" placeholder="Número telefónico">
+                        </div>
+                        <button type="submit" class="btn btn-primary form-submit-full" style="background: #25D366; font-size: 18px; font-weight: 700; padding: 18px;">
+                            Obtener mi presupuesto
+                        </button>
+                    </form>
+                </div>
 
-                            <button type="submit" class="btn btn-primary form-submit-full" style="background: #25D366; font-size: 18px; font-weight: 700; padding: 18px;">
-                                ¡Quiero mi presupuesto!
-                            </button>
-                        </form>
-                    </div>
-
-                    <!-- Información de contacto -->
-                    <div class="contact-info-container">
-                        <h3 class="contact-title">
-                            ¿Prefieres contactarnos por llamada?
-                        </h3>
-                        <a href="tel:+525535412631" class="btn btn-primary">
-                            📞 Llamar
-                        </a>
-                    </div>
+                <!-- Información de contacto -->
+                <div class="contact-info-container">
+                    <a href="tel:+525535412631" class="btn btn-primary">
+                        📞 Llamar
+                    </a>
                 </div>
             </div>
+        </div>
         </section>
     </main>
 
@@ -289,16 +417,16 @@
     </footer>
 
     <!-- JavaScript para el formulario -->
-    <script src="js/form-handler.min.js"></script>
+    <script src="js/form-handler.js"></script>
 
     <!-- Persistent Video Background -->
-    <script src="js/video-background.min.js"></script>
+    <script src="js/video-background.js"></script>
 
     <!-- Navegación -->
-    <script src="js/navigation.min.js"></script>
+    <script src="js/navigation.js"></script>
 
     <!-- Optimizaciones -->
-    <script src="js/optimizations.min.js"></script>
+    <script src="js/optimizations.js"></script>
 
     <!-- Chatbot La Célula -->
     <div id="celula-chatbot-container" class="celula-chatbot-container">
@@ -372,6 +500,57 @@
     <!-- Script de inicialización del chatbot -->
     <script src="js/chatbot.js" defer></script>
 
+    <!-- Testimonial Carousel -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const track = document.getElementById('testimonialTrack');
+            const dotsContainer = document.getElementById('carouselDots');
+            if (!track || !dotsContainer) return;
+
+            const slides = track.querySelectorAll('.testimonial-slide');
+            const prevBtn = document.querySelector('.carousel-prev');
+            const nextBtn = document.querySelector('.carousel-next');
+            let currentSlide = 0;
+            const totalSlides = slides.length;
+
+            if (!totalSlides) return;
+
+            for (let i = 0; i < totalSlides; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+                dot.addEventListener('click', () => goToSlide(i));
+                dotsContainer.appendChild(dot);
+            }
+
+            function updateDots() {
+                const dots = dotsContainer.querySelectorAll('.carousel-dot');
+                dots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === currentSlide);
+                });
+            }
+
+            function goToSlide(index) {
+                currentSlide = index;
+                track.style.transform = 'translateX(-' + (currentSlide * 100) + '%)';
+                updateDots();
+            }
+
+            function nextSlide() {
+                currentSlide = (currentSlide + 1) % totalSlides;
+                goToSlide(currentSlide);
+            }
+
+            function prevSlide() {
+                currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+                goToSlide(currentSlide);
+            }
+
+            nextBtn?.addEventListener('click', nextSlide);
+            prevBtn?.addEventListener('click', prevSlide);
+
+            setInterval(nextSlide, 5000);
+        });
+    </script>
+
   </body>
   </html>
-
