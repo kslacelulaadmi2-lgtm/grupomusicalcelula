@@ -9,6 +9,7 @@
 html,
 body {
     font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+    font-weight: 400;
     background: url('../assets/images/background.webp') center/cover no-repeat fixed, #000000;
     color: #fff;
     overflow-x: hidden;
@@ -17,7 +18,7 @@ body {
 
 main.content-text,
 .content-text {
-    font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+    font-weight: 400;
     text-align: center;
 }
 
@@ -29,7 +30,7 @@ main.content-text p,
 .content-text h2,
 .content-text h3,
 .content-text p {
-    font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+    font-weight: 400;
     text-align: center;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.9), 0 0 10px rgba(0, 0, 0, 0.5);
 }
@@ -38,7 +39,7 @@ main.content-text p,
 
 .hero-section {
     position: relative;
-    height: 100vh;
+    height: auto;
     width: 100vw;
     margin: 0;
     padding: 0;
@@ -51,7 +52,7 @@ main.content-text p,
 
 .content-section {
     position: relative;
-    padding: 4rem 0;
+    padding: 0 0 4rem 0;
     background: rgba(0, 0, 0, 0.8);
 }
 
@@ -80,13 +81,12 @@ main.content-text p,
     --overlay-bg: rgba(0, 0, 0, 0.4);
     --footer-bg: rgba(0, 0, 0, 0.8);
 
-    /* Tipografía */
-    --font-header: normal normal normal 50px/1.4em 'Lobster', cursive;
-    --font-nav: normal normal bold 15px/1.4em 'Open Sans', Arial, sans-serif;
-    --font-body: normal normal normal 20px/1.4em 'Open Sans', Arial, sans-serif;
-    --font-title: normal normal normal 25px/1.4em 'Lobster', cursive;
-    --font-large: normal normal normal 35px/1.4em 'Open Sans', Arial, cursive;
-    --font-medium: normal normal normal 27px/1.4em 'Open Sans', Arial, sans-serif;
+    /* Tipografía - Open Sans para todo, peso varía según contexto */
+    --font-nav: 700;
+    --font-body: 400;
+    --font-title: 400;
+    --font-large: 400;
+    --font-medium: 400;
 
     /* Espaciado */
     --card-margin: 15px;
@@ -154,10 +154,7 @@ main.content-text p,
 }
 
 .nav-link {
-    color: var(--primary-text);
-    text-decoration: none;
-    font: var(--font-nav);
-    padding: 10px 15px;
+    font-weight: var(--font-nav);
     border-radius: var(--border-radius);
     transition: all 0.3s ease;
     display: block;
@@ -168,10 +165,8 @@ main.content-text p,
     color: var(--secondary-text);
     background: rgba(255, 255, 255, 0.1);
 }
-
-/* ===== HERO SECTION ===== */
 .hero-section {
-    min-height: 80vh;
+    min-height: 60vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -305,29 +300,72 @@ main.content-text p,
 }
 
 /* Additional mobile video optimizations */
-@media (max-width: 480px) {
-    .hero-section {
-        min-height: 80vh;
-    }
-
+@media (max-width: 768px) {
+    /* Hero responsive improvements */
     .hero-content {
         padding: 0 15px;
-    }
-
-    .hero-logo {
-        width: 200px;
-        height: 112px;
-        margin: 0 auto 20px auto;
-        display: block;
+        max-width: 95%;
     }
 
     .hero-title {
-        font-size: 20px;
+        font-size: 32px !important;
+        margin-bottom: 15px !important;
+    }
+
+    /* Override inline styles for paragraphs */
+    .hero-content p {
+        font-size: 18px !important;
+        padding-bottom: 15px !important;
+        line-height: 1.4 !important;
+    }
+
+    .hero-logo {
+        width: 280px;
+        height: 158px;
+        margin-bottom: 15px;
     }
 
     .hero-badge {
         font-size: 0.85rem;
         padding: 5px 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-section {
+        min-height: 40vh;
+        padding: var(--header-height) 10px 20px;
+    }
+
+    .hero-content {
+        padding: 0 10px;
+        max-width: 100%;
+    }
+
+    .hero-logo {
+        width: 200px;
+        height: 112px;
+        margin-bottom: 10px;
+        display: block;
+    }
+
+    .hero-title {
+        font-size: 20px !important;
+        margin-bottom: 12px !important;
+        letter-spacing: 0.5px !important;
+        line-height: 1.2 !important;
+    }
+
+    .hero-content p {
+        font-size: 14px !important;
+        padding-bottom: 10px !important;
+        line-height: 1.3 !important;
+        word-wrap: break-word !important;
+    }
+
+    .hero-badge {
+        font-size: 0.75rem;
+        padding: 4px 10px;
     }
 
     .cta-btn {
@@ -346,34 +384,37 @@ main.content-text p,
 
 .hero-content {
     position: absolute;
-    top: 45%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 10;
     max-width: 800px;
     max-height: auto;
     text-align: center;
+    padding-top: 60px;
 }
 
 .hero-logo {
-    width: 390px;
-    height: 220px;
+    width: 340px;
+    height: 192px;
     margin: 0 auto 20px auto;
     display: block;
     object-fit: contain;
 }
 
 .hero-title {
-    font: var(--font-title);
     font-size: 30px;
+    font-weight: 400;
+    font-family: 'Lobster', cursive;
     margin-bottom: 30px;
     color: var(--primary-text);
     text-align: center;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9), 0 0 20px rgba(0, 0, 0, 0.5);
 }
 .hero-subtitle {
-    font: var(--font-title);
     font-size: 30px;
+    font-weight: 400;
+    font-family: 'Lobster', cursive;
     margin-bottom: 30px;
     color: var(--primary-text);
     text-align: center;
@@ -496,23 +537,26 @@ main.content-text p,
 }
 
 .section-title {
-    color: #ffffff !important;
-    font-size: 36px;
     font-weight: 400;
+    font-family: 'Lobster', cursive;
+    font-size: 30px;
     margin-bottom: 30px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9), 0 0 20px rgba(0, 0, 0, 0.5);
 }
 
 .section-subtitle {
-    font: var(--font-large);
+    font-weight: 400;
+    font-family: 'Lobster', cursive;
+    font-size: 30px;
     text-align: center;
     margin-bottom: 20px;
     color: #ffffff;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9), 0 0 15px rgba(0, 0, 0, 0.5);  
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9), 0 0 15px rgba(0, 0, 0, 0.5);
 }
 
 .section-description {
-    font-size: 24px;
+    font-weight: 400;
+    font-size: 20px;
     color: #FFFFFF !important;
     line-height: 1.6;
     margin-bottom: 10px;
@@ -571,9 +615,38 @@ main.content-text p,
     transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
-.service-card:hover .service-content-overlay {
-    opacity: 0;
-    transform: translateY(20px);
+/* Hover flip only on non-touch devices */
+@media (hover: hover) and (pointer: fine) {
+    .service-card:hover .service-content-overlay {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    .service-card:hover .service-back-overlay {
+        opacity: 1;
+    }
+}
+
+/* Touch devices - use click flip */
+@media (hover: none) and (pointer: coarse) {
+    .service-card:hover .service-content-overlay,
+    .service-card.flipped .service-content-overlay {
+        opacity: 1;
+        transform: none;
+    }
+
+    .service-card:hover .service-back-overlay {
+        opacity: 0;
+    }
+
+    .service-card.flipped .service-content-overlay {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    .service-card.flipped .service-back-overlay {
+        opacity: 1;
+    }
 }
 
 .service-back-overlay {
@@ -620,6 +693,11 @@ main.content-text p,
         grid-column: 1 / -1;
         max-width: 50%;
         margin: 0 auto;
+    }
+
+    .video-promo-container {
+        max-width: 600px;
+        margin: 30px auto 1.5rem;
     }
 }
 
@@ -722,10 +800,11 @@ main.content-text p,
     }
 }
 
-.service-title {
-    font-size: 28px;
-    color: #FFD700;
-    font-weight: bold;
+.service-subtitle {
+    font-size: 30px;
+    font-weight: 400;
+    font-family: 'Lobster', cursive;
+    color: #ffffff;
     letter-spacing: 0.05em;
     margin-bottom: 10px;
     line-height: 1.2;
@@ -733,7 +812,9 @@ main.content-text p,
 }
 
 .service-content-overlay p {
-    font-size: 15px;
+    font-size: 20px;
+    font-weight: 400;
+    font-family: 'Open Sans', Arial, sans-serif;
     color: #ffffff;
     line-height: 1.5;
     margin: 0;
@@ -741,7 +822,9 @@ main.content-text p,
 }
 
 .service-description {
-    font-size: 16px;
+    font-size: 20px;
+    font-weight: 400;
+    font-family: 'Open Sans', Arial, sans-serif;
     color: var(--content-text);
     margin-bottom: 25px;
     line-height: 1.6;
@@ -755,11 +838,13 @@ main.content-text p,
 }
 
 .service-features li {
-    font: var(--font-body);
+    font-size: 20px;
+    font-weight: 400;
     color: var(--content-text);
     margin-bottom: 8px;
     position: relative;
     padding-left: 20px;
+    font-family: 'Open Sans', Arial, sans-serif;
 }
 
 .service-features li:before {
@@ -838,7 +923,10 @@ main.content-text p,
     padding: 12px 24px;
     border-radius: var(--button-radius);
     text-decoration: none;
-    font: normal normal normal 14px/1.4em 'Raleway', Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    font-family: 'Open Sans', Arial, sans-serif;
+    transition: all 0.3s ease;
     transition: all 0.3s ease;
     cursor: pointer;
     border: none;
@@ -967,7 +1055,9 @@ main.content-text p,
     list-style: none;
     cursor: pointer;
     padding: 16px 18px;
-    font: 700 15px/1.4 'Open Sans', Arial, sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    font-family: 'Open Sans', Arial, sans-serif;
     color: #FFE100;
     background: rgba(255, 255, 255, 0.03);
     transition: background 0.3s ease;
@@ -1023,7 +1113,9 @@ main.content-text p,
 }
 
 .footer-text {
-    font: var(--font-body);
+    font-size: 20px;
+    font-weight: 400;
+    font-family: 'Open Sans', Arial, sans-serif;
     opacity: 0.8;
 }
 
@@ -1082,8 +1174,9 @@ main.content-text p,
         padding: 15px;
     }
 
-    .service-title {
+    .service-subtitle {
         font-size: 22px;
+        font-family: 'Lobster', cursive;
     }
 
     .nav-menu {
@@ -1161,8 +1254,9 @@ main.content-text p,
         padding: 15px;
     }
 
-    .service-title {
+    .service-subtitle {
         font-size: 22px;
+        font-family: 'Lobster', cursive;
     }
 
     .service-card:hover {
@@ -1198,7 +1292,7 @@ main.content-text p,
         padding: 15px;
     }
 
-    .service-title {
+    .service-subtitle {
         font-size: 20px;
         color: #ffffff;
         margin-bottom: 10px;
@@ -1242,11 +1336,11 @@ main.content-text p,
     }
 
     /* Ajuste adicional para pantallas muy pequeñas */
-    .service-title {
-        font-size: 14px;
-        /* cambiado a 14px según solicitud */
+    .service-subtitle {
+        font-size: 20px;
+        font-family: 'Lobster', cursive;
         margin-bottom: 10px;
-        color: #ffffff;
+        color: #FFD700;
         line-height: 1.3;
     }
 
@@ -1657,7 +1751,9 @@ img[loading="lazy"].loaded {
     padding: 12px;
     border: 2px solid rgba(255, 255, 255, 0.3);
     border-radius: var(--border-radius);
-    font: var(--font-body);
+    font-size: 20px;
+    font-weight: 400;
+    font-family: 'Open Sans', Arial, sans-serif;
     color: #ffffff;
     background: rgba(255, 255, 255, 0.1);
 }
@@ -1764,7 +1860,9 @@ img[loading="lazy"].loaded {
 }
 
 .post-body-container {
-    font: var(--font-body);
+    font-size: 20px;
+    font-weight: 400;
+    font-family: 'Open Sans', Arial, sans-serif;
     color: #ffffff;
     line-height: 1.8;
     max-width: 800px;
@@ -1848,7 +1946,9 @@ img[loading="lazy"].loaded {
 }
 
 .contact-title {
-    font: var(--font-title);
+    font-size: 30px;
+    font-weight: 400;
+    font-family: 'Lobster', cursive;
     color: #ffffff;
     margin-bottom: 20px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9), 0 0 15px rgba(0, 0, 0, 0.5);
@@ -2480,10 +2580,10 @@ img[loading="lazy"].loaded {
 .post-title {
     font-size: 20px;
     font-weight: 600;
+    font-family: 'Open Sans', Arial, sans-serif;
     color: var(--content-text);
     margin-bottom: 15px;
     line-height: 1.3;
-    font-family: 'Open Sans', Arial, sans-serif;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9), 0 0 15px rgba(0, 0, 0, 0.5);
 }
 
@@ -2514,7 +2614,9 @@ img[loading="lazy"].loaded {
 }
 
 .post-excerpt {
-    font: var(--font-body);
+    font-size: 20px;
+    font-weight: 400;
+    font-family: 'Open Sans', Arial, sans-serif;
     color: var(--content-text);
     line-height: 1.6;
     margin-bottom: 20px;
@@ -2684,12 +2786,14 @@ img[loading="lazy"].loaded {
 /* ===== VIDEO PROMOCIONAL SECTION ===== */
 .video-promo-section {
     text-align: center;
+    padding-top: 0;
+    margin-top: 0;
 }
 
 .video-promo-container {
-    margin-top: 0;
     max-width: 400px;
-    margin: 0 auto;
+    width: 100%;
+    margin: 40px auto 2rem;
     position: relative;
     border-radius: 12px;
     overflow: hidden;
@@ -2698,15 +2802,37 @@ img[loading="lazy"].loaded {
 
 .video-promo-container video {
     width: 100%;
-    height: auto;
+    height: 100%;
     display: block;
 }
 
 .video-promo-title {
-    font-family: var(--font-title);
     font-size: 2rem;
+    font-weight: 400;
+    font-family: 'Open Sans', Arial, sans-serif;
     color: #fff;
     margin-bottom: 30px;
+}
+
+/* ===== VIDEO GALLERY HIERARCHY ===== */
+.video-gallery-title {
+    font-size: 30px;
+    font-weight: 400;
+    font-family: 'Lobster', cursive;
+    color: #ffffff;
+    margin-bottom: 10px;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9), 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.video-gallery-description {
+    font-size: 20px;
+    font-weight: 400;
+    font-family: 'Open Sans', Arial, sans-serif;
+    color: #e0e0e0;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    text-align: center;
 }
 
 /* ===== EXPERIENCIAS SECTION ===== */
@@ -2756,8 +2882,9 @@ img[loading="lazy"].loaded {
 }
 
 .experiencia-title {
-    font-family: var(--font-title);
-    font-size: 2rem;
+    font-size: 30px;
+    font-weight: 400;
+    font-family: 'Lobster', cursive;
     color: #fff;
     margin-bottom: 10px;
 }
@@ -2941,15 +3068,17 @@ img[loading="lazy"].loaded {
 }
 
 .manifesto-section h2 {
-    color: #ffffff !important;
-    font-size: 36px;
     font-weight: 400;
+    font-family: 'Lobster', cursive;
+    font-size: 30px;
     margin-bottom: 30px;
     text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
 }
 
 .manifesto-section p {
-    font-size: 24px;
+    font-size: 20px;
+    font-weight: 400;
+    font-family: 'Open Sans', Arial, sans-serif;
     color: #FFFFFF !important;
     line-height: 1.6;
     margin-bottom: 10px;
@@ -2971,73 +3100,84 @@ img[loading="lazy"].loaded {
 }
 
 @media (max-width: 768px) {
+    /* Main content adjustments */
+    .content-section {
+        padding: 0 0 2rem 0;
+    }
+
+    .main-content {
+        padding: 0 1rem;
+    }
+
     .diferenciador-grid,
     .experiencias-grid {
         grid-template-columns: 1fr;
     }
 
     .diferenciador-card {
-        padding: 20px;
+        padding: 15px;
     }
 
     .experiencia-card {
-        height: 300px;
+        height: 250px;
     }
 
     .video-promo-title {
-        font-size: 1.5rem;
+        font-size: 1.3rem;
+        margin-bottom: 20px;
     }
 
     .video-promo-section {
-        padding: 20px 15px;
+        padding: 15px 10px;
+        margin-top: 0;
     }
 
     .video-promo-container {
-        max-width: 100%;
+        max-width: 500px;
         width: 100%;
-        margin: 0 auto 20px;
+        margin: 0 auto 15px;
         border-radius: 10px;
     }
 
     .manifesto-section {
-        padding: 30px 15px;
+        padding: 20px 15px;
     }
 
     .manifesto-section h2 {
-        font-size: 28px;
+        font-size: 24px;
         line-height: 1.3;
-        margin-bottom: 18px;
+        margin-bottom: 15px;
     }
 
     .manifesto-section p {
-        font-size: 18px;
+        font-size: 16px;
         line-height: 1.5;
     }
 
     .social-proof-title {
-        font-size: 1.5rem;
+        font-size: 1.3rem;
     }
 
     .social-proof-section {
-        padding: 40px 15px;
+        padding: 25px 15px;
     }
 
     .testimonial-carousel {
         max-width: 100%;
         width: 100%;
-        margin: 20px auto 0;
+        margin: 15px auto 0;
     }
 
     .testimonial-slide {
-        padding: 0 8px;
+        padding: 0 6px;
     }
 
     .testimonial-card {
-        padding: 20px 16px;
+        padding: 15px 12px;
     }
 
     .testimonial-name {
-        font-size: 15px;
+        font-size: 13px;
         line-height: 1.3;
     }
 
@@ -3053,47 +3193,108 @@ img[loading="lazy"].loaded {
 
 @media (max-width: 480px) {
     .video-promo-section {
-        padding: 60px 15px;
+        padding: 10px 15px;
+    }
+
+    .video-promo-container {
+        max-width: 100%;
+        margin: 0 auto 10px;
+    }
+
+    .video-promo-section .cta-btn {
+        font-size: 1rem !important;
+        padding: 12px 20px !important;
+    }
+
+    .video-promo-section .cta-button {
+        padding: 12px 25px !important;
+        font-size: 14px !important;
     }
 
     .diferenciador-section,
     .experiencias-section,
     .social-proof-section {
-        padding: 60px 15px;
+        padding: 25px 12px;
+    }
+
+    .main-content {
+        padding: 0 12px;
     }
 
     .experiencia-title {
-        font-size: 1.5rem;
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+    }
+
+    .section-subtitle {
+        font-size: 1.1rem;
+        margin-bottom: 10px;
+    }
+
+    .section-description p {
+        font-size: 13px;
+        margin-bottom: 10px;
+    }
+
+    .services-grid {
+        gap: 10px;
+        padding: 0 10px;
+    }
+
+    .service-card {
+        height: 220px;
+    }
+
+    .service-subtitle {
+        font-size: 20px;
+        font-family: 'Lobster', cursive;
+    }
+
+    .service-content-overlay p,
+    .service-back-overlay p,
+    .service-back-overlay li {
+        font-size: 14px !important;
+    }
+
+    .detailed-features li {
+        font-size: 12px;
+        padding: 4px 0;
+    }
+
+    .btn {
+        padding: 10px 15px !important;
+        font-size: 13px !important;
     }
 
     .testimonial-carousel {
         max-width: 100%;
-        margin: 30px auto 0;
+        margin: 20px auto 0;
     }
 
     .testimonial-slide {
-        padding: 0 10px;
+        padding: 0 8px;
     }
 
     .testimonial-card {
-        padding: 20px 15px;
+        padding: 15px 12px;
+        font-size: 13px;
     }
 
     .testimonial-avatar {
-        width: 50px;
-        height: 50px;
+        width: 45px;
+        height: 45px;
     }
 
     .testimonial-name {
-        font-size: 14px;
+        font-size: 12px;
     }
 
     .testimonial-quote {
-        font-size: 13px;
-        line-height: 1.5;
+        font-size: 12px;
+        line-height: 1.4;
     }
 
     .carousel-dots {
-        margin-top: 20px;
+        margin-top: 15px;
     }
 }
