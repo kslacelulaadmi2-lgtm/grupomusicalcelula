@@ -118,6 +118,10 @@
         .nav-link {
             color: #fff;
             text-decoration: none;
+            text-decoration-line: none;
+            text-decoration-thickness: none;
+            text-decoration-style: none;
+            text-decoration-color: none;
             font: normal normal bold 15px/1.4em 'Open Sans', sans-serif;
             padding: 10px 15px;
             border-radius: 5px;
@@ -285,10 +289,6 @@
                 object-fit: contain
             }
         }
-    </style>
-
-    <!-- Self-hosted Fonts -->
-    <style>
         @font-face {
             font-family: 'Open Sans';
             font-style: normal;
@@ -337,85 +337,6 @@
             src: url('assets/fonts/raleway-v28-latin-600.woff2') format('woff2')
         }
     </style>
-
-    <style>
-        /* Testimonial Widget Styles */
-        .testimonial-card-link {
-            display: block;
-            max-width: 32rem;
-            margin: 2rem auto;
-            text-decoration: none;
-        }
-
-        .testimonial-card {
-            background-color: #111827;
-            border: 1px solid #374151;
-            border-radius: 0.5rem;
-            padding: 1.5rem;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-            transition: all 300ms;
-            text-align: left;
-        }
-
-        .testimonial-card:hover {
-            box-shadow: 0 0 15px rgba(250, 204, 21, 0.2);
-            border-color: rgba(156, 163, 175, 0.5);
-            transform: translateY(-0.25rem);
-        }
-
-        .t-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 1rem;
-        }
-
-        .t-title {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: #fff;
-            margin-bottom: 0.25rem;
-            line-height: 1.4;
-        }
-
-        .t-rating {
-            display: flex;
-            align-items: center;
-            font-size: 0.875rem;
-            color: #d1d5db;
-            flex-wrap: wrap;
-        }
-
-        .t-stars {
-            color: #facc15;
-            margin: 0 0.5rem;
-            letter-spacing: 2px;
-        }
-
-        .t-quote {
-            margin: 1.25rem 0;
-            border-left: 4px solid #4b5563;
-            padding-left: 1rem;
-            color: #d1d5db;
-            font-size: 1rem;
-            line-height: 1.6;
-        }
-
-        .t-footer {
-            margin-top: 1.25rem;
-            text-align: center;
-            background-color: #1f2937;
-            border-radius: 0.5rem;
-            padding: 0.75rem;
-            color: #facc15;
-            font-weight: 700;
-        }
-
-        .t-footer:hover {
-            text-decoration: underline;
-        }
-    </style>
-
     <!-- Async CSS Loading -->
     <link rel="preload" href="css/styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript>
@@ -550,7 +471,11 @@
             <a href="/cotizador" class="btn cta-btn" style="background: #0000ff4f; color: white; font-size: 1.5rem;">Reserva la fecha de tu evento en CDMX</a>
         </div>
         <div style="margin-top: 20px; display: flex; flex-direction: row; padding-top: 10px; position: relative; justify-content: center; flex-wrap: wrap;">
-            <a  href="https://wa.me/+525535412631?text=Hola,%20quiero%20cotizar%20a%20La%20Célula%20para%20mi%20evento.%20Vengo%20de%20su%20sitio%20web" class="cta-button" style="background: linear-gradient(135deg, #25D3668F 0%, #1DB95491 100%); color: #fff; padding: 18px 40px; border-radius: 50px; font-size: 18px; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 10px; transition: all 0.3s ease; box-shadow: 0 4px 20px rgba(37, 211, 102, 0.5);">
+            <a  href="https://wa.me/+525535412631?text=Hola,%20quiero%20cotizar%20a%20La%20Célula%20para%20mi%20evento.%20Vengo%20de%20su%20sitio%20web" class="cta-button" style="background: linear-gradient(135deg, #25D3668F 0%, #1DB95491 100%); color: #fff; padding: 18px 40px; border-radius: 50px; font-size: 18px; font-weight: 700; text-decoration: none;
+text-decoration-line: none;
+text-decoration-thickness: none;
+text-decoration-style: none;
+text-decoration-color: none; display: inline-flex; align-items: center; gap: 10px; transition: all 0.3s ease; box-shadow: 0 4px 20px rgba(37, 211, 102, 0.5);">
                 <img src="assets/icons/whatsapp-icon.webp" alt="WhatsApp" style="width: 24px; height: 24px; filter: brightness(0) invert(1);">
             </a>
         </div>

@@ -13,6 +13,11 @@ body {
     color: #fff;
     overflow-x: hidden;
     scroll-behavior: smooth;
+    text-decoration: none;
+    text-decoration-line: none;
+    text-decoration-thickness: none;
+    text-decoration-style: none;
+    text-decoration-color: none;
 }
 
 main.content-text,
@@ -31,7 +36,7 @@ main.content-text p,
 .content-text p {
     font-weight: 400;
     text-align: center;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.9), 0 0 10px rgba(0, 0, 0, 0.5);
+    text-shadow: none;
 }
 
 /* ===== SECCIONES PRINCIPALES ===== */
@@ -56,11 +61,13 @@ main.content-text p,
     color: var(--content-text);
     position: relative;
     z-index: 1;
+    margin-top: 20px;
 }
 
 .main-content {
     max-width: 1200px;
     padding: 0 2rem;
+    top: 50px;
 }
 
 /* ===== VARIABLES CSS ===== */
@@ -385,14 +392,12 @@ main.content-text p,
 
 .hero-content {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     z-index: 10;
     max-width: 800px;
     max-height: auto;
     text-align: center;
     padding-top: 60px;
+    margin-bottom: 20px;
 }
 
 .hero-logo {
@@ -916,6 +921,10 @@ main.content-text p,
     padding: 12px 24px;
     border-radius: var(--button-radius);
     text-decoration: none;
+text-decoration-line: none;
+text-decoration-thickness: none;
+text-decoration-style: none;
+text-decoration-color: none;
     font-size: 14px;
     font-weight: 400;
     font-family: 'Open Sans', Arial, sans-serif;
@@ -989,6 +998,10 @@ main.content-text p,
     box-shadow: var(--button-shadow), 0 4px 20px rgba(37, 211, 102, 0.5);
     font-weight: 600;
     text-decoration: none;
+text-decoration-line: none;
+text-decoration-thickness: none;
+text-decoration-style: none;
+text-decoration-color: none;
     display: inline-block;
     padding: 14px 32px;
     border-radius: 50px;
@@ -1023,6 +1036,10 @@ main.content-text p,
 
 .cta-btn a {
     text-decoration: none;
+text-decoration-line: none;
+text-decoration-thickness: none;
+text-decoration-style: none;
+text-decoration-color: none;
     color: white;
 }
 
@@ -1881,6 +1898,10 @@ img[loading="lazy"].loaded {
 
 .link-no-decoration {
     text-decoration: none;
+text-decoration-line: none;
+text-decoration-thickness: none;
+text-decoration-style: none;
+text-decoration-color: none;
 }
 
 /* ===== PAGINACIÓN ===== */
@@ -1902,6 +1923,10 @@ img[loading="lazy"].loaded {
     padding: 8px 16px;
     color: white;
     text-decoration: none;
+text-decoration-line: none;
+text-decoration-thickness: none;
+text-decoration-style: none;
+text-decoration-color: none;
     border-radius: 4px;
     transition: background 0.3s ease;
 }
@@ -2648,6 +2673,10 @@ img[loading="lazy"].loaded {
     background: var(--button-blue);
     color: white;
     text-decoration: none;
+text-decoration-line: none;
+text-decoration-thickness: none;
+text-decoration-style: none;
+text-decoration-color: none;
     border-radius: 4px;
     transition: background 0.3s ease;
 }
@@ -2897,6 +2926,10 @@ img[loading="lazy"].loaded {
     border-radius: 25px;
     font-weight: 600;
     text-decoration: none;
+text-decoration-line: none;
+text-decoration-thickness: none;
+text-decoration-style: none;
+text-decoration-color: none;
     transition: all 0.3s ease;
     width: fit-content;
     border: 1px solid rgba(255, 255, 255, 0.2);
@@ -2964,6 +2997,11 @@ img[loading="lazy"].loaded {
 .testimonial-slide {
     min-width: 100%;
     padding: 0 20px;
+    text-decoration: none;
+text-decoration-line: none;
+text-decoration-thickness: none;
+text-decoration-style: none;
+text-decoration-color: none;
 }
 
 .testimonial-card {
@@ -2972,6 +3010,27 @@ img[loading="lazy"].loaded {
     border-radius: 12px;
     padding: 30px;
     text-align: center;
+    text-shadow: none;
+    text-decoration: none;
+text-decoration-line: none;
+text-decoration-thickness: none;
+text-decoration-style: none;
+text-decoration-color: none;
+}
+
+.testimonial-slide a {
+    display: block;
+    text-decoration: none !important;
+    text-shadow: none !important;
+    color: inherit !important;
+    border-bottom: none !important;
+}
+
+.testimonial-slide a * {
+    text-decoration: none !important;
+    text-shadow: none !important;
+    color: inherit !important;
+    border-bottom: none !important;
 }
 
 .testimonial-avatar {
@@ -2985,18 +3044,33 @@ img[loading="lazy"].loaded {
     font-weight: 700;
     color: #fff;
     margin-bottom: 5px;
+    text-decoration: none;
+text-decoration-line: none;
+text-decoration-thickness: none;
+text-decoration-style: none;
+text-decoration-color: none;
 }
 
 .testimonial-stars {
     color: #FFE100;
     margin-bottom: 15px;
     letter-spacing: 3px;
+    text-decoration: none;
+text-decoration-line: none;
+text-decoration-thickness: none;
+text-decoration-style: none;
+text-decoration-color: none;
 }
 
 .testimonial-quote {
     color: #ccc;
     font-style: italic;
     line-height: 1.6;
+    text-decoration: none;
+text-decoration-line: none;
+text-decoration-thickness: none;
+text-decoration-style: none;
+text-decoration-color: none;
 }
 
 .carousel-dots {
@@ -3163,6 +3237,11 @@ img[loading="lazy"].loaded {
 
     .testimonial-slide {
         padding: 0 6px;
+        text-decoration: none;
+text-decoration-line: none;
+text-decoration-thickness: none;
+text-decoration-style: none;
+text-decoration-color: none;
     }
 
     .testimonial-card {
@@ -3266,6 +3345,11 @@ img[loading="lazy"].loaded {
 
     .testimonial-slide {
         padding: 0 8px;
+        text-decoration: none;
+text-decoration-line: none;
+text-decoration-thickness: none;
+text-decoration-style: none;
+text-decoration-color: none;
     }
 
     .testimonial-card {

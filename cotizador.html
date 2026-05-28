@@ -1,20 +1,26 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-5783XFN4');</script>
+    <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-5783XFN4');</script>
     <!-- End Google Tag Manager -->
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Cotiza tu Evento Musical - La Célula</title>
-    <meta name="description" content="Obtén una cotización personalizada para tu evento musical con La Célula. Presupuestos para bodas, XV años, y más.">
-    <meta name="keywords" content="cotizador musical, presupuesto boda, cotizar evento, precio grupo musical, La Célula, cotización">
+    <meta name="description"
+        content="Obtén una cotización personalizada para tu evento musical con La Célula. Presupuestos para bodas, XV años, y más.">
+    <meta name="keywords"
+        content="cotizador musical, presupuesto boda, cotizar evento, precio grupo musical, La Célula, cotización">
 
     <link rel="canonical" href="https://www.grupomusicalcelula.com/cotizador">
 
@@ -22,14 +28,16 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.grupomusicalcelula.com/cotizador">
     <meta property="og:title" content="Cotizador - Grupo Musical Versátil La Célula">
-    <meta property="og:description" content="Solicita tu cotización para eventos musicales. Presupuesto personalizado para bodas, XV años, graduaciones y eventos corporativos con La Célula.">
+    <meta property="og:description"
+        content="Solicita tu cotización para eventos musicales. Presupuesto personalizado para bodas, XV años, graduaciones y eventos corporativos con La Célula.">
     <meta property="og:image" content="https://www.grupomusicalcelula.com/assets/gallery/banda-1.webp">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://www.grupomusicalcelula.com/cotizador">
     <meta property="twitter:title" content="Cotizador - Grupo Musical Versátil La Célula">
-    <meta property="twitter:description" content="Solicita tu cotización para eventos musicales. Presupuesto personalizado para bodas, XV años, graduaciones y eventos corporativos con La Célula.">
+    <meta property="twitter:description"
+        content="Solicita tu cotización para eventos musicales. Presupuesto personalizado para bodas, XV años, graduaciones y eventos corporativos con La Célula.">
     <meta property="twitter:image" content="https://www.grupomusicalcelula.com/assets/gallery/banda-1.webp">
 
     <!-- Theme Color -->
@@ -52,77 +60,360 @@
     <link rel="preconnect" href="https://i.ytimg.com">
 
     <!-- Google Fonts con display=swap para evitar FOIT -->
-    <link href="https://fonts.googleapis.com/css2?family=Lobster:wght@400&family=Open+Sans:wght@400;600;700&family=Raleway:wght@400;600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lobster:wght@400&family=Open+Sans:wght@400;600;700&family=Raleway:wght@400;600&display=swap"
+        rel="stylesheet">
 
     <!-- Estilos limpios -->
     <link rel="stylesheet" href="css/styles.css">
 
     <!-- Vercel Analytics & Speed Insights -->
     <script>
-      window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+        window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
     </script>
     <script defer src="/_vercel/insights/script.js"></script>
     <script>
-      window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+        window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
     </script>
     <script defer src="/_vercel/speed-insights/script.js"></script>
     <style>
-    .venues-carousel-section {
-        background: transparent;
-        padding: 40px;
-    }
-    .venues-track {
-        display: flex;
-        gap: 60px;
-        animation: scroll-venues 25s linear infinite;
-        width: max-content;
-    }
-    .venues-slide {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        min-width: 120px;
-        color: #fff;
-        text-align: center;
-    }
-    .venues-slide p {
-        margin-top: 10px;
-        font-size: 14px;
-        opacity: 0.8;
-    }
-    @keyframes scroll-venues {
-        0% { transform: translateX(0); }
-        100% { transform: translateX(-50%); }
-    }
-    .venues-track:hover {
-        animation-play-state: paused;
-    }
-    @media (max-width: 768px) {
-        .trust-section > div {
-            gap: 20px !important;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
         }
 
-        .trust-section > div > div:nth-of-type(2) {
-            grid-template-columns: 1fr !important;
-            gap: 22px !important;
+        body,
+        html {
+            height: 100%;
+            font-family: 'Open Sans', Arial, sans-serif;
+            background: #000;
+            color: #fff;
+            overflow-x: hidden;
+            scrollbar-width: none
         }
 
-        .trust-section > div > div:nth-of-type(3) {
-            max-width: 100% !important;
+        .site-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 55px;
+            background: rgba(0, 0, 0, .4);
+            backdrop-filter: blur(10px);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center
         }
 
-        .trust-section > div > div:nth-of-type(2) > div,
-        .trust-section > div > div:nth-of-type(3) > div {
-            padding: 0 !important;
+        .nav-container {
+            width: 100%;
+            max-width: 980px;
+            padding: 0 20px;
+            display: flex;
+            justify-content: center;
+            position: relative
         }
-    }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 40px;
+            align-items: center
+        }
+
+        .nav-link {
+            color: #fff;
+            text-decoration: none;
+            text-decoration-line: none;
+            text-decoration-thickness: none;
+            text-decoration-style: none;
+            text-decoration-color: none;
+            font: normal normal bold 15px/1.4em 'Open Sans', sans-serif;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: all .3s ease;
+            display: block
+        }
+
+        .hero-section {
+            position: relative;
+            height: 100vh;
+            width: 100vw;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+            background: url('assets/images/background.webp') center/cover no-repeat, #000;
+            background-attachment: fixed
+        }
+
+        .hero-video-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            overflow: hidden
+        }
+
+        .hero-background-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            width: 100vw;
+            height: 100vh;
+            z-index: 1;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+            will-change: transform
+        }
+
+        .hero-video-container .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, .5);
+            z-index: 2;
+            pointer-events: none
+        }
+
+        .hero-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+            max-width: 800px;
+            text-align: center
+        }
+
+        .hero-logo {
+            width: 390px;
+            height: 220px;
+            margin-bottom: 20px;
+            object-fit: contain
+        }
+
+        .hero-title {
+            font: normal normal normal 40px/1.4em 'Lobster', cursive;
+            margin-bottom: 30px;
+            color: #fff;
+        }
+
+        .social-bar {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px
+        }
+
+        .social-icon {
+            width: 39px;
+            height: 39px;
+            border-radius: 50%;
+            transition: transform .3s ease;
+            filter: brightness(0) invert(1)
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10001
+        }
+
+        .mobile-menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: #fff;
+            margin: 3px 0;
+            transition: .3s;
+            display: block
+        }
+
+        @media (max-width:768px) {
+            .mobile-menu-toggle {
+                display: flex
+            }
+
+            .nav-menu {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(0, 0, 0, .95);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                padding: 20px;
+                opacity: 0;
+                visibility: hidden;
+                max-height: 0;
+                overflow: hidden;
+                transition: all .3s ease;
+                z-index: 9999
+            }
+
+            .nav-menu.active {
+                opacity: 1;
+                visibility: visible;
+                max-height: 500px
+            }
+
+            .hero-logo {
+                width: 280px;
+                height: 158px
+            }
+
+            .hero-title {
+                font-size: 16px
+            }
+        }
+
+        @media (max-width:480px) {
+            .hero-logo {
+                width: 240px;
+                height: 135px
+            }
+
+            .hero-background-video {
+                width: 100%;
+                height: 100%;
+                object-fit: contain
+            }
+        }
+
+        @font-face {
+            font-family: 'Open Sans';
+            font-style: normal;
+            font-weight: 400;
+            font-display: swap;
+            src: url('assets/fonts/open-sans-v34-latin-regular.woff2') format('woff2')
+        }
+
+        @font-face {
+            font-family: 'Open Sans';
+            font-style: normal;
+            font-weight: 600;
+            font-display: swap;
+            src: url('assets/fonts/open-sans-v34-latin-600.woff2') format('woff2')
+        }
+
+        @font-face {
+            font-family: 'Open Sans';
+            font-style: normal;
+            font-weight: 700;
+            font-display: swap;
+            src: url('assets/fonts/open-sans-v34-latin-700.woff2') format('woff2')
+        }
+
+        @font-face {
+            font-family: 'Lobster';
+            font-style: normal;
+            font-weight: 400;
+            font-display: swap;
+            src: url('assets/fonts/lobster-v28-latin-regular.woff2') format('woff2')
+        }
+
+        @font-face {
+            font-family: 'Raleway';
+            font-style: normal;
+            font-weight: 400;
+            font-display: swap;
+            src: url('assets/fonts/raleway-v28-latin-regular.woff2') format('woff2')
+        }
+
+        @font-face {
+            font-family: 'Raleway';
+            font-style: normal;
+            font-weight: 600;
+            font-display: swap;
+            src: url('assets/fonts/raleway-v28-latin-600.woff2') format('woff2')
+        }
+
+        .venues-carousel-section {
+            background: transparent;
+            padding: 40px;
+        }
+
+        .venues-track {
+            display: flex;
+            gap: 60px;
+            animation: scroll-venues 25s linear infinite;
+            width: max-content;
+        }
+
+        .venues-slide {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 120px;
+            color: #fff;
+            text-align: center;
+        }
+
+        .venues-slide p {
+            margin-top: 10px;
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        @keyframes scroll-venues {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .venues-track:hover {
+            animation-play-state: paused;
+        }
+
+        @media (max-width: 768px) {
+            .trust-section>div {
+                gap: 20px !important;
+            }
+
+            .trust-section>div>div:nth-of-type(2) {
+                grid-template-columns: 1fr !important;
+                gap: 22px !important;
+            }
+
+            .trust-section>div>div:nth-of-type(3) {
+                max-width: 100% !important;
+            }
+
+            .trust-section>div>div:nth-of-type(2)>div,
+            .trust-section>div>div:nth-of-type(3)>div {
+                padding: 0 !important;
+            }
+        }
     </style>
 
 </head>
+
 <body style="background: transparent;">
     <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5783XFN4"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5783XFN4" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
 
     <!-- Header y Navegación -->
@@ -130,10 +421,10 @@
         <nav class="nav-container">
             <ul class="nav-menu" id="nav-menu">
                 <li class="nav-item">
-                    <a href="index.html" class="nav-link">INICIO</a>
+                    <a href="index.html" class="nav-link active">INICIO</a>
                 </li>
                 <li class="nav-item">
-                    <a href="/cotizador" class="nav-link active">COTIZADOR</a>
+                    <a href="/cotizador" class="nav-link">COTIZADOR</a>
                 </li>
                 <li class="nav-item">
                     <a href="/blog" class="nav-link">BLOG</a>
@@ -154,20 +445,29 @@
 
         <!-- Bloque 2: Confianza -->
         <section class="trust-section" style="padding: 20px 20px; text-align: center;">
-            <div style="max-width: 1100px; margin: 0 auto; display: flex; flex-direction: column; gap: 28px; align-items: center;">
-                <h2 style="color: #FFD700; font-size: 28px; margin-bottom: 30px; font-weight: 700;">¿Por qué elegirnos?</h2>
-                <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 30px; width: 100%; align-items: start;">
+            <div
+                style="max-width: 1100px; margin: 0 auto; display: flex; flex-direction: column; gap: 28px; align-items: center;">
+                <h2 style="color: #FFD700; font-size: 28px; margin-bottom: 30px; font-weight: 700;">¿Por qué elegirnos?
+                </h2>
+                <div
+                    style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 30px; width: 100%; align-items: start;">
                     <div style="padding: 0 10px;">
                         <div style="font-size: 40px; font-weight: 600; margin-bottom: 10px;">🛡️</div>
-                        <p style="color: #fff; font-size: 16px; line-height: 1.5; font-weight: 600; text-shadow: 0 1px 4px rgba(0, 0, 0, 0.55);">¡Fiesta sin interrupciones! Olvídate de los baches de energía; la música no para.</p>
+                        <p
+                            style="color: #fff; font-size: 16px; line-height: 1.5; font-weight: 600; text-shadow: 0 1px 4px rgba(0, 0, 0, 0.55);">
+                            ¡Fiesta sin interrupciones! Olvídate de los baches de energía; la música no para.</p>
                     </div>
                     <div style="padding: 0 10px;">
                         <div style="font-size: 40px; font-weight: 600; margin-bottom: 10px;">🎉</div>
-                        <p style="color: #fff; font-size: 16px; font-weight: 600; line-height: 1.5; text-shadow: 0 1px 4px rgba(0, 0, 0, 0.55);">Expertos en crear momentos inolvidables: Bodas, XV Años y Eventos Corporativos.</p>
+                        <p
+                            style="color: #fff; font-size: 16px; font-weight: 600; line-height: 1.5; text-shadow: 0 1px 4px rgba(0, 0, 0, 0.55);">
+                            Expertos en crear momentos inolvidables: Bodas, XV Años y Eventos Corporativos.</p>
                     </div>
                     <div style="padding: 0 10px;">
                         <div style="font-size: 40px; font-weight: 600; margin-bottom: 10px;">💃</div>
-                        <p style="color: #fff; font-size: 16px; line-height: 1.5; font-weight: 600; text-shadow: 0 1px 4px rgba(0, 0, 0, 0.55); word-break: break-word;">El mejor show visual de la CDMX,  con gran repertorio multigeneracional.</p>
+                        <p
+                            style="color: #fff; font-size: 16px; line-height: 1.5; font-weight: 600; text-shadow: 0 1px 4px rgba(0, 0, 0, 0.55); word-break: break-word;">
+                            El mejor show visual de la CDMX, con gran repertorio multigeneracional.</p>
                     </div>
                 </div>
             </div>
@@ -180,75 +480,117 @@
                 <div class="testimonial-track" id="testimonialTrack">
                     <!-- Testimonio 1 -->
                     <div class="testimonial-slide">
-                        <div class="testimonial-card">
-                            <img src="https://ui-avatars.com/api/?name=Pedro+Martin&background=random&color=fff" alt="Avatar" class="testimonial-avatar">
-                            <h4 class="testimonial-name">Pedro Martin Lozano Morales</h4>
-                            <div class="testimonial-stars">★★★★★</div>
-                            <p class="testimonial-quote">"Excelente grupo tocan música versátil para todos los gustos 100% recomendable para cualquier tipo de evento"</p>
-                        </div>
+                        <a
+                            href="https://www.google.com/maps/place/Grupo+Musical+Vers%C3%A1til+La+C%C3%A9lula/@19.3264047,-99.6049788,9z/data=!4m8!3m7!1s0x85d1fe64b416032d:0xe5c20c868a65a1dd!8m2!3d19.3264047!4d-99.6049788!9m1!1b1!16s%2Fg%2F1v_s66qw?entry=ttu&g_ep=EgoyMDI2MDUyNS4wIKXMDSoASAFQAw%3D%3D">
+                            <div class="testimonial-card">
+                                <img src="https://ui-avatars.com/api/?name=Pedro+Martin&background=random&color=fff"
+                                    alt="Avatar" class="testimonial-avatar">
+                                <h4 class="testimonial-name">Pedro Martin Lozano Morales</h4>
+                                <div class="testimonial-stars">★★★★★</div>
+                                <p class="testimonial-quote">"Excelente grupo tocan música versátil para todos los
+                                    gustos 100% recomendable para cualquier tipo de evento"</p>
+                            </div>
+                        </a>
                     </div>
                     <!-- Testimonio 2 -->
                     <div class="testimonial-slide">
-                        <div class="testimonial-card">
-                            <img src="https://ui-avatars.com/api/?name=Rubicel+Trujillo&background=random&color=fff" alt="Avatar" class="testimonial-avatar">
-                            <h4 class="testimonial-name">Rubicel Trujillo</h4>
-                            <div class="testimonial-stars">★★★★★</div>
-                            <p class="testimonial-quote">"Excelente grupo musical. Muy versátil, excelente repertorio musical. A todos nuestros invitados les encantó todo."</p>
-                        </div>
+                        <a
+                            href="https://www.google.com/maps/place/Grupo+Musical+Vers%C3%A1til+La+C%C3%A9lula/@19.3264047,-99.6049788,9z/data=!4m8!3m7!1s0x85d1fe64b416032d:0xe5c20c868a65a1dd!8m2!3d19.3264047!4d-99.6049788!9m1!1b1!16s%2Fg%2F1v_s66qw?entry=ttu&g_ep=EgoyMDI2MDUyNS4wIKXMDSoASAFQAw%3D%3D">
+                            <div class="testimonial-card">
+                                <img src="https://ui-avatars.com/api/?name=Rubicel+Trujillo&background=random&color=fff"
+                                    alt="Avatar" class="testimonial-avatar">
+                                <h4 class="testimonial-name">Rubicel Trujillo</h4>
+                                <div class="testimonial-stars">★★★★★</div>
+                                <p class="testimonial-quote">"Excelente grupo musical. Muy versátil, excelente
+                                    repertorio musical. A todos nuestros invitados les encantó todo."</p>
+                            </div>
+                        </a>
                     </div>
                     <!-- Testimonio 3 -->
                     <div class="testimonial-slide">
-                        <div class="testimonial-card">
-                            <img src="https://ui-avatars.com/api/?name=Aura+Mora&background=random&color=fff" alt="Avatar" class="testimonial-avatar">
-                            <h4 class="testimonial-name">Aura Mora</h4>
-                            <div class="testimonial-stars">★★★★★</div>
-                            <p class="testimonial-quote">"Súper profesionales, me encantó que desde el primer momento me brindaron una excelente atención y siempre estuvieron súper atentos al mood de los invitados."</p>
-                        </div>
+                        <a
+                            href="https://www.google.com/maps/place/Grupo+Musical+Vers%C3%A1til+La+C%C3%A9lula/@19.3264047,-99.6049788,9z/data=!4m8!3m7!1s0x85d1fe64b416032d:0xe5c20c868a65a1dd!8m2!3d19.3264047!4d-99.6049788!9m1!1b1!16s%2Fg%2F1v_s66qw?entry=ttu&g_ep=EgoyMDI2MDUyNS4wIKXMDSoASAFQAw%3D%3D">
+                            <div class="testimonial-card">
+                                <img src="https://ui-avatars.com/api/?name=Aura+Mora&background=random&color=fff"
+                                    alt="Avatar" class="testimonial-avatar">
+                                <h4 class="testimonial-name">Aura Mora</h4>
+                                <div class="testimonial-stars">★★★★★</div>
+                                <p class="testimonial-quote">"Súper profesionales, me encantó que desde el primer
+                                    momento me brindaron una excelente atención y siempre estuvieron súper atentos al
+                                    mood de los invitados."</p>
+                            </div>
+                        </a>
                     </div>
                     <!-- Testimonio 4 -->
                     <div class="testimonial-slide">
-                        <div class="testimonial-card">
-                            <img src="https://ui-avatars.com/api/?name=Erandi+MM&background=random&color=fff" alt="Avatar" class="testimonial-avatar">
-                            <h4 class="testimonial-name">Erandi MM</h4>
-                            <div class="testimonial-stars">★★★★★</div>
-                            <p class="testimonial-quote">"Excelente trabajo, todos nuestros invitados estuvieron encantados, muchas gracias por amenizar tan bien nuestra boda 🥰"</p>
-                        </div>
+                        <a
+                            href="https://www.google.com/maps/place/Grupo+Musical+Vers%C3%A1til+La+C%C3%A9lula/@19.3264047,-99.6049788,9z/data=!4m8!3m7!1s0x85d1fe64b416032d:0xe5c20c868a65a1dd!8m2!3d19.3264047!4d-99.6049788!9m1!1b1!16s%2Fg%2F1v_s66qw?entry=ttu&g_ep=EgoyMDI2MDUyNS4wIKXMDSoASAFQAw%3D%3D">
+                            <div class="testimonial-card">
+                                <img src="https://ui-avatars.com/api/?name=Erandi+MM&background=random&color=fff"
+                                    alt="Avatar" class="testimonial-avatar">
+                                <h4 class="testimonial-name">Erandi MM</h4>
+                                <div class="testimonial-stars">★★★★★</div>
+                                <p class="testimonial-quote">"Excelente trabajo, todos nuestros invitados estuvieron
+                                    encantados, muchas gracias por amenizar tan bien nuestra boda 🥰"</p>
+                            </div>
+                        </a>
                     </div>
                     <!-- Testimonio 5 -->
                     <div class="testimonial-slide">
-                        <div class="testimonial-card">
-                            <img src="https://ui-avatars.com/api/?name=Kimberly+Rocha&background=random&color=fff" alt="Avatar" class="testimonial-avatar">
-                            <h4 class="testimonial-name">Kimberly Rocha</h4>
-                            <div class="testimonial-stars">★★★★★</div>
-                            <p class="testimonial-quote">"Lo que más me encantó es que son super versátiles al tope de las últimas tendencias musicales, un sonido que suena increíble y súper ambiente."</p>
-                        </div>
+                        <a
+                            href="https://www.google.com/maps/place/Grupo+Musical+Vers%C3%A1til+La+C%C3%A9lula/@19.3264047,-99.6049788,9z/data=!4m8!3m7!1s0x85d1fe64b416032d:0xe5c20c868a65a1dd!8m2!3d19.3264047!4d-99.6049788!9m1!1b1!16s%2Fg%2F1v_s66qw?entry=ttu&g_ep=EgoyMDI2MDUyNS4wIKXMDSoASAFQAw%3D%3D">
+                            <div class="testimonial-card">
+                                <img src="https://ui-avatars.com/api/?name=Kimberly+Rocha&background=random&color=fff"
+                                    alt="Avatar" class="testimonial-avatar">
+                                <h4 class="testimonial-name">Kimberly Rocha</h4>
+                                <div class="testimonial-stars">★★★★★</div>
+                                <p class="testimonial-quote">"Lo que más me encantó es que son super versátiles al tope
+                                    de las últimas tendencias musicales, un sonido que suena increíble y súper
+                                    ambiente."</p>
+                            </div>
+                        </a>
                     </div>
                     <!-- Testimonio 6 -->
                     <div class="testimonial-slide">
-                        <div class="testimonial-card">
-                            <img src="https://ui-avatars.com/api/?name=Sherem+Garcia&background=random&color=fff" alt="Avatar" class="testimonial-avatar">
-                            <h4 class="testimonial-name">Sherem Garcia</h4>
-                            <div class="testimonial-stars">★★★★★</div>
-                            <p class="testimonial-quote">"De los mejores que he escuchado y disfrutado y con la mejor actitud de servicio y fiesta CON TODO CELULA"</p>
-                        </div>
+                        <a
+                            href="https://www.google.com/maps/place/Grupo+Musical+Vers%C3%A1til+La+C%C3%A9lula/@19.3264047,-99.6049788,9z/data=!4m8!3m7!1s0x85d1fe64b416032d:0xe5c20c868a65a1dd!8m2!3d19.3264047!4d-99.6049788!9m1!1b1!16s%2Fg%2F1v_s66qw?entry=ttu&g_ep=EgoyMDI2MDUyNS4wIKXMDSoASAFQAw%3D%3D">
+                            <div class="testimonial-card">
+                                <img src="https://ui-avatars.com/api/?name=Sherem+Garcia&background=random&color=fff"
+                                    alt="Avatar" class="testimonial-avatar">
+                                <h4 class="testimonial-name">Sherem Garcia</h4>
+                                <div class="testimonial-stars">★★★★★</div>
+                                <p class="testimonial-quote">"De los mejores que he escuchado y disfrutado y con la
+                                    mejor actitud de servicio y fiesta CON TODO CELULA"</p>
+                            </div>
+                        </a>
                     </div>
                     <!-- Testimonio 7 -->
                     <div class="testimonial-slide">
-                        <div class="testimonial-card">
-                            <img src="https://ui-avatars.com/api/?name=Sebastian+Vernis&background=random&color=fff" alt="Avatar" class="testimonial-avatar">
-                            <h4 class="testimonial-name">Sebastián Vernis Mora</h4>
-                            <div class="testimonial-stars">★★★★★</div>
-                            <p class="testimonial-quote">"Los amé. Música desde los 80's y 90's hasta actual, estuvimos bailando sin parar."</p>
-                        </div>
+                        <a
+                            href="https://www.google.com/maps/place/Grupo+Musical+Vers%C3%A1til+La+C%C3%A9lula/@19.3264047,-99.6049788,9z/data=!4m8!3m7!1s0x85d1fe64b416032d:0xe5c20c868a65a1dd!8m2!3d19.3264047!4d-99.6049788!9m1!1b1!16s%2Fg%2F1v_s66qw?entry=ttu&g_ep=EgoyMDI2MDUyNS4wIKXMDSoASAFQAw%3D%3D">
+                            <div class="testimonial-card">
+                                <img src="https://ui-avatars.com/api/?name=Sebastian+Vernis&background=random&color=fff"
+                                    alt="Avatar" class="testimonial-avatar">
+                                <h4 class="testimonial-name">Sebastián Vernis Mora</h4>
+                                <div class="testimonial-stars">★★★★★</div>
+                                <p class="testimonial-quote">"Los amé. Música desde los 80's y 90's hasta actual,
+                                    estuvimos bailando sin parar."</p>
+                            </div>
+                        </a>
                     </div>
                     <!-- Testimonio 8 -->
                     <div class="testimonial-slide">
-                        <div class="testimonial-card">
-                            <img src="https://ui-avatars.com/api/?name=Jazmin+Robles&background=random&color=fff" alt="Avatar" class="testimonial-avatar">
-                            <h4 class="testimonial-name">Jazmin Robles Yerena</h4>
-                            <div class="testimonial-stars">★★★★★</div>
-                            <p class="testimonial-quote">"Es muy buen grupo me gusta mucho el ambiente que pone cuando empieza a tocar"</p>
-                        </div>
+                        <a
+                            href="https://www.google.com/maps/place/Grupo+Musical+Vers%C3%A1til+La+C%C3%A9lula/@19.3264047,-99.6049788,9z/data=!4m8!3m7!1s0x85d1fe64b416032d:0xe5c20c868a65a1dd!8m2!3d19.3264047!4d-99.6049788!9m1!1b1!16s%2Fg%2F1v_s66qw?entry=ttu&g_ep=EgoyMDI2MDUyNS4wIKXMDSoASAFQAw%3D%3D">
+                            <div class="testimonial-card">
+                                <img src="https://ui-avatars.com/api/?name=Jazmin+Robles&background=random&color=fff"
+                                    alt="Avatar" class="testimonial-avatar">
+                                <h4 class="testimonial-name">Jazmin Robles Yerena</h4>
+                                <div class="testimonial-stars">★★★★★</div>
+                                <p class="testimonial-quote">"Es muy buen grupo me gusta mucho el ambiente que pone
+                                    cuando empieza a tocar"</p>
+                            </div>
+                        </a>
                     </div>
                 </div>
                 <button class="carousel-nav carousel-next" aria-label="Siguiente">❯</button>
@@ -258,41 +600,48 @@
 
         <!-- Carrusel de Lugares -->
         <section class="venues-carousel-section">
-        <div style="padding: 40px 0; overflow: hidden;">
-        <h2 style="text-align: center; color: #FFD700; font-size: 28px; margin-bottom: 30px; font-weight: 700;">Trayectoria comprobada en los recintos más exclusivos de la CDMX</h2>
-            <div class="venues-track">
-                <div class="venues-slide">
-                    <img src="assets/atriosantafe.png.png" alt="Atrio Santa Fe" style="height: 50px; object-fit: contain;">
-                </div>
-                <div class="venues-slide">
-                    <img src="assets/exposantafe.png.png" alt="ExponTA Santa Fe" style="height: 50px; object-fit: contain;">
-                </div>
-                <div class="venues-slide">
-                    <img src="assets/sitatyr.png.png" alt="SitaYR" style="height: 50px; object-fit: contain;">
-                </div>
-                <div class="venues-slide">
-                    <img src="assets/auditoriobb.png.png" alt="Auditorio BB" style="height: 50px; object-fit: contain;">
-                </div>
-                <div class="venues-slide">
-                    <img src="assets/239476.svg" alt="La Ternura" style="height: 50px; object-fit: contain;">
-                </div>
-                <div class="venues-slide">
-                    <img src="assets/atriosantafe.png.png" alt="Atrio Santa Fe" style="height: 50px; object-fit: contain;">
-                </div>
-                <div class="venues-slide">
-                    <img src="assets/exposantafe.png.png" alt="ExponTA Santa Fe" style="height: 50px; object-fit: contain;">
-                </div>
-                <div class="venues-slide">
-                    <img src="assets/sitatyr.png.png" alt="SitaYR" style="height: 50px; object-fit: contain;">
-                </div>
-                <div class="venues-slide">
-                    <img src="assets/auditoriobb.png.png" alt="Auditorio BB" style="height: 50px; object-fit: contain;">
-                </div>
-                <div class="venues-slide">
-                    <img src="assets/239476.svg" alt="La Ternura" style="height: 50px; object-fit: contain;">
+            <div style="padding: 40px 0; overflow: hidden;">
+                <h2 style="text-align: center; color: #FFD700; font-size: 28px; margin-bottom: 30px; font-weight: 700;">
+                    Trayectoria comprobada en los recintos más exclusivos de la CDMX</h2>
+                <div class="venues-track">
+                    <div class="venues-slide">
+                        <img src="assets/atriosantafe.png.png" alt="Atrio Santa Fe"
+                            style="height: 50px; object-fit: contain;">
+                    </div>
+                    <div class="venues-slide">
+                        <img src="assets/exposantafe.png.png" alt="ExponTA Santa Fe"
+                            style="height: 50px; object-fit: contain;">
+                    </div>
+                    <div class="venues-slide">
+                        <img src="assets/sitatyr.png.png" alt="SitaYR" style="height: 50px; object-fit: contain;">
+                    </div>
+                    <div class="venues-slide">
+                        <img src="assets/auditoriobb.png.png" alt="Auditorio BB"
+                            style="height: 50px; object-fit: contain;">
+                    </div>
+                    <div class="venues-slide">
+                        <img src="assets/239476.svg" alt="La Ternura" style="height: 50px; object-fit: contain;">
+                    </div>
+                    <div class="venues-slide">
+                        <img src="assets/atriosantafe.png.png" alt="Atrio Santa Fe"
+                            style="height: 50px; object-fit: contain;">
+                    </div>
+                    <div class="venues-slide">
+                        <img src="assets/exposantafe.png.png" alt="ExponTA Santa Fe"
+                            style="height: 50px; object-fit: contain;">
+                    </div>
+                    <div class="venues-slide">
+                        <img src="assets/sitatyr.png.png" alt="SitaYR" style="height: 50px; object-fit: contain;">
+                    </div>
+                    <div class="venues-slide">
+                        <img src="assets/auditoriobb.png.png" alt="Auditorio BB"
+                            style="height: 50px; object-fit: contain;">
+                    </div>
+                    <div class="venues-slide">
+                        <img src="assets/239476.svg" alt="La Ternura" style="height: 50px; object-fit: contain;">
+                    </div>
                 </div>
             </div>
-        </div>       
         </section>
 
         <!-- Formulario de Cotización -->
@@ -355,9 +704,11 @@
                         </div>
                         <div class="form-group">
                             <label for="telefono" class="form-label">Teléfono</label>
-                            <input type="tel" id="telefono" name="telefono" class="form-input" placeholder="Número telefónico">
+                            <input type="tel" id="telefono" name="telefono" class="form-input"
+                                placeholder="Número telefónico">
                         </div>
-                        <button type="submit" class="btn btn-primary form-submit-full" style="background: #25D366; font-size: 18px; font-weight: 700; padding: 18px;">
+                        <button type="submit" class="btn btn-primary form-submit-full"
+                            style="background: #25D366; font-size: 18px; font-weight: 700; padding: 18px;">
                             Obtener mi presupuesto
                         </button>
                     </form>
@@ -370,7 +721,7 @@
                     </a>
                 </div>
             </div>
-        </div>
+            </div>
         </section>
     </main>
 
@@ -389,7 +740,8 @@
                 aria-label="YouTube">
                 <img src="assets/icons/youtube-icon.webp" alt="YouTube" class="social-icon">
             </a>
-            <a href="https://www.tiktok.com/@grupolacelula?_r=1&_t=ZS-94JHojCkITM" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+            <a href="https://www.tiktok.com/@grupolacelula?_r=1&_t=ZS-94JHojCkITM" target="_blank"
+                rel="noopener noreferrer" aria-label="TikTok">
                 <img src="assets/icons/tiktok-icon.png" alt="TikTok" class="social-icon">
             </a>
         </div>
@@ -435,11 +787,13 @@
                     </div>
                     <div class="form-group">
                         <label for="email-input">Email</label>
-                        <input type="email" id="email-input" class="form-input" placeholder="correo@ejemplo.com" required>
+                        <input type="email" id="email-input" class="form-input" placeholder="correo@ejemplo.com"
+                            required>
                     </div>
                     <div class="form-group">
                         <label for="phone-input">Teléfono</label>
-                        <input type="tel" id="phone-input" class="form-input" placeholder="Tu número de teléfono" required>
+                        <input type="tel" id="phone-input" class="form-input" placeholder="Tu número de teléfono"
+                            required>
                     </div>
                     <div class="form-group">
                         <label for="event-type-input">Tipo de evento</label>
@@ -455,7 +809,8 @@
                     </div>
                     <button type="submit" class="lead-form-submit">Iniciar chat</button>
                 </form>
-                <p class="lead-form-privacy">Tu información es confidencial y solo se utilizará para brindarte atención personalizada.</p>
+                <p class="lead-form-privacy">Tu información es confidencial y solo se utilizará para brindarte atención
+                    personalizada.</p>
             </div>
         </div>
 
@@ -472,7 +827,10 @@
             <div id="chat-input-area" class="chat-input-area">
                 <textarea id="user-input" class="chat-input" placeholder="Escribe tu mensaje..." rows="1"></textarea>
                 <button id="send-btn" class="send-btn" aria-label="Enviar mensaje">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24"
+                        height="24">
+                        <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
+                    </svg>
                 </button>
             </div>
         </div>
@@ -485,7 +843,7 @@
 
     <!-- Testimonial Carousel -->
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const track = document.getElementById('testimonialTrack');
             const dotsContainer = document.getElementById('carouselDots');
             if (!track || !dotsContainer) return;
@@ -535,5 +893,6 @@
         });
     </script>
 
-  </body>
-  </html>
+</body>
+
+</html>

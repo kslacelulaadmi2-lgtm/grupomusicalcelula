@@ -218,6 +218,10 @@
     font-size: 14px;
     transition: background 0.3s;
     text-decoration: none;
+text-decoration-line: none;
+text-decoration-thickness: none;
+text-decoration-style: none;
+text-decoration-color: none;
     display: inline-block;
     font-family: inherit;
     text-align: center;
