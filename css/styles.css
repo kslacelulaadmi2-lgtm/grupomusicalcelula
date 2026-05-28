@@ -1,7 +1,6 @@
 /*! Grupo Musical Célula - Clean Stylesheet */
 
 * {
-    margin: 0;
     padding: 0;
     box-sizing: border-box
 }
@@ -54,11 +53,13 @@ main.content-text p,
     position: relative;
     padding: 0 0 4rem 0;
     background: rgba(0, 0, 0, 0.8);
+    color: var(--content-text);
+    position: relative;
+    z-index: 1;
 }
 
 .main-content {
     max-width: 1200px;
-    margin: 0 auto;
     padding: 0 2rem;
 }
 
@@ -517,14 +518,6 @@ main.content-text p,
 
 .social-icon:hover {
     transform: scale(1.1);
-}
-
-/* ===== SECCIONES DE CONTENIDO ===== */
-.content-section {
-    background: transparent;
-    color: var(--content-text);
-    position: relative;
-    z-index: 1;
 }
 
 /* Content sections with white text */
