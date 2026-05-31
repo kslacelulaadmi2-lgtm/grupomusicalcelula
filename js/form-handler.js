@@ -130,6 +130,18 @@ let isSubmitting=false;form.addEventListener('submit',async function(e){e.preven
                 currency: 'MXN',
                 form_fields_filled: Object.keys(data).length
             });
+
+            // Google Ads conversion (GT-5MXH55ZG)
+            try {
+                if (typeof gtag === 'function') {
+                    gtag('event', 'conversion', {
+                        send_to: 'GT-5MXH55ZG'
+                    });
+                }
+            } catch (err) {
+                console.warn('Google Ads conversion error:', err);
+            }
+
             showNotification('✅ Tu solicitud ha sido enviada. Te contactaremos pronto.', 'success');
         } else {
             console.warn('No se pudo enviar el email:', result.error);

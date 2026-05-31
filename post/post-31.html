@@ -1,57 +1,496 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-5783XFN4');</script>
-    <!-- End Google Tag Manager -->
 
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=GT-5MXH55ZG"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'GT-5MXH55ZG');
+</script>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Grupo Musical Célula se presenta en Santa Moto este 7 de diciembre | grupomusicalcelula.com</title>
-    <meta name="description" content="¡7 diciembre 5 PM! Grupo Musical Célula enciende Santa Moto. Música en vivo, ambiente biker y energía pura. Evento imperdible.">
-    <meta name="keywords" content="Grupo Musical Célula, Santa Moto, 7 diciembre 2025, 5 PM, música en vivo, biker México, conciertos CDMX">
-    <meta property="og:title" content="Grupo Musical Célula se presenta en Santa Moto este 7 de diciembre">
-    <meta property="og:description" content="¡7 diciembre 5 PM! Grupo Musical Célula enciende Santa Moto. Música en vivo, ambiente biker y energía pura.">
+    <title>Bienvenidos a La Célula: la evolución de la música en vivo</title>
+    <meta name="description"
+        content="Descubre cómo La Célula crea atmósferas electrizantes con un flujo sonoro continuo y tecnología de punta para eventos premium en CDMX.">
+    <meta property="og:title" content="Bienvenidos a La Célula: la evolución de la música en vivo">
+    <meta property="og:description"
+        content="Creamos atmósferas electrizantes a través de un flujo sonoro continuo que conecta de forma exacta con cada asistente. Música premium non-stop para tu evento.">
     <meta property="og:type" content="article">
-    <meta property="og:image" content="../assets/gallery/post-31.webp">
-    <meta property="og:url" content="https://www.grupomusicalcelula.com/post/post-31.html">
-    <link rel="canonical" href="https://www.grupomusicalcelula.com/post/post-31.html">
+    <meta property="og:image" content="../assets/gallery/banda-1.webp">
+    <meta property="og:url" content="https://www.grupomusicalcelula.com/post/post-32.html">
+    <link rel="canonical" href="https://www.grupomusicalcelula.com/post/post-32.html">
 
     <!-- Favicon -->
     <link rel="icon" href="../assets/logo/logo-favicon-grupo-musical-la-celula.webp" type="image/webp">
 
-    <!-- Google Fonts -->
+    <!-- Preconnect para recursos externos -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lobster:wght@400&family=Open+Sans:wght@400;600;700&family=Raleway:wght@400;600&display=swap" rel="stylesheet">
 
-    <!-- Estilos -->
-    <link rel="stylesheet" href="../css/styles.min.css">
+    <!-- Google Fonts -->
+    <link rel="preload" href="../assets/fonts/open-sans-v34-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../assets/fonts/lobster-v28-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Async CSS Loading -->
+    <link rel="preload" href="../css/styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="../css/styles.min.css">
+    </noscript>
+
     <!-- Vercel Analytics & Speed Insights -->
     <script>
-      window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+        window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
     </script>
     <script defer src="/_vercel/insights/script.js"></script>
     <script>
-      window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+        window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
     </script>
     <script defer src="/_vercel/speed-insights/script.js"></script>
 
-  </head>
+    <!-- Critical CSS Inline -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        body,
+        html {
+            height: 100%;
+            font-family: 'Open Sans', Arial, sans-serif;
+            background: #000;
+            color: #fff;
+            overflow-x: hidden;
+            scrollbar-width: none
+        }
+
+        .site-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 55px;
+            background: rgba(0, 0, 0, .4);
+            backdrop-filter: blur(10px);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center
+        }
+
+        .nav-container {
+            width: 100%;
+            max-width: 980px;
+            padding: 0 20px;
+            display: flex;
+            justify-content: center;
+            position: relative
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 40px;
+            align-items: center
+        }
+
+        .nav-link {
+            color: #fff;
+            text-decoration: none;
+            text-decoration-line: none;
+            text-decoration-thickness: none;
+            text-decoration-style: none;
+            text-decoration-color: none;
+            font: normal normal bold 15px/1.4em 'Open Sans', sans-serif;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: all .3s ease;
+            display: block
+        }
+
+        .nav-link.active,
+        .nav-link:hover {
+            background: hsla(0, 0%, 100%, .1);
+            color: #e0e0e0
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10001
+        }
+
+        .mobile-menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: #fff;
+            margin: 3px 0;
+            transition: .3s;
+            display: block
+        }
+
+        @media (max-width:768px) {
+            .mobile-menu-toggle {
+                display: flex
+            }
+
+            .nav-menu {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(0, 0, 0, .95);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                padding: 20px;
+                opacity: 0;
+                visibility: hidden;
+                max-height: 0;
+                overflow: hidden;
+                transition: all .3s ease;
+                z-index: 9999
+            }
+
+            .nav-menu.active {
+                opacity: 1;
+                visibility: visible;
+                max-height: 500px
+            }
+        }
+
+        /* ============================================
+           BLOG POST - HOMOLOGADO AL SITIO
+           ============================================ */
+        .blog-post-section {
+            background: rgba(0, 0, 0, 0.6);
+            min-height: 100vh;
+            padding: 75px 20px 40px;
+            position: relative;
+            z-index: 1
+        }
+
+        .blog-post-container {
+            max-width: 800px;
+            margin: 0 auto
+        }
+
+        .blog-post-header {
+            text-align: center;
+            margin-bottom: 30px
+        }
+
+        .blog-post-header h1 {
+            font-family: 'Lobster', cursive;
+            font-weight: 400;
+            color: #fff;
+            font-size: 30px;
+            line-height: 1.3;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,.9), 0 0 20px rgba(0,0,0,.5)
+        }
+
+        .post-meta {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap
+        }
+
+        .post-meta-center {
+            justify-content: center
+        }
+
+        .post-category {
+            background: #ffe100;
+            color: #000;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            padding: 5px 12px;
+            border-radius: 20px;
+            text-transform: uppercase
+        }
+
+        .post-date {
+            color: #e0e0e0;
+            font-size: 13px
+        }
+
+        .post-author-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid hsla(0,0%,100%,.2)
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover
+        }
+
+        .author-name {
+            font-family: 'Open Sans', sans-serif;
+            font-weight: 600;
+            color: #fff
+        }
+
+        .post-stats {
+            font-size: 13px;
+            color: #e0e0e0
+        }
+
+        .post-body-container {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 20px;
+            font-weight: 400;
+            line-height: 1.8;
+            color: #fff
+        }
+
+        .post-body-container p {
+            margin-bottom: 20px
+        }
+
+        .post-body-container h2 {
+            font-family: 'Lobster', cursive;
+            font-weight: 400;
+            color: #fff;
+            font-size: 30px;
+            margin: 30px 0 20px 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,.9), 0 0 15px rgba(0,0,0,.5)
+        }
+
+        .post-body-container a {
+            color: #3d9be9;
+            text-decoration: underline
+        }
+
+        .post-body-container a:hover {
+            color: #ffe100
+        }
+
+        .post-image-container {
+            margin: 30px 0
+        }
+
+        .post-image-full {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 10px
+        }
+
+        .post-tags-container {
+            margin-top: 40px;
+            text-align: center;
+            padding: 20px;
+            background: hsla(0,0%,100%,.05);
+            border-radius: 8px
+        }
+
+        .post-tag {
+            display: inline-block;
+            margin: 5px;
+            padding: 5px 15px;
+            background: #ffe100;
+            color: #000;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600
+        }
+
+        .post-navigation-container {
+            margin-top: 40px;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+            text-align: center
+        }
+
+        .link-no-decoration {
+            text-decoration: none
+        }
+
+        .cta-container {
+            margin: 40px 0;
+            text-align: center
+        }
+
+        .cta-container .btn {
+            font-size: 16px;
+            padding: 15px 40px
+        }
+
+        .btn {
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            display: inline-block;
+            font-family: 'Open Sans', Arial, sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            overflow: hidden;
+            padding: 12px 24px;
+            position: relative;
+            text-align: center;
+            text-decoration: none;
+            transition: all .3s ease
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, rgba(59,130,246,.6), rgba(29,78,216,.6) 50%, rgba(30,64,175,.6));
+            border: 1px solid hsla(0,0%,100%,.15);
+            color: #fff;
+            font-weight: 600
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #60a5fa, #3b82f6 50%, #2563eb);
+            transform: translateY(-2px)
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, rgba(253,224,71,.6), rgba(250,204,21,.6) 50%, rgba(234,179,8,.6));
+            border: 1px solid hsla(0,0%,100%,.2);
+            color: #000
+        }
+
+        .btn-secondary:hover {
+            background: linear-gradient(135deg, #fef08a, #fde047 50%, #facc15);
+            transform: translateY(-2px)
+        }
+
+        /* ============================================
+           FOOTER
+           ============================================ */
+        .site-footer {
+            background: rgba(0, 0, 0, .8);
+            color: #fff;
+            padding: 40px 20px;
+            position: relative;
+            text-align: center;
+            z-index: 1
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 20px
+        }
+
+        .social-icon {
+            width: 39px;
+            height: 39px;
+            border-radius: 50%;
+            transition: transform .3s ease;
+            filter: brightness(0) invert(1)
+        }
+
+        .footer-text {
+            font-family: 'Open Sans', Arial, sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            opacity: .8
+        }
+
+        @font-face {
+            font-family: 'Open Sans';
+            font-style: normal;
+            font-weight: 400;
+            font-display: swap;
+            src: url('../assets/fonts/open-sans-v34-latin-regular.woff2') format('woff2')
+        }
+
+        @font-face {
+            font-family: 'Lobster';
+            font-style: normal;
+            font-weight: 400;
+            font-display: swap;
+            src: url('../assets/fonts/lobster-v28-latin-regular.woff2') format('woff2')
+        }
+
+        @media (max-width:768px) {
+            .blog-post-header h1 {
+                font-size: 24px
+            }
+
+            .post-body-container {
+                font-size: 18px
+            }
+
+            .post-body-container h2 {
+                font-size: 24px
+            }
+
+            .post-image-full {
+                height: 250px
+            }
+
+            .post-navigation-container {
+                flex-direction: column
+            }
+
+            .post-navigation-container a {
+                width: 100%
+            }
+
+            .post-author-container {
+                flex-direction: column;
+                text-align: center
+            }
+        }
+
+        @media (max-width:480px) {
+            .blog-post-header h1 {
+                font-size: 20px
+            }
+
+            .post-body-container {
+                font-size: 16px
+            }
+
+            .post-body-container h2 {
+                font-size: 20px
+            }
+
+            .post-image-full {
+                height: 200px
+            }
+        }
+    </style>
+</head>
+
 <body>
     <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5783XFN4"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5783XFN4" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
 
-
-    <!-- Header y Navegación -->
+    <!-- Header y Navegación (mismo que index) -->
     <header class="site-header" id="SITE_HEADER">
         <nav class="nav-container">
             <ul class="nav-menu" id="nav-menu">
@@ -62,7 +501,7 @@
                     <a href="/cotizador" class="nav-link">COTIZADOR</a>
                 </li>
                 <li class="nav-item">
-                    <a href="/blog" class="nav-link active">Blog</a>
+                    <a href="/blog" class="nav-link active">BLOG</a>
                 </li>
             </ul>
 
@@ -74,146 +513,121 @@
             </button>
         </nav>
     </header>
-
     <!-- Contenido Principal -->
-    <main class="site-container">
-        <!-- Hero del Artículo -->
-        <section class="hero-section" id="hero">
-            <div class="hero-content fade-in">
-                <h1 class="section-title">Grupo Musical Célula se presenta en Santa Moto este 7 de Diciembre</h1>
-            </div>
-        </section>
+  <main class="blog-post-section">
+        <div class="blog-post-container">
+            <!-- Titulo -->
+            <header class="blog-post-header fade-in">
+                  <h1 class="section-title">Grupo Musical Célula se presenta en Santa Moto este 7 de Diciembre</h1>
+            </header>
 
-        <!-- Contenido del Artículo -->
-        <section class="content-section">
-            <div class="main-content">
-                <article class="blog-post-content">
-                    <div class="post-meta post-meta-center">
+            <div class="post-meta post-meta-center">
                         <span class="post-category">Eventos</span>
-                        <span class="post-date">3 Diciembre 2025</span>
-                    </div>
+                        <span class="post-date">3 Diciembre 2025</span>                       </div>
 
-                    <div class="post-image-container">
-                        <img src="../assets/gallery/post-31.webp" alt="Grupo Musical Célula Santa Moto 7 diciembre 5 PM" class="post-img post-image-full">
-                    </div>
-
-                    <div class="post-author-container">
-                        <img src="../assets/gallery/post-31.webp" alt="Grupo Musical La Célula" class="author-avatar author-avatar-large">
-                        <div>
-                            <div class="author-name author-name-bold">Grupo Musical Versátil La Célula</div>
-                            <div class="post-stats post-stats-small">5 min de lectura</div>
-                        </div>
-                    </div>
-
+                       <!-- Autor -->
+                       <div class="post-author-container">
+                           <img src="../assets/gallery/banda-1.webp" alt="Redaccion La Célula"
+                               class="author-avatar">
+                           <div>
+                               <div class="author-name">Redacción La Célula</div>
+                               <div class="post-stats">1 min. de lectura • 3 de Diciembre de 2026</div>
+                           </div>
+                       </div>
                     <div class="post-body-container">
                         <article>
-<p><strong>¡ATENCIÓN MÚSICOS Y BIKERS!</strong> Este <strong>Domingo 7 de diciembre a las 5:00 PM</strong>, <a href="https://grupomusicalcelula.com">Grupo Musical Célula</a> <strong>enciende Santa Moto</strong> con un show en vivo cargado de <strong>energía rebelde y música que se vive</strong>.</p>
+                            <p><strong>¡ATENCIÓN MÚSICOS Y BIKERS!</strong> Este <strong>Domingo 7 de diciembre a las 5:00 PM</strong>, <a href="https://grupomusicalcelula.com">Grupo Musical Célula</a> <strong>enciende Santa Moto</strong> con un show en vivo cargado de <strong>energía rebelde y música que se vive</strong>.</p>
 
-<h2>🏍️ Santa Moto: Templo del Rock y las Motos</h2>
-<p>El icónico <strong>Santa Moto</strong> será el escenario perfecto para fusionar <strong>música en vivo con cultura biker auténtica</strong>. Una noche donde las motos rugen y la música prende fuego.</p>
+                            <h2>🏍️ Santa Moto: Templo del Rock y las Motos</h2>
+                            <p>El icónico <strong>Santa Moto</strong> será el escenario perfecto para fusionar <strong>música en vivo con cultura biker auténtica</strong>. Una noche donde las motos rugen y la música prende fuego.</p>
 
-<h2>🎸 ¿Por qué NO TE LO PUEDES PERDER?</h2>
-<ul>
-    <li><strong>🎤 Música con actitud:</strong> Estilo directo que conecta desde la primera nota</li>
-    <li><strong>🏍️ Ambiente biker 100%:</strong> Motos, rock y vibra rebelde</li>
-    <li><strong>🔥 Energía pura:</strong> Del escenario directo al público</li>
-    <li><strong>🍻 Ideal con amigos:</strong> La crew completa disfrutando</li>
-</ul>
+                            <h2>🎸 ¿Por qué NO TE LO PUEDES PERDER?</h2>
+                            <ul>
+                                <li><strong>🎤 Música con actitud:</strong> Estilo directo que conecta desde la primera nota</li>
+                                <li><strong>🏍️ Ambiente biker 100%:</strong> Motos, rock y vibra rebelde</li>
+                                <li><strong>🔥 Energía pura:</strong> Del escenario directo al público</li>
+                                <li><strong>🍻 Ideal con amigos:</strong> La crew completa disfrutando</li>
+                            </ul>
 
-<blockquote>
-    "Música que se siente. Energía que se vive. Santa Moto será épico."
-    <cite>— Grupo Musical Célula</cite>
-</blockquote>
+                            <blockquote>
+                                "Música que se siente. Energía que se vive. Santa Moto será épico."
+                                <cite>— Grupo Musical Célula</cite>
+                            </blockquote>
+                             <div class="post-image-container">
+                                <img src="../assets/gallery/banda-31.webp"
+                                    alt="Grupo Musical La Célula - Eventos Premium" class="post-image-full">
+                            </div>
 
-<h2>📋 DETALLES CONFIRMADOS</h2>
-<div class="event-details" style="background: transparent; padding: 2rem; border-radius: 12px; border-left: 5px solid #ff6b35;">
-    <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 1rem; margin-bottom: 1rem;">
-        <strong>📍 Lugar:</strong> <span>Santa Moto</span>
-    </div>
-    <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 1rem; margin-bottom: 1rem;">
-        <strong>📅 Fecha:</strong> <span>Domingo 7 Diciembre 2025</span>
-    </div>
-    <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 1rem; margin-bottom: 1rem;">
-        <strong>🕘 HORA:</strong> <span><strong>5:00 PM</strong></span>
-    </div>
-    <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 1rem;">
-        <strong>🎶 Artista:</strong> <span><strong>Grupo Musical Célula</strong></span>
-    </div>
-</div>
+                            <h2>📋 DETALLES CONFIRMADOS</h2>
+                            <div class="event-details" style="background: transparent; padding: 2rem; border-radius: 12px; border-left: 5px solid #ff6b35;">
+                                <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 1rem; margin-bottom: 1rem;">
+                                    <strong>📍 Lugar:</strong> <span>Santa Moto</span>
+                                </div>
+                                <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 1rem; margin-bottom: 1rem;">
+                                    <strong>📅 Fecha:</strong> <span>Domingo 7 Diciembre 2025</span>
+                                </div>
+                                <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 1rem; margin-bottom: 1rem;">
+                                    <strong>🕘 HORA:</strong> <span><strong>5:00 PM</strong></span>
+                                </div>
+                                <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 1rem;">
+                                    <strong>🎶 Artista:</strong> <span><strong>Grupo Musical Célula</strong></span>
+                                </div>
+                            </div>
 
-<div class="cta-section event-cta" style="text-align: center; margin: 2rem 0;">
-    <a href="https://api.whatsapp.com/send/?phone=%2B525535412631&text=Hola%2C+me+interesa+cotizar+mi+evento...&type=phone_number&app_absent=0" class="btn btn-secondary">Chat WhatsApp Disponibilidad</a>
-</div>
+                            <div class="cta-section event-cta" style="text-align: center; margin: 2rem 0;">
+                                <a href="https://wa.me/+525535412631?text=Hola,%20quiero%20cotizar%20a%20La%20Célula%20para%20mi%20evento.%20Vengo%20de%20su%20sitio%20web" class="btn btn-secondary">Chat WhatsApp Disponibilidad</a>
+                            </div>
 
-<h2>⚡ QUÉ ESPERAR</h2>
-<p><strong>Clásicos del rock que hacen rugir las motos</strong> + <strong>hits que mantienen la fiesta hasta el amanecer</strong>. Trae tu chamarra de cuero y tu mejor actitud.</p>
+                            <h2>⚡ QUÉ ESPERAR</h2>
+                            <p><strong>Clásicos del rock que hacen rugir las motos</strong> + <strong>hits que mantienen la fiesta hasta el amanecer</strong>. Trae tu chamarra de cuero y tu mejor actitud.</p>
 
-<div style="background: linear-gradient(45deg, #ff6b35A6, #ff8e53A6); color: white; padding: 2.5rem; border-radius: 16px; text-align: center; font-size: 1em; font-weight: bold; margin: 3rem 0; text-shadow: 1px 1px 2px rgba(0,0,0,0.5);">
-    👉 <strong>¡DOMINGO 7 DICIEMBRE - 5:00 PM - SANTA MOTO! 🏍️🔥🎸</strong> 👈
-</div>
+                            <div style="background: linear-gradient(45deg, #ff6b35A6, #ff8e53A6); color: white; padding: 2.5rem; border-radius: 16px; text-align: center; font-size: 1em; font-weight: bold; margin: 3rem 0; text-shadow: 1px 1px 2px rgba(0,0,0,0.5);">
+                                👉 <strong>¡DOMINGO 7 DICIEMBRE - 5:00 PM - SANTA MOTO! 🏍️🔥🎸</strong> 👈
+                            </div>
 
-<p><strong>¡Comparte con tu crew biker y nos vemos en Santa Moto!</strong></p>
+                            <p><strong>¡Comparte con tu crew biker y nos vemos en Santa Moto!</strong></p>
 
-<h3>Preguntas Frecuentes (FAQs)</h3>
-<p><strong>1. ¿Cuánto cuesta la entrada?</strong><br/>Entrada Libre.</p>
-<p><strong>2. ¿Qué tipo de música tocarán?</strong><br/>Rock clásico, covers potentes y hits que prenden la fiesta.</p>
-<p><strong>3. ¿Hay estacionamiento para motos?</strong><br/>Sí, Santa Moto cuenta con espacio especial para motociclistas.</p>
-<p><strong>4. ¿Cómo contrato a Grupo Musical Versátil La Célula?</strong><br/>Solo debes <a href="/cotizador">contactarnos aquí</a> para tu próximo evento.</p>
-</article>
-                    </div>
-
+                            <h3>Preguntas Frecuentes (FAQs)</h3>
+                            <p><strong>1. ¿Cuánto cuesta la entrada?</strong><br/>Entrada Libre.</p>
+                            <p><strong>2. ¿Qué tipo de música tocarán?</strong><br/>Rock clásico, covers potentes y hits que prenden la fiesta.</p>
+                            <p><strong>3. ¿Hay estacionamiento para motos?</strong><br/>Sí, Santa Moto cuenta con espacio especial para motociclistas.</p>
+                            <p><strong>4. ¿Cómo contrato a Grupo Musical Versátil La Célula?</strong><br/>Solo debes <a href="/cotizador">contactarnos aquí</a> para tu próximo evento.</p>
+                            </article>
+                        </div>
                     <div class="post-tags-container">
                         <span class="post-tag">#música</span><span class="post-tag">#eventos</span><span class="post-tag">#rock</span><span class="post-tag">#bikers</span>
                     </div>
 
-                    <div class="post-navigation-container">
-                        <a href="/blog" class="btn btn-secondary link-no-decoration">← Volver al Blog</a>
-                        <a href="post-30.html" class="btn btn-primary link-no-decoration">Artículo Anterior →</a>
-                    </div>
-                </article>
+            <div class="post-navigation-container">
+                <a href="/blog" class="btn btn-secondary link-no-decoration">← Volver al blog</a>
+                <a href="post-32.html" class="btn btn-primary link-no-decoration">Anterior artículo →</a>
             </div>
-        </section>
+        </div>
     </main>
 
-    <!-- Footer -->
+    <!-- Footer (mismo que index) -->
     <footer class="site-footer" id="SITE_FOOTER">
         <div class="footer-social">
-            <a href="https://api.whatsapp.com/send/?phone=%2B525535412631&text=Hola%2C+me+interesa+cotizar+mi+evento...&type=phone_number&app_absent=0"
-               target="_blank"
-               rel="noopener noreferrer"
-               aria-label="WhatsApp">
-                <img src="../assets/icons/whatsapp-icon.webp"
-                     alt="WhatsApp"
-                     class="social-icon">
+            <a href="https://wa.me/+525535412631?text=Hola,%20quiero%20cotizar%20a%20La%20Célula%20para%20mi%20evento.%20Vengo%20de%20su%20sitio%20web"
+                target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+                <img src="../assets/icons/whatsapp-icon.webp" alt="WhatsApp" class="social-icon">
             </a>
-            <a href="https://www.facebook.com/grupocelula/"
-               target="_blank"
-               rel="noopener noreferrer"
-               aria-label="Facebook">
-                <img src="../assets/icons/facebook-icon.png"
-                     alt="Facebook"
-                     class="social-icon">
+            <a href="https://www.facebook.com/grupocelula/" target="_blank" rel="noopener noreferrer"
+                aria-label="Facebook">
+                <img src="../assets/icons/facebook-icon.webp" alt="Facebook" class="social-icon">
             </a>
-            <a href="https://www.youtube.com/user/GIOVASTUDIO1"
-               target="_blank"
-               rel="noopener noreferrer"
-               aria-label="YouTube">
-                <img src="../assets/icons/youtube-icon.png"
-                     alt="YouTube"
-                     class="social-icon">
+            <a href="https://www.youtube.com/user/GIOVASTUDIO1" target="_blank" rel="noopener noreferrer"
+                aria-label="YouTube">
+                <img src="../assets/icons/youtube-icon.webp" alt="YouTube" class="social-icon">
             </a>
-            <a href="https://twitter.com/lacelula2"
-               target="_blank"
-               rel="noopener noreferrer"
-               aria-label="Twitter">
-                <img src="../assets/icons/twitter-icon.png"
-                     alt="Twitter"
-                     class="social-icon">
+            <a href="https://twitter.com/lacelula2" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+                <img src="../assets/icons/twitter-icon.webp" alt="Twitter" class="social-icon">
             </a>
         </div>
 
         <div class="footer-text">
-            <p>&copy; 2025 Grupo Musical Versátil La Célula. Todos los derechos reservados.</p>
+            <p>&copy; 2026 Grupo Musical Versátil La Célula. Todos los derechos reservados. El arte de la música
+                continua.</p>
         </div>
     </footer>
 
@@ -226,171 +640,24 @@
     <!-- Optimizaciones -->
     <script src="../js/optimizations.js"></script>
 
-    <!-- Estilos específicos para el artículo -->
-    <style>
-        .blog-post-content {
-            max-width: 800px;
-            margin: 0 auto;
-            background: transparent;
-            padding: 40px;
-            border-radius: var(--border-radius);
-            box-shadow: var(--card-shadow);
-            position: relative;
-            z-index: 2;
-        }
-
-        .post-category {
-            background: var(--accent-yellow);
-            color: var(--primary-bg);
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            display: inline-block;
-        }
-
-        .post-date {
-            color: var(--secondary-text);
-            font-size: 13px;
-            margin-left: 15px;
-        }
-
-        .post-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: var(--border-radius);
-            box-shadow: var(--image-shadow);
-        }
-
-        .author-avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            object-fit: cover;
-        }
-
-        .author-name {
-            font-weight: 600;
-            color: var(--content-text);
-        }
-
-        .post-stats {
-            font-size: 12px;
-            color: var(--secondary-text);
-        }
-
-        .post-body-container h2 {
-            font: var(--font-medium);
-            color: var(--content-text);
-            margin: 30px 0 20px 0;
-        }
-
-        .post-body-container h3 {
-            font: var(--font-large);
-            color: var(--content-text);
-            margin: 30px 0 20px 0;
-        }
-
-        .post-body-container p {
-            margin-bottom: 20px;
-            line-height: 1.8;
-        }
-
-        .post-body-container ul {
-            margin: 20px 0 20px 40px;
-        }
-
-        .post-body-container li {
-            margin-bottom: 10px;
-        }
-
-        .post-body-container blockquote {
-            border-left: 4px solid var(--accent-yellow);
-            padding: 20px;
-            margin: 30px 0;
-            background: rgba(61, 155, 233, 0.05);
-            border-radius: 0 8px 8px 0;
-            font-style: italic;
-            color: var(--content-text);
-        }
-
-        .post-tags-container {
-            margin-top: 40px;
-            text-align: center;
-            padding: 20px;
-            background: rgba(0,0,0,0.05);
-            border-radius: 8px;
-        }
-
-        .post-tag {
-            display: inline-block;
-            margin: 5px;
-            padding: 5px 15px;
-            background: var(--accent-yellow);
-            color: var(--primary-bg);
-            border-radius: 20px;
-            font-size: 13px;
-        }
-
-        .post-navigation-container {
-            margin-top: 40px;
-            text-align: center;
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-
-        /* Desactivar efectos de hover en galería */
-        .gallery-item:hover {
-            transform: none !important;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3) !important;
-        }
-
-        .gallery-item:hover .gallery-image {
-            transform: none !important;
-        }
-
-        .gallery-item:hover .gallery-overlay {
-            opacity: 0 !important;
-        }
-
-        @media (max-width: 768px) {
-            .blog-post-content {
-                padding: 25px;
-                margin: 20px 15px;
-            }
-
-            .post-navigation-container {
-                flex-direction: column;
-            }
-
-            .post-navigation-container a {
-                width: 100%;
-            }
-        }
-    </style>
-
     <!-- GTM DataLayer: Blog Post View -->
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const postTitle = document.querySelector('.blog-post-content h1, .post-title, h1')?.textContent?.trim() || 'Post sin título';
-        const postUrl = window.location.pathname;
-        
-        window.dataLayer = window.dataLayer || [];
-        window.dataLayer.push({
-            event: 'view_blog_post',
-            postTitle: postTitle,
-            postUrl: postUrl,
-            postCategory: 'Blog'
+        document.addEventListener('DOMContentLoaded', function () {
+            const postTitle = document.querySelector('.blog-post-header h1')?.textContent?.trim() || 'Post sin título';
+            const postUrl = window.location.pathname;
+
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({
+                event: 'view_blog_post',
+                postTitle: postTitle,
+                postUrl: postUrl,
+                postCategory: 'Blog'
+            });
+
+            console.log('📊 GTM Event: view_blog_post -', postTitle);
         });
-        
-        console.log('📊 GTM Event: view_blog_post -', postTitle);
-    });
     </script>
 
 </body>
+
 </html>
