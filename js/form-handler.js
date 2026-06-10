@@ -54,9 +54,16 @@ let isSubmitting=false;form.addEventListener('submit',async function(e){e.preven
             });
         }
 
-        if (!data.fecha || !data.evento || !data.invitados || !data.ubicacion) {
+        if (!data.telefono || !data.fecha || !data.evento || !data.ubicacion) {
             window.__gaLeadTrack('cotizador_submit_error', { step: 'error', error_type: 'validation', error_message: 'Campos requeridos faltantes' });
-            throw new Error('Por favor completa tu nombre, teléfono, tipo de evento y lugar para continuar');
+            throw new Error('Por favor completa todos los campos requeridos (teléfono, tipo de evento, fecha y lugar)');
+        }
+
+        // Validar formato de teléfono básico (al menos números)
+        const phoneDigits = data.telefono.replace(/\D/g, '');
+        if (phoneDigits.length < 7) {
+            window.__gaLeadTrack('cotizador_submit_error', { step: 'error', error_type: 'validation', error_message: 'Teléfono inválido' });
+            throw new Error('Por favor ingresa un teléfono válido');
         }
 
         // Fecha solo se valida si fue proporcionada
@@ -76,11 +83,15 @@ let isSubmitting=false;form.addEventListener('submit',async function(e){e.preven
         const emailData = {
             type: 'form_cotizador',
             formData: {
+                nombre: '',
+                email: '',
                 telefono: data.telefono.trim(),
                 tipoEvento: data.evento.trim(),
-                fechaEvento: data.fecha || '',
-                lugar: data.ubicacion ? data.ubicacion.trim() : '',
-                numeroInvitados: numeroInvitados,
+                fecha: data.fecha || '',
+                ubicacion: data.ubicacion ? data.ubicacion.trim() : '',
+                invitados: numeroInvitados,
+                duracion: '',
+                mensaje: ''
             }
         };
 
@@ -150,17 +161,21 @@ let isSubmitting=false;form.addEventListener('submit',async function(e){e.preven
         }
 
         const fechaFormateada = data.fecha ? new Date(data.fecha).toLocaleDateString('es-MX', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) : 'Por definir';
-        const mensaje = `Hola, vengo de su sitio web.\n\nMe interesa cotizar mi evento:\n\n🎵 *Cotización de Evento Musical*\n📞 *Teléfono:* ${data.telefono}\n🎉 *Tipo de evento:* ${data.evento}\n📅 *Fecha:* ${fechaFormateada}${data.ubicacion ? '\n📍 *Ubicación:* ' + data.ubicacion : ''}${data.invitados ? '\n👥 *Invitados:* ' + data.invitados + ' personas' : ''}\n\n¡Espero su respuesta!`;
+        const mensaje = `Hola, vengo de su sitio web.\n\nMe interesa cotizar mi evento:\n\n🎵 *Cotización de Evento Musical*\n📞 *Teléfono:* ${data.telefono}\n🎉 *Tipo de evento:* ${data.evento}\n📅 *Fecha:* ${fechaFormateada}${data.ubicacion ? '\n📍 *Ubicación:* ' + data.ubicacion : ''}${data.invitados ? '\n👥 *Invitados:* ' + data.invitados : ''}\n\n¡Espero su respuesta!`;
 
         await new Promise(resolve => setTimeout(resolve, 1500));
 
-        const whatsappUrl = `https://wa.me/525535412631?text=${encodeURIComponent(mensaje)}`;
-        window.open(whatsappUrl, '_blank');
+        // Guardar mensaje en sessionStorage para que whatsapp.html lo use
+        try { sessionStorage.setItem('celulaWhatsAppLeadMessage', mensaje); } catch (e) {}
+
+        // Redirigir a página de agradecimiento que llevará a WhatsApp
+        window.location.replace('/whatsapp.html');
         this.reset();
 
         setTimeout(() => {
-            showNotification('📱 Te hemos redirigido a WhatsApp para atención inmediata.', 'info');
+            showNotification('📱 Te llevaremos a WhatsApp para atención inmediata.', 'info');
         }, 2000);
+
 
     } catch (error) {
         console.error('Error al procesar el formulario:', error);

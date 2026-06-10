@@ -366,11 +366,20 @@ Haz clic en el botón de abajo para enviarnos estos datos por WhatsApp y recibir
         const waBtn = document.createElement('a');
         waBtn.href = waLink;
         waBtn.target = '_blank';
+
         waBtn.className = 'chat-btn whatsapp-btn';
         waBtn.innerHTML = '📱 Hablar por WhatsApp';
         waBtn.style.backgroundColor = '#25D366';
         waBtn.style.fontWeight = 'bold';
         waBtn.onclick = () => {
+            // Si el sitelink intermedio está activo, guardamos el mensaje para que el botón
+            // siga enviando la información correcta al abrir WhatsApp.
+            try {
+                if (this.leadData && typeof window !== 'undefined') {
+                    window.sessionStorage.setItem('celulaWhatsAppLeadMessage', waMessage);
+                }
+            } catch (e) {}
+
             window.__gaChatTrack('generate_lead', {
                 step: 'success',
                 contact_method: 'whatsapp_api',

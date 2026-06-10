@@ -835,9 +835,47 @@
     <!-- Script de inicialización del chatbot -->
     <script src="js/chatbot.js" defer></script>
 
+    <!-- WhatsApp sitelink intermedio (screen de agradecimiento y delay 2–3s) -->
+    <script>
+        (function () {
+            const THANKS_PATH = '/whatsapp';
+            const shouldIntercept = function (url) {
+                if (!url) return false;
+                return url.includes('wa.me/') || url.includes('api.whatsapp.com');
+            };
+
+            function getHref(a) {
+                return (a && (a.href || a.getAttribute('href'))) || null;
+            }
+
+            function goToThanks(finalUrl) {
+                const u = new URL(window.location.origin + THANKS_PATH);
+                if (finalUrl) u.searchParams.set('to', finalUrl);
+                window.location.replace(u.toString());
+            }
+
+            document.addEventListener('click', function (e) {
+                const a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
+                if (!a) return;
+
+                const href = getHref(a);
+                if (!shouldIntercept(href)) return;
+
+                e.preventDefault();
+                e.stopPropagation();
+
+                if (a.dataset && a.dataset.waThanks === '1') return;
+                if (a.dataset) a.dataset.waThanks = '1';
+
+                goToThanks(href);
+            }, { capture: true });
+        })();
+    </script>
+
     <!-- Testimonial Carousel -->
     <script>
         document.addEventListener('DOMContentLoaded', function () {
+
             const track = document.getElementById('testimonialTrack');
             const dotsContainer = document.getElementById('carouselDots');
             if (!track || !dotsContainer) return;

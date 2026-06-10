@@ -205,17 +205,9 @@ export default async function handler(req, res) {
               </div>
               
               <div style="background: #ffffff; padding: 30px; border: 1px solid #e5e7eb; border-top: none;">
-                <h2 style="color: #1f2937; border-bottom: 2px solid #3b82f6; padding-bottom: 10px; margin-top: 0;">👤 Datos del Cliente</h2>
+                <h2 style="color: #1f2937; border-bottom: 2px solid #3b82f6; padding-bottom: 10px; margin-top: 0;">📋 Información de Contacto</h2>
                 <div style="background: #f9fafb; padding: 20px; border-radius: 8px; margin: 20px 0;">
                   <table style="width: 100%; border-collapse: collapse;">
-                    <tr>
-                      <td style="padding: 8px 0; color: #6b7280; font-weight: 600;">Nombre:</td>
-                      <td style="padding: 8px 0; color: #111827;">${formData.nombre}</td>
-                    </tr>
-                    <tr>
-                      <td style="padding: 8px 0; color: #6b7280; font-weight: 600;">Email:</td>
-                      <td style="padding: 8px 0; color: #111827;">${formData.email}</td>
-                    </tr>
                     <tr>
                       <td style="padding: 8px 0; color: #6b7280; font-weight: 600;">Teléfono:</td>
                       <td style="padding: 8px 0; color: #111827;">${formData.telefono}</td>

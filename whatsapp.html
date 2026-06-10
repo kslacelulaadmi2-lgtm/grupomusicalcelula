@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Enviando a WhatsApp...</title>
+    <meta http-equiv="refresh" content="3;url=https://wa.me/+525535412631" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        body,
+        html {
+            height: 100%;
+            background: #000000;
+            color: #fff;
+            font-family: Arial, Helvetica, sans-serif
+        }
+
+        .wrap {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+
+        .card {
+            width: 100%;
+            max-width: 520px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.208);
+            border: 1px solid rgba(255, 255, 255, .12);
+            border-radius: 16px;
+            padding: 28px 20px;
+        }
+
+        .title {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 10px
+        }
+
+        .sub {
+            font-size: 14px;
+            opacity: .85;
+            line-height: 1.5
+        }
+
+        .dot {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #25D366;
+            margin: 0 4px;
+            animation: bounce 1s infinite
+        }
+
+        .dots {
+            margin-top: 14px
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+                opacity: .6
+            }
+
+            50% {
+                transform: translateY(-6px);
+                opacity: 1
+            }
+        }
+
+        .dot:nth-child(2) {
+            animation-delay: .15s
+        }
+
+        .dot:nth-child(3) {
+            animation-delay: .3s
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap" role="dialog" aria-modal="true" aria-label="Redirección a WhatsApp">
+        <div class="card">
+            <div class="logo"><img src="./assets/images/logo-blanco.webp" alt="Logo la Célula" width="200"
+                    height="auto">
+            </div>
+            <div class="title">¡Gracias! 🎵</div>
+            <div class="sub">En un momento te llevamos a WhatsApp para continuar con tu solicitud.</div>
+            <div class="dots" aria-hidden="true">
+                <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+            </div>
+            <div class="sub" style="margin-top:14px; font-size:12px; opacity:.75" aria-live="polite" id="countdownText">
+                ... </div>
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            const params = new URLSearchParams(window.location.search);
+            // Permite pasar el destino final. Si no viene, usa el WhatsApp del sitio.
+            let finalUrlFromTo = params.get('to') || 'https://wa.me/+525535412631';
+            // Robustez por si el parámetro llegó doblemente codificado.
+            try { finalUrlFromTo = decodeURIComponent(finalUrlFromTo); } catch (e) { }
+            let finalUrl = finalUrlFromTo;
+
+            // Si el chatbot guardó un mensaje, lo aplicamos como ?text=...
+            try {
+                const leadMessage = sessionStorage.getItem('celulaWhatsAppLeadMessage');
+                if (leadMessage) {
+                    const u = new URL(finalUrl, 'https://wa.me');
+                    u.searchParams.set('text', leadMessage);
+                    finalUrl = u.toString();
+                }
+            } catch (e) { }
+            // 2 a 3 segundos aleatorios
+            const delayMs = Math.floor(2000 + Math.random() * 1000);
+
+            const countdownText = document.getElementById('countdownText');
+            const start = Date.now();
+
+            function tick() {
+                const elapsed = Date.now() - start;
+                const remaining = Math.max(0, delayMs - elapsed);
+                const secs = Math.ceil(remaining / 1000);
+                if (countdownText) countdownText.textContent = 'Redirigiendo en ~' + secs + 's';
+                if (remaining <= 0) return;
+                requestAnimationFrame(tick);
+            }
+            requestAnimationFrame(tick);
+
+            setTimeout(function () {
+                window.location.replace(finalUrl);
+            }, delayMs);
+        })();
+    </script>
+</body>
+
+</html>
