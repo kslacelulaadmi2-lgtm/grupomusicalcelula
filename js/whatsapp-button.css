@@ -1,0 +1,131 @@
+/*! Botón flotante WhatsApp — Grupo Musical La Célula
+    Reemplaza al chatbot conversacional.
+    Botón simple con animación pulse + tooltip hover "Atención personalizada". */
+
+.celula-wa-button {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 9999;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.celula-wa-button__link {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    background-color: #25D366;
+    border-radius: 50%;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25);
+    text-decoration: none;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    animation: celula-wa-pulse 2.4s ease-out infinite;
+}
+
+/* Anillo de pulso expansivo */
+.celula-wa-button__link::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background-color: #25D366;
+    opacity: 0.6;
+    z-index: -1;
+    animation: celula-wa-pulse-ring 2.4s ease-out infinite;
+    pointer-events: none;
+}
+
+.celula-wa-button__link:hover {
+    background-color: #1ebe5a;
+    transform: scale(1.08);
+    animation: none; /* Pausa el pulse en hover para que el usuario pueda hacer click con precisión */
+}
+
+.celula-wa-button__link:hover::before {
+    animation-play-state: paused;
+}
+
+.celula-wa-button__icon {
+    width: 32px;
+    height: 32px;
+    filter: brightness(0) invert(1);
+    pointer-events: none;
+}
+
+/* Tooltip "Atención personalizada" */
+.celula-wa-button__tooltip {
+    position: absolute;
+    right: 70px;
+    top: 50%;
+    transform: translateY(-50%) translateX(6px);
+    background: #111827;
+    color: #ffffff;
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.celula-wa-button__tooltip::after {
+    content: '';
+    position: absolute;
+    right: -7px;
+    top: 50%;
+    transform: translateY(-50%);
+    border-width: 7px 0 7px 7px;
+    border-style: solid;
+    border-color: transparent transparent transparent #111827;
+}
+
+.celula-wa-button__link:hover .celula-wa-button__tooltip,
+.celula-wa-button__link:focus-visible .celula-wa-button__tooltip {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+}
+
+.celula-wa-button__link:focus-visible {
+    outline: 3px solid #FFE100;
+    outline-offset: 3px;
+}
+
+/* Animaciones */
+@keyframes celula-wa-pulse {
+    0%   { transform: scale(1); }
+    50%  { transform: scale(1.04); }
+    100% { transform: scale(1); }
+}
+
+@keyframes celula-wa-pulse-ring {
+    0%   { transform: scale(1);    opacity: 0.55; }
+    80%  { transform: scale(1.7);  opacity: 0; }
+    100% { transform: scale(1.7);  opacity: 0; }
+}
+
+@media (max-width: 768px) {
+    .celula-wa-button {
+        bottom: 20px;
+        right: 20px;
+    }
+
+    .celula-wa-button__link {
+        width: 56px;
+        height: 56px;
+    }
+
+    .celula-wa-button__icon {
+        width: 28px;
+        height: 28px;
+    }
+
+    .celula-wa-button__tooltip {
+        display: none; /* En móvil el tooltip de hover no aplica */
+    }
+}

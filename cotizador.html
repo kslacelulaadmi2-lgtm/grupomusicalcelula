@@ -757,84 +757,18 @@
     <!-- Optimizaciones -->
     <script src="js/optimizations.js"></script>
 
-    <!-- Chatbot La Célula -->
-    <div id="celula-chatbot-container" class="celula-chatbot-container">
-        <!-- Botón de chatbot -->
-        <button id="chatbot-toggle" class="chatbot-toggle" aria-label="Abrir asistente musical">
-            <img src="assets/icons/whatsapp-icon.webp" alt="Chat" class="chatbot-icon">
-            <span class="chatbot-tooltip">¿Necesitas ayuda con tu evento musical?</span>
-        </button>
-
-        <!-- Formulario inicial de contacto -->
-        <div id="lead-form" class="lead-form">
-            <div class="lead-form-header">
-                <img src="/assets/logo/logo-favicon-grupo-musical-la-celula.webp" alt="La Célula" class="chatbot-logo">
-                <h2>Asistente Musical La Célula</h2>
-                <button id="lead-form-close" class="lead-form-close" aria-label="Cerrar">×</button>
-            </div>
-            <div class="lead-form-body">
-                <p>¡Bienvenido! 🎵 Para brindarte una experiencia personalizada, necesitamos algunos datos:</p>
-                <form id="chatbot-lead-form">
-                    <div class="form-group">
-                        <label for="name-input">Nombre</label>
-                        <input type="text" id="name-input" class="form-input" placeholder="Tu nombre" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email-input">Email</label>
-                        <input type="email" id="email-input" class="form-input" placeholder="correo@ejemplo.com"
-                            required>
-                    </div>
-                    <div class="form-group">
-                        <label for="phone-input">Teléfono</label>
-                        <input type="tel" id="phone-input" class="form-input" placeholder="Tu número de teléfono"
-                            required>
-                    </div>
-                    <div class="form-group">
-                        <label for="event-type-input">Tipo de evento</label>
-                        <select id="event-type-input" class="form-input">
-                            <option value="">Selecciona...</option>
-                            <option value="Boda">Boda</option>
-                            <option value="XV años">XV años</option>
-                            <option value="Evento Corporativo">Evento Corporativo</option>
-                            <option value="Fiesta privada">Fiesta privada</option>
-                            <option value="Graduación">Graduación</option>
-                            <option value="Otro">Otro</option>
-                        </select>
-                    </div>
-                    <button type="submit" class="lead-form-submit">Iniciar chat</button>
-                </form>
-                <p class="lead-form-privacy">Tu información es confidencial y solo se utilizará para brindarte atención
-                    personalizada.</p>
-            </div>
-        </div>
-
-        <!-- Ventana de chat -->
-        <div id="chat-window-container" class="chat-window-container">
-            <div class="chat-header">
-                <img src="/assets/logo/logo-favicon-grupo-musical-la-celula.webp" alt="La Célula" class="chatbot-logo">
-                <h2>Asistente Musical</h2>
-                <button id="chat-close" class="chat-close" aria-label="Cerrar">×</button>
-            </div>
-            <div id="chat-window" class="chat-window">
-                <!-- Messages will be appended here -->
-            </div>
-            <div id="chat-input-area" class="chat-input-area">
-                <textarea id="user-input" class="chat-input" placeholder="Escribe tu mensaje..." rows="1"></textarea>
-                <button id="send-btn" class="send-btn" aria-label="Enviar mensaje">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24"
-                        height="24">
-                        <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
-                    </svg>
-                </button>
-            </div>
-        </div>
+    <!-- Botón Flotante WhatsApp — Atención personalizada -->
+    <div class="celula-wa-button" id="celula-wa-button">
+        <a class="celula-wa-button__link"
+           href="https://wa.me/+525535412631?text=Hola%2C%20me%20interesa%20una%20cotizaci%C3%B3n%20para%20mi%20evento.%20Mi%20nombre%20es%20..."
+           target="_blank"
+           rel="noopener noreferrer"
+           aria-label="Abrir WhatsApp para atención personalizada">
+            <img src="assets/icons/whatsapp-icon.webp" alt="" class="celula-wa-button__icon" aria-hidden="true">
+            <span class="celula-wa-button__tooltip" role="tooltip">Atención personalizada</span>
+        </a>
     </div>
-
-    <!-- Estilos del chatbot -->
-    <link rel="stylesheet" href="js/chatbot.css">
-    <!-- Script de inicialización del chatbot -->
-    <script src="js/chatbot.js" defer></script>
-
+    <link rel="stylesheet" href="js/whatsapp-button.css">
     <!-- WhatsApp sitelink intermedio (screen de agradecimiento y delay 2–3s) -->
     <script>
         (function () {
