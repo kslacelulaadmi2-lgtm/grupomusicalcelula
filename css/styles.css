@@ -2841,6 +2841,32 @@ text-decoration-color: none;
     display: block;
 }
 
+.video-promo-cta {
+    margin: 24px auto 0;
+    display: flex;
+    justify-content: center;
+}
+
+.btn-call {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 50%, #2563eb 100%);
+    color: #ffffff;
+    box-shadow: var(--button-shadow), 0 4px 15px rgba(59, 130, 246, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.btn-call:hover {
+    background: linear-gradient(135deg, #93c5fd 0%, #60a5fa 50%, #3b82f6 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(59, 130, 246, 0.6);
+}
+
+.btn-call svg {
+    flex-shrink: 0;
+}
+
 .video-promo-title {
     font-size: 2rem;
     font-weight: 400;
