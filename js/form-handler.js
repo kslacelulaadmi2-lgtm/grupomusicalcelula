@@ -142,16 +142,9 @@ let isSubmitting=false;form.addEventListener('submit',async function(e){e.preven
                 form_fields_filled: Object.keys(data).length
             });
 
-            // Google Ads conversion (GT-5MXH55ZG)
-            try {
-                if (typeof gtag === 'function') {
-                    gtag('event', 'conversion', {
-                        send_to: 'GT-5MXH55ZG'
-                    });
-                }
-            } catch (err) {
-                console.warn('Google Ads conversion error:', err);
-            }
+            // La conversión "Enviar formulario de clientes potenciales" (AW-943484255) se
+            // detecta automáticamente en Google Ads a partir del evento nativo `submit` de
+            // este <form> en /cotizador, sin necesidad de un send_to manual aquí.
 
             showNotification('✅ Tu solicitud ha sido enviada. Te contactaremos pronto.', 'success');
         } else {
