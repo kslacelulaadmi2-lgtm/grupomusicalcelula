@@ -1,5 +1,0 @@
-# Ignore local test configuration
-*.local.js
-*.env
-.env
-local-*.js

@@ -1,273 +1,250 @@
-# Grupo Musical Versátil La Célula - Sitio Web
-
-Sitio web oficial del Grupo Musical Versátil La Célula, una banda versátil profesional en México.
-
-## 🎵 Características
-
-- **Sitio estático optimizado** con HTML, CSS y JavaScript
-- **Blog** con sistema de paginación
-- **AI Chatbot** con Google Gemini
-- **Sistema de cotizaciones** integrado
-- **Galería multimedia** con fotos y videos
-- **Formularios de contacto** con Resend API
-- **PWA** (Progressive Web App)
-- **Optimizado para rendimiento** (Core Web Vitals)
-
-## 🚀 Inicio Rápido
-
-### Prerequisitos
-
-- Node.js 18+
-- npm o yarn
-- Cuenta en AWS Amplify (recomendado) o Cloudflare Pages
-- API Keys: Resend (email), Gemini (chatbot)
-
-### Instalación
-
-```bash
-# Clonar repositorio
-git clone https://github.com/tu-usuario/celula-site.git
-cd celula-site
-
-# Instalar dependencias
-npm install
-
-# Instalar dependencias de Functions
-cd functions && npm install && cd ..
-```
-
-### Desarrollo Local
-
-```bash
-# Iniciar servidor de desarrollo
-npm run dev
-
-# El sitio estará disponible en http://localhost:8788
-```
-
-### Build y Minificación
-
-```bash
-# Minificar todos los archivos JS y CSS
-npm run minify
-
-# Optimizar imágenes a WebP
-npm run optimize:images
-
-# Optimizar videos
-npm run optimize:video
-```
-
-### Deploy
-
-```bash
-# Deploy a AWS Amplify (recomendado)
-npm run deploy:amplify
-
-# Deploy a Cloudflare Pages (legacy)
-npm run deploy:legacy
-```
-
-## 📁 Estructura del Proyecto
-
-```
-celula-site/
-├── index.html              # Página principal
-├── blog.html               # Blog
-├── cotizador.html          # Cotizador
-├── assets/                 # Imágenes, videos, fuentes, etc.
-├── js/                     # JavaScript (source + minified)
-├── css/                    # Estilos (source + minified)
-├── functions/              # Serverless Functions (API endpoints)
-│   └── api/                # API routes
-├── post/                   # Artículos del blog
-├── docs/                   # Documentación
-├── scripts/                # Scripts de utilidad
-└── archived/               # Archivos archivados
-```
-
-Ver [`docs/ESTRUCTURA-DIRECTORIOS.md`](docs/ESTRUCTURA-DIRECTORIOS.md) para más detalles.
-
-## 📚 Documentación
-
-### Despliegue y Configuración
-- [**DEPLOYMENT.md**](docs/DEPLOYMENT.md) - Guía completa de AWS Amplify (recomendado)
-- [**AMPLIFY_DEPLOYMENT.md**](docs/AMPLIFY_DEPLOYMENT.md) - Guía detallada de AWS Amplify (legacy)
-- [**CONFIGURACION_SECRETOS_AMPLIFY.md**](docs/CONFIGURACION_SECRETOS_AMPLIFY.md) - 🔐 Configuración de API Keys (IMPORTANTE)
-- [**SECRETS_MIGRATION.md**](docs/SECRETS_MIGRATION.md) - Migración de secretos
-- [**DEPLOY.md**](docs/DEPLOY.md) - Guía de deployment (Legacy)
-- [**CLOUDFLARE_PAGES_SETUP.md**](docs/CLOUDFLARE_PAGES_SETUP.md) - Setup de Cloudflare (Legacy)
-
-### Desarrollo
-- [**AGENTS.md**](docs/AGENTS.md) - Guía para AI assistants
-- [**ESTRUCTURA-DIRECTORIOS.md**](docs/ESTRUCTURA-DIRECTORIOS.md) - Estructura del proyecto
-- [**ESTRUCTURA-PROYECTO.md**](docs/ESTRUCTURA-PROYECTO.md) - Documentación técnica
-- [**API-EMAIL-DOCUMENTATION.md**](docs/API-EMAIL-DOCUMENTATION.md) - API de email
-- [**REPORTE-FINAL-OPTIMIZACIONES.md**](docs/REPORTE-FINAL-OPTIMIZACIONES.md) - Optimizaciones
-
-## 🛠️ Scripts Disponibles
-
-### npm scripts
-
-```bash
-npm run dev                 # Servidor de desarrollo (Node.js/Express)
-npm run dev:legacy          # Servidor legacy con Wrangler
-npm run build               # Build para producción (legacy)
-npm run build:amplify       # Build optimizado para AWS Amplify
-npm run build:functions     # Instalar dependencias de functions (legacy)
-npm run deploy:amplify      # Deploy a AWS Amplify
-npm run deploy              # Deploy a AWS Amplify (alias)
-npm run deploy:legacy       # Deploy a Cloudflare Pages (legacy)
-npm run minify              # Minificar JS y CSS
-npm run lint:js             # Linting JavaScript con ESLint
-npm run validate:html       # Validar estructura HTML
-npm run test:video-paths    # Probar rutas de video background
-npm run optimize:images     # Optimizar imágenes
-npm run optimize:video      # Optimizar videos
-npm run start               # Alias para npm run dev
-```
-
-### Bash scripts (en `/scripts/`)
-
-```bash
-# Nuevos scripts para AWS Amplify
-bash scripts/deploy-amplify.sh          # Despliegue completo a Amplify
-bash scripts/build-amplify.sh           # Build optimizado para Amplify
-bash scripts/validate-html.sh           # Validación HTML detallada
-bash scripts/test-video-paths.sh        # Testing de video background
-
-# Scripts legacy
-bash scripts/minify-all.sh              # Minificar todo
-bash scripts/convert-images-to-webp.sh  # Convertir imágenes
-bash scripts/optimize-video.sh          # Optimizar video
-bash scripts/generate-blog-images.sh    # Generar imágenes blog
-bash scripts/cleanup.sh                 # Limpiar archivos temporales
-bash scripts/cleanup.sh --deep          # Limpieza profunda
-```
-
-## 🔧 Configuración
-
-### ⚠️ Variables de Entorno (REQUERIDAS)
-
-**Para que el sitio funcione completamente, debes configurar las siguientes API keys:**
-
-#### En AWS Amplify (Producción)
-
-1. **Ir a:** AWS Amplify Console > App settings > Environment variables
-2. **Agregar:**
-   - `RESEND_API_KEY` = tu_clave_resend (marcar como Secret)
-   - `GEMINI_API_KEY` = tu_clave_gemini (marcar como Secret)
-   - `CONTACT_EMAIL` = tu_email@ejemplo.com
-
-📖 **Guía completa:** Ver [CONFIGURACION_SECRETOS_AMPLIFY.md](docs/CONFIGURACION_SECRETOS_AMPLIFY.md)
-
-#### En Desarrollo Local
-
-Crear archivo `.env` en la raíz con:
-
-```env
-RESEND_API_KEY=tu_api_key_de_resend
-CONTACT_EMAIL=email@ejemplo.com
-GEMINI_API_KEY=tu_api_key_de_gemini
-```
-
-#### Obtener API Keys
-
-- **RESEND_API_KEY**: https://resend.com/api-keys
-- **GEMINI_API_KEY**: https://makersuite.google.com/app/apikey
-
-#### Cloudflare Pages (Legacy)
-
-Dashboard > Settings > Environment Variables
-
-### AWS Amplify (Recomendado)
-
-- **Build command**: Automático con `amplify.yml`
-- **Build output directory**: `dist`
-- **Node version**: 18+
-- **Configuration file**: `amplify.yml`
-- **Servidor de desarrollo**: `npm run dev` (Node.js/Express)
-
-### Cloudflare Pages (Legacy)
-
-- **Build command**: `npm run build`
-- **Build output directory**: `.`
-- **Node version**: 18+
-- **Servidor de desarrollo**: `npm run dev:legacy` (Wrangler)
-
-## 🎨 Personalización
-
-### Agregar un Artículo al Blog
-
-1. Crear archivo en `/post/post-XX.html`
-2. Agregar entrada en `assets/data/blog-posts.json`
-3. Generar imágenes con `bash scripts/generate-blog-images.sh`
-
-### Modificar Estilos
-
-1. Editar `css/styles.css`
-2. Minificar con `npm run minify`
-3. Probar con `npm run dev`
-
-### Modificar JavaScript
-
-1. Editar archivos en `/js/` (ej: `chatbot.js`)
-2. Minificar con `npm run minify`
-3. Probar con `npm run dev`
-
-## 🚦 Testing
-
-```bash
-# Testing local con Wrangler
-npm run dev
-
-# Testing de API endpoint
-curl -X POST http://localhost:8788/api/send-email \
-  -H "Content-Type: application/json" \
-  -d '{"name":"Test","email":"test@test.com","message":"Test"}'
-```
-
-## 📊 Optimización
-
-El sitio está optimizado para Core Web Vitals:
-
-- ✅ WebP images
-- ✅ Responsive images
-- ✅ Lazy loading
-- ✅ Minified CSS/JS
-- ✅ Self-hosted fonts
-- ✅ Critical CSS inlining
-- ✅ Deferred JS loading
-
-Ver [`docs/REPORTE-FINAL-OPTIMIZACIONES.md`](docs/REPORTE-FINAL-OPTIMIZACIONES.md) para detalles.
-
-## 🔒 Seguridad
-
-- HTTPS-only
-- Content Security Policy
-- Input sanitization
-- Rate limiting en APIs
-- Environment variables para secrets
-- No credentials en código
-
-## 🤝 Contribuir
-
-1. Fork el proyecto
-2. Crear branch (`git checkout -b feature/mejora`)
-3. Commit cambios (`git commit -m 'Agregar mejora'`)
-4. Push al branch (`git push origin feature/mejora`)
-5. Abrir Pull Request
-
-## 📄 Licencia
-
-© 2024 Grupo Musical Versátil La Célula. Todos los derechos reservados.
-
-## 📞 Contacto
-
-- **Web**: https://grupomusicalcelula.com
-- **Email**: contacto@grupomusicalcelula.com
-- **WhatsApp**: [Contactar](https://wa.me/...)
+# Grupo Musical Versátil La Célula — Sitio Web
+
+Sitio web oficial y estático de **Grupo Musical Versátil La Célula**, alojado en **Vercel**.
+Este documento explica de forma completa cómo está hecho el proyecto, cómo editarlo,
+cómo desplegarlo y qué debe saber cualquier persona que lo vaya a mantener.
 
 ---
 
-**Hecho con ❤️ por el equipo de La Célula**
+## 1. Visión general
+
+- **Tipo:** Sitio web estático (HTML + CSS + JavaScript) servido por Vercel.
+- **Backend:** Una única función serverless en Vercel (`/api/send-email`) que envía
+  correos con **Resend**. No hay base de datos ni servidor propio.
+- **Propósito:** Presentar la banda, mostrar galería/video, publicar blog, y captar
+  leads de cotización y contacto vía formulario y WhatsApp.
+- **Dominio:** `https://grupomusicalcelula.com`
+
+### Páginas principales
+
+| Ruta                | Archivo fuente        | Descripción                                              |
+|---------------------|-----------------------|----------------------------------------------------------|
+| `/` (inicio)        | `index.html`          | Home: hero con video, servicios, galería, contacto.      |
+| `/blog`             | `blog.html`           | Listado de artículos con paginación.                     |
+| `/post/:id`         | `post/post-*.html`    | Artículo individual del blog.                            |
+| `/cotizador`        | `cotizador.html`      | Formulario de solicitud de cotización (envía por email). |
+| `/whatsapp`         | `whatsapp.html`       | Landing de redirección a WhatsApp con cuenta regresiva.  |
+
+> Nota: las URLs limpias (`/blog`, `/cotizador`, `/whatsapp`, `/post/:id`) se
+> resuelven con `vercel.json`. Los archivos físicos terminan en `.html`.
+
+---
+
+## 2. Estructura del repositorio
+
+```
+celula-site/
+├── index.html              # Página de inicio
+├── blog.html               # Blog (listado)
+├── cotizador.html          # Formulario de cotización
+├── whatsapp.html           # Redirección a WhatsApp
+├── post/                   # Artículos del blog (post-0.html, post-31.html, post-32.html)
+├── assets/                 # Imágenes, video, fuentes, iconos, logo y datos
+│   ├── data/               # blog-posts.json, youtube-videos.json
+│   ├── fonts/              # Fuentes auto-alojadas (woff2)
+│   ├── gallery/            # Fotos de la banda (webp)
+│   ├── icons/              # Iconos de redes sociales
+│   ├── images/             # Imágenes generales y de fondo
+│   ├── logo/               # Logos
+│   └── video/              # Videos de fondo (webm/mp4)
+├── css/
+│   ├── styles.css          # Estilos fuente (editar este)
+│   └── styles.min.css      # Minificado (se genera solo en el build)
+├── js/                     # JavaScript fuente (editar los .js, no los .min.js)
+│   ├── *.js                # Código fuente de cada módulo
+│   └── *.min.js            # Minificados (se generan solos en el build)
+├── api/
+│   └── send-email.js       # Función serverless (Resend) para formularios
+├── public/
+│   └── _vercel-analytics.html
+├── tools/                  # Scripts de build, validación y minificación
+├── config/
+│   └── eslint.config.js
+├── manifest.json           # Configuración PWA
+├── sw.js                   # Service Worker (PWA / caché offline)
+├── robots.txt
+├── sitemap.xml
+├── vercel.json             # Configuración de Vercel (build, redirects, rewrites, headers)
+├── package.json
+└── README.md
+```
+
+### Módulos JavaScript (`js/`)
+
+| Archivo                  | Función                                                      |
+|--------------------------|--------------------------------------------------------------|
+| `navigation.js`          | Menú, navegación y comportamiento responsive.                |
+| `video-background.js`    | Reproducción de video de fondo.                              |
+| `gallery-dynamic.js`     | Carga dinámica de la galería.                                |
+| `youtube-carousel.js`    | Carrusel de videos de YouTube.                               |
+| `blog-pagination.js`     | Paginación del blog (usa `assets/data/blog-posts.json`).     |
+| `form-handler.js`        | Valida y envía el formulario de cotización a `/api/send-email`. |
+| `conversion-tracking.js` | Dispara conversiones de Google Ads en clics de WhatsApp/teléfono. |
+| `accessibility-fixes.js` | Mejoras de accesibilidad.                                    |
+| `optimizations.js`       | Optimizaciones de carga/rendimiento.                         |
+| `site-functionality.js`  | Funcionalidad general del sitio.                             |
+
+---
+
+## 3. Cómo funciona el despliegue
+
+El flujo es **estático + una función serverless**:
+
+1. Vercel ejecuta `npm install` y luego `npm run build` (comando definido en `vercel.json`).
+2. `npm run build` = `prebuild` + `tools/build.js`:
+   - `prebuild` corre `validate` y `minify` (valida HTML y minifica JS/CSS).
+   - `build.js` copia `index.html`, `blog.html`, `cotizador.html`, `whatsapp.html`,
+     `post/`, `assets/`, `css/`, `js/`, `manifest.json`, `robots.txt`, `sitemap.xml`
+     y `sw.js` a la carpeta `dist/`.
+   - Reescribe las referencias `*.js` → `*.min.js` dentro del HTML en `dist/`.
+3. Vercel publica el contenido de `dist/` como sitio estático.
+4. La carpeta `dist/` está ignorada por git (es un artefacto de build). No se commitea.
+
+> Para editar estilos o scripts, **modifica `css/styles.css` y los `js/*.js` (fuente)**.
+> Los archivos `*.min.*` se regeneran automáticamente al hacer build. No edites los `.min`.
+
+---
+
+## 4. Configuración en Vercel (`vercel.json`)
+
+- **Build:** `npm run build` → salida en `dist/`.
+- **Clean URLs / sin barra final:** activos.
+- **Headers de seguridad:** `X-Content-Type-Options`, `X-Frame-Options`, `X-XSS-Protection`
+  en todas las rutas; caché inmutable de 1 año para `/assets/*`.
+- **Rewrites (internos):**
+  - `/whatsapp` → `whatsapp.html`
+  - `/api/send-email` → `api/send-email.js` (función serverless)
+  - `/post/:id` → `post/post-:id.html`
+- **Redirects (permanentes):**
+  - `/bodas`, `/xv`, `/privada` → `https://marketing-celula.vercel.app/...`
+    **Estas tres secciones viven en un proyecto Vercel distinto** (`marketing-celula`).
+    No están en este repositorio; para cambiarlas hay que editar ese otro proyecto.
+  - `/cotizador.html` → `/cotizador`, `/blog.html` → `/blog`
+  - `/post/post-:id.html` → `/post/:id`
+
+---
+
+## 5. Formulario de contacto y correos (API)
+
+Todo el envío de correos pasa por **`api/send-email.js`**, una función serverless de Vercel
+que usa **Resend** (`resend`). Soporta dos destinos independientes (por si se quiere
+enviar copia a un segundo correo).
+
+Tipos de mensaje que maneja:
+- `form_cotizador` — envío del formulario de cotización (`cotizador.html`).
+- `chatbot_summary` — resumen de conversación de chatbot (ver sección 8 sobre el chatbot).
+
+### Variables de entorno requeridas (Vercel → Settings → Environment Variables)
+
+Configura **al menos un par completo** (1 ó 2). Si ninguno está completo, la API responde 500.
+
+| Variable            | Descripción                                  |
+|---------------------|----------------------------------------------|
+| `RESEND_API_KEY_1`  | API key de Resend del destino 1.             |
+| `CONTACT_EMAIL_1`   | Correo receptor del destino 1.               |
+| `RESEND_API_KEY_2`  | (Opcional) API key de Resend del destino 2.  |
+| `CONTACT_EMAIL_2`   | (Opcional) Correo receptor del destino 2.    |
+
+Resend: https://resend.com/api-keys
+
+---
+
+## 6. Desarrollo local
+
+Requisitos: **Node.js 18+**.
+
+```bash
+# 1) Instalar dependencias
+npm install
+
+# 2) Servidor de desarrollo (Vercel)
+npm run dev
+# Abre la URL que imprime el comando (por defecto http://localhost:3000)
+
+# 3) Para probar el envío de correos localmente necesitas las variables de
+#    entorno de la sección 5 en tu entorno (p. ej. un archivo .env local,
+#    ya que Vercel las inyecta automáticamente en producción).
+```
+
+### Scripts disponibles (`package.json`)
+
+| Script              | Qué hace                                                      |
+|---------------------|---------------------------------------------------------------|
+| `npm run dev`       | Servidor de desarrollo con Vercel.                           |
+| `npm run build`     | Valida, minifica y construye `dist/`.                         |
+| `npm run validate`  | Valida la estructura HTML (herramienta propia).               |
+| `npm run minify`    | Minifica JS y CSS fuente.                                      |
+| `npm run lint`      | ESLint sobre `js/**` (usa `config/eslint.config.js`).         |
+| `npm run deploy`    | Despliegue a producción (`vercel --prod`).                    |
+| `npm run deploy:preview` | Despliegue de preview (`vercel`).                        |
+
+---
+
+## 7. Gestión de contenido
+
+### Añadir un artículo al blog
+1. Crea `post/post-XX.html` (puedes copiar la estructura de `post/post-0.html`).
+2. Agrega una entrada en `assets/data/blog-posts.json` con `id`, `title`, `excerpt`,
+   `date`, `image` y `url` (`post/post-XX.html`).
+3. La paginación (`js/blog-pagination.js`) lee ese JSON automáticamente.
+4. Regenera `sitemap.xml` si es necesario y haz build/deploy.
+
+### Cambiar imágenes, video o logos
+- Coloca los archivos en `assets/` (respeta las subcarpetas) y actualiza las rutas en el HTML.
+- Se recomienda formato `webp` para imágenes y `webm` para video de fondo (peso menor).
+
+### Cambiar textos y secciones
+- Edita directamente el HTML de la página correspondiente (`index.html`, etc.).
+
+---
+
+## 8. Analítica y seguimiento
+
+- **Google Tag Manager / gtag:** ID `GT-5MXH55ZG`, cargado en las 4 páginas principales
+  (`index.html`, `blog.html`, `cotizador.html`, `whatsapp.html`, línea ~6).
+- **Google Ads (conversiones):** cuenta `AW-943484255`, disparadas en clics de
+  WhatsApp/teléfono por `js/conversion-tracking.js`.
+- **Vercel Analytics / Speed Insights:** incluido vía dependencias del proyecto.
+
+> Para cambiar el ID de medición, edita el `id=GT-...` en las cabeceras de las páginas
+> y la cuenta `AW-...` en `js/conversion-tracking.js`.
+
+### Sobre el chatbot (importante)
+El sitio está preparado para un chatbot: `whatsapp.html` lee un mensaje guardado en
+`sessionStorage` (`celulaWhatsAppLeadMessage`) y `api/send-email.js` acepta el tipo
+`chatbot_summary`. **Sin embargo, el código del chatbot (front-end/IA) NO está en este
+repositorio**; es una integración externa o fue removida. Si se implementa de nuevo, debe
+apuntar a `/api/send-email` con `type: "chatbot_summary"` o a la ruta de API correspondiente.
+
+---
+
+## 9. Mantenimiento y troubleshooting
+
+- **No se commitea `dist/`, `node_modules/`, `.vercel/`:** son artefactos (ver `.gitignore`).
+- **El build falla en `validate`/`minify`:** corrige el error reportado y vuelve a `npm run build`.
+- **El formulario no envía correo:** revisa que las variables de la sección 5 estén
+  configuradas en Vercel y sean válidas en Resend.
+- **`/bodas`, `/xv`, `/privada` no cargan:** esas secciones están en el proyecto
+  `marketing-celula`, no aquí.
+- **Cambios en CSS/JS no se ven en producción:** recuerda que el build usa los `.min`.
+  Edita la fuente y haz build/deploy.
+
+---
+
+## 10. Resumen para el nuevo responsable
+
+- Repo estático en Vercel, sin backend propio.
+- Edita HTML/CSS/JS fuente y despliega con `npm run deploy` (o conecta el repo a Vercel
+  para despliegue automático al hacer push).
+- El único código server-side es `api/send-email.js` (Resend), configurable con 2 correos.
+- El blog se gestiona con `assets/data/blog-posts.json` + `post/*.html`.
+- Secciones bodas/XV/privada son un proyecto aparte (`marketing-celula`).
+- El chatbot no forma parte de este repositorio actualmente.
+
+---
+
+## 11. Contacto
+
+- **Web:** https://grupomusicalcelula.com
+- **Email:** contacto@grupomusicalcelula.com
+- **WhatsApp:** https://wa.me/+525535412631

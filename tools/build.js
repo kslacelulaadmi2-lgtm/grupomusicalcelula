@@ -25,7 +25,7 @@ console.log('📦 Copying files to dist...\n');
 
 // Copy HTML files from root
 console.log('📄 Copying HTML files...');
-const htmlFiles = ['index.html', 'blog.html', 'cotizador.html', 'testimonios.html', 'whatsapp.html'];
+const htmlFiles = ['index.html', 'blog.html', 'cotizador.html', 'whatsapp.html'];
 htmlFiles.forEach(file => {
     const src = join(PROJECT_ROOT, file);
     const dest = join(DIST_DIR, file);

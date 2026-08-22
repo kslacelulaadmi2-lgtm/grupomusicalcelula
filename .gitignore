@@ -72,5 +72,11 @@ tmp/
 wrangler.toml.backup
 
 assets/video/'Grupo musical versatil la celula [Li_vcFRHxYM].mp4.backup'
+# AI tool caches
+.a5c/
+.crush/
+.remember/
+.serena/
+
 # Zaemit AI tool config (auto-generated)
 .mcp.json

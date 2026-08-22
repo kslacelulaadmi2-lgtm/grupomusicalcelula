@@ -44,10 +44,6 @@
       "destination": "/whatsapp.html"
     },
     {
-      "source": "/api/chatbot",
-      "destination": "/api/chatbot.js"
-    },
-    {
       "source": "/api/send-email",
       "destination": "/api/send-email.js"
     },
@@ -80,11 +76,6 @@
     {
       "source": "/blog.html",
       "destination": "/blog",
-      "permanent": true
-    },
-    {
-      "source": "/testimonios.html",
-      "destination": "/testimonios",
       "permanent": true
     },
     {

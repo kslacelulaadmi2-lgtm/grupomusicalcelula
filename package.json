@@ -10,11 +10,8 @@
     "deploy:preview": "vercel",
     "validate": "node tools/validate.js",
     "minify": "node tools/minify.js",
-    "lint": "npx eslint --config config/eslint.config.js src/js/**/*.js --fix || echo 'ESLint completed with warnings'",
-    "prebuild": "npm run validate && npm run minify",
-    "test:email": "node tests/test-chatbot-email.js",
-    "test:deployment": "node tests/test-local-deployment.js",
-    "test": "npm run test:email && npm run test:deployment"
+    "lint": "npx eslint --config config/eslint.config.js js/**/*.js --fix || echo 'ESLint completed with warnings'",
+    "prebuild": "npm run validate && npm run minify"
   },
   "dependencies": {
     "@vercel/analytics": "^1.5.0",
