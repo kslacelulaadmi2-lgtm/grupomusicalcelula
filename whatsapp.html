@@ -15,7 +15,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Enviando a WhatsApp...</title>
-    <meta http-equiv="refresh" content="3;url=https://wa.me/+525535412631" />
+    <!-- Respaldo sin JavaScript: espera más que el redirect principal para no pisar el mensaje -->
+    <noscript><meta http-equiv="refresh" content="8;url=https://wa.me/+525535412631" /></noscript>
     <style>
         * {
             margin: 0;
@@ -130,6 +131,8 @@
             // Si el chatbot guardó un mensaje, lo aplicamos como ?text=...
             try {
                 const leadMessage = sessionStorage.getItem('celulaWhatsAppLeadMessage');
+                // Se usa una sola vez: si no, un clic posterior en WhatsApp reutilizaría el mensaje viejo del cotizador
+                sessionStorage.removeItem('celulaWhatsAppLeadMessage');
                 if (leadMessage) {
                     const u = new URL(finalUrl, 'https://wa.me');
                     u.searchParams.set('text', leadMessage);
