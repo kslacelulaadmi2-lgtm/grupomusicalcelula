@@ -3269,3 +3269,12 @@ text-decoration-color: none;
         margin-top: 15px;
     }
 }
+
+/* ===== FIX: opciones de los desplegables del cotizador =====
+   El select usa texto blanco (sobre fondo oscuro); el menú desplegable del navegador
+   es blanco y heredaba ese color, por eso las opciones no se leían. */
+.form-group select option,
+.form-select option {
+    color: #111111 !important;
+    background-color: #ffffff !important;
+}
