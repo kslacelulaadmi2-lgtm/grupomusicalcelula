@@ -27,8 +27,8 @@
   
   <!-- Posts del Blog -->
   <url>
-    <loc>https://grupomusicalcelula.com/post/post-0.html</loc>
-    <lastmod>2024-12-18</lastmod>
+    <loc>https://www.grupomusicalcelula.com/post/0</loc>
+    <lastmod>2026-10-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -250,4 +250,16 @@
     <priority>0.7</priority>
   </url>
   
+  <url>
+    <loc>https://www.grupomusicalcelula.com/post/32</loc>
+    <lastmod>2026-10-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.grupomusicalcelula.com/post/33</loc>
+    <lastmod>2026-10-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
 </urlset>

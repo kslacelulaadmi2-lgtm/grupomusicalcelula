@@ -30,3 +30,12 @@
  .article-page .post-body-container h2 { font-size: 24px; }
  .article-page .post-body-container h3 { font-size: 22px; }
 }
+
+.article-table-scroll { max-width: 100%; overflow-x: auto; margin: 24px 0; -webkit-overflow-scrolling: touch; }
+.article-table { width: 100%; border-collapse: collapse; font: inherit; font-size: 17px; line-height: 1.65; color: #fff; }
+.article-table caption { text-align: left; margin-bottom: 12px; font-size: 16px; color: #e0e0e0; }
+.article-table th, .article-table td { border: 1px solid rgba(255,255,255,.25); padding: 14px; text-align: left; vertical-align: top; }
+.article-table thead { background: rgba(255,225,0,.1); }
+.article-table th { font-weight: 600; }
+.article-table-scroll:focus-visible { outline: 2px solid #ffe100; outline-offset: 4px; }
+@media (max-width: 600px) { .article-table { min-width: 520px; font-size: 16px; } .article-table th, .article-table td { padding: 12px; } }

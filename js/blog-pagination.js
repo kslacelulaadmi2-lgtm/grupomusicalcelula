@@ -4,10 +4,39 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Embedded fallback posts (small)
     let blogPosts = [
-        { id: 'post-31', title: 'Grupo Musical Célula se presenta en Santa Moto', excerpt: '¡7 diciembre 5 PM!...', date: '3 dic 2025', image: 'assets/gallery/post-31.webp', url: 'post-31.html' },
-        { id: 'post-30', title: 'Tu Tranquilidad no Tiene Precio', excerpt: 'Firmar un contrato...', date: '14 nov 2025', image: 'assets/gallery/banda-1.webp', url: 'post-30.html' },
-        { id: 'post-29', title: 'No es solo tocar: Así es el Montaje', excerpt: 'Descubre el proceso...', date: '11 nov 2025', image: 'assets/gallery/banda-2.webp', url: 'post-29.html' }
-    ];
+    {
+        "id": "post-33",
+        "title": "Tendencias de música y ambiente para fiestas de XV años en CDMX",
+        "excerpt": "Ideas de música, baile sorpresa, iluminación y animación para una fiesta de XV años en CDMX que reúna a jóvenes y adultos en la pista.",
+        "date": "Septiembre de 2026",
+        "image": "assets/gallery/banda-12.webp",
+        "url": "/post/33"
+    },
+    {
+        "id": "post-32",
+        "title": "🎶 Bienvenidos al Mundo Musical de Grupo Musical Versátil La Célula",
+        "excerpt": "En Grupo Musical Versátil La Célula creemos que la música no solo se escucha, se vive. Descubre nuestra esencia, versatilidad y cómo creamos experiencias inolvidables.",
+        "date": "Agosto de 2026",
+        "image": "assets/gallery/banda-12.webp",
+        "url": "post/post-32.html"
+    },
+    {
+        "id": "post-31",
+        "title": "Grupo Musical Célula se presenta en Santa Moto este 7 de diciembre",
+        "excerpt": "¡7 diciembre 5 PM! Grupo Musical Célula enciende Santa Moto. Música en vivo, ambiente biker y energía pura. Evento imperdible.",
+        "date": "Julio de 2026",
+        "image": "assets/gallery/post-31.webp",
+        "url": "post/post-31.html"
+    },
+    {
+        "id": "post-0",
+        "title": "Por qué un grupo versátil es el secreto para el éxito de tu evento corporativo en CDMX",
+        "excerpt": "Descubre cómo la música en vivo, un repertorio versátil y una producción profesional pueden transformar el evento corporativo de tu empresa en CDMX.",
+        "date": "Junio de 2026",
+        "image": "assets/gallery/banda-1.webp",
+        "url": "/post/0"
+    }
+];
 
     // Try to load external posts, otherwise keep the fallback
     (async function loadPosts() {
