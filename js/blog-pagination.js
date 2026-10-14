@@ -22,11 +22,11 @@ document.addEventListener('DOMContentLoaded', function () {
     },
     {
         "id": "post-31",
-        "title": "Grupo Musical Célula se presenta en Santa Moto este 7 de diciembre",
-        "excerpt": "¡7 diciembre 5 PM! Grupo Musical Célula enciende Santa Moto. Música en vivo, ambiente biker y energía pura. Evento imperdible.",
+        "title": "La Célula en Santa Moto: rock, motos y música en vivo",
+        "excerpt": "Revive una presentación de Grupo Musical La Célula en Santa Moto: ambiente biker, rock y la energía de la música en vivo en una grabación del show.",
         "date": "Julio de 2026",
         "image": "assets/gallery/post-31.webp",
-        "url": "post/post-31.html"
+        "url": "/post/31"
     },
     {
         "id": "post-0",
