@@ -42,7 +42,7 @@
     <!-- Async CSS Loading -->
     <link rel="preload" href="../css/styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript>
-        <link rel="stylesheet" href="../css/styles.min.css">
+        <link rel="stylesheet" href="../css/styles.css">
     </noscript>
 
     <!-- Vercel Analytics & Speed Insights -->
@@ -467,9 +467,10 @@
             }
         }
     </style>
+<link rel="stylesheet" href="../css/article-reading.css">
 </head>
 
-<body>
+<body class="article-page">
 
     <!-- Header y Navegación (mismo que index) -->
     <header class="site-header" id="SITE_HEADER">
@@ -506,21 +507,28 @@
             <!-- Meta del post -->
             <div class="post-meta post-meta-center">
                 <span class="post-category">Música</span>
-                <span class="post-date">30 jul 2024</span>
+                <span class="post-date">Agosto de 2026</span>
             </div>
 
             <!-- Autor -->
             <div class="post-author-container">
-                <img src="../assets/gallery/banda-1.webp" alt="Giovanni Rocha Urzua" class="author-avatar">
+                <img src="../assets/gallery/banda-1.webp" alt="Redacción La Célula" class="author-avatar">
                 <div>
-                    <div class="author-name">Giovanni Rocha Urzua</div>
-                    <div class="post-stats">1 Min. de lectura • 30 jul 2024</div>
+                    <div class="author-name">Redacción La Célula</div>
+                    <div class="post-stats">1 Min. de lectura • Agosto de 2026</div>
                 </div>
             </div>
 
             <!-- Contenido -->
             <article class="post-body-container">
-                <p><em>Actualizado: 31 jul</em></p>
+                <section class="article-video" aria-labelledby="article-video-title">
+<h2 id="article-video-title">Conoce el mundo musical de La Célula</h2>
+<div class="article-video-player">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/XM5GMxs6nVQ?controls=0&amp;start=81" title="Conoce el mundo musical de La Célula" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+</div>
+<p><a href="https://www.youtube.com/watch?v=XM5GMxs6nVQ&amp;t=81s" target="_blank" rel="noopener noreferrer">Ver el video en YouTube</a></p>
+</section>
+
 
                 <p>En Grupo Musical Versátil La Célula creemos que la música no solo se escucha, se vive.
                     Nuestro objetivo es crear atmósferas memorables que conecten con cada persona en el
@@ -551,9 +559,7 @@
                     manteniendo a los invitados disfrutando desde el primer hasta el último minuto de la
                     celebración.</p>
 
-                <div class="post-image-container">
-                    <img src="../assets/gallery/banda-12.webp" alt="Grupo Musical Versátil La Célula" class="post-image-full">
-                </div>
+                
 
                 <h2>🌟 Más que Música, una Experiencia</h2>
 
