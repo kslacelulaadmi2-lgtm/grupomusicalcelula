@@ -49,7 +49,7 @@
     },
     {
       "source": "/post/:id",
-      "destination": "/post/post-:id.html"
+      "destination": "/post/post-:id"
     }
   ],
   "redirects": [
