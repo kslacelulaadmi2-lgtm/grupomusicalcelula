@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function () {
         "title": "🎶 Bienvenidos al Mundo Musical de Grupo Musical Versátil La Célula",
         "excerpt": "En Grupo Musical Versátil La Célula creemos que la música no solo se escucha, se vive. Descubre nuestra esencia, versatilidad y cómo creamos experiencias inolvidables.",
         "date": "Agosto de 2026",
-        "image": "assets/gallery/banda-12.webp",
+        "image": "assets/gallery/banda-15.webp",
         "url": "post/post-32.html"
     },
     {
@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function () {
         "title": "La Célula en Santa Moto: rock, motos y música en vivo",
         "excerpt": "Revive una presentación de Grupo Musical La Célula en Santa Moto: ambiente biker, rock y la energía de la música en vivo en una grabación del show.",
         "date": "Julio de 2026",
-        "image": "assets/gallery/post-31.webp",
+        "image": "assets/gallery/banda-14.webp",
         "url": "/post/31"
     },
     {
@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function () {
         "title": "Por qué un grupo versátil es el secreto para el éxito de tu evento corporativo en CDMX",
         "excerpt": "Descubre cómo la música en vivo, un repertorio versátil y una producción profesional pueden transformar el evento corporativo de tu empresa en CDMX.",
         "date": "Junio de 2026",
-        "image": "assets/gallery/banda-1.webp",
+        "image": "assets/gallery/banda-24.webp",
         "url": "/post/0"
     }
 ];
@@ -56,6 +56,10 @@ document.addEventListener('DOMContentLoaded', function () {
     function initPagination(posts) {
         const container = document.getElementById('blog-posts-container');
         if (!container) return;
+
+        // The featured article is already visible above the grid.
+        const featuredId = document.querySelector('[data-featured-post]')?.dataset.featuredPost;
+        if (featuredId) posts = posts.filter(post => post.id !== featuredId);
 
         function createBlogPost(post) {
             const article = document.createElement('article');
