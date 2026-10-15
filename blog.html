@@ -337,6 +337,56 @@
     <!-- Estilos limpios -->
     <link rel="stylesheet" href="css/styles.min.css">
 
+    <!-- Tipografía y encuadre exclusivos de la portada del blog. -->
+    <style>
+        #hero.blog-hero {
+            width: 100%;
+            height: auto;
+            min-height: 0;
+            padding: 120px 24px 64px;
+        }
+
+        .blog-intro {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 960px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .blog-intro-title {
+            margin: 0 0 24px;
+            font-family: 'Lobster', cursive;
+            font-size: clamp(26px, 3vw, 36px);
+            font-style: normal;
+            font-weight: 400;
+            line-height: 1.3;
+            color: #fff;
+        }
+
+        .blog-intro-description {
+            margin: 0 auto;
+            max-width: 800px;
+            font-family: 'Open Sans', Arial, sans-serif;
+            font-size: clamp(16px, 1.5vw, 20px);
+            font-style: normal;
+            font-weight: 400;
+            line-height: 1.65;
+            color: #fff;
+        }
+
+        .blog-intro-description + .blog-intro-description {
+            margin-top: 20px;
+        }
+
+        @media (max-width: 600px) {
+            #hero.blog-hero {
+                padding: 100px 20px 40px;
+            }
+        }
+    </style>
+
     <!-- Vercel Analytics & Speed Insights -->
     <script>
         window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
@@ -379,13 +429,12 @@
     <!-- Contenido Principal -->
     <main class="site-container">
         <!-- Hero del Blog -->
-        <section class="hero-section" id="hero">
-            <div class="hero-content fade-in">
-                <h1 class="section-title">EL BLOG DE CÉLULA</h1>
-                <p class="hero-title">Descubre guías exclusivas de producción técnica, consejos de logística local y los
-                    secretos detrás de una pista de baile imparable. El espacio diseñado para transformar tu próxima
-                    gala corporativa o boda premium en una experiencia con el más alto caché profesional.
-                </p>
+        <section class="hero-section blog-hero" id="hero">
+            <div class="blog-intro fade-in">
+                <h1 class="blog-intro-title">Música Realmente Viva: el blog de La Célula</h1>
+                <p class="blog-intro-description">En <strong>Grupo Musical La Célula</strong> llevamos más de 20 años tocando música para bodas, eventos corporativos y fiestas privadas en la Ciudad de México. Nuestro repertorio versátil reúne a distintas generaciones con grandes éxitos y ese espíritu chavorruco de los 80 y 90, creando un ambiente que hará que <strong>tus invitados no quieran salir de la pista</strong>.</p>
+                <p class="blog-intro-description">En este blog compartimos ideas, consejos y experiencias para ayudarte a preparar tu celebración: desde cómo elegir la música hasta los detalles que hacen la diferencia en tu evento.</p>
+                <p class="blog-intro-description">Explora nuestros artículos y descubre cómo darle a tu festejo el sello de <strong>Música Realmente Viva</strong>.</p>
             </div>
         </section>
 
@@ -395,31 +444,26 @@
                 <!-- Posts Destacados -->
                 <div class="blog-featured blog-featured-container">
                     <!-- Post Principal -->
-                    <article class="blog-post-featured fade-in">
+                    <article class="blog-post-featured fade-in" data-featured-post="post-0">
                         <div class="post-image">
-                            <img src="assets/gallery/banda-1.webp" alt="Bienvenidos al Mundo Musical" class="post-img">
+                            <img src="assets/gallery/banda-24.webp" alt="Producción de música en vivo en un salón de eventos" class="post-img">
                         </div>
                         <div class="post-content">
                             <div class="post-meta">
-                                <span class="post-category">Música</span>
-                                <span class="post-date">28 Mayo 2026</span>
+                                <span class="post-category">Corporativos</span>
+                                <span class="post-date">Junio de 2026</span>
                             </div>
-                            <h2 class="post-title">
-                            </h2>
+                            <h2 class="post-title">Por qué un grupo versátil es el secreto para el éxito de tu evento corporativo en CDMX</h2>
                             <div class="post-author">
-                                <img src="https://via.placeholder.com/40x40/3d9be9/ffffff?text=GR" alt="Giovanni Rocha"
-                                    class="author-avatar">
                                 <div>
                                     <div class="author-name">Redacción La Célula</div>
-                                    <div class="post-stats">1 Min. de lectura</div>
+                                    <div class="post-stats">4 min de lectura</div>
                                 </div>
                             </div>
-                            <p class="post-excerpt">
-                                En La Célula creemos que la música de un evento de alta gama no debe tener
-                                interrupciones. No solo diseñamos un show; creamos atmósferas electrizantes a través de
-                                un flujo sonoro continuo que conecta de forma exacta con cada asistente. <a
-                                    href="/post/post-0.html" class="btn btn-primary">Leer más</a>
+                            <p class="post-excerpt">Descubre cómo la música en vivo, un repertorio versátil y una producción profesional pueden transformar el evento corporativo de tu empresa en CDMX.</p>
+                            <a href="/post/0" class="btn btn-primary">Leer más</a>
                         </div>
+                    </article>
                         <!-- Todos los Posts -->
                         <div class="blog-posts-grid" id="blog-posts-container">
                             <!-- Los posts se cargan dinámicamente desde blog-pagination.js -->
@@ -436,6 +480,7 @@
                             </ul>
                         </nav>
                 </div>
+            </div>
         </section>
     </main>
 
@@ -454,14 +499,13 @@
                 aria-label="YouTube">
                 <img src="assets/icons/youtube-icon.webp" alt="YouTube" class="social-icon">
             </a>
-            <a href="https://www.tiktok.com/@grupolacelula?_r=1&_t=ZS-94JHojCkITM" target="_blank"
-                rel="noopener noreferrer" aria-label="TikTok">
-                <img src="assets/icons/tiktok-icon.webp" alt="TikTok" class="social-icon">
+            <a href="https://www.tiktok.com/@grupolacelula?_r=1&amp;_t=ZS-94JHojCkITM" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+                <img src="assets/icons/tiktok-footer.png" alt="TikTok" class="social-icon">
             </a>
         </div>
 
         <div class="footer-text">
-            <p>&copy; 2026 Grupo Musical Versátil La Célula. Todos los derechos reservados.</p>
+            <p>© 2026 Grupo Musical Versátil La Célula. Música Realmente Viva en tu evento.</p>
         </div>
     </footer>
 

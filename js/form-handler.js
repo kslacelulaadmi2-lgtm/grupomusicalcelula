@@ -68,7 +68,7 @@ let isSubmitting=false;form.addEventListener('submit',async function(e){e.preven
 
         // Fecha solo se valida si fue proporcionada
         if (data.fecha) {
-            const eventDate = new Date(data.fecha);
+            const eventDate = parseFechaLocal(data.fecha);
             const today = new Date();
             today.setHours(0, 0, 0, 0);
             if (eventDate < today) {
@@ -153,7 +153,7 @@ let isSubmitting=false;form.addEventListener('submit',async function(e){e.preven
             showNotification(`⚠️ ${result.error || 'No se pudo enviar el email'}. Te redirigiremos a WhatsApp.`, 'warning');
         }
 
-        const fechaFormateada = data.fecha ? new Date(data.fecha).toLocaleDateString('es-MX', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) : 'Por definir';
+        const fechaFormateada = data.fecha ? parseFechaLocal(data.fecha).toLocaleDateString('es-MX', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) : 'Por definir';
         const mensaje = `Hola, vengo de su sitio web.\n\nMe interesa cotizar mi evento:\n\n🎵 *Cotización de Evento Musical*\n📞 *Teléfono:* ${data.telefono}\n🎉 *Tipo de evento:* ${data.evento}\n📅 *Fecha:* ${fechaFormateada}${data.ubicacion ? '\n📍 *Ubicación:* ' + data.ubicacion : ''}${data.invitados ? '\n👥 *Invitados:* ' + data.invitados : ''}\n\n¡Espero su respuesta!`;
 
         await new Promise(resolve => setTimeout(resolve, 1500));
@@ -200,6 +200,13 @@ try {
 
 console.log('✅ Cotizador cargado correctamente');
 });
+
+// Convierte 'AAAA-MM-DD' (input type=date) a fecha LOCAL. new Date('2026-10-30') la
+// interpreta como UTC y en México muestra el día anterior.
+function parseFechaLocal(valor) {
+    const [anio, mes, dia] = String(valor).split('-').map(Number);
+    return new Date(anio, mes - 1, dia);
+}
 
 function showNotification(message, type = 'info') {
     const notification = document.createElement('div');
