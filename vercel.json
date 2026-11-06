@@ -52,11 +52,38 @@
       "destination": "/api/send-email.js"
     },
     {
+      "source": "/post/grupo-musical-la-celula-santa-moto",
+      "destination": "/post/post-31"
+    },
+    {
+      "source": "/post/grupo-musical-versatil-cdmx",
+      "destination": "/post/post-32"
+    },
+    {
+      "source": "/post/musica-para-xv-anos-en-cdmx",
+      "destination": "/post/post-33"
+    },
+    {
       "source": "/post/:id",
       "destination": "/post/post-:id"
     }
   ],
   "redirects": [
+    {
+      "source": "/post/31",
+      "destination": "/post/grupo-musical-la-celula-santa-moto",
+      "permanent": true
+    },
+    {
+      "source": "/post/32",
+      "destination": "/post/grupo-musical-versatil-cdmx",
+      "permanent": true
+    },
+    {
+      "source": "/post/33",
+      "destination": "/post/musica-para-xv-anos-en-cdmx",
+      "permanent": true
+    },
     {
       "source": "/bodas",
       "destination": "https://marketing-celula.vercel.app/bodas",
