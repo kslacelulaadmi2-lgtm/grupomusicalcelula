@@ -400,27 +400,7 @@
     display: block;
 }
     
-    /* Overlay sutil detrás de los textos del blog */
-.blog-intro,
-.post-content,
-.post-content-card {
-    position: relative;
-    isolation: isolate;
-}
-
-.blog-intro::before,
-.post-content::before,
-.post-content-card::before {
-    content: "";
-    position: absolute;
-    inset: -8px -10px;
-    background: rgba(0, 0, 0, 0.14);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-    border-radius: 8px;
-    z-index: -1;
-    pointer-events: none;
-}</style>
+ </style>
 
     <!-- Vercel Analytics & Speed Insights -->
     <script>
