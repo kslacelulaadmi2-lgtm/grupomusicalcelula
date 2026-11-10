@@ -85,14 +85,14 @@
     },
     {
       "source": "/post/33",
-      "destination": "/post/musica-para-xv-años-en-cdmx",
+      "destination": "/post/musica-para-xv-a%C3%B1os-en-cdmx",
       "permanent": true
     },   
-            {
-          "source": "/post/musica-para-xv-anos-en-cdmx",
-          "destination": "/post/musica-para-xv-a%C3%B1os-en-cdmx",
-          "permanent": true
-        },
+    {
+      "source": "/post/musica-para-xv-anos-en-cdmx",
+      "destination": "/post/musica-para-xv-a%C3%B1os-en-cdmx",
+      "permanent": true
+    },
     {
       "source": "/post/0",
       "destination": "/post/grupo-musical-para-eventos-corporativos-cdmx",
