@@ -60,9 +60,9 @@
       "destination": "/post/post-32"
     },
     {
-      "source": "/post/musica-para-xv-anos-en-cdmx",
-      "destination": "/post/post-33"
-    },
+  "source": "/post/musica-para-xv-años-en-cdmx",
+  "destination": "/post/post-33"
+},
     {
    "source": "/post/grupo-musical-para-eventos-corporativos-cdmx",
    "destination": "/post/post-0"
@@ -85,7 +85,7 @@
     },
     {
       "source": "/post/33",
-      "destination": "/post/musica-para-xv-anos-en-cdmx",
+      "destination": "/post/musica-para-xv-años-en-cdmx",
       "permanent": true
     },
     {
