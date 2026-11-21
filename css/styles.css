@@ -692,7 +692,20 @@ main.content-text p,
     }
 
     .services-carousel-track .service-card .service-back-overlay {
-        display: none;
+        display: flex;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.4s ease;
+    }
+
+    .services-carousel-track .service-card.flipped .service-content-overlay {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .services-carousel-track .service-card.flipped .service-back-overlay {
+        opacity: 1;
+        pointer-events: auto;
     }
 
     .services-carousel-dots {
