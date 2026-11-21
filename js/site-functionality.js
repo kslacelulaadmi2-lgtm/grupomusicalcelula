@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log(`🎴 Tarjetas encontradas: ${serviceCards.length}`);
 
         serviceCards.forEach((card, index) => {
-            if (card.closest('.services-carousel')) return;
+            
 
             const newCard = card.cloneNode(true);
             card.parentNode.replaceChild(newCard, card);
